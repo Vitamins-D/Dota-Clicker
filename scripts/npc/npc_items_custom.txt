@@ -1,3 +1,28 @@
 "DOTAAbilities"
 {
+	"item_dota_clicker_wood"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"wood"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"50"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDroppable"					"1"
+		"ItemSellable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemDisassemblable"			"0"
+		"ItemPermanent"					"0"
+		"ItemKillable"					"1"
+		"SideShop"						"0"
+		"SecretShop"					"0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+	}
 }
