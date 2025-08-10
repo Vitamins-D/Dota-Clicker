@@ -2,6 +2,8 @@ if dota_clicker == nil then
 	dota_clicker = class({})
 end
 
+local neutralSpawner = require("utils/neutralSpawner")
+
 HeroExpTable = {0}
 -- expTable = {0, 240, 640, 1160, 1760, 2440, 3200, 4000, 4900, 5900, 7000, 8200, 9500, 10900, 12400, 14000, 15700, 17500, 19400, 21400, 23600, 26000, 28600, 31400, 34400, 38400, 43400, 49400, 56400, 63900}
 
@@ -143,8 +145,18 @@ function dota_clicker:dotaClickerKilled(data)
 	
 end
 
+function AttachDireTeam()
+    local entities = Entities:FindAllByName("dire_team")
+    for _, ent in pairs(entities) do
+        if ent.SetTeam then
+            ent:SetTeam(DOTA_TEAM_BADGUYS)
+        end
+    end
+end
+
 function dota_clicker:dotaClickerStart()
 	print("DOTA CLICKER START")
+	neutralSpawner:InitNeutralCamps()
 	-- local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
 	-- local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil,nil , DOTA_TEAM_GOODGUYS)
 	
