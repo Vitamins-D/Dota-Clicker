@@ -3,9 +3,10 @@ if neutralSpawner == nil then
 end
 
 local campsUnits = {
-	{"npc_dota_clicker_vision"}, -- 1
-	{"npc_dota_neutral_kobold"}, -- 2
-	{"npc_dota_neutral_mud_golem_split", "npc_dota_neutral_warpine_raider"}, -- 3
+	{"npc_dota_clicker_boar", "npc_dota_clicker_boar"}, -- 1
+	{"npc_dota_clicker_wolf", "npc_dota_clicker_wolf", "npc_dota_clicker_wolf"}, -- 2
+	{"npc_dota_clicker_murloc", "npc_dota_clicker_murloc2"}, -- 3
+	{"npc_dota_clicker_bear"}, -- 4
 }
 neutralSpawner.campsUnits = campsUnits
 
@@ -17,8 +18,9 @@ function neutralSpawner:InitNeutralCamps()
 
     for _, trigger in pairs(allTriggers) do
         local name = trigger:GetName()
-        if string.find(name, "_neutral_camp") then
-            local campType = tonumber(trigger.units_types or 1)
+        if string.find(name, "neutral_camp") then
+            local campType = tonumber(string.match(name, 'neutral_camp_(%d+)$') or 1)
+			print("campType", campType, string.match(name, 'neutral_camp_(%d+)$') )
             local camp = {
                 trigger = trigger,
                 campType = campType,

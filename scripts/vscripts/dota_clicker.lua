@@ -157,8 +157,8 @@ end
 function dota_clicker:dotaClickerStart()
 	print("DOTA CLICKER START")
 	neutralSpawner:InitNeutralCamps()
-	-- local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
-	-- local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil,nil , DOTA_TEAM_GOODGUYS)
+	local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
+	local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil,nil , DOTA_TEAM_GOODGUYS)
 	
 	-- Timers:CreateTimer(1, function()
         -- local damage_table = {
