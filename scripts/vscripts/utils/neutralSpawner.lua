@@ -9,6 +9,27 @@ local campsUnits = {
 	{"npc_dota_clicker_bear"}, -- 4
 }
 ns.campsUnits = campsUnits
+ns.dropTable = {
+	["npc_dota_clicker_boar"] = {
+		{item = "item_dotac_boar_skin", chance = 75}
+	},
+	["npc_dota_clicker_wolf"] = {
+		{item = "item_dotac_wolf_skin", chance = 75}
+	},
+	["npc_dota_clicker_wolf_alpha"] = {
+		{item = "item_dotac_wolf_skin", chance = 75}
+	},
+	["npc_dota_clicker_murloc"] = {
+		{item = "item_dotac_murloc_skin", chance = 75}
+	},
+	["npc_dota_clicker_murloc2"] = {
+		{item = "item_dotac_murloc_skin", chance = 75}
+	},
+	["npc_dota_clicker_bear"] = {
+		{item = "item_dotac_bear_skin", chance = 75},
+		{item = "item_dotac_cheeter_meat", chance = 5}
+	}
+}
 
 local camps = {}
 ns.camps = camps
@@ -20,7 +41,6 @@ function ns:InitNeutralCamps()
         local name = trigger:GetName()
         if string.find(name, "neutral_camp") then
             local campType = tonumber(string.match(name, 'neutral_camp_(%d+)$') or 1)
-			print("campType", campType, string.match(name, 'neutral_camp_(%d+)$') )
             local camp = {
                 trigger = trigger,
                 campType = campType,
@@ -54,11 +74,25 @@ function ns:SpawnCamp(camp)
         local spawnPos = camp.trigger:GetAbsOrigin() + RandomVector(math.random(0, 200))
         local unit = CreateUnitByName(unitName, spawnPos, true, nil, nil, DOTA_TEAM_NEUTRALS)
         unit.campRef = camp -- привязка к кемпу
+		
+        -- Выдаём предметы из dropTable
+        local drops = self.dropTable[unitName]
+        if drops then
+            for _, dropInfo in pairs(drops) do
+                -- Если шанс срабатывает — даём предмет сразу в инвентарь
+				if dropInfo.item ~= "item_dotac_cheeter_meat" then
+					local item = CreateItem(dropInfo.item, unit, unit)
+					unit:AddItem(item)
+				end
+            end
+        end
+
         table.insert(camp.units, unit)
     end
 
     camp.isRespawning = false
 end
+
 
 function ns:OnCampUnitDeath(unit)
     local camp = unit.campRef

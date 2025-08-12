@@ -1,8 +1,8 @@
-if neutralSpawner == nil then
-	neutralSpawner = class({})
+if wa == nil then
+	wa = class({})
 end
 
-require("wavesInfo")
+local info = require("utils/wavesInfo")
 
 -- info
 -- 1 - melee
@@ -29,3 +29,33 @@ local upgrades = {
 local units = {
 	"melee", "ranger", "mage", "siege", "ranger"
 }
+
+function wa:InitAddon(player)
+	player.units = {
+		"melee", "ranger", "mage", "siege", "ranger"
+	}
+	
+	player.upgrades = {
+		["melee"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
+		["ranger"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
+		["mage"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
+		["siege"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
+	}
+end
+
+function wa:spawnWave(player)
+	local spawnPos = player.spawnPos
+	local units = player.units
+	local upgrades = player.upgrades
+	local team = player.team
+	
+	for i = 1, #units do
+		local unit = units[i]
+		
+		local name = info:getUnitByName(unit)
+		
+		local entity = CreateUnitByName(name, spawnPos, true, nil, nil, team)
+	end
+end
+
+return wa

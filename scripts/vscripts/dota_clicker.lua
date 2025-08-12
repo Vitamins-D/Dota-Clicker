@@ -3,6 +3,9 @@ if dota_clicker == nil then
 end
 
 local neutralSpawner = require("utils/neutralSpawner")
+local wi = require("utils/wavesInfo")
+local wa = require("utils/wavesAddon")
+local utils = require("utils/utils")
 local lvlupInterval = 60
 
 HeroExpTable = {0}
@@ -49,6 +52,34 @@ function dota_clicker:InitGameMode()
 		
 		miningDo(oreType, playerId)
 	end)
+	
+	CustomGameEventManager:RegisterListener("upgrade_unit", function(_, event)
+		print(event)
+		local unit = event.unit
+		local upgrade = event.upgrade
+		local player_id = event.player_id
+		local player = PlayerResource:GetPlayer(player_id)
+		if player then
+			local upgId, upgType = wi:getUpgByName(unit, upgrade)
+			
+			local arrId
+			if upgType == "base" then arrId = 1
+			elseif upgType == "class" then arrId = 3
+			elseif upgType == "sub" then arrId = 5
+			end
+			
+			local baseName = wi:getUnitName(unit)
+			local newLevel = player.upgrades[baseName][arrId][upgId]
+			local gold = PlayerResource:GetGold(player_id)
+			if gold >= 300 and newLevel < wi:getMaxLevel(upgType, unit, upgrade) then
+				newLevel = newLevel + 1
+				player.upgrades[baseName][arrId][upgId] = newLevel
+				GiveGold( -300, player_id )
+			end
+			
+			CustomGameEventManager:Send_ServerToPlayer(player, "upgrade_success", {unit = unit, upgrade = upgrade, newLevel = newLevel, desc = newLevel})
+		end
+	end)
 end
 
 function dota_clicker:OnTreeCut(event)
@@ -73,8 +104,6 @@ function dota_clicker:OnTreeCut(event)
 	end
 end
 
--- Система автоочистки предметов дерева
--- Система автоочистки предметов
 function dota_clicker:StartSimpleGroundItemCleanup()
     local cleanupItems = {
         "item_dotac_wood",
@@ -93,7 +122,7 @@ function dota_clicker:StartSimpleGroundItemCleanup()
                 local item = item_drop:GetContainedItem()
                 if item then
                     local itemName = item:GetAbilityName()
-                    if self:indexOf(cleanupItems, itemName) then
+                    if utils:indexOf(cleanupItems, itemName) then
                         if not item_drop.creation_time then
                             item_drop.creation_time = GameRules:GetGameTime()
                         elseif GameRules:GetGameTime() - item_drop.creation_time >= 30 then
@@ -157,27 +186,7 @@ function dota_clicker:dotaClickerKilled(data)
     local dropPos = killed_unit:GetAbsOrigin()
 
     -- Таблица для шансов дропа
-    local dropTable = {
-        ["npc_dota_clicker_boar"] = {
-            {item = "item_dotac_boar_skin", chance = 75}
-        },
-        ["npc_dota_clicker_wolf"] = {
-            {item = "item_dotac_wolf_skin", chance = 75}
-        },
-        ["npc_dota_clicker_wolf_alpha"] = {
-            {item = "item_dotac_wolf_skin", chance = 75}
-        },
-        ["npc_dota_clicker_murloc"] = {
-            {item = "item_dotac_murloc_skin", chance = 75}
-        },
-        ["npc_dota_clicker_murloc2"] = {
-            {item = "item_dotac_murloc_skin", chance = 75}
-        },
-        ["npc_dota_clicker_bear"] = {
-            {item = "item_dotac_bear_skin", chance = 75},
-            {item = "item_dotac_cheeter_meat", chance = 100}
-        }
-    }
+	local dropTable = neutralSpawner.dropTable
 
     if dropTable[unitName] then
         for _, drop in pairs(dropTable[unitName]) do
@@ -223,6 +232,10 @@ function dota_clicker:dotaClickerStart()
         -- return
     -- end)
 	
+	self:throughPlayers(function(player, hero)
+		wa:InitAddon(player)
+	end)
+	
 	Timers:CreateTimer(lvlupInterval, function()
 		GiveGoldPlayers( 500 )
         GiveExpPlayers(100)
@@ -239,40 +252,33 @@ function dota_clicker:OnThink()
 	return 1
 end
 
-function dota_clicker:indexOf(t, value)
-	for i = 1, #t do
-		if t[i] == value then
-			return i
-		end
-	end
-	return nil
-end
-
 function dota_clicker:OnNpcSpawned(data)
  	local npc = EntIndexToHScript(data.entindex)
 	
      
 end
 
-function GiveExpPlayers(expVal)
-    local playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
+function dota_clicker:throughPlayers(callback)
+	local playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
     
     for index = 0, playerCount - 1 do
         if PlayerResource:HasSelectedHero(index) then
             local player = PlayerResource:GetPlayer(index)
             local hero = PlayerResource:GetSelectedHeroEntity(index)
-            hero:AddExperience(expVal, false, false)
+            callback(player, hero)
         end
     end
 end
 
-function GiveGoldPlayers( gold )
-	for index=0 ,PlayerResource:GetPlayerCount() do
-		if PlayerResource:HasSelectedHero(index) then
-			local player = PlayerResource:GetPlayer(index)
-			local hero = PlayerResource:GetSelectedHeroEntity(index)
-			hero:ModifyGold(gold, false, 0)
-			SendOverheadEventMessage( player, OVERHEAD_ALERT_GOLD, hero, gold, nil )
-		end
-	end
+function GiveExpPlayers(expVal)
+	dota_clicker:throughPlayers(function(_, hero)
+		hero:AddExperience(expVal, false, false)
+	end)
+end
+
+function GiveGoldPlayers( gold )	
+	dota_clicker:throughPlayers(function(player, hero)
+		hero:ModifyGold(gold, false, 0)
+		SendOverheadEventMessage( player, OVERHEAD_ALERT_GOLD, hero, gold, nil )
+	end)
 end
