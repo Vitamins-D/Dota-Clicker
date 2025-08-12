@@ -1,5 +1,5 @@
-if neutralSpawner == nil then
-	neutralSpawner = class({})
+if ns == nil then
+	ns = class({})
 end
 
 local campsUnits = {
@@ -8,12 +8,12 @@ local campsUnits = {
 	{"npc_dota_clicker_murloc", "npc_dota_clicker_murloc2"}, -- 3
 	{"npc_dota_clicker_bear"}, -- 4
 }
-neutralSpawner.campsUnits = campsUnits
+ns.campsUnits = campsUnits
 
 local camps = {}
-neutralSpawner.camps = camps
+ns.camps = camps
 
-function neutralSpawner:InitNeutralCamps()
+function ns:InitNeutralCamps()
     local allTriggers = Entities:FindAllByClassname("trigger_multiple")
 
     for _, trigger in pairs(allTriggers) do
@@ -43,7 +43,7 @@ function neutralSpawner:InitNeutralCamps()
     end, nil)
 end
 
-function neutralSpawner:SpawnCamp(camp)
+function ns:SpawnCamp(camp)
     local unitNames = campsUnits[camp.campType]
     if not unitNames then
         print("Нет юнитов для campType: " .. tostring(camp.campType))
@@ -60,7 +60,7 @@ function neutralSpawner:SpawnCamp(camp)
     camp.isRespawning = false
 end
 
-function neutralSpawner:OnCampUnitDeath(unit)
+function ns:OnCampUnitDeath(unit)
     local camp = unit.campRef
     if not camp then return end
 
@@ -81,4 +81,4 @@ function neutralSpawner:OnCampUnitDeath(unit)
     end
 end
 
-return neutralSpawner
+return ns
