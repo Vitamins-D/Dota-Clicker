@@ -3,6 +3,7 @@ if dota_clicker == nil then
 end
 
 local neutralSpawner = require("utils/neutralSpawner")
+local lvlupInterval = 60
 
 HeroExpTable = {0}
 -- expTable = {0, 240, 640, 1160, 1760, 2440, 3200, 4000, 4900, 5900, 7000, 8200, 9500, 10900, 12400, 14000, 15700, 17500, 19400, 21400, 23600, 26000, 28600, 31400, 34400, 38400, 43400, 49400, 56400, 63900}
@@ -58,7 +59,7 @@ function dota_clicker:OnTreeCut(event)
 		local tree_position = Vector(tree_x, tree_y, GetGroundHeight(Vector(tree_x, tree_y, 0), nil))
 		
 		-- Создаем предмет на месте срубленного дерева
-		local item = CreateItem("item_dota_clicker_wood", nil, nil)
+		local item = CreateItem("item_dotac_wood", nil, nil)
 		if item then
 			-- Создаем физический предмет на карте
 			local dropped_item = CreateItemOnPositionSync(tree_position, item)
@@ -66,38 +67,47 @@ function dota_clicker:OnTreeCut(event)
 			-- Устанавливаем время создания для системы очистки
 			if dropped_item then
 				dropped_item.creation_time = GameRules:GetGameTime()
-				print("Wood item created at time: " .. dropped_item.creation_time)
+				-- print("Wood item created at time: " .. dropped_item.creation_time)
 			end
 		end
 	end
 end
 
 -- Система автоочистки предметов дерева
+-- Система автоочистки предметов
 function dota_clicker:StartSimpleGroundItemCleanup()
+    local cleanupItems = {
+        "item_dotac_wood",
+        "item_dotac_boar_skin",
+        "item_dotac_wolf_skin",
+        "item_dotac_murloc_skin",
+        "item_dotac_bear_skin",
+        "item_dotac_cheeter_meat"
+    }
+
     Timers:CreateTimer(30, function()
-        -- Каждые 30 секунд проверяем все предметы на земле
         local all_items = Entities:FindAllByClassname("dota_item_drop")
-        
+
         for _, item_drop in pairs(all_items) do
             if IsValidEntity(item_drop) and not item_drop:IsNull() then
                 local item = item_drop:GetContainedItem()
-                if item and item:GetAbilityName() == "item_dota_clicker_wood" then
-                    -- Проверяем время существования предмета
-                    if not item_drop.creation_time then
-                        -- Если время не установлено, устанавливаем текущее время
-                        item_drop.creation_time = GameRules:GetGameTime()
-                    elseif GameRules:GetGameTime() - item_drop.creation_time >= 30 then
-                        -- Удаляем предмет, если он лежит дольше 30 секунд
-                        UTIL_Remove(item_drop)
-                        print("Wood item cleaned up by timer (existed for " .. (GameRules:GetGameTime() - item_drop.creation_time) .. " seconds)")
+                if item then
+                    local itemName = item:GetAbilityName()
+                    if self:indexOf(cleanupItems, itemName) then
+                        if not item_drop.creation_time then
+                            item_drop.creation_time = GameRules:GetGameTime()
+                        elseif GameRules:GetGameTime() - item_drop.creation_time >= 30 then
+                            UTIL_Remove(item_drop)
+                        end
                     end
                 end
             end
         end
-        
-        return 30 -- Повторяем каждые 30 секунд
+
+        return 30
     end)
 end
+
 
 function miningDo(oreType, playerId)
 	local oresValues = {
@@ -140,10 +150,50 @@ function dota_clicker:OnPlayerChat(event)
 end
 
 function dota_clicker:dotaClickerKilled(data)
-	local killed_unit = EntIndexToHScript(data.entindex_killed)
-	
-	
+    local killed_unit = EntIndexToHScript(data.entindex_killed)
+    if not killed_unit or not killed_unit.GetUnitName then return end
+
+    local unitName = killed_unit:GetUnitName()
+    local dropPos = killed_unit:GetAbsOrigin()
+
+    -- Таблица для шансов дропа
+    local dropTable = {
+        ["npc_dota_clicker_boar"] = {
+            {item = "item_dotac_boar_skin", chance = 75}
+        },
+        ["npc_dota_clicker_wolf"] = {
+            {item = "item_dotac_wolf_skin", chance = 75}
+        },
+        ["npc_dota_clicker_wolf_alpha"] = {
+            {item = "item_dotac_wolf_skin", chance = 75}
+        },
+        ["npc_dota_clicker_murloc"] = {
+            {item = "item_dotac_murloc_skin", chance = 75}
+        },
+        ["npc_dota_clicker_murloc2"] = {
+            {item = "item_dotac_murloc_skin", chance = 75}
+        },
+        ["npc_dota_clicker_bear"] = {
+            {item = "item_dotac_bear_skin", chance = 75},
+            {item = "item_dotac_cheeter_meat", chance = 100}
+        }
+    }
+
+    if dropTable[unitName] then
+        for _, drop in pairs(dropTable[unitName]) do
+            if RandomInt(1, 100) <= drop.chance then
+                local item = CreateItem(drop.item, nil, nil)
+                if item then
+                    local dropped_item = CreateItemOnPositionSync(dropPos, item)
+                    if dropped_item then
+                        dropped_item.creation_time = GameRules:GetGameTime()
+                    end
+                end
+            end
+        end
+    end
 end
+
 
 function AttachDireTeam()
     local entities = Entities:FindAllByName("dire_team")
@@ -172,6 +222,12 @@ function dota_clicker:dotaClickerStart()
 		-- ApplyDamage(damage_table)
         -- return
     -- end)
+	
+	Timers:CreateTimer(lvlupInterval, function()
+		GiveGoldPlayers( 500 )
+        GiveExpPlayers(100)
+        return lvlupInterval
+    end)
 end
 
 -- Evaluate the state of the game
@@ -196,4 +252,27 @@ function dota_clicker:OnNpcSpawned(data)
  	local npc = EntIndexToHScript(data.entindex)
 	
      
+end
+
+function GiveExpPlayers(expVal)
+    local playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
+    
+    for index = 0, playerCount - 1 do
+        if PlayerResource:HasSelectedHero(index) then
+            local player = PlayerResource:GetPlayer(index)
+            local hero = PlayerResource:GetSelectedHeroEntity(index)
+            hero:AddExperience(expVal, false, false)
+        end
+    end
+end
+
+function GiveGoldPlayers( gold )
+	for index=0 ,PlayerResource:GetPlayerCount() do
+		if PlayerResource:HasSelectedHero(index) then
+			local player = PlayerResource:GetPlayer(index)
+			local hero = PlayerResource:GetSelectedHeroEntity(index)
+			hero:ModifyGold(gold, false, 0)
+			SendOverheadEventMessage( player, OVERHEAD_ALERT_GOLD, hero, gold, nil )
+		end
+	end
 end

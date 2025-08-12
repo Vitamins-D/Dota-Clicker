@@ -4,7 +4,7 @@ end
 
 local campsUnits = {
 	{"npc_dota_clicker_boar", "npc_dota_clicker_boar"}, -- 1
-	{"npc_dota_clicker_wolf", "npc_dota_clicker_wolf", "npc_dota_clicker_wolf"}, -- 2
+	{"npc_dota_clicker_wolf", "npc_dota_clicker_wolf_alpha", "npc_dota_clicker_wolf"}, -- 2
 	{"npc_dota_clicker_murloc", "npc_dota_clicker_murloc2"}, -- 3
 	{"npc_dota_clicker_bear"}, -- 4
 }
