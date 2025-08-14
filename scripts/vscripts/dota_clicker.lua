@@ -239,13 +239,6 @@ function dota_clicker:dotaClickerStart()
 		wa:spawnWave(player)
 	end)
 	
-	local uiArr = wi:convertToUnifiedStructure()
-	self:throughPlayers(function(player, hero)
-		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
-	end)
-	
-	
-	
 	Timers:CreateTimer(lvlupInterval, function()
 		GiveGoldPlayers( 500 )
         GiveExpPlayers(100)
@@ -265,7 +258,10 @@ end
 function dota_clicker:OnNpcSpawned(data)
  	local npc = EntIndexToHScript(data.entindex)
 	
-     
+	local uiArr = wi:convertToUnifiedStructure()
+	self:throughPlayers(function(player, hero)
+		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
+	end)
 end
 
 function dota_clicker:throughPlayers(callback)
