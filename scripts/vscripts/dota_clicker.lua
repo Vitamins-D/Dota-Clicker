@@ -46,17 +46,12 @@ function dota_clicker:InitGameMode()
 	-- Запускаем систему очистки предметов дерева
 	self:StartSimpleGroundItemCleanup()
 	
-	local uiArr = wi:convertToUnifiedStructure()
-	CustomGameEventManager:Send_ServerToAllClients("SetDataUnits", {dataU = uiArr})
-	
 	CustomGameEventManager:RegisterListener("Mining", function(_, event)
 		local oreType = event.ore_type
 		local playerId = event.player_id
 		
 		miningDo(oreType, playerId)
 	end)
-	
-	CustomGameEventManager:Send_ServerToAllClients("upgrade_success", {unit = "ZZZ", upgrade = "ZZZ", newLevel = 2, desc = "ZZZ123"})
 	
 	CustomGameEventManager:RegisterListener("upgrade_unit", function(_, event)
 		local unit = event.unit
@@ -243,6 +238,13 @@ function dota_clicker:dotaClickerStart()
 		wa:InitAddon(player, wave_start, DOTA_TEAM_BADGUYS)
 		wa:spawnWave(player)
 	end)
+	
+	local uiArr = wi:convertToUnifiedStructure()
+	self:throughPlayers(function(player, hero)
+		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
+	end)
+	
+	
 	
 	Timers:CreateTimer(lvlupInterval, function()
 		GiveGoldPlayers( 500 )
