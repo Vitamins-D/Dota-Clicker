@@ -255,13 +255,17 @@ function dota_clicker:OnThink()
 	return 1
 end
 
+local uiInit = false
 function dota_clicker:OnNpcSpawned(data)
  	local npc = EntIndexToHScript(data.entindex)
 	
-	local uiArr = wi:convertToUnifiedStructure()
-	self:throughPlayers(function(player, hero)
-		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
-	end)
+	if not uiInit then
+		uiInit = true
+		local uiArr = wi:convertToUnifiedStructure()
+		self:throughPlayers(function(player, hero)
+			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
+		end)
+	end
 end
 
 function dota_clicker:throughPlayers(callback)
