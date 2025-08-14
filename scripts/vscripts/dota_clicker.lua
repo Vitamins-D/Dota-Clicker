@@ -46,12 +46,17 @@ function dota_clicker:InitGameMode()
 	-- Запускаем систему очистки предметов дерева
 	self:StartSimpleGroundItemCleanup()
 	
+	local uiArr = wi:convertToUnifiedStructure()
+	CustomGameEventManager:Send_ServerToAllClients("SetDataUnits", {dataU = uiArr})
+	
 	CustomGameEventManager:RegisterListener("Mining", function(_, event)
 		local oreType = event.ore_type
 		local playerId = event.player_id
 		
 		miningDo(oreType, playerId)
 	end)
+	
+	CustomGameEventManager:Send_ServerToAllClients("upgrade_success", {unit = "ZZZ", upgrade = "ZZZ", newLevel = 2, desc = "ZZZ123"})
 	
 	CustomGameEventManager:RegisterListener("upgrade_unit", function(_, event)
 		local unit = event.unit

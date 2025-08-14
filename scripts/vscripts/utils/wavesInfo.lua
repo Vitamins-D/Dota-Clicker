@@ -18,6 +18,66 @@ local utils = require("utils/utils")
 -- 4.1 - catapult, 4.1.1 - trebuchet, 4.1.2 - ballista
 -- 4.2 - bomb, 4.2.1 - miner, 4.2.2 - flamethrower
 
+wi.unitTypes = {
+	"melee", "ranger", "mage", "siege"
+}
+
+wi.unitDescription = {
+	["tank"] = "",
+	["berserk"] = "",
+	["shooter"] = "",
+	["archer"] = "",
+	["elementalist"] = "",
+	["shaman"] = "",
+	["catapult"] = "",
+	["bomb"] = "",
+	
+	["fire"] = "",
+	["stone"] = "",
+	["swordsman"] = "",
+	["illusion"] = "",
+	["gunner"] = "",
+	["sniper"] = "",
+	["pathfinder"] = "",
+	["huntsman"] = "",
+	["firestone"] = "",
+	["waterair"] = "",
+	["aura"] = "",
+	["summoner"] = "",
+	["trebuchet"] = "",
+	["ballista"] = "",
+	["miner"] = "",
+	["flamethrower"] = "",
+}
+
+wi.requirement = {
+	["tank"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["berserk"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["shooter"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["archer"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["elementalist"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["shaman"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["catapult"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["bomb"] = {upgs = {"damage", 1}, {"armor", 2}},
+	
+	["fire"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["stone"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["swordsman"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["illusion"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["gunner"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["sniper"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["pathfinder"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["huntsman"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["firestone"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["waterair"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["aura"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["summoner"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["trebuchet"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["ballista"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["miner"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["flamethrower"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+}
+
 wi.units = {
 	["melee"] = "",
 	["ranger"] = "",
@@ -88,7 +148,7 @@ wi.base = {
 	{
 		{type = "mana", levels = {
 			{{type = "mana", value = 100}, {type = "hp", value = 9999}},
-			{{type = "spell", value = "Roma"}},
+			{{type = "spell", value = "dotac_boar_charge"}},
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -460,23 +520,32 @@ local autoDesc = {
     mana = "Добавляет %d ед. к мане",
     manareg = "Добавляет %d ед. к регенерации маны",
     spell = "Открывает способность %s",
+    spell_up = "Улучшает способность %s",
 }
 
 function wi:getUpgradeDescription(unit, name, level)
 	
-	local upgrades = wi:getUpgrades(unit, name).levels[level]
+	local upgrades = wi:getUpgrades(unit, name)
 	
 	local desc = ""
 	if upgrades then
-		for i = 1, #upgrades do
-			local upgrade = upgrades[i]
-			if i > 1 then desc = desc .. "<br><br>" end
-			if upgrade.desc then
-				desc = desc .. upgrade.desc
-			else
-				local pattern = autoDesc[upgrade.type]
-				if pattern then
-					desc = desc .. string.format(pattern, upgrade.value)
+		upgrades = upgrades.levels[level]
+		if upgrades then
+			for i = 1, #upgrades do
+				local upgrade = upgrades[i]
+				if i > 1 then desc = desc .. "<br><br>" end
+				if upgrade.desc then
+					desc = desc .. upgrade.desc
+				else
+					local pattern = autoDesc[upgrade.type]
+					if pattern then
+						if upgrade.type == "spell" or upgrade.type == "spell_up" then
+							-- Берём локализованное имя способности
+							desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_" .. upgrade.value)
+						else
+							desc = desc .. string.format(pattern, upgrade.value)
+						end
+					end
 				end
 			end
 		end
@@ -513,7 +582,12 @@ end
 
 function wi:getMaxLevel(type, unit, name)
 	local id, _ = self:getUpgByName(unit, name)
-	return #wi.upgrades[type][unit][id].levels
+	local upgrade = wi.upgrades[type][unit][id]
+	if upgrade then
+		return #upgrade.levels
+	else
+		return 0
+	end
 end
 
 function wi:getUnitName(name)
@@ -530,6 +604,255 @@ function wi:getUpgrades(unit, name)
 	local arr = wi:getArrByUnit(unit)
 	
 	return arr[id]
+end
+
+-- Добавляем в конец файла wi.lua
+
+-- Маппинг названий
+wi.nameMapping = {
+	-- Базовые типы
+	["melee"] = "Мечник",
+	["ranger"] = "Лучник", 
+	["mage"] = "Маг",
+	["siege"] = "Осадная машина",
+	
+	-- Классы (evolutions)
+	["tank"] = "Танк",
+	["berserk"] = "Берсерк",
+	["shooter"] = "Стрелок",
+	["archer"] = "Лучник",
+	["elementalist"] = "Элементалист",
+	["shaman"] = "Шаман",
+	["catapult"] = "Катапульта",
+	["bomb"] = "Бомба",
+	
+	-- Подклассы (subclasses)
+	["fire"] = "Огненные жилы",
+	["stone"] = "Каменная глыба",
+	["swordsman"] = "Мастер фехтования",
+	["illusion"] = "Мастер иллюзий",
+	["gunner"] = "Пулеметчик",
+	["sniper"] = "Снайпер",
+	["pathfinder"] = "Следопыт",
+	["huntsman"] = "Егерь",
+	["firestone"] = "Маг огня и земли",
+	["waterair"] = "Маг воды и ветра",
+	["aura"] = "Боевой шаман",
+	["summoner"] = "Шаман призыва",
+	["trebuchet"] = "Требушет",
+	["ballista"] = "Баллиста",
+	["miner"] = "Минер",
+	["flamethrower"] = "Огнеметчик",
+	
+	-- Названия апгрейдов
+	["mana"] = "Сила магии",
+	["spell_power"] = "Сила заклинаний",
+	["cast_speed"] = "Скорость каста",
+	["hp"] = "Здоровяк",
+	["damage"] = "Урон",
+	["armor"] = "Броня",
+	["def"] = "Стойкость"
+}
+
+-- Функция преобразования всех данных в один большой массив
+function wi:convertToUnifiedStructure()
+	local result = {}
+	
+	-- Проходим по базовым типам юнитов
+	for _, unitType in ipairs(wi.unitTypes) do
+		local unitData = {
+			name = wi.nameMapping[unitType] or unitType,
+			baseUpgrades = {},
+			evolutions = {},
+			subclasses = {}
+		}
+		
+		-- Получаем базовые апгрейды
+		if wi.base[unitType] then
+			for _, upgrade in ipairs(wi.base[unitType]) do
+				local upgradeData = {
+					id = upgrade.type,
+					name = wi.nameMapping[upgrade.type] or upgrade.type,
+					description = wi:getUpgradeDescription(unitType, upgrade.type, 1),
+					level = 0,
+					maxLevel = #upgrade.levels
+				}
+				table.insert(unitData.baseUpgrades, upgradeData)
+			end
+		end
+		
+		-- Находим все классы (evolutions) для данного базового типа
+		for className, classData in pairs(wi.classes) do
+			local parentType = wi:getUnitName(className)
+			if parentType == unitType then
+				local evolution = {
+					id = className,
+					name = wi.nameMapping[className] or className,
+					description = wi.unitDescription[className] or "",
+					requirement = {},
+					skills = {}
+				}
+				
+				-- Парсим требования из wi.requirement
+				if wi.requirement[className] and wi.requirement[className].upgs then
+					local reqs = wi.requirement[className].upgs
+					for i = 1, #reqs, 2 do
+						if reqs[i+1] then
+							evolution.requirement[reqs[i]] = reqs[i+1]
+						end
+					end
+				end
+				
+				-- Преобразуем levels в skills
+				for _, skill in ipairs(classData) do
+					local skillData = {
+						id = skill.type,
+						name = wi.nameMapping[skill.type] or skill.type,
+						description = wi:getUpgradeDescription(className, skill.type, 1),
+						level = 0,
+						maxLevel = #skill.levels
+					}
+					table.insert(evolution.skills, skillData)
+				end
+				
+				table.insert(unitData.evolutions, evolution)
+			end
+		end
+		
+		-- Находим все подклассы (subclasses) для данного базового типа
+		for subClassName, subClassData in pairs(wi.subClasses) do
+			local parentType = wi:getUnitName(subClassName)
+			if parentType == unitType then
+				local subclass = {
+					id = subClassName,
+					name = wi.nameMapping[subClassName] or subClassName,
+					description = wi.unitDescription[subClassName] or "",
+					requirement = {},
+					skills = {}
+				}
+				
+				-- Парсим требования из wi.requirement для подклассов
+				if wi.requirement[subClassName] then
+					local req = wi.requirement[subClassName]
+					if req.class then
+						-- Структура: { evolutions: { class_name: { upgrade_requirements } } }
+						subclass.requirement.evolutions = {}
+						subclass.requirement.evolutions[req.class] = {}
+						
+						if req.upgs then
+							for i = 1, #req.upgs, 2 do
+								if req.upgs[i+1] then
+									subclass.requirement.evolutions[req.class][req.upgs[i]] = req.upgs[i+1]
+								end
+							end
+						end
+					end
+				end
+				
+				-- Преобразуем levels в skills (берем структуру из subClassData напрямую)
+				local skillData = {
+					id = subClassData.type,
+					name = wi.nameMapping[subClassData.type] or subClassData.type,
+					description = wi:getUpgradeDescription(subClassName, subClassData.type, 1),
+					level = 0,
+					maxLevel = #subClassData.levels
+				}
+				table.insert(subclass.skills, skillData)
+				
+				table.insert(unitData.subclasses, subclass)
+			end
+		end
+		
+		result[unitType] = unitData
+	end
+	
+	return result
+end
+
+-- Функция для вывода структуры в консоль для проверки
+function wi:printUnifiedStructure()
+	local data = wi:convertToUnifiedStructure()
+	
+	print("=== UNIFIED UNIT STRUCTURE ===")
+	
+	for unitType, unitData in pairs(data) do
+		print("\n" .. unitType .. ": {")
+		print("  name: \"" .. unitData.name .. "\",")
+		
+		-- Выводим базовые апгрейды
+		print("  baseUpgrades: [")
+		for _, upgrade in ipairs(unitData.baseUpgrades) do
+			print("    { id: \"" .. upgrade.id .. "\", name: \"" .. upgrade.name .. "\", level: " .. upgrade.level .. ", maxLevel: " .. upgrade.maxLevel .. " },")
+		end
+		print("  ],")
+		
+		-- Выводим эволюции
+		print("  evolutions: [")
+		for _, evolution in ipairs(unitData.evolutions) do
+			print("    {")
+			print("      id: \"" .. evolution.id .. "\",")
+			print("      name: \"" .. evolution.name .. "\",")
+			print("      description: \"" .. evolution.description .. "\",")
+			
+			-- Выводим требования
+			print("      requirement: {")
+			local reqCount = 0
+			for reqKey, reqValue in pairs(evolution.requirement) do
+				if reqCount > 0 then print(", ") end
+				print(" " .. reqKey .. ": " .. reqValue)
+				reqCount = reqCount + 1
+			end
+			print(" },")
+			
+			-- Выводим скиллы
+			print("      skills: [")
+			for _, skill in ipairs(evolution.skills) do
+				print("        { id: \"" .. skill.id .. "\", name: \"" .. skill.name .. "\", level: " .. skill.level .. ", maxLevel: " .. skill.maxLevel .. " },")
+			end
+			print("      ]")
+			print("    },")
+		end
+		print("  ],")
+		
+		-- Выводим подклассы
+		print("  subclasses: [")
+		for _, subclass in ipairs(unitData.subclasses) do
+			print("    {")
+			print("      id: \"" .. subclass.id .. "\",")
+			print("      name: \"" .. subclass.name .. "\",")
+			print("      description: \"" .. subclass.description .. "\",")
+			
+			-- Выводим требования для подклассов
+			print("      requirement: {")
+			if subclass.requirement.evolutions then
+				print("        evolutions: {")
+				for evolName, evolReqs in pairs(subclass.requirement.evolutions) do
+					print("          " .. evolName .. ": {")
+					local reqCount = 0
+					for reqKey, reqValue in pairs(evolReqs) do
+						if reqCount > 0 then print(", ") end
+						print(" " .. reqKey .. ": " .. reqValue)
+						reqCount = reqCount + 1
+					end
+					print(" }")
+				end
+				print("        }")
+			end
+			print("      },")
+			
+			-- Выводим скиллы
+			print("      skills: [")
+			for _, skill in ipairs(subclass.skills) do
+				print("        { id: \"" .. skill.id .. "\", name: \"" .. skill.name .. "\", level: " .. skill.level .. ", maxLevel: " .. skill.maxLevel .. " },")
+			end
+			print("      ]")
+			print("    },")
+		end
+		print("  ]")
+		print("},")
+	end
+	
+	print("\n=== END STRUCTURE ===")
 end
 
 return wi

@@ -105,7 +105,13 @@ function wa:spawnWave(player)
 						for n = 1, #upgradeLevel do
 							local upgrade = upgradeLevel[n]
 							if upgrade.type == "spell" then
-								print("SPELL:", upgrade.value)
+								-- print("SPELL:", upgrade.value)
+								unit:AddAbility(upgrade.value)
+							elseif upgrade.type == "spell_up" then
+								local ability = unit:FindAbilityByName(upgrade.value)
+								if ability then
+									ability:SetLevel(ability:GetLevel() + 1)
+								end
 							else
 								unit.bonus[upgrade.type] = upgrade.value
 							end
