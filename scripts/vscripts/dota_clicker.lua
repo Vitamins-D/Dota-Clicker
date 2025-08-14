@@ -63,12 +63,12 @@ function dota_clicker:InitGameMode()
 			
 			local arrId
 			if upgType == "base" then arrId = 1
-			elseif upgType == "class" then arrId = 3
-			elseif upgType == "sub" then arrId = 5
+			elseif upgType == "class" then arrId = 2
+			elseif upgType == "sub" then arrId = 3
 			end
 			
 			local baseName = wi:getUnitName(unit)
-			local newLevel = player.upgrades[baseName][arrId][upgId]
+			local newLevel = player.upgrades[baseName][arrId].levels[upgId]
 			local gold = PlayerResource:GetGold(player_id)
 			if gold >= 300 and newLevel < wi:getMaxLevel(upgType, unit, upgrade) then
 				newLevel = newLevel + 1
@@ -233,8 +233,10 @@ function dota_clicker:dotaClickerStart()
         -- return
     -- end)
 	
+	local wave_start = Entities:FindByName(nil, "good_path"):GetAbsOrigin()
 	self:throughPlayers(function(player, hero)
-		wa:InitAddon(player)
+		wa:InitAddon(player, wave_start, DOTA_TEAM_BADGUYS)
+		wa:spawnWave(player)
 	end)
 	
 	Timers:CreateTimer(lvlupInterval, function()

@@ -21,7 +21,7 @@ local utils = require("utils/utils")
 wi.units = {
 	["melee"] = "",
 	["ranger"] = "",
-	["mage"] = "",
+	["mage"] = "npc_dota_clicker_boar",
 	["siege"] = "",
 	
 	["tank"] = "",
@@ -87,8 +87,8 @@ wi.base = {
 	["mage"] =
 	{
 		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+			{{type = "mana", value = 100}, {type = "hp", value = 9999}},
+			{{type = "spell", value = "Roma"}},
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -449,34 +449,39 @@ wi.unitNames = {
 	{"siege", "catapult", "bomb", "trebuchet", "ballista", "miner", "flamethrower"},
 }
 
-
 local autoDesc = {
     atks = "Добавляет %d ед. к скорости атаки",
     atk = "Добавляет %d ед. к урону",
     hp = "Добавляет %d ед. к здоровью",
     armor = "Добавляет %d ед. к броне",
     magr = "Добавляет %d%% к магическому сопротивлению",
-    aml = "Добавляет %d%% к усилению магического урона",
+    spell_amp = "Добавляет %d%% к усилению магического урона",
     hpreg = "Добавляет %d ед. к регенерации здоровья",
     mana = "Добавляет %d ед. к мане",
-    manareg = "Добавляет %d ед. к регенерации маны"
+    manareg = "Добавляет %d ед. к регенерации маны",
+    spell = "Открывает способность %s",
 }
 
-function wi:getUpgradeDescription(unit, name)
+function wi:getUpgradeDescription(unit, name, level)
 	
-	local id = wi:getUpgByName(unit, name)
-	local arr = wi:getArrByUnit(unit)
+	local upgrades = wi:getUpgrades(unit, name).levels[level]
 	
-	local upgrade = arr[id]
-	
-    if upgrade.desc then
-        return upgrade.desc
-    end
-    local pattern = autoDesc[upgrade.type]
-    if pattern then
-        return string.format(pattern, upgrade.value)
-    end
-    return "Неизвестное улучшение"
+	local desc = ""
+	if upgrades then
+		for i = 1, #upgrades do
+			local upgrade = upgrades[i]
+			if i > 1 then desc = desc .. "<br><br>" end
+			if upgrade.desc then
+				desc = desc .. upgrade.desc
+			else
+				local pattern = autoDesc[upgrade.type]
+				if pattern then
+					desc = desc .. string.format(pattern, upgrade.value)
+				end
+			end
+		end
+	end
+    return desc
 end
 
 function wi:getUnitByName(name)
@@ -518,6 +523,13 @@ function wi:getUnitName(name)
 			return arr[1]
 		end
 	end
+end
+
+function wi:getUpgrades(unit, name)
+	local id = wi:getUpgByName(unit, name)
+	local arr = wi:getArrByUnit(unit)
+	
+	return arr[id]
 end
 
 return wi

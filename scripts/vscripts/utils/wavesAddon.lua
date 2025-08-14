@@ -30,31 +30,93 @@ local units = {
 	"melee", "ranger", "mage", "siege", "ranger"
 }
 
-function wa:InitAddon(player)
+function wa:InitAddon(player, spawnPos, team)
 	player.units = {
-		"melee", "ranger", "mage", "siege", "ranger"
+		"mage"
 	}
 	
 	player.upgrades = {
-		["melee"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
-		["ranger"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
-		["mage"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
-		["siege"] = {{0, 0, 0}, nil, {0, 0, 0}, nil, 0},
+		["melee"] = {
+			{type = "base", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
+		["ranger"] = {
+			{type = "base", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
+		["mage"] = {
+			{type = "base", levels = {2, 0, 0}}, 
+			{type = "class", levels = {0, 0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
+		["siege"] = {
+			{type = "base", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
 	}
+	
+	player.spawnPos = spawnPos
+	player.team = team
 end
 
 function wa:spawnWave(player)
 	local spawnPos = player.spawnPos
 	local units = player.units
-	local upgrades = player.upgrades
+	local pUpgrades = player.upgrades
 	local team = player.team
 	
 	for i = 1, #units do
-		local unit = units[i]
+		local name = units[i]
 		
-		local name = info:getUnitByName(unit)
+		local unitUpg = pUpgrades[name]
+		local class = unitUpg[4]
+		local subclass = unitUpg[5]
 		
-		local entity = CreateUnitByName(name, spawnPos, true, nil, nil, team)
+		local pathName = name
+		if subclass then pathName = subclass
+		elseif class then pathName = class end
+		local path = info:getUnitByName(pathName)
+		
+		local unit = CreateUnitByName(path, spawnPos, true, nil, nil, team)
+		
+		unit.bonus = {}
+		Timers:CreateTimer(0.1, function()
+			unit:AddNewModifier(unit, nil, "modifier_buff_stats", {})
+		end)
+		
+		local names = {name, class, subclass}
+		for i = 1, 3 do
+			local pUpgrade = unitUpg[i]
+			local type = pUpgrade.type
+			local levels = pUpgrade.levels
+			for j = 1, #levels do
+				local lvl = levels[j]
+				
+				local unitType = names[i]
+				if lvl > 0 and unitType then
+					local upgrades = info.upgrades[type][unitType][j].levels
+					
+					for k = 1, lvl do
+						local upgradeLevel = upgrades[k]
+						
+						for n = 1, #upgradeLevel do
+							local upgrade = upgradeLevel[n]
+							if upgrade.type == "spell" then
+								print("SPELL:", upgrade.value)
+							else
+								unit.bonus[upgrade.type] = upgrade.value
+							end
+						end
+						
+					end
+				end
+				
+			end
+		end
+		
 	end
 end
 
