@@ -114,7 +114,6 @@ function dota_clicker:InitGameMode()
 	end)
 	
 	CustomGameEventManager:RegisterListener("buy_unit", function(_, event)
-		print("BUY", event)
 		local unit = event.unit
 		local player_id = event.player_id
 		local player = PlayerResource:GetPlayer(player_id)
@@ -325,9 +324,13 @@ function dota_clicker:dotaClickerStart()
 	end)
 	
 	Timers:CreateTimer(lvlupInterval, function()
-		GiveGoldPlayers( 500 )
         GiveExpPlayers(100)
         return lvlupInterval
+    end)
+	
+	Timers:CreateTimer(goldInterval, function()
+		GiveGoldPlayers( 500 )
+        return goldInterval
     end)
 end
 
