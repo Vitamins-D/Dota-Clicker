@@ -234,7 +234,6 @@ function dota_clicker:dotaClickerStart()
     -- end)
 	
 	local uiArr = wi:convertToUnifiedStructure()
-	print("ZZZZZ", uiArr.melee.name)
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
 	end)

@@ -656,118 +656,123 @@ wi.nameMapping = {
 
 -- Функция преобразования всех данных в один большой массив
 function wi:convertToUnifiedStructure()
-	local result = {}
-	
-	-- Проходим по базовым типам юнитов
-	for _, unitType in ipairs(wi.unitTypes) do
-		local unitData = {
-			name = wi.nameMapping[unitType] or unitType,
-			baseUpgrades = {},
-			evolutions = {},
-			subclasses = {}
-		}
-		
-		-- Получаем базовые апгрейды
-		if wi.base[unitType] then
-			for _, upgrade in ipairs(wi.base[unitType]) do
-				local upgradeData = {
-					id = upgrade.type,
-					name = wi.nameMapping[upgrade.type] or upgrade.type,
-					description = wi:getUpgradeDescription(unitType, upgrade.type, 1),
-					level = 0,
-					maxLevel = #upgrade.levels
-				}
-				table.insert(unitData.baseUpgrades, upgradeData)
-			end
-		end
-		
-		-- Находим все классы (evolutions) для данного базового типа
-		for className, classData in pairs(wi.classes) do
-			local parentType = wi:getUnitName(className)
-			if parentType == unitType then
-				local evolution = {
-					id = className,
-					name = wi.nameMapping[className] or className,
-					description = wi.unitDescription[className] or "",
-					requirement = {},
-					skills = {}
-				}
-				
-				-- Парсим требования из wi.requirement
-				if wi.requirement[className] and wi.requirement[className].upgs then
-					local reqs = wi.requirement[className].upgs
-					for i = 1, #reqs, 2 do
-						if reqs[i+1] then
-							evolution.requirement[reqs[i]] = reqs[i+1]
-						end
-					end
-				end
-				
-				-- Преобразуем levels в skills
-				for _, skill in ipairs(classData) do
-					local skillData = {
-						id = skill.type,
-						name = wi.nameMapping[skill.type] or skill.type,
-						description = wi:getUpgradeDescription(className, skill.type, 1),
-						level = 0,
-						maxLevel = #skill.levels
-					}
-					table.insert(evolution.skills, skillData)
-				end
-				
-				table.insert(unitData.evolutions, evolution)
-			end
-		end
-		
-		-- Находим все подклассы (subclasses) для данного базового типа
-		for subClassName, subClassData in pairs(wi.subClasses) do
-			local parentType = wi:getUnitName(subClassName)
-			if parentType == unitType then
-				local subclass = {
-					id = subClassName,
-					name = wi.nameMapping[subClassName] or subClassName,
-					description = wi.unitDescription[subClassName] or "",
-					requirement = {},
-					skills = {}
-				}
-				
-				-- Парсим требования из wi.requirement для подклассов
-				if wi.requirement[subClassName] then
-					local req = wi.requirement[subClassName]
-					if req.class then
-						-- Структура: { evolutions: { class_name: { upgrade_requirements } } }
-						subclass.requirement.evolutions = {}
-						subclass.requirement.evolutions[req.class] = {}
-						
-						if req.upgs then
-							for i = 1, #req.upgs, 2 do
-								if req.upgs[i+1] then
-									subclass.requirement.evolutions[req.class][req.upgs[i]] = req.upgs[i+1]
-								end
-							end
-						end
-					end
-				end
-				
-				-- Преобразуем levels в skills (берем структуру из subClassData напрямую)
-				local skillData = {
-					id = subClassData.type,
-					name = wi.nameMapping[subClassData.type] or subClassData.type,
-					description = wi:getUpgradeDescription(subClassName, subClassData.type, 1),
-					level = 0,
-					maxLevel = #subClassData.levels
-				}
-				table.insert(subclass.skills, skillData)
-				
-				table.insert(unitData.subclasses, subclass)
-			end
-		end
-		
-		result[unitType] = unitData
-	end
-	
-	return result
+  local result = {}
+  
+  local function newArray()
+    return setmetatable({}, { __jsontype = 'array' })
+  end
+
+  -- Проходим по базовым типам юнитов
+  for _, unitType in ipairs(wi.unitTypes) do
+    local unitData = {
+      name = wi.nameMapping[unitType] or unitType,
+      baseUpgrades = newArray(),
+      evolutions = newArray(),
+      subclasses = newArray()
+    }
+    
+    -- Получаем базовые апгрейды
+    if wi.base[unitType] then
+      for _, upgrade in ipairs(wi.base[unitType]) do
+        local upgradeData = {
+          id = upgrade.type,
+          name = wi.nameMapping[upgrade.type] or upgrade.type,
+          description = wi:getUpgradeDescription(unitType, upgrade.type, 1),
+          level = 0,
+          maxLevel = #upgrade.levels
+        }
+        table.insert(unitData.baseUpgrades, upgradeData)
+      end
+    end
+    
+    -- Находим все классы (evolutions) для данного базового типа
+    for className, classData in pairs(wi.classes) do
+      local parentType = wi:getUnitName(className)
+      if parentType == unitType then
+        local evolution = {
+          id = className,
+          name = wi.nameMapping[className] or className,
+          description = wi.unitDescription[className] or "",
+          requirement = {},
+          skills = newArray()
+        }
+        
+        -- Парсим требования из wi.requirement
+        if wi.requirement[className] and wi.requirement[className].upgs then
+          local reqs = wi.requirement[className].upgs
+          for i = 1, #reqs, 2 do
+            if reqs[i+1] then
+              evolution.requirement[reqs[i]] = reqs[i+1]
+            end
+          end
+        end
+        
+        -- Преобразуем levels в skills
+        for _, skill in ipairs(classData) do
+          local skillData = {
+            id = skill.type,
+            name = wi.nameMapping[skill.type] or skill.type,
+            description = wi:getUpgradeDescription(className, skill.type, 1),
+            level = 0,
+            maxLevel = #skill.levels
+          }
+          table.insert(evolution.skills, skillData)
+        end
+        
+        table.insert(unitData.evolutions, evolution)
+      end
+    end
+    
+    -- Находим все подклассы (subclasses) для данного базового типа
+    for subClassName, subClassData in pairs(wi.subClasses) do
+      local parentType = wi:getUnitName(subClassName)
+      if parentType == unitType then
+        local subclass = {
+          id = subClassName,
+          name = wi.nameMapping[subClassName] or subClassName,
+          description = wi.unitDescription[subClassName] or "",
+          requirement = {},
+          skills = newArray()
+        }
+        
+        -- Парсим требования из wi.requirement для подклассов
+        if wi.requirement[subClassName] then
+          local req = wi.requirement[subClassName]
+          if req.class then
+            -- Структура: { evolutions: { class_name: { upgrade_requirements } } }
+            subclass.requirement.evolutions = {}
+            subclass.requirement.evolutions[req.class] = {}
+            
+            if req.upgs then
+              for i = 1, #req.upgs, 2 do
+                if req.upgs[i+1] then
+                  subclass.requirement.evolutions[req.class][req.upgs[i]] = req.upgs[i+1]
+                end
+              end
+            end
+          end
+        end
+        
+        -- Преобразуем levels в skills (берем структуру из subClassData напрямую)
+        local skillData = {
+          id = subClassData.type,
+          name = wi.nameMapping[subClassData.type] or subClassData.type,
+          description = wi:getUpgradeDescription(subClassName, subClassData.type, 1),
+          level = 0,
+          maxLevel = #subClassData.levels
+        }
+        table.insert(subclass.skills, skillData)
+        
+        table.insert(unitData.subclasses, subclass)
+      end
+    end
+    
+    result[unitType] = unitData
+  end
+  
+  return result
 end
+
 
 -- Функция для вывода структуры в консоль для проверки
 function wi:printUnifiedStructure()
