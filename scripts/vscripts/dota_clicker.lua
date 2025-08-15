@@ -125,7 +125,7 @@ function dota_clicker:InitGameMode()
 		local count = playerUnit
 		
 		local gold = PlayerResource:GetGold(player_id)
-		local cost = 500
+		local cost = wi.base[unit].cost
 		if gold >= cost then
 			GiveGold( -cost, player_id )
 			success = true
@@ -147,7 +147,7 @@ function dota_clicker:InitGameMode()
 		local count = playerUnit-1
 		table.remove(player.units, utils:indexOf(player.units, unit))
 		
-		local cost = 500
+		local cost = wi.base[unit].cost
 		GiveGold( cost, player_id )
 		CustomGameEventManager:Send_ServerToPlayer(player, "sell_unit_response", {unit = unit, success = true, new_count = count})
 	end)

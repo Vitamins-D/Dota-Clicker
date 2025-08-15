@@ -118,7 +118,7 @@ wi.base = {
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-		}},
+		}}, cost = 300
 	},
 	["archer"] =
 	{
@@ -142,7 +142,7 @@ wi.base = {
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-		}},
+		}}, cost = 500
 	},
 	["mage"] =
 	{
@@ -166,7 +166,7 @@ wi.base = {
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-		}},
+		}}, cost = 700
 	},
 	["catapult"] =
 	{
@@ -190,7 +190,7 @@ wi.base = {
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-		}},
+		}}, cost = 1200
 	},
 }
 
