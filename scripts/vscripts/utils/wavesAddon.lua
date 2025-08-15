@@ -5,30 +5,18 @@ end
 local info = require("utils/wavesInfo")
 
 -- info
--- 1 - melee
--- 1.1 - tank, 1.1.1 - fire, 1.1.2 - stone
--- 1.2 - berserk, 1.2.1 - swordsman, 1.2.2 - illusion
--- 2 - ranger
--- 2.1 - shooter, 2.1.1 - gunner, 2.1.2 - sniper
--- 2.2 - archer, 2.2.1 - pathfinder, 2.2.2 - huntsman
+-- 1 - swordsman
+-- 1.1 - tank, 1.1.1 - Veins_fire, 1.1.2 - stone_block
+-- 1.2 - berserker, 1.2.1 - melee, 1.2.2 - illusionist
+-- 2 - archer
+-- 2.1 - shooter, 2.1.1 - marksman, 2.1.2 - headhunter
+-- 2.2 - ranger, 2.2.1 - forest_guard, 2.2.2 - beast_master
 -- 3 - mage
--- 3.1 - elementalist, 3.1.1 - firestone, 3.1.2 - waterair
--- 3.2 - shaman, 3.2.1 - aura, 3.2.2 - summoner
--- 4 - siege
--- 4.1 - catapult, 4.1.1 - trebuchet, 4.1.2 - ballista
--- 4.2 - bomb, 4.2.1 - miner, 4.2.2 - flamethrower
-
--- Example as view in player
-local upgrades = {
-	["melee"] = {{0, 0, 0}, "class", {0, 0, 0}, "subclass", 0},
-	["ranger"] = {{0, 0, 0}, "class", {0, 0, 0}, "subclass", 0},
-	["mage"] = {{0, 0, 0}, "class", {0, 0, 0}, "subclass", 0},
-	["siege"] = {{0, 0, 0}, "class", {0, 0, 0}, "subclass", 0},
-}
-
-local units = {
-	"melee", "ranger", "mage", "siege", "ranger"
-}
+-- 3.1 - elementalist, 3.1.1 - fire_mage, 3.1.2 - air_mage
+-- 3.2 - shaman, 3.2.1 - def_shaman, 3.2.2 - fight_shaman
+-- 4 - catapult
+-- 4.1 - siege_tower, 4.1.1 - fort_breaker, 4.1.2 - wall_crusher
+-- 4.2 - mobile_launcher, 4.2.1 - rapid_fire, 4.2.2 - long_range
 
 function wa:InitAddon(player, spawnPos, team)
 	player.units = {
@@ -36,22 +24,22 @@ function wa:InitAddon(player, spawnPos, team)
 	}
 	
 	player.upgrades = {
-		["melee"] = {
+		["swordsman"] = {
 			{type = "base", levels = {0, 0, 0}}, 
 			{type = "class", levels = {0, 0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
-		["ranger"] = {
+		["archer"] = {
 			{type = "base", levels = {0, 0, 0}}, 
 			{type = "class", levels = {0, 0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
 		["mage"] = {
-			{type = "base", levels = {2, 0, 0}}, 
+			{type = "base", levels = {0, 0, 0}}, 
 			{type = "class", levels = {0, 0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
-		["siege"] = {
+		["catapult"] = {
 			{type = "base", levels = {0, 0, 0}}, 
 			{type = "class", levels = {0, 0, 0}}, 
 			{type = "sub", levels = {0}}, 

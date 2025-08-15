@@ -7,6 +7,8 @@ local wi = require("utils/wavesInfo")
 local wa = require("utils/wavesAddon")
 local utils = require("utils/utils")
 local lvlupInterval = 60
+local goldInterval = 120
+local maxUnits = 20
 
 HeroExpTable = {0}
 -- expTable = {0, 240, 640, 1160, 1760, 2440, 3200, 4000, 4900, 5900, 7000, 8200, 9500, 10900, 12400, 14000, 15700, 17500, 19400, 21400, 23600, 26000, 28600, 31400, 34400, 38400, 43400, 49400, 56400, 63900}
@@ -58,25 +60,55 @@ function dota_clicker:InitGameMode()
 		local upgrade = event.upgrade
 		local player_id = event.player_id
 		local player = PlayerResource:GetPlayer(player_id)
+		local type = event.type
 		if player then
-			local upgId, upgType = wi:getUpgByName(unit, upgrade)
-			
-			local arrId
-			if upgType == "base" then arrId = 1
-			elseif upgType == "class" then arrId = 2
-			elseif upgType == "sub" then arrId = 3
+			if type == "base" then
+				local upgId, upgType = wi:getUpgByName(unit, upgrade)
+				
+				local arrId
+				if upgType == "base" then arrId = 1
+				elseif upgType == "class" then arrId = 2
+				elseif upgType == "sub" then arrId = 3
+				end
+				
+				
+				
+				local baseName = wi:getUnitName(unit)
+				local newLevel = player.upgrades[baseName][arrId].levels[upgId]
+				local gold = PlayerResource:GetGold(player_id)
+				local maxLevel = wi:getMaxLevel(upgType, unit, upgrade)
+				-- local desc = wi:getUpgradeDescription(unit, upgrade, newLevel+1)
+				local desc = nil
+				local cost = wi:getUpgradeCost(unit, upgrade, newLevel+1)
+				if gold >= cost and newLevel < maxLevel then
+					newLevel = newLevel + 1
+					player.upgrades[baseName][arrId].levels[upgId] = newLevel
+					desc = wi:getUpgradeDescription(unit, upgrade, newLevel+1)
+					GiveGold( -cost, player_id )
+				end
+				
+				CustomGameEventManager:Send_ServerToPlayer(player, "upgrade_success", {unit = unit, upgrade = upgrade, newLevel = newLevel, desc = desc})
+			elseif type == "evolution" or type == "subclass" then
+				local converter = {
+					["evolution"] = "class",
+					["subclass"] = "sub",
+				}
+				local baseName = wi:getUnitName(unit)
+				local playerUnit = player.upgrades[baseName]
+				local infoUnit = wi.upgrades[converter[type]][upgrade]
+				local cost = infoUnit.cost
+				
+				local gold = PlayerResource:GetGold(player_id)
+				if gold >= cost then
+					GiveGold( -cost, player_id )
+					if type == "evolution" then
+						playerUnit[4] = upgrade
+					else
+						playerUnit[5] = upgrade
+					end
+					CustomGameEventManager:Send_ServerToPlayer(player, "upgrade_success", {unit = unit, upgrade = upgrade})
+				end
 			end
-			
-			local baseName = wi:getUnitName(unit)
-			local newLevel = player.upgrades[baseName][arrId].levels[upgId]
-			local gold = PlayerResource:GetGold(player_id)
-			if gold >= 300 and newLevel < wi:getMaxLevel(upgType, unit, upgrade) then
-				newLevel = newLevel + 1
-				player.upgrades[baseName][arrId][upgId] = newLevel
-				GiveGold( -300, player_id )
-			end
-			
-			CustomGameEventManager:Send_ServerToPlayer(player, "upgrade_success", {unit = unit, upgrade = upgrade, newLevel = newLevel, desc = newLevel})
 		end
 	end)
 end
