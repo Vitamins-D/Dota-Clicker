@@ -23,6 +23,67 @@ wi.unitTypes = {
 }
 
 wi.unitDescription = {
+	["tank"] = "Непробиваемая стена на поле боя, способная поглощать как магические, так и физические удары.",
+	["berserker"] = "Яростный воин, полагающийся на критические удары и молниеносное уклонение.",
+	["shooter"] = "Меткий стрелок, умеющий либо утяжелить залп для мощи, либо облегчить руку ради скорости.",
+	["ranger"] = "Мастер выживания, лечит себя природной силой и обрушивает шквал стрел по врагам.",
+	["elementalist"] = "Повелитель стихий, усиливает огненные и водные заклинания до разрушительной мощи.",
+	["shaman"] = "Духовный вождь, наполняющий союзников чакрой (ну наруто типа, вы поняли) и повышающий их боевой урон.",
+	["siege_tower"] = "Орудие разрушения, наносящее урон по площади и ускоряющее осадный обстрел.",
+	["bomber"] = "Безумец-взрывник, усиливающий снаряды и способный обрушить на врагов мощные заклинания.",
+	
+	["Veins_fire"] = "Танк с пламенными венами — его броня раскалена, а удары по нему прожигают вражескую плоть.",
+	["stone_block"] = "Живая каменная преграда, усиливающая собственную прочность и защиту.",
+	["melee"] = "Берсерк ближнего боя, усиливающий свои сокрушительные удары.",
+	["illusionist"] = "Мастер обмана, создающий иллюзии, чтобы сбить врагов с толку.",
+	["gunner"] = "Стрелок с огневой мощью, разрывающий врагов градом свинца.",
+	["sniper"] = "Хладнокровный охотник, поражающий цель с невероятной точностью.",
+	["pathfinder"] = "Следопыт, чьи навыки помогают выжить и доминировать в любой местности.",
+	["marksman"] = "Мастер дальнего боя, чей каждый выстрел смертельно точен.",
+	["fire_mage"] = "Огненный маг, превращающий поле боя в пылающий ад.",
+	["air_mage"] = "Маг воздуха, чьи заклинания быстры, как порыв ветра.",
+	["def_shaman"] = "Шаман-защитник, укрепляющий союзников и отражающий удары.",
+	["fight_shaman"] = "Боевой шаман, усиливающий атакующую мощь своего войска.",
+	["trebuchet"] = "Тяжёлое осадное орудие, разрушающее укрепления с чудовищной силой.",
+	["ballista"] = "Дальнобойная машина смерти, пробивающая цели насквозь.",
+	["rapid_fire"] = "Огнемётчик, превращающий врагов в пылающее пепелище непрерывным потоком огня.",
+	["miner"] = "Подрывник, закладывающий взрывчатку в сердца врагов и собственную грудь ради последнего прикола (чисто поржать).",
+}
+
+wi.requirement = {
+	["tank"] = {upgs = {{"def", 1}, {"hp", 2}}},
+	["berserker"] = {upgs = {{"damage", 5}}},
+	["shooter"] = {upgs = {{"agility", 1}, {"strength", 2}}},
+	["ranger"] = {upgs = {{"agility", 1}, {"def", 2}}},
+	["elementalist"] = {upgs = {{"mana", 1}, {"spell_power", 2}}},
+	["shaman"] = {upgs = {{"mana", 1}, {"def", 2}}},
+	["siege_tower"] = {upgs = {{"siege", 1}, {"def", 2}}},
+	["bomber"] = {upgs = {{"damage", 1}}},
+	
+	["Veins_fire"] = {class = "tank", upgs = {{"mag_armor", 3}}},
+	["stone_block"] = {class = "tank", upgs = {{"phys_armor", 3}}},
+	["melee"] = {class = "berserker", upgs = {{"crit", 3}}},
+	["illusionist"] = {class = "berserker", upgs = {{"evade", 3}}},
+	["gunner"] = {class = "shooter", upgs = {{"heave", 3}}},
+	["sniper"] = {class = "shooter", upgs = {{"light", 3}}},
+	["pathfinder"] = {class = "ranger", upgs = {{"nature", 3}}},
+	["marksman"] = {class = "ranger", upgs = {{"multy", 3}}},
+	["fire_mage"] = {class = "elementalist", upgs = {{"fire_upgrade", 3}}},
+	["air_mage"] = {class = "elementalist", upgs = {{"water_upgrade", 3}}},
+	["def_shaman"] = {class = "shaman", upgs = {{"chakra", 3}}},
+	["fight_shaman"] = {class = "shaman", upgs = {{"dmg_boost", 3}}},
+	["trebuchet"] = {class = "siege_tower", upgs = {{"splash", 3}}},
+	["ballista"] = {class = "siege_tower", upgs = {{"speed_siege", 3}}},
+	["rapid_fire"] = {class = "bomber", upgs = {{"dragon_slave", 3}}},
+	["miner"] = {class = "bomber", upgs = {{"bombordiro", 3}}},
+}
+
+wi.units = {
+	["swordsman"] = "",
+	["archer"] = "",
+	["mage"] = "npc_dota_clicker_boar",
+	["catapult"] = "",
+	
 	["tank"] = "",
 	["berserker"] = "",
 	["shooter"] = "",
@@ -50,70 +111,25 @@ wi.unitDescription = {
 	["miner"] = "",
 }
 
-wi.requirement = {
-	["tank"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["berserker"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["shooter"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["ranger"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["elementalist"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["shaman"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["siege_tower"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	["bomber"] = {upgs = {{"damage", 1}, {"def", 2}}},
-	
-	["Veins_fire"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["stone_block"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["melee"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["illusionist"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["gunner"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["sniper"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["pathfinder"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["marksman"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["fire_mage"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["air_mage"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["def_shaman"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["fight_shaman"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["trebuchet"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["ballista"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["rapid_fire"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-	["miner"] = {class = "berserker", upgs = {{"damage", 1}, {"def", 2}}},
-}
-
-wi.units = {
-	["swordsman"] = "",
-	["archer"] = "",
-	["mage"] = "npc_dota_clicker_boar",
-	["catapult"] = "",
-	
-	["tank"] = "",
-	["berserker"] = "",
-	["shooter"] = "",
-	["ranger"] = "",
-	["elementalist"] = "",
-	["shaman"] = "",
-	["siege_tower"] = "",
-	["bomber"] = "",
-	
-}
-
 wi.base = {
 	["swordsman"] =
 	{
 		{type = "hp", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "hp", value = 0}, {type = "hpreg", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
 		{type = "damage", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "atk", value = 0}, {type = "atks", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
 		{type = "def", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "magr", value = 0}, {type = "armor", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
@@ -122,22 +138,22 @@ wi.base = {
 	},
 	["archer"] =
 	{
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+		{type = "agility", levels = {
+			{{type = "atks", value = 0}, {type = "vision", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "cast_speed", levels = {
+		{type = "strength", levels = {
+			{{type = "atk", value = 0}, {type = "atk_dis", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+		}},
+		{type = "def", levels = {
+			{{type = "hp", value = 0}, {type = "armor", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
@@ -147,45 +163,45 @@ wi.base = {
 	["mage"] =
 	{
 		{type = "mana", levels = {
-			{{type = "mana", value = 100}, {type = "hp", value = 9999}, cost = 300},
-			{{type = "spell", value = "dotac_boar_charge"}, cost = 3000},
+			{{type = "mana", value = 100}, {type = "manareg", value = 9999}, cost = 300},
+			{{type = "", value = ""}, cost = 3000},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
 		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "spell_amp", value = 0.5}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+		{type = "def", levels = {
+			{{type = "spell_up", value = ""}, cost = 300},
+			{{type = "spell_up", value = ""}, cost = 300},
+			{{type = "spell_up", value = ""}, cost = 300},
+			{{type = "spell_up", value = ""}, cost = 300},
+			{{type = "spell_up", value = ""}, cost = 300},
 		}}, cost = 700
 	},
 	["catapult"] =
 	{
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+		{type = "siege", levels = {
+			{{type = "spell_up", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "cast_speed", levels = {
+		{type = "damage", levels = {
+			{{type = "atk", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+		}},
+		{type = "def", levels = {
+			{{type = "hp", value = 0}, {type = "def", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
@@ -196,300 +212,180 @@ wi.base = {
 
 wi.classes = {
 	["tank"] = { -- swordsman
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "mag_armor", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "phys_armor", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["berserker"] = { -- swordsman
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "crit", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "evade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["shooter"] = { -- archer
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "heave", levels = { --+atks
+			{{type = "hp", value = 0}, {type = "atks", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "light", levels = { -- -atks
+			{{type = "atk", value = 0}, {type = "atks", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["ranger"] = { -- archer
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "nature", levels = {
+			{{type = "hp", value = 0}, {type = "hpreg", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "multy", levels = {
+			{{type = "spell", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["elementalist"] = { -- mage
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "fire_upgrade", levels = { -- даётся ликвид фаер змея горыныча
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "water_upgrade", levels = { -- даётся колба виверны, огненный маг потом заменяет на вампиризм заклинанием
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["shaman"] = { -- mage
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "chakra", levels = { -- chakra kotla
+			{{type = "hpreg", value = 0}, {type = "spell", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "dmg_boost", levels = { -- aura
+			{{type = "spell", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["siege_tower"] = { -- catapult
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "splash", levels = {
+			{{type = "spell", value = 0}, cost = 300},
+			{{type = "atk_dis", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "speed_siege", levels = {
+			{{type = "atks", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 	["bomber"] = { -- catapult
-		{type = "mana", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "bombordiro", levels = {
+			{{type = "spell_up", value = 0}, cost = 300},
+			{{type = "", value = 0}, cost = 300},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 		}},
-		{type = "spell_power", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-		}},
-		{type = "cast_speed", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
-			{{type = "", value = 0}, {type = "", value = 0}},
+		{type = "dragon_slave", levels = { -- у минера заменяется на улучшение прыжка
+			{{type = "spell", value = 0}, cost = 300},
+			{{type = "spell_up", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "spell_up", value = 0}, {type = "", value = 0}, cost = 300},
 		}}, cost = 500
 	},
 }
 
-wi.subClasses = {
-	["Veins_fire"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- tank
-	["stone_block"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+wi.subClasses = { -- усиляются их способности
+	["Veins_fire"] = {type = "Veins_fire_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- tank
-	["melee"] = {type = "cast_speed", levels = {
+	["stone_block"] = {type = "stone_block_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- berserker
-	["illusionist"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- tank
+	["melee"] = {type = "melee_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- berserker
-	["gunner"] = {type = "cast_speed", levels = {
+	["illusionist"] = {type = "illusionist_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- shooter
-	["sniper"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- berserker
+	["gunner"] = {type = "gunner_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- shooter
-	["pathfinder"] = {type = "cast_speed", levels = {
+	["sniper"] = {type = "sniper_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- ranger
-	["marksman"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- shooter
+	["pathfinder"] = {type = "pathfinder_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- ranger
-	["fire_mage"] = {type = "cast_speed", levels = {
+	["marksman"] = {type = "marksman_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- elementalist
-	["air_mage"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- ranger
+	["fire_mage"] = {type = "fire_mage_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- elementalist
-	["def_shaman"] = {type = "cast_speed", levels = {
+	["air_mage"] = {type = "air_mage_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- shaman
-	["fight_shaman"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- elementalist
+	["def_shaman"] = {type = "def_shaman_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- shaman
-	["trebuchet"] = {type = "cast_speed", levels = {
+	["fight_shaman"] = {type = "fight_shaman_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- siege_tower
-	["ballista"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- shaman
+	["trebuchet"] = {type = "trebuchet_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- siege_tower
-	["rapid_fire"] = {type = "cast_speed", levels = {
+	["ballista"] = {type = "ballista_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
+		{{type = "", value = 0}, {type = "", value = 0}},
+	}, cost = 500}, -- siege_tower
+	["rapid_fire"] = {type = "rapid_fire_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}, cost = 500}, -- bomber
-	["miner"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
+	["miner"] = {type = "miner_upgrade", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
@@ -512,6 +408,8 @@ wi.unitNames = {
 local autoDesc = {
     atks = "Добавляет %d ед. к скорости атаки",
     atk = "Добавляет %d ед. к урону",
+    atk_dis = "Добавляет %d ед. к дальности атаки",
+    vision = "Добавляет %d ед. к дальности обзора",
     hp = "Добавляет %d ед. к здоровью",
     armor = "Добавляет %d ед. к броне",
     magr = "Добавляет %d%% к магическому сопротивлению",
@@ -669,7 +567,7 @@ wi.nameMapping = {
 	["hp"] = "Здоровяк",
 	["damage"] = "Урон",
 	["armor"] = "Броня",
-	["def"] = "Стойкость"
+	["def"] = "Стойкость",
 }
 
 -- Функция преобразования всех данных в один большой массив
@@ -748,7 +646,7 @@ function wi:convertToUnifiedStructure()
         local subclass = {
           id = subClassName,
           name = wi.nameMapping[subClassName] or subClassName,
-          description = wi.unitDescription[subClassName] .. costText(wi.subClasses[subClassName].cost) or "",
+          description = wi.unitDescription[subClassName] .. costText(wi.subClasses[subClassName].cost) .. "<br>" or "",
           requirement = {},
           skills = newArray()
         }

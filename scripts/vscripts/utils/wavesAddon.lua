@@ -99,7 +99,8 @@ function wa:spawnWave(player)
 									ability:SetLevel(ability:GetLevel() + 1)
 								end
 							else
-								unit.bonus[upgrade.type] = upgrade.value
+								if not unit.bonus[upgrade.type] then unit.bonus[upgrade.type] = 0 end
+								unit.bonus[upgrade.type] = unit.bonus[upgrade.type] + upgrade.value
 							end
 						end
 						

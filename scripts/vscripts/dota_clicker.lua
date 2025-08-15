@@ -306,6 +306,10 @@ function dota_clicker:dotaClickerStart()
         -- return
     -- end)
 	
+	self:throughPlayers(function(player, hero)
+		CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
+	end)
+	
 	local uiArr = wi:convertToUnifiedStructure()
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
