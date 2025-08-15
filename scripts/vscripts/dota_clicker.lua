@@ -9,6 +9,7 @@ local utils = require("utils/utils")
 local lvlupInterval = 60
 local goldInterval = 120
 local maxUnits = 20
+local playerCount
 
 HeroExpTable = {0}
 -- expTable = {0, 240, 640, 1160, 1760, 2440, 3200, 4000, 4900, 5900, 7000, 8200, 9500, 10900, 12400, 14000, 15700, 17500, 19400, 21400, 23600, 26000, 28600, 31400, 34400, 38400, 43400, 49400, 56400, 63900}
@@ -77,8 +78,8 @@ function dota_clicker:InitGameMode()
 				local newLevel = player.upgrades[baseName][arrId].levels[upgId]
 				local gold = PlayerResource:GetGold(player_id)
 				local maxLevel = wi:getMaxLevel(upgType, unit, upgrade)
-				-- local desc = wi:getUpgradeDescription(unit, upgrade, newLevel+1)
-				local desc = nil
+				local desc = wi:getUpgradeDescription(unit, upgrade, newLevel+1)
+				-- local desc = nil
 				local cost = wi:getUpgradeCost(unit, upgrade, newLevel+1)
 				if gold >= cost and newLevel < maxLevel then
 					newLevel = newLevel + 1
@@ -110,6 +111,46 @@ function dota_clicker:InitGameMode()
 				end
 			end
 		end
+	end)
+	
+	CustomGameEventManager:RegisterListener("buy_unit", function(_, event)
+		print("BUY", event)
+		local unit = event.unit
+		local player_id = event.player_id
+		local player = PlayerResource:GetPlayer(player_id)
+		
+		local baseName = wi:getUnitName(unit)
+		local playerUnit = utils:countOf(player.units, unit)
+		
+		local success = false
+		local count = playerUnit
+		
+		local gold = PlayerResource:GetGold(player_id)
+		local cost = 500
+		if gold >= cost then
+			GiveGold( -cost, player_id )
+			success = true
+			count = count + 1
+			table.insert(player.units, unit)
+		end
+		
+		CustomGameEventManager:Send_ServerToPlayer(player, "buy_unit_response", {unit = unit, success = success, new_count = count})
+	end)
+	
+	CustomGameEventManager:RegisterListener("sell_unit", function(_, event)
+		local unit = event.unit
+		local player_id = event.player_id
+		local player = PlayerResource:GetPlayer(player_id)
+		
+		local baseName = wi:getUnitName(unit)
+		local playerUnit = utils:countOf(player.units, unit)
+		
+		local count = playerUnit-1
+		table.remove(player.units, utils:indexOf(player.units, unit))
+		
+		local cost = 500
+		GiveGold( cost, player_id )
+		CustomGameEventManager:Send_ServerToPlayer(player, "sell_unit_response", {unit = unit, success = true, new_count = count})
 	end)
 end
 
@@ -251,6 +292,7 @@ function dota_clicker:dotaClickerStart()
 	neutralSpawner:InitNeutralCamps()
 	local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
 	local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil,nil , DOTA_TEAM_GOODGUYS)
+	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
 	
 	-- Timers:CreateTimer(1, function()
         -- local damage_table = {
@@ -268,6 +310,12 @@ function dota_clicker:dotaClickerStart()
 	local uiArr = wi:convertToUnifiedStructure()
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
+	end)
+	
+	
+	local maxUnitPerPlayer = math.ceil(maxUnits/playerCount)
+	self:throughPlayers(function(player, hero)
+		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataLimit", {limit = maxUnitPerPlayer})
 	end)
 	
 	local wave_start = Entities:FindByName(nil, "good_path"):GetAbsOrigin()
@@ -298,8 +346,6 @@ function dota_clicker:OnNpcSpawned(data)
 end
 
 function dota_clicker:throughPlayers(callback)
-	local playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
-    
     for index = 0, playerCount - 1 do
         if PlayerResource:HasSelectedHero(index) then
             local player = PlayerResource:GetPlayer(index)
