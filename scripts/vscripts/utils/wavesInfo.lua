@@ -5,98 +5,98 @@ end
 local utils = require("utils/utils")
 
 -- info
--- 1 - melee
--- 1.1 - tank, 1.1.1 - fire, 1.1.2 - stone
--- 1.2 - berserk, 1.2.1 - swordsman, 1.2.2 - illusion
--- 2 - ranger
--- 2.1 - shooter, 2.1.1 - gunner, 2.1.2 - sniper
--- 2.2 - archer, 2.2.1 - pathfinder, 2.2.2 - huntsman
+-- 1 - swordsman
+-- 1.1 - tank, 1.1.1 - Veins_fire, 1.1.2 - stone_block
+-- 1.2 - berserker, 1.2.1 - melee, 1.2.2 - illusionist
+-- 2 - archer
+-- 2.1 - shooter, 2.1.1 - marksman, 2.1.2 - headhunter
+-- 2.2 - ranger, 2.2.1 - forest_guard, 2.2.2 - beast_master
 -- 3 - mage
--- 3.1 - elementalist, 3.1.1 - firestone, 3.1.2 - waterair
--- 3.2 - shaman, 3.2.1 - aura, 3.2.2 - summoner
--- 4 - siege
--- 4.1 - catapult, 4.1.1 - trebuchet, 4.1.2 - ballista
--- 4.2 - bomb, 4.2.1 - miner, 4.2.2 - flamethrower
+-- 3.1 - elementalist, 3.1.1 - fire_mage, 3.1.2 - air_mage
+-- 3.2 - shaman, 3.2.1 - def_shaman, 3.2.2 - fight_shaman
+-- 4 - catapult
+-- 4.1 - siege_tower, 4.1.1 - fort_breaker, 4.1.2 - wall_crusher
+-- 4.2 - mobile_launcher, 4.2.1 - rapid_fire, 4.2.2 - long_range
 
 wi.unitTypes = {
-	"melee", "ranger", "mage", "siege"
+	"swordsman", "archer", "mage", "catapult"
 }
 
 wi.unitDescription = {
 	["tank"] = "",
-	["berserk"] = "",
+	["berserker"] = "",
 	["shooter"] = "",
-	["archer"] = "",
+	["ranger"] = "",
 	["elementalist"] = "",
 	["shaman"] = "",
-	["catapult"] = "",
-	["bomb"] = "",
+	["siege_tower"] = "",
+	["mobile_launcher"] = "",
 	
-	["fire"] = "",
-	["stone"] = "",
-	["swordsman"] = "",
-	["illusion"] = "",
-	["gunner"] = "",
-	["sniper"] = "",
-	["pathfinder"] = "",
-	["huntsman"] = "",
-	["firestone"] = "",
-	["waterair"] = "",
-	["aura"] = "",
-	["summoner"] = "",
-	["trebuchet"] = "",
-	["ballista"] = "",
-	["miner"] = "",
-	["flamethrower"] = "",
+	["Veins_fire"] = "",
+	["stone_block"] = "",
+	["melee"] = "",
+	["illusionist"] = "",
+	["marksman"] = "",
+	["headhunter"] = "",
+	["forest_guard"] = "",
+	["beast_master"] = "",
+	["fire_mage"] = "",
+	["air_mage"] = "",
+	["def_shaman"] = "",
+	["fight_shaman"] = "",
+	["fort_breaker"] = "",
+	["wall_crusher"] = "",
+	["rapid_fire"] = "",
+	["long_range"] = "",
 }
 
 wi.requirement = {
 	["tank"] = {upgs = {"damage", 1}, {"armor", 2}},
-	["berserk"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["berserker"] = {upgs = {"damage", 1}, {"armor", 2}},
 	["shooter"] = {upgs = {"damage", 1}, {"armor", 2}},
-	["archer"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["ranger"] = {upgs = {"damage", 1}, {"armor", 2}},
 	["elementalist"] = {upgs = {"damage", 1}, {"armor", 2}},
 	["shaman"] = {upgs = {"damage", 1}, {"armor", 2}},
-	["catapult"] = {upgs = {"damage", 1}, {"armor", 2}},
-	["bomb"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["siege_tower"] = {upgs = {"damage", 1}, {"armor", 2}},
+	["mobile_launcher"] = {upgs = {"damage", 1}, {"armor", 2}},
 	
-	["fire"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["stone"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["swordsman"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["illusion"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["gunner"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["sniper"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["pathfinder"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["huntsman"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["firestone"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["waterair"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["aura"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["summoner"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["trebuchet"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["ballista"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["miner"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
-	["flamethrower"] = {class = "berserk", upgs = {"damage", 1}, {"armor", 2}},
+	["Veins_fire"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["stone_block"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["melee"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["illusionist"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["marksman"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["headhunter"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["forest_guard"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["beast_master"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["fire_mage"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["air_mage"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["def_shaman"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["fight_shaman"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["fort_breaker"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["wall_crusher"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["rapid_fire"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
+	["long_range"] = {class = "berserker", upgs = {"damage", 1}, {"armor", 2}},
 }
 
 wi.units = {
-	["melee"] = "",
-	["ranger"] = "",
+	["swordsman"] = "",
+	["archer"] = "",
 	["mage"] = "npc_dota_clicker_boar",
-	["siege"] = "",
+	["catapult"] = "",
 	
 	["tank"] = "",
-	["berserk"] = "",
+	["berserker"] = "",
 	["shooter"] = "",
-	["archer"] = "",
+	["ranger"] = "",
 	["elementalist"] = "",
 	["shaman"] = "",
-	["catapult"] = "",
-	["bomb"] = "",
+	["siege_tower"] = "",
+	["mobile_launcher"] = "",
 	
 }
 
 wi.base = {
-	["melee"] =
+	["swordsman"] =
 	{
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -120,7 +120,7 @@ wi.base = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["ranger"] =
+	["archer"] =
 	{
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -168,7 +168,7 @@ wi.base = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["siege"] =
+	["catapult"] =
 	{
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -195,7 +195,7 @@ wi.base = {
 }
 
 wi.classes = {
-	["tank"] = { -- melee
+	["tank"] = { -- swordsman
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -218,7 +218,7 @@ wi.classes = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["berserk"] = { -- melee
+	["berserker"] = { -- swordsman
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -241,7 +241,7 @@ wi.classes = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["shooter"] = { -- ranger
+	["shooter"] = { -- archer
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -264,7 +264,7 @@ wi.classes = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["archer"] = { -- ranger
+	["ranger"] = { -- archer
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -333,7 +333,7 @@ wi.classes = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["catapult"] = { -- siege
+	["siege_tower"] = { -- catapult
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -356,7 +356,7 @@ wi.classes = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 		}},
 	},
-	["bomb"] = { -- siege
+	["mobile_launcher"] = { -- catapult
 		{type = "mana", levels = {
 			{{type = "", value = 0}, {type = "", value = 0}},
 			{{type = "", value = 0}, {type = "", value = 0}},
@@ -382,118 +382,118 @@ wi.classes = {
 }
 
 wi.subClasses = {
-	["fire"] = {type = "cast_speed", levels = {
+	["Veins_fire"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- tank
-	["stone"] = {type = "cast_speed", levels = {
+	["stone_block"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- tank
-	["swordsman"] = {type = "cast_speed", levels = {
+	["melee"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- berserk
-	["illusion"] = {type = "cast_speed", levels = {
+	}}, -- berserker
+	["illusionist"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- berserk
-	["gunner"] = {type = "cast_speed", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- shooter
-	["sniper"] = {type = "cast_speed", levels = {
+	}}, -- berserker
+	["marksman"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- shooter
-	["pathfinder"] = {type = "cast_speed", levels = {
+	["headhunter"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- archer
-	["huntsman"] = {type = "cast_speed", levels = {
+	}}, -- shooter
+	["forest_guard"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- archer
-	["firestone"] = {type = "cast_speed", levels = {
+	}}, -- ranger
+	["beast_master"] = {type = "cast_speed", levels = {
+		{{type = "", value = 0}, {type = "", value = 0}},
+		{{type = "", value = 0}, {type = "", value = 0}},
+		{{type = "", value = 0}, {type = "", value = 0}},
+		{{type = "", value = 0}, {type = "", value = 0}},
+		{{type = "", value = 0}, {type = "", value = 0}},
+	}}, -- ranger
+	["fire_mage"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- elementalist
-	["waterair"] = {type = "cast_speed", levels = {
+	["air_mage"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- elementalist
-	["aura"] = {type = "cast_speed", levels = {
+	["def_shaman"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- shaman
-	["summoner"] = {type = "cast_speed", levels = {
+	["fight_shaman"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 	}}, -- shaman
-	["trebuchet"] = {type = "cast_speed", levels = {
+	["fort_breaker"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- catapult
-	["ballista"] = {type = "cast_speed", levels = {
+	}}, -- siege_tower
+	["wall_crusher"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- catapult
-	["miner"] = {type = "cast_speed", levels = {
+	}}, -- siege_tower
+	["rapid_fire"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- bomb
-	["flamethrower"] = {type = "cast_speed", levels = {
+	}}, -- mobile_launcher
+	["long_range"] = {type = "cast_speed", levels = {
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
 		{{type = "", value = 0}, {type = "", value = 0}},
-	}}, -- bomb
+	}}, -- mobile_launcher
 }
 
 wi.upgrades = {
@@ -503,10 +503,10 @@ wi.upgrades = {
 }
 
 wi.unitNames = {
-	{"melee", "tank", "berserk", "fire", "stone", "swordsman", "illusion"},
-	{"ranger", "shooter", "archer", "gunner", "sniper", "pathfinder", "huntsman"},
-	{"mage", "elementalist", "shaman", "firestone", "waterair", "aura", "summoner"},
-	{"siege", "catapult", "bomb", "trebuchet", "ballista", "miner", "flamethrower"},
+	{"swordsman", "tank", "berserker", "Veins_fire", "stone_block", "melee", "illusionist"},
+	{"archer", "shooter", "ranger", "marksman", "headhunter", "forest_guard", "beast_master"},
+	{"mage", "elementalist", "shaman", "fire_mage", "air_mage", "def_shaman", "fight_shaman"},
+	{"catapult", "siege_tower", "mobile_launcher", "fort_breaker", "wall_crusher", "rapid_fire", "long_range"},
 }
 
 local autoDesc = {
@@ -611,38 +611,38 @@ end
 -- Маппинг названий
 wi.nameMapping = {
 	-- Базовые типы
-	["melee"] = "Мечник",
-	["ranger"] = "Лучник", 
+	["swordsman"] = "Мечник",
+	["archer"] = "Лучник", 
 	["mage"] = "Маг",
-	["siege"] = "Осадная машина",
+	["catapult"] = "Осадная машина",
 	
 	-- Классы (evolutions)
 	["tank"] = "Танк",
-	["berserk"] = "Берсерк",
+	["berserker"] = "Берсерк",
 	["shooter"] = "Стрелок",
-	["archer"] = "Лучник",
+	["ranger"] = "Лучник",
 	["elementalist"] = "Элементалист",
 	["shaman"] = "Шаман",
-	["catapult"] = "Катапульта",
-	["bomb"] = "Бомба",
+	["siege_tower"] = "Катапульта",
+	["mobile_launcher"] = "Бомба",
 	
 	-- Подклассы (subclasses)
-	["fire"] = "Огненные жилы",
-	["stone"] = "Каменная глыба",
-	["swordsman"] = "Мастер фехтования",
-	["illusion"] = "Мастер иллюзий",
-	["gunner"] = "Пулеметчик",
-	["sniper"] = "Снайпер",
-	["pathfinder"] = "Следопыт",
-	["huntsman"] = "Егерь",
-	["firestone"] = "Маг огня и земли",
-	["waterair"] = "Маг воды и ветра",
-	["aura"] = "Боевой шаман",
-	["summoner"] = "Шаман призыва",
-	["trebuchet"] = "Требушет",
-	["ballista"] = "Баллиста",
-	["miner"] = "Минер",
-	["flamethrower"] = "Огнеметчик",
+	["Veins_fire"] = "Огненные жилы",
+	["stone_block"] = "Каменная глыба",
+	["melee"] = "Мастер фехтования",
+	["illusionist"] = "Мастер иллюзий",
+	["marksman"] = "Пулеметчик",
+	["headhunter"] = "Снайпер",
+	["forest_guard"] = "Следопыт",
+	["beast_master"] = "Егерь",
+	["fire_mage"] = "Маг огня и земли",
+	["air_mage"] = "Маг воды и ветра",
+	["def_shaman"] = "Боевой шаман",
+	["fight_shaman"] = "Шаман призыва",
+	["fort_breaker"] = "Требушет",
+	["wall_crusher"] = "Баллиста",
+	["rapid_fire"] = "Минер",
+	["long_range"] = "Огнеметчик",
 	
 	-- Названия апгрейдов
 	["mana"] = "Сила магии",
