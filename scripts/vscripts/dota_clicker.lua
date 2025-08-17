@@ -13,6 +13,8 @@ local GOLD_INTERVAL = 120
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 
+local uiArr
+
 local playerCount
 
 HeroExpTable = {0}
@@ -197,72 +199,79 @@ function dota_clicker:OrderFilter(filterTable)
 	local player_id = filterTable["issuer_player_id_const"]
 	local units = filterTable["units"]
 	
+	-- Проверяем только если есть цель
 	if target_index and target_index ~= 0 then
 		local target = EntIndexToHScript(target_index)
-		if target and IsValidEntity(target) and (target:GetUnitName() == "npc_dotac_mine" or target.is_mine) then
-			local issuer_unit = nil
-			if units then
-				for i, unit_index in pairs(units) do
-					issuer_unit = EntIndexToHScript(unit_index)
-					break
-				end
-			end
+		
+		-- Безопасная проверка на существование цели и её методов
+		if target and IsValidEntity(target) then
+			local target_name = target.GetUnitName and target:GetUnitName() or "unknown"
 			
-			if issuer_unit and issuer_unit:IsRealHero() then
-				-- Проверяем расстояние между героем и шахтой
-				local hero_pos = issuer_unit:GetAbsOrigin()
-				local mine_pos = target:GetAbsOrigin()
-				local distance = (hero_pos - mine_pos):Length2D()
-				
-				if distance <= MINE_INTERACTION_DISTANCE then
-					if (order_type == DOTA_UNIT_ORDER_MOVE_TO_TARGET or 
-						order_type == DOTA_UNIT_ORDER_ATTACK_TARGET or 
-						order_type == DOTA_UNIT_ORDER_CAST_TARGET or
-						order_type == DOTA_UNIT_ORDER_CAST_NO_TARGET) then
-						
-						CustomGameEventManager:Send_ServerToPlayer(issuer, "toggle_mine_modal", {
-							mine_id = target:GetEntityIndex()
-						})
-						return false
+			-- Проверяем только если цель - это шахта
+			if target_name == "npc_dotac_mine" then
+				local issuer_unit = nil
+				if units then
+					for i, unit_index in pairs(units) do
+						local unit = EntIndexToHScript(unit_index)
+						if unit and IsValidEntity(unit) then
+							issuer_unit = unit
+							break
+						end
 					end
 				end
-			else
-				return false
+				
+				-- Проверяем только если юнит - это настоящий герой
+				if issuer_unit and issuer_unit.IsRealHero and issuer_unit:IsRealHero() then
+					-- Проверяем расстояние между героем и шахтой
+					local hero_pos = issuer_unit:GetAbsOrigin()
+					local mine_pos = target:GetAbsOrigin()
+					local distance = (hero_pos - mine_pos):Length2D()
+					
+					if distance <= MINE_INTERACTION_DISTANCE then
+						-- Проверяем наличие кирки у героя
+						local has_pickaxe = false
+						local pickaxes = {
+							"item_dotac_pickaxe_wood",
+							"item_dotac_pickaxe_stone", 
+							"item_dotac_pickaxe_iron",
+							"item_dotac_pickaxe_diamond",
+							"item_dotac_pickaxe_netherite"
+						}
+						
+						for _, pickaxe_name in pairs(pickaxes) do
+							if issuer_unit:HasItemInInventory(pickaxe_name) then
+								has_pickaxe = true
+								break
+							end
+						end
+						
+						-- Проверяем подходящий тип приказа для взаимодействия с шахтой
+						if order_type == DOTA_UNIT_ORDER_MOVE_TO_TARGET or 
+						   order_type == DOTA_UNIT_ORDER_ATTACK_TARGET or 
+						   order_type == DOTA_UNIT_ORDER_CAST_TARGET then
+							
+							if has_pickaxe then
+								-- Открываем модал шахты
+								CustomGameEventManager:Send_ServerToPlayer(issuer, "toggle_mine_modal", {
+									mine_id = target:GetEntityIndex()
+								})
+								return false -- Блокируем этот приказ
+							else
+								-- Показываем сообщение о необходимости кирки
+								CustomGameEventManager:Send_ServerToPlayer(issuer, "show_floating_text", {
+									message = "You need a pickaxe to mine!",
+									duration = 2.0
+								})
+								return false -- Блокируем этот приказ
+							end
+						end
+					end
+				end
 			end
 		end
 	end
 	
-	-- if order_type == DOTA_UNIT_ORDER_MOVE_TO_POSITION then
-		-- local position = Vector(filterTable["position_x"], filterTable["position_y"], filterTable["position_z"])
-		-- local nearby_mines = Entities:FindAllByNameWithin("npc_dotac_mine", position, 100)
-		
-		-- if #nearby_mines > 0 then
-			-- local issuer_unit = nil
-			-- if units then
-				-- for i, unit_index in pairs(units) do
-					-- issuer_unit = EntIndexToHScript(unit_index)
-					-- break
-				-- end
-			-- end
-			
-			-- if issuer_unit and issuer_unit:IsRealHero() then
-				-- local closest_mine = nearby_mines[1]
-				-- local hero_pos = issuer_unit:GetAbsOrigin()
-				-- local mine_pos = closest_mine:GetAbsOrigin()
-				-- local distance = (hero_pos - mine_pos):Length2D()
-				
-				-- if distance <= MINE_INTERACTION_DISTANCE then
-					-- print("Mine nearby clicked by player " .. player_id .. " at distance " .. distance)
-					-- CustomGameEventManager:Send_ServerToPlayer(issuer, "toggle_mine_modal", {
-						-- mine_id = closest_mine:GetEntityIndex()
-					-- })
-					-- return false
-				-- end
-			-- end
-		-- end
-	-- end
-	
-	return true
+	return true -- Разрешаем все остальные приказы
 end
 
 function dota_clicker:DamageFilter(filterTable)
@@ -333,7 +342,48 @@ function miningDo(oreType, playerId)
 		["silver"] = 3,
 		["gold"] = 5,
 	}
-	GiveGold(oresValues[oreType], playerId)
+	
+	local player = PlayerResource:GetPlayer(playerId)
+	if not player then return end
+	
+	local hero = player:GetAssignedHero()
+	if not hero then return end
+	
+	-- Список всех кирок
+	local pickaxes = {
+		"item_dotac_pickaxe_wood",
+		"item_dotac_pickaxe_stone", 
+		"item_dotac_pickaxe_iron",
+		"item_dotac_pickaxe_diamond",
+		"item_dotac_pickaxe_netherite"
+	}
+	
+	local goldMultiplier = 1
+	local bestPickaxe = nil
+	
+	-- Ищем лучшую кирку в инвентаре
+	for i = 0, 15 do
+		local item = hero:GetItemInSlot(i)
+		if item then
+			local itemName = item:GetAbilityName()
+			for _, pickaxeName in pairs(pickaxes) do
+				if itemName == pickaxeName then
+					local itemMultiplier = item:GetSpecialValueFor("gold_mult")
+					if itemMultiplier and itemMultiplier > goldMultiplier then
+						goldMultiplier = itemMultiplier
+						bestPickaxe = item
+					end
+				end
+			end
+		end
+	end
+	
+	-- Рассчитываем финальное количество золота
+	local baseGold = oresValues[oreType] or 0
+	local finalGold = math.floor(baseGold * goldMultiplier)
+	
+	-- Выдаем золото
+	GiveGold(finalGold, playerId)
 end
 
 function GiveGold(gold, playerId)
@@ -443,7 +493,7 @@ function dota_clicker:dotaClickerStart()
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
 	end)
 	
-	local uiArr = wi:convertToUnifiedStructure()
+	uiArr = wi:convertToUnifiedStructure()
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
 	end)

@@ -11,9 +11,7 @@ function Precache( context )
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_v2.vmdl", context);
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_ranged_v2.vmdl", context);
 	PrecacheResource("model", "models/heroes/lone_druid/spirit_bear.vmdl", context);
-	PrecacheResource("model", "models/props_structures/dire_ancient_destruction002.vmdl", context)
-    PrecacheResource("model", "models/props_structures/dire_crystalmaiden_statue.vmdl", context)
-    PrecacheResource("model", "models/creeps/roshan/roshan.vmdl", context)
+	PrecacheResource("model", "models/creeps/lane_creeps/creep_good_siege/creep_good_siege_deathsim.vmdl", context);
 end
 
 -- Create the game mode when we activate

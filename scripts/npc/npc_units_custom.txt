@@ -6,7 +6,7 @@
 	"npc_dotac_mine"
 	{
 		"BaseClass"							"npc_dota_base_additive"
-		"Model"								"models/creeps/neutral_creeps/n_creep_kobold/kobold_c/n_creep_kobold_c.vmdl"
+		"Model"								"models/creeps/lane_creeps/creep_good_siege/creep_good_siege_deathsim.vmdl"
 		"UnitLabel"							"mine"
 		
 		"AttackCapabilities"				"DOTA_UNIT_CAP_NO_ATTACK"
