@@ -46,6 +46,13 @@ function dota_clicker:InitGameMode()
 	ListenToGameEvent('entity_hurt', Dynamic_Wrap(self, 'dotaClickerHurt'), self)
 	ListenToGameEvent("player_chat", Dynamic_Wrap(self, 'OnPlayerChat'), self)
 	ListenToGameEvent('tree_cut', Dynamic_Wrap(self, 'OnTreeCut'), self)
+	ListenToGameEvent("player_connect_full", function(keys)
+		local playerID = keys.PlayerID
+		InitPlayerUpgrades(playerID)
+	end, nil)
+	
+	local UnitsData = wi:convertToUnifiedStructure()
+	CustomNetTables:SetTableValue("units", "data", UnitsData)
 	
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(dota_clicker, "OrderFilter"), self)
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(dota_clicker, "DamageFilter"), self)
@@ -140,6 +147,8 @@ function dota_clicker:HandleSpecialUpgrade(player, player_id, unit, upgrade, typ
 			unit = unit, 
 			upgrade = upgrade
 		})
+		
+		InitPlayerUpgrades(player_id)
 	end
 end
 
@@ -493,11 +502,6 @@ function dota_clicker:dotaClickerStart()
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
 	end)
 	
-	uiArr = wi:convertToUnifiedStructure()
-	self:throughPlayers(function(player, hero)
-		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
-	end)
-	
 	local maxUnitPerPlayer = math.ceil(MAX_UNITS/playerCount)
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataLimit", {limit = maxUnitPerPlayer})
@@ -553,4 +557,9 @@ function GiveGoldPlayers(gold)
 		hero:ModifyGold(gold, false, 0)
 		SendOverheadEventMessage(player, OVERHEAD_ALERT_GOLD, hero, gold, nil)
 	end)
+end
+
+function InitPlayerUpgrades(playerID)
+	local player = PlayerResource:GetPlayer(playerID)
+    CustomNetTables:SetTableValue("player_upgrades", tostring(playerID), player.upgrades)
 end
