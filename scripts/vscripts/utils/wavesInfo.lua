@@ -310,86 +310,118 @@ wi.classes = {
 }
 
 wi.subClasses = { -- усиляются их способности
-	["Veins_fire"] = {type = "Veins_fire_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- tank
-	["stone_block"] = {type = "stone_block_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- tank
-	["melee"] = {type = "melee_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- berserker
-	["illusionist"] = {type = "illusionist_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- berserker
-	["gunner"] = {type = "gunner_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- shooter
-	["sniper"] = {type = "sniper_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- shooter
-	["pathfinder"] = {type = "pathfinder_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- ranger
-	["marksman"] = {type = "marksman_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- ranger
-	["fire_mage"] = {type = "fire_mage_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- elementalist
-	["air_mage"] = {type = "air_mage_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- elementalist
-	["def_shaman"] = {type = "def_shaman_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- shaman
-	["fight_shaman"] = {type = "fight_shaman_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- shaman
-	["trebuchet"] = {type = "trebuchet_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- siege_tower
-	["ballista"] = {type = "ballista_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- siege_tower
-	["rapid_fire"] = {type = "rapid_fire_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- bomber
-	["miner"] = {type = "miner_upgrade", levels = {
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-		{{type = "", value = 0}, {type = "", value = 0}},
-	}, cost = 500}, -- bomber
+	["Veins_fire"] = {
+		{type = "Veins_fire_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- tank
+	["stone_block"] = {
+		{type = "stone_block_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- tank
+	["melee"] = {
+		{type = "melee_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- berserker
+	["illusionist"] = {
+		{type = "illusionist_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- berserker
+	["gunner"] = {
+		{type = "gunner_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- shooter
+	["sniper"] = {
+		{type = "sniper_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- shooter
+	["pathfinder"] = {
+		{type = "pathfinder_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- ranger
+	["marksman"] = {
+		{type = "marksman_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- ranger
+	["fire_mage"] = {
+		{type = "fire_mage_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- elementalist
+	["air_mage"] = {
+		{type = "air_mage_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- elementalist
+	["def_shaman"] = {
+		{type = "def_shaman_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- shaman
+	["fight_shaman"] = {
+		{type = "fight_shaman_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- shaman
+	["trebuchet"] = {
+		{type = "trebuchet_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- siege_tower
+	["ballista"] = {
+		{type = "ballista_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- siege_tower
+	["rapid_fire"] = {
+		{type = "rapid_fire_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- bomber
+	["miner"] = {
+		{type = "miner_upgrade", levels = {
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+		}}, cost = 500
+	}, -- bomber
 }
 
 wi.upgrades = {
@@ -438,33 +470,38 @@ end
 
 function wi:getUpgradeDescription(unit, name, level)
 	
-	local upgrades = wi:getUpgrades(unit, name)
+	local upgrades, type = wi:getUpgrades(unit, name)
 	
 	local desc = ""
 	if upgrades then
-		upgrades = upgrades.levels[level]
-		if upgrades then
-			for i = 1, #upgrades do
-				local upgrade = upgrades[i]
-				if i > 1 then desc = desc .. "<br><br>" end
-				if upgrade.desc then
-					desc = desc .. upgrade.desc
-				else
-					local pattern = autoDesc[upgrade.type]
-					if pattern then
-						if upgrade.type == "spell" or upgrade.type == "spell_up" then
-							-- Берём локализованное имя способности
-							desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_" .. upgrade.value)
-						else
-							desc = desc .. string.format(pattern, upgrade.value)
+		local maxLevel = wi:getMaxLevel(type, unit, name)
+		if level > maxLevel then
+			desc = "Max Level"
+		else
+			upgrades = upgrades.levels[level]
+			if upgrades then
+				for i = 1, #upgrades do
+					local upgrade = upgrades[i]
+					if i > 1 then desc = desc .. "<br><br>" end
+					if upgrade.desc then
+						desc = desc .. upgrade.desc
+					else
+						local pattern = autoDesc[upgrade.type]
+						if pattern then
+							if upgrade.type == "spell" or upgrade.type == "spell_up" then
+								-- Берём локализованное имя способности
+								desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_" .. upgrade.value)
+							else
+								desc = desc .. string.format(pattern, upgrade.value)
+							end
 						end
 					end
 				end
 			end
+			
+			local cost = wi:getUpgradeCost(unit, name, level)
+			desc = desc .. costText(cost)
 		end
-		
-		local cost = wi:getUpgradeCost(unit, name, level)
-		desc = desc .. costText(cost)
 	end
     return desc
 end
@@ -491,9 +528,22 @@ function wi:getUpgByName(unit, name)
 				return i, type
 			end
 		end
+		return nil
 	end
 	
-	return getId(wi:getArrByUnit(unit))
+	for i = 1, #wi.unitNames do
+		local names = wi.unitNames[i]
+		if utils:indexOf(names, unit) then
+			for j = 1, #names do
+				local unitName = names[j]
+				local i, type = getId(wi:getArrByUnit(unitName))
+				if i then
+					return i, type, unitName
+				end
+			end
+		end
+	end
+	return nil
 end
 
 function wi:getMaxLevel(type, unit, name)
@@ -516,10 +566,10 @@ function wi:getUnitName(name)
 end
 
 function wi:getUpgrades(unit, name)
-	local id = wi:getUpgByName(unit, name)
+	local id, type = wi:getUpgByName(unit, name)
 	local arr = wi:getArrByUnit(unit)
 	
-	return arr[id]
+	return arr[id], type
 end
 
 -- Добавляем в конец файла wi.lua
@@ -669,15 +719,16 @@ function wi:convertToUnifiedStructure()
           end
         end
         
-        -- Преобразуем levels в skills (берем структуру из subClassData напрямую)
-        local skillData = {
-          id = subClassData.type,
-          name = wi.nameMapping[subClassData.type] or subClassData.type,
-          description = wi:getUpgradeDescription(subClassName, subClassData.type, 1),
-          level = 0,
-          maxLevel = #subClassData.levels
-        }
-        table.insert(subclass.skills, skillData)
+		for _, skill in ipairs(subClassData) do
+          local skillData = {
+            id = skill.type,
+            name = wi.nameMapping[skill.type] or skill.type,
+            description = wi:getUpgradeDescription(subClassName, skill.type, 1),
+            level = 0,
+            maxLevel = #skill.levels
+          }
+          table.insert(subclass.skills, skillData)
+        end
         
         table.insert(unitData.subclasses, subclass)
       end

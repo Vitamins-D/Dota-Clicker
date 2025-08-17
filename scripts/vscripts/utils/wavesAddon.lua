@@ -19,7 +19,7 @@ local info = require("utils/wavesInfo")
 -- 4.2 - mobile_launcher, 4.2.1 - rapid_fire, 4.2.2 - long_range
 
 function wa:InitAddon(player, spawnPos, team)
-	player.units = {}
+	player.units = {"mage"}
 	
 	player.upgrades = {
 		["swordsman"] = {

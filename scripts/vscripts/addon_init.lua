@@ -1,1 +1,2 @@
 LinkLuaModifier('modifier_buff_stats', 'modifiers/modifier_buff_stats', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('modifier_mine_protection', 'modifiers/modifier_mine_protection', LUA_MODIFIER_MOTION_NONE)
