@@ -10,8 +10,13 @@ local utils = require("utils/utils")
 -- константы/настройки
 local LVLUP_INTERVAL = 60
 local GOLD_INTERVAL = 120
+local WAVE_INTERVAL = 60
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
+
+local badBot = {}
+
+local pathCount = 11
 
 local uiArr
 
@@ -417,7 +422,7 @@ function dota_clicker:OnPlayerChat(event)
 	local player_id = event.playerid
 	local text = event.text
 	
-	if text == "-rich" then
+	if text == "-rich" or text == "-кшср" then
 		GiveGoldPlayers(999999)
 	end
 end
@@ -503,11 +508,17 @@ function dota_clicker:dotaClickerStart()
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataLimit", {limit = maxUnitPerPlayer})
 	end)
 	
-	local wave_start = Entities:FindByName(nil, "good_path"):GetAbsOrigin()
+	local path = getPaths("wave_path_", pathCount, true)
+	local wave_start = path[1]:GetAbsOrigin()
 	self:throughPlayers(function(player, hero)
-		wa:InitAddon(player, wave_start, DOTA_TEAM_BADGUYS)
-		wa:spawnWave(player)
+		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS)
+		-- wa:spawnWave(player)
 	end)
+	
+	local badPath = getPaths("wave_path_", pathCount, false)
+	local bad_start = badPath[1]:GetAbsOrigin()
+	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
+	-- wa:spawnWave(badBot)
 	
 	Timers:CreateTimer(LVLUP_INTERVAL, function()
 		GiveExpPlayers(100)
@@ -517,6 +528,14 @@ function dota_clicker:dotaClickerStart()
 	Timers:CreateTimer(GOLD_INTERVAL, function()
 		GiveGoldPlayers(500)
 		return GOLD_INTERVAL
+	end)
+	
+	Timers:CreateTimer(WAVE_INTERVAL, function()
+		self:throughPlayers(function(player, hero)
+			wa:spawnWave(player)
+		end)
+		wa:spawnWave(badBot)
+		return WAVE_INTERVAL
 	end)
 end
 
@@ -553,4 +572,20 @@ function GiveGoldPlayers(gold)
 		hero:ModifyGold(gold, false, 0)
 		SendOverheadEventMessage(player, OVERHEAD_ALERT_GOLD, hero, gold, nil)
 	end)
+end
+
+function getPaths(name, count, revers)
+	local path = {}
+	for i = 1, count do
+		local point = Entities:FindByName(nil, name..i)
+		table.insert(path, point)
+	end
+	if revers then
+		local newPath = {}
+		for i = #path, 1, -1 do
+			table.insert(newPath, path[i])
+		end
+		path = newPath
+	end
+	return path
 end

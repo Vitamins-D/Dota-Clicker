@@ -115,25 +115,25 @@ wi.base = {
 	["swordsman"] =
 	{
 		{type = "hp", levels = {
-			{{type = "hp", value = 0}, {type = "hpreg", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "hp", value = 50}, {type = "hpreg", value = 0.5}, cost = 300},
+			{{type = "hp", value = 50}, {type = "hpreg", value = 0.5}, cost = 300},
+			{{type = "hp", value = 50}, {type = "hpreg", value = 0.5}, cost = 300},
+			{{type = "hp", value = 50}, {type = "hpreg", value = 0.5}, cost = 300},
+			{{type = "hp", value = 50}, {type = "hpreg", value = 0.5}, cost = 300},
 		}},
 		{type = "damage", levels = {
-			{{type = "atk", value = 0}, {type = "atks", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "atk", value = 5}, {type = "atks", value = 10}, cost = 300},
+			{{type = "atk", value = 5}, {type = "atks", value = 10}, cost = 300},
+			{{type = "atk", value = 5}, {type = "atks", value = 10}, cost = 300},
+			{{type = "atk", value = 5}, {type = "atks", value = 10}, cost = 300},
+			{{type = "atk", value = 5}, {type = "atks", value = 10}, cost = 300},
 		}},
 		{type = "def", levels = {
-			{{type = "magr", value = 0}, {type = "armor", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
+			{{type = "magr", value = 400}, {type = "armor", value = 1000}, cost = 300},
+			{{type = "magr", value = 4}, {type = "armor", value = 1}, cost = 300},
+			{{type = "magr", value = 4}, {type = "armor", value = 1}, cost = 300},
+			{{type = "magr", value = 4}, {type = "armor", value = 1}, cost = 300},
+			{{type = "magr", value = 4}, {type = "armor", value = 1}, cost = 300},
 		}}, cost = 300
 	},
 	["archer"] =
@@ -475,30 +475,28 @@ function wi:getUpgradeDescription(unit, name, level)
 	local desc = ""
 	if upgrades then
 		local maxLevel = wi:getMaxLevel(type, unit, name)
-		if level > maxLevel then
-			desc = "Max Level"
-		else
-			upgrades = upgrades.levels[level]
-			if upgrades then
-				for i = 1, #upgrades do
-					local upgrade = upgrades[i]
-					if i > 1 then desc = desc .. "<br><br>" end
-					if upgrade.desc then
-						desc = desc .. upgrade.desc
-					else
-						local pattern = autoDesc[upgrade.type]
-						if pattern then
-							if upgrade.type == "spell" or upgrade.type == "spell_up" then
-								-- Берём локализованное имя способности
-								desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_" .. upgrade.value)
-							else
-								desc = desc .. string.format(pattern, upgrade.value)
-							end
+		upgrades = upgrades.levels[level]
+		if upgrades then
+			for i = 1, #upgrades do
+				local upgrade = upgrades[i]
+				if i > 1 then desc = desc .. "<br><br>" end
+				if upgrade.desc then
+					desc = desc .. upgrade.desc
+				else
+					local pattern = autoDesc[upgrade.type]
+					if pattern then
+						if upgrade.type == "spell" or upgrade.type == "spell_up" then
+							-- Берём локализованное имя способности
+							desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_" .. upgrade.value)
+						else
+							desc = desc .. string.format(pattern, upgrade.value)
 						end
 					end
 				end
 			end
-			
+		end
+		
+		if level <= maxLevel then
 			local cost = wi:getUpgradeCost(unit, name, level)
 			desc = desc .. costText(cost)
 		end

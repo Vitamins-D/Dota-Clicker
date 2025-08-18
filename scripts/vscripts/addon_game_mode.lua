@@ -28,6 +28,25 @@ function Precache( context )
 	PrecacheResource("particle", "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture.vpcf", context)
 	PrecacheResource("particle", "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture_hit.vpcf", context)
 	PrecacheResource("particle", "particles/units/heroes/hero_furion/furion_force_of_nature_damage.vpcf", context)
+	
+	-- Models for Main Wave Units
+    PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer.vmdl", context);
+    PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context);
+    PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged.vmdl", context);
+    PrecacheResource("model", "models/heroes/rattletrap/rattletrap.vmdl", context);
+
+    -- Models for Evolution Units
+    PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_hulk/creep_radiant_ancient_hulk.vmdl", context);
+    PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer_mega.vmdl", context);
+    PrecacheResource("model", "models/heroes/invoker/invoker.vmdl", context);
+    PrecacheResource("model", "models/heroes/shadowshaman/shadowshaman.vmdl", context);
+    PrecacheResource("model", "models/heroes/sniper/sniper.vmdl", context);
+    PrecacheResource("model", "models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl", context);
+    PrecacheResource("model", "models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl", context);
+
+    -- Models for Subclass Units
+    PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ancient_frog/n_creep_ancient_frog_mage.vmdl", context);
+    PrecacheResource("model", "models/heroes/techies/techies.vmdl", context);
 end
 
 -- Create the game mode when we activate
