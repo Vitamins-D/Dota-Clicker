@@ -60,6 +60,7 @@
 		"item"		"item_claymore"				
 		"item"		"item_mithril_hammer"	
 		"item"		"item_dotac_pickaxe_wood"	
+		"item"		"item_dotac_axe_wood"	
 	}
 			
 	"misc"

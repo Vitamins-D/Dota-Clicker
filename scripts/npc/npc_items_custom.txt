@@ -1,5 +1,22 @@
 "DOTAAbilities"
 {
+	"item_quelling_blade" "REMOVE"
+	"item_dagon" "REMOVE"
+	"item_dagon_2" "REMOVE"
+	"item_dagon_3" "REMOVE"
+	"item_dagon_4" "REMOVE"
+	"item_dagon_5" "REMOVE"
+	"item_recipe_dagon" "REMOVE"
+	"item_recipe_dagon_2" "REMOVE"
+	"item_recipe_dagon_3" "REMOVE"
+	"item_recipe_dagon_4" "REMOVE"
+	"item_recipe_dagon_5" "REMOVE"
+	"item_hand_of_midas" "REMOVE"
+	"item_helm_of_the_dominator" "REMOVE"
+	"item_recipe_helm_of_the_dominator" "REMOVE"
+	"item_recipe_helm_of_the_overlord" "REMOVE"
+	"item_helm_of_the_overlord" "REMOVE"
+	
 	"item_dotac_wood"
 	{
 		// General
@@ -164,7 +181,7 @@
 		"AbilityValues"
 		{
 			"gold_mult"				"1"
-			"bonus_damage"				"10"
+			"bonus_damage"				"5"
 			"stun_chance"				"10"
 			"stun_duration"				"0.5"
 		}
@@ -196,7 +213,7 @@
 		"AbilityValues"
 		{
 			"gold_mult"				"1.5"
-			"bonus_damage"				"20"
+			"bonus_damage"				"10"
 			"stun_chance"				"10"
 			"stun_duration"				"0.4"
 		}
@@ -226,7 +243,7 @@
 		"AbilityValues"
 		{
 			"gold_mult"				"2"
-			"bonus_damage"				"30"
+			"bonus_damage"				"15"
 			"stun_chance"				"10"
 			"stun_duration"				"0.6"
 		}
@@ -256,7 +273,7 @@
 		"AbilityValues"
 		{
 			"gold_mult"				"2.5"
-			"bonus_damage"				"40"
+			"bonus_damage"				"20"
 			"stun_chance"				"10"
 			"stun_duration"				"0.8"
 		}
@@ -286,7 +303,7 @@
 		"AbilityValues"
 		{
 			"gold_mult"				"3"
-			"bonus_damage"				"50"
+			"bonus_damage"				"25"
 			"stun_chance"				"10"
 			"stun_duration"				"1"
 		}
@@ -356,5 +373,280 @@
 	   {
 		   "01"                 "item_dotac_pickaxe_diamond"
 	   }
+	}
+	
+	
+	//=================================================================================================================
+	// Wood Axe
+	//=================================================================================================================
+	"item_dotac_axe_wood"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/axes_custom"
+		"AbilityTextureName"			"axe_wood"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"AbilityCastRange"				"300"
+		"AbilityCastPoint"				"6.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"50"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"common"
+		"ShouldBeSuggested"				"1"
+		"ItemSellable"					"1"
+		"ItemPurchasable"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"				"10"
+			"bleed_chance"				"100"
+			"bleed_damage"				"5"
+			"bleed_duration"			"3"
+			"tree_cut_time"				"6.0"
+		}
+	}
+
+	//=================================================================================================================
+	// Stone Axe
+	//=================================================================================================================
+	"item_dotac_axe_stone"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/axes_custom"
+		"AbilityTextureName"			"axe_stone"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"AbilityCastRange"				"300"
+		"AbilityCastPoint"				"5.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"100"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"common"
+		"ShouldBeSuggested"				"1"
+		"ItemSellable"					"1"
+		"ItemPurchasable"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"				"20"
+			"bleed_chance"				"15"
+			"bleed_damage"				"8"
+			"bleed_duration"			"2.5"
+			"tree_cut_time"				"5.8"
+		}
+	}
+
+	//=================================================================================================================
+	// Iron Axe
+	//=================================================================================================================
+	"item_dotac_axe_iron"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/axes_custom"
+		"AbilityTextureName"			"axe_iron"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"AbilityCastRange"				"300"
+		"AbilityCastPoint"				"4.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"uncommon"
+		"ShouldBeSuggested"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"				"30"
+			"bleed_chance"				"15"
+			"bleed_damage"				"12"
+			"bleed_duration"			"3"
+			"tree_cut_time"				"4.0"
+		}
+	}
+
+	//=================================================================================================================
+	// Diamond Axe
+	//=================================================================================================================
+	"item_dotac_axe_diamond"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/axes_custom"
+		"AbilityTextureName"			"axe_diamond"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"AbilityCastRange"				"300"
+		"AbilityCastPoint"				"3.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"400"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"rare"
+		"ShouldBeSuggested"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"				"40"
+			"bleed_chance"				"20"
+			"bleed_damage"				"18"
+			"bleed_duration"			"4.0"
+			"tree_cut_time"				"3.0"
+		}
+	}
+
+	//=================================================================================================================
+	// Netherite Axe
+	//=================================================================================================================
+	"item_dotac_axe_netherite"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/axes_custom"
+		"AbilityTextureName"			"axe_netherite"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"AbilityCastRange"				"300"
+		"AbilityCastPoint"				"2.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"800"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"epic"
+		"ShouldBeSuggested"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"				"50"
+			"bleed_chance"				"20"
+			"bleed_damage"				"25"
+			"bleed_duration"			"4.0"
+			"tree_cut_time"				"2.0"
+		}
+	}
+
+	"item_recipe_dotac_axe_stone"
+	{
+	   "BaseClass"              "item_recipe_iron_talon"
+	   "ItemCost"               "100"
+	   "ItemShopTags"           "damage"
+	   "ItemRecipe"             "1"
+	   "ItemResult"             "item_dotac_axe_stone"
+	   "ItemRequirements"
+	   {
+		   "01"                 "item_dotac_axe_wood"
+	   }
+	}
+
+	"item_recipe_dotac_axe_iron"
+	{
+	   "BaseClass"              "item_recipe_iron_talon"
+	   "ItemCost"               "200"
+	   "ItemShopTags"           "damage"
+	   "ItemRecipe"             "1"
+	   "ItemResult"             "item_dotac_axe_iron"
+	   "ItemRequirements"
+	   {
+		   "01"                 "item_dotac_axe_stone"
+	   }
+	}
+
+	"item_recipe_dotac_axe_diamond"
+	{
+	   "BaseClass"              "item_recipe_iron_talon"
+	   "ItemCost"               "400"
+	   "ItemShopTags"           "damage"
+	   "ItemRecipe"             "1"
+	   "ItemResult"             "item_dotac_axe_diamond"
+	   "ItemRequirements"
+	   {
+		   "01"                 "item_dotac_axe_iron"
+	   }
+	}
+
+	"item_recipe_dotac_axe_netherite"
+	{
+	   "BaseClass"              "item_recipe_iron_talon"
+	   "ItemCost"               "800"
+	   "ItemShopTags"           "damage"
+	   "ItemRecipe"             "1"
+	   "ItemResult"             "item_dotac_axe_netherite"
+	   "ItemRequirements"
+	   {
+		   "01"                 "item_dotac_axe_diamond"
+	   }
+	}
+	
+	
+	//=================================================================================================================
+	// Battlefury
+	//=================================================================================================================
+	"item_bfury"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/battle_fury_custom"
+		"AbilityTextureName"			"item_bfury"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE"
+		
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"3800"
+		"ItemShopTags"					"damage;health_regen;mana_regen;hard_to_tag"
+		"ItemQuality"					"epic"
+		"ItemAliases"					"bf;battle fury"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"			"60"
+			"bonus_health_regen"	"7.5"
+			"bonus_mana_regen"		"2.75"
+			"melee_cleave_dmg"		"40"
+			"range_cleave_dmg"		"30"
+			"cleave_radius"			"250"
+		}
 	}
 }
