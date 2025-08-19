@@ -120,9 +120,6 @@ function modifier_buff_stats:OnCreated(kv)
         self:ForceRefresh()
         return nil
     end)
-    
-    print("unit.bonus mana:", unit.bonus["mana"])
-    print("unit name:", unit:GetUnitName())
 end
 
 function modifier_buff_stats:OnRefresh(kv)

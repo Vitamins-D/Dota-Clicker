@@ -131,7 +131,7 @@ wi.base = {
 		{type = "def", levels = {
 			{{type = "magr", value = 1}, {type = "armor", value = 1}, cost = 600},
 			{{type = "magr", value = 5}, {type = "armor", value = 1}, cost = 700},
-			{{type = "magr", value = 12}, {type = "armor", value = 0}, cost = 900},
+			{{type = "magr", value = 12}, cost = 900},
 			{{type = "magr", value = 6}, {type = "armor", value = 1}, cost = 1200},
 			{{type = "magr", value = 6}, {type = "armor", value = 1}, cost = 1200},
 		}}, cost = 300
@@ -140,24 +140,24 @@ wi.base = {
 	{
 		{type = "agility", levels = {
 			{{type = "atks", value = 3}, {type = "vision", value = 100}, cost = 300},
-			{{type = "atks", value = 6}, {type = "vision", value = 0}, cost = 450},
+			{{type = "atks", value = 6}, cost = 450},
 			{{type = "atks", value = 12}, {type = "vision", value = 150}, cost = 450},
-			{{type = "atks", value = 7}, {type = "vision", value = 0}, cost = 450},
+			{{type = "atks", value = 7}, cost = 450},
 			{{type = "atks", value = 18}, {type = "vision", value = 350}, cost = 750},
 		}},
 		{type = "strength", levels = {
 			{{type = "atk", value = 7}, {type = "atk_dis", value = 30}, cost = 450},
-			{{type = "atk", value = 7}, {type = "atk_dis", value = 0}, cost = 300},
+			{{type = "atk", value = 7}, cost = 300},
 			{{type = "atk", value = 9}, {type = "atk_dis", value = 40}, cost = 750},
 			{{type = "atk", value = 14}, {type = "atk_dis", value = 7}, cost = 300},
 			{{type = "atk", value = 22}, {type = "atk_dis", value = 70}, cost = 1200},
 		}},
 		{type = "def", levels = {
-			{{type = "hp", value = 100}, {type = "armor", value = 1}, cost = 1200},
-			{{type = "hp", value = 25}, {type = "armor", value = 0}, cost = 1200},
-			{{type = "hp", value = 100}, {type = "armor", value = 0}, cost = 1200},
-			{{type = "hp", value = 25}, {type = "armor", value = 1}, cost = 1200},
-			{{type = "hp", value = 100}, {type = "armor", value = 1}, cost = 1200},
+			{{type = "hp", value = 100}, {type = "armor", value = 1}, cost = 800},
+			{{type = "hp", value = 25}, cost = 300},
+			{{type = "hp", value = 100}, cost = 650},
+			{{type = "hp", value = 25}, {type = "armor", value = 1}, cost = 500},
+			{{type = "hp", value = 100}, {type = "armor", value = 1}, cost = 800},
 		}}, cost = 500
 	},
 	["mage"] =
