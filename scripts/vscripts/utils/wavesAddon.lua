@@ -71,6 +71,13 @@ function wa:spawnWave(player)
 	
 	units = wa:sortUnits(units)
 	
+	-- local hero = PlayerResource:GetSelectedHeroEntity(0)
+	-- hero.bonus = {}
+	-- hero.bonus["spell_amp"] = 50
+	-- Timers:CreateTimer(0.5, function()
+		-- hero:AddNewModifier(hero, nil, "modifier_buff_stats", {})
+	-- end)
+	
 	for i = 1, #units do
 		Timers:CreateTimer(0.5*i, function()
 			local name = units[i]
@@ -88,9 +95,6 @@ function wa:spawnWave(player)
 			unit.path = player.path
 			
 			unit.bonus = {}
-			Timers:CreateTimer(0.1, function()
-				unit:AddNewModifier(unit, nil, "modifier_buff_stats", {})
-			end)
 			
 			local names = {name, class, subclass}
 			for i = 1, 3 do
@@ -117,9 +121,21 @@ function wa:spawnWave(player)
 									if ability then
 										ability:SetLevel(ability:GetLevel() + 1)
 									end
+								elseif upgrade.type == "replace" then
+									unit:RemoveAbility(upgrade.value[1])
+									unit:AddAbility(upgrade.value[2])
 								else
-									if not unit.bonus[upgrade.type] then unit.bonus[upgrade.type] = 0 end
-									unit.bonus[upgrade.type] = unit.bonus[upgrade.type] + upgrade.value
+									if upgrade.type == "armor" then
+										unit:SetPhysicalArmorBaseValue(unit:GetPhysicalArmorBaseValue() + upgrade.value)
+									elseif upgrade.type == "magr" then
+										unit:SetBaseMagicalResistanceValue(unit:GetBaseMagicalResistanceValue() + upgrade.value)
+									elseif upgrade.type == "hpreg" then
+										unit:SetBaseHealthRegen(unit:GetBaseHealthRegen() + upgrade.value)
+									else
+										-- остальные бонусы в модификатор
+										if not unit.bonus[upgrade.type] then unit.bonus[upgrade.type] = 0 end
+										unit.bonus[upgrade.type] = unit.bonus[upgrade.type] + upgrade.value
+									end
 								end
 							end
 							
@@ -128,6 +144,9 @@ function wa:spawnWave(player)
 					
 				end
 			end
+			Timers:CreateTimer(0.5, function()
+				unit:AddNewModifier(unit, nil, "modifier_buff_stats", {})
+			end)
 		end)
 	end
 end

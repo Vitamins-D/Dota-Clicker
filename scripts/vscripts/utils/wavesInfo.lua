@@ -170,7 +170,7 @@ wi.base = {
 			{{type = "mana", value = 0}, {type = "manareg", value = 0}, cost = 300},
 		}},
 		{type = "spell_power", levels = {
-			{{type = "spell_amp", value = 0.5}, cost = 300},
+			{{type = "spell_amp", value = 50}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
 			{{type = "", value = 0}, {type = "", value = 0}, cost = 300},
@@ -446,9 +446,9 @@ local autoDesc = {
     armor = "Добавляет %d ед. к броне",
     magr = "Добавляет %d%% к магическому сопротивлению",
     spell_amp = "Добавляет %d%% к усилению магического урона",
-    hpreg = "Добавляет %d ед. к регенерации здоровья",
+    hpreg = "Добавляет %.1f ед. к регенерации здоровья",
     mana = "Добавляет %d ед. к мане",
-    manareg = "Добавляет %d ед. к регенерации маны",
+    manareg = "Добавляет %.1f ед. к регенерации маны",
     spell = "Открывает способность %s",
     spell_up = "Улучшает способность %s",
 }

@@ -32,28 +32,6 @@ function AIThink()
         return nil -- Прекратить обработку, если крип мертв
     end
 	
-	do
-		local hAbility = thisEntity:FindAbilityByName("dotac_boar_charge")
-		if hAbility and hAbility:IsFullyCastable() then
-			local enemies = AICore:getEnemies(600, thisEntity)
-			if #enemies > 0 then
-				local enemy = enemies[math.random(1, #enemies)]
-				ExecuteOrderFromTable({
-					UnitIndex = thisEntity:entindex(),
-					OrderType = DOTA_UNIT_ORDER_CAST_TARGET,
-					TargetIndex = enemy:entindex(),
-					AbilityIndex = hAbility:entindex(),
-				})
-				nextPath = false
-				Timers:CreateTimer(5, function()
-					nextPath = true
-					return
-				end)
-				return hAbility:GetCastPoint()
-			end
-		end
-	end
-	
 	goPath()
 	
     return 0.5 -- Продолжите обработку на следующем тике
