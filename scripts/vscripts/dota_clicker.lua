@@ -34,7 +34,7 @@ function dota_clicker:InitGameMode()
 	GameRules:SetPreGameTime(0)
 	GameRules:SetStrategyTime(10.0)
 	GameRules:SetShowcaseTime(0.0)
-	GameRules:SetTreeRegrowTime(60)
+	GameRules:SetTreeRegrowTime(120)
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(25)
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(false)
 	
@@ -549,6 +549,13 @@ end
 
 function dota_clicker:OnNpcSpawned(data)
 	local npc = EntIndexToHScript(data.entindex)
+    if not npc or not npc:IsRealHero() then return end
+
+    -- Проверяем, есть ли способность
+    local ability = npc:FindAbilityByName("neutral_damage_bonus")
+    if ability and ability:GetLevel() < 1 then
+        ability:SetLevel(1)
+    end
 end
 
 function dota_clicker:throughPlayers(callback)

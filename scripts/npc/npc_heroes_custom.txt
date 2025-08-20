@@ -3,10 +3,20 @@
 // the specified key-value combinations.  Use override_hero <hero_to_override> for this.
 "DOTAHeroes"
 {
-	//=================================================================================================================
-	// HERO: Templar Assassin
-	//=================================================================================================================
+	"npc_dota_hero_ogre_magi"
+	{
+		"Ability5"		""
+	}
+	
 	"npc_dota_hero_pudge"
 	{
+		"Ability1"		"pudge_meat_hook_lua"
+		"Ability5"		"pudge_innate_custom"
+	}
+	
+	"npc_dota_hero_hoodwink"
+	{
+		"Ability9"		"neutral_damage_bonus"
+		"Ability9Level" "1"
 	}
 }
