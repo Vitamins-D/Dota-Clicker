@@ -556,20 +556,13 @@ end
 
 function dota_clicker:OnNpcSpawned(data)
 	local npc = EntIndexToHScript(data.entindex)
-    if not npc or not npc:IsRealHero() or not npc.getUnitName then return end
+    if not npc or not npc:IsRealHero() then return end
 
     -- Проверяем, есть ли способность
     local ability = npc:FindAbilityByName("neutral_damage_bonus")
     if ability and ability:GetLevel() < 1 then
         ability:SetLevel(1)
     end
-	
-	if npc:getUnitName() == "npc_dota_hero_meepo" then
-		local proMiner = npc:FindAbilityByName("dotac_meepo_pro_miner")
-		if not proMiner then
-			npc:AddAbility("dotac_meepo_pro_miner")
-		end
-	end
 end
 
 function dota_clicker:throughPlayers(callback)
