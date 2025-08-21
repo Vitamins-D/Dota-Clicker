@@ -79,13 +79,30 @@ wi.requirement = {
 }
 
 wi.specials = {
-	-- ["unit"] = {{"replace", "from", "to"}, {"updrage", "name"}, {"set", "name", 2}}, -- example
+	-- ["unit"] = {{"replace", "from", "to"}, {"upgrade", "name"}, {"set", "name", 2}}, -- example
+	["tank"] = {{"upgrade", "dota_clicker_tidehunter_kraken_shell"}},
+	["siege_tower"] = {{"upgrade", "creep_siege"}},
+	["sniper"] = {{"upgrade", "dc_sniper_headshot"}},
+	["marksman"] = {{"upgrade", "dc_medusa_split_shot"}},
+	["fire_mage"] = {{"replace", "dc_winter_wyvern_cold_embrace", "dc_lina_light_strike_array"}},
+	["air_mage"] = {{"upgrade", "dc_winter_wyvern_cold_embrace"}},
+	["air_mage"] = {{"replace", "dc_jakiro_liquid_fire", "dc_jakiro_liquid_ice"}},
+	["trebuchet"] = {{"upgrade", "black_dragon_splash_attack"}},
+	["ballista"] = {{"replace", "black_dragon_splash_attack", "black_dragon_splash_attack_small"}},
+	["miner"] = {"replace", "dc_lina_dragon_slave", "dc_techies_suicide_big"}
 }
 
 wi.skills = {
   -- ["unit"] = {"spell", "spell"}, -- example
-  ["mage"] = {"dota_clicker_vengefulspirit_magic_missile"},
+  ["ballista"] = {"dc_windrunner_powershot"}
+  ["mage"] = {"dotac_chaos_knight_chaos_bolt"},
   ["catapult"] = {"dota_clicker_creep_siege"},
+  ["air_mage"] = {"dc_zuus_arc_lightning"},
+  ["shaman"] = {"dc_shadow_shaman_mass_serpent_ward"},
+  ["bomber"] = {"dc_techies_suicide"}
+  ["Veins_fire"] = {"burning_strikes"},
+  ["stone_block"] = {"dc_mars_bulwark"},
+  ["fight_shaman"] = {"dc_witch_doctor_death_ward"},
 }
 
 wi.units = {
@@ -180,11 +197,11 @@ wi.base = {
 			{{type = "mana", value = 150}, {type = "manareg", value = 2.7}, cost = 900},
 		}},
 		{type = "spell_power", levels = {
-			{{type = "spell_amp", value = 5}, {type = "spell_up", value = "dota_clicker_vengefulspirit_magic_missile"}, cost = 450},
+			{{type = "spell_amp", value = 5}, {type = "spell_up", value = "dotac_chaos_knight_chaos_bolt"}, cost = 450},
 			{{type = "spell_amp", value = 7}, cost = 400},
-			{{type = "spell_amp", value = 7}, {type = "spell_up", value = "dota_clicker_vengefulspirit_magic_missile"}, cost = 600},
+			{{type = "spell_amp", value = 7}, {type = "spell_up", value = "dotac_chaos_knight_chaos_bolt"}, cost = 600},
 			{{type = "spell_amp", value = 9},cost = 500},
-			{{type = "spell_amp", value = 15}, {type = "spell_up", value = "dota_clicker_vengefulspirit_magic_missile"},cost = 1200},
+			{{type = "spell_amp", value = 15}, {type = "spell_up", value = "dotac_chaos_knight_chaos_bolt"},cost = 1200},
 		}},
 		{type = "def", levels = {
 			{{type = "spell", value = "dc_frogmen_water_bubble_small"}, cost = 300},
@@ -413,9 +430,9 @@ wi.subClasses = { -- усиляются их способности
 	}, -- siege_tower
 	["ballista"] = {
 		{type = "ballista_upgrade", levels = {
-			{{type = "spell_up", value = ""}, cost = 700},
-			{{type = "spell_up", value = ""}, cost = 900},
-			{{type = "spell_up", value = ""}, cost = 1200},
+			{{type = "spell_up", value = "dc_windrunner_powershot"}, cost = 700},
+			{{type = "spell_up", value = "dc_windrunner_powershot"}, cost = 900},
+			{{type = "spell_up", value = "dc_windrunner_powershot"}, cost = 1200},
 		}}, cost = 900
 	}, -- siege_tower
 	["rapid_fire"] = {
