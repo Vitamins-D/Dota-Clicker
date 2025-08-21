@@ -2008,5 +2008,110 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// Ability: burning_strikes
+	//=================================================================================================================
+	"burning_strikes"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "abilities/creeps/burning_strikes.lua"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"burning_strikes"
 
+		"AbilityValues"
+		{
+			"burn_dps"
+			{
+				"value" "15 25 35 45"
+			}
+			"burn_duration"
+			{
+				"value" "3 4 5 6"
+			}
+			"magic_resist_reduction"
+			{
+				"value" "10 15 20 25"
+			}
+		}
+	}
+	//=================================================================================================================
+	// melee_spawn_unit
+	//=================================================================================================================
+	"melee_spawn_unit"
+	{  
+		"BaseClass"            "ability_lua"
+		"ScriptFile"          "abilities/creeps/melee_spawn_unit"
+		"AbilityTextureName"      "melee_spawn_unit"
+		"MaxLevel"						"2"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"FightRecapLevel"        "1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"        "0.0"
+		"AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+		
+		// Time    
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"        "50"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"        "100"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"unit_id"      "1"  
+			"duration"      "30"
+			"count" 		"3"
+			"hp_perc"	"123"
+			"damage_perc" "500"
+			"def_perc" "123"
+		}
+	}
+	//=================================================================================================================
+	// pathfinder_spawn_unit
+	//=================================================================================================================
+	"pathfinder_spawn_unit"
+	{  
+		"BaseClass"            "ability_lua"
+		"ScriptFile"          "abilities/creeps/pathfinder_spawn_unit"
+		"AbilityTextureName"      "pathfinder_spawn_unit"
+		"MaxLevel"						"2"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"FightRecapLevel"        "1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"        "0.0"
+		"AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+		
+		// Time    
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"        "50"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"        "100"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"unit_id"      "1"  
+			"duration"      "30"
+			"count" 		"3"
+			"hp"	"123"
+			"damage" "500"
+			"def" "123"
+		}
+	}
 }

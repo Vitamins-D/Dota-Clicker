@@ -10,7 +10,7 @@
 	
 	"npc_dota_hero_pudge"
 	{
-		"Ability1"		"pudge_meat_hook_lua"
+		"Ability1"		"pathfinder_spawn_unit"
 		"Ability5"		"pudge_innate_custom"
 	}
 	
