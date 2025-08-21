@@ -11,7 +11,7 @@ local badBotAI = require("utils/badBotAI")
 -- константы/настройки
 local LVLUP_INTERVAL = 60
 local GOLD_INTERVAL = 120
-local WAVE_INTERVAL = 60
+local WAVE_INTERVAL = 15
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
