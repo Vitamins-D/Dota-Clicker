@@ -78,6 +78,10 @@ wi.requirement = {
 	["miner"] = {class = "bomber", upgs = {{"bombordiro", 3}}},
 }
 
+wi.specials = {
+	-- ["unit"] = {{"replace", "from", "to"}, {"updrage", "name"}, {"set", "name", 2}}, -- example
+}
+
 wi.units = {
 	["swordsman"] = "npc_dota_clicker_main_warrior",
 	["archer"] = "npc_dota_clicker_main_archer",

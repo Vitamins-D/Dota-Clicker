@@ -21,4 +21,16 @@ function u:countOf(tbl, value)
     return count
 end
 
+function u:replaceAbility(unit, abil1, abil2)
+    unit:RemoveAbility(abil1)
+	unit:AddAbility(abil2)
+end
+
+function u:upgradeAbility(unit, abil)
+	local ability = unit:FindAbilityByName(abil)
+	if ability then
+		ability:SetLevel(ability:GetLevel() + 1)
+	end
+end
+
 return u

@@ -3,6 +3,7 @@ if wa == nil then
 end
 
 local info = require("utils/wavesInfo")
+local utils = require("utils/utils")
 
 -- info
 -- 1 - swordsman
@@ -96,6 +97,23 @@ function wa:spawnWave(player)
 			
 			unit.bonus = {}
 			
+			local special = info.specials[pathName]
+			if special then
+				for j = 1, #special do
+					local arr = special[j]
+					if arr[1] == "replace" then
+						utils:replaceAbility(unit, arr[2], arr[3])
+					elseif arr[1] == "set" then
+						local ability = unit:FindAbilityByName(arr[2])
+						if ability then
+							ability:SetLevel(arr[3])
+						end
+					elseif arr[1] == "upgrade" then
+						utils:upgradeAbility(unit, arr[2])
+					end
+				end
+			end
+			
 			local names = {name, class, subclass}
 			for i = 1, 3 do
 				local pUpgrade = unitUpg[i]
@@ -117,13 +135,9 @@ function wa:spawnWave(player)
 									-- print("SPELL:", upgrade.value)
 									unit:AddAbility(upgrade.value)
 								elseif upgrade.type == "spell_up" then
-									local ability = unit:FindAbilityByName(upgrade.value)
-									if ability then
-										ability:SetLevel(ability:GetLevel() + 1)
-									end
+									utils:upgradeAbility(unit, upgrade.value)
 								elseif upgrade.type == "replace" then
-									unit:RemoveAbility(upgrade.value[1])
-									unit:AddAbility(upgrade.value[2])
+									utils:replaceAbility(unit, upgrade.value[1], upgrade.value[2])
 								else
 									if upgrade.type == "armor" then
 										unit:SetPhysicalArmorBaseValue(unit:GetPhysicalArmorBaseValue() + upgrade.value)
