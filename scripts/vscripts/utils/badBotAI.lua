@@ -10,8 +10,8 @@ local wi    = require("utils/wavesInfo")
 local utils = require("utils/utils")
 
 local STAGE_WAVES = {
-    class_at    = 3,
-    subclass_at = 7,
+    class_at    = 6,
+    subclass_at = 14,
 }
 
 local CLASS_OPTIONS = {

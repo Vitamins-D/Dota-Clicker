@@ -9,13 +9,14 @@ local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
 
 -- константы/настройки
-local LVLUP_INTERVAL = 60
+local WAVE_INTERVAL = 60
+local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
-local WAVE_INTERVAL = 15
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
-local LVL_GIVE = 100
+local LVL_GIVE = 1
+local playerLevel = 1
 
 local badBot = {}
 
@@ -543,11 +544,17 @@ function dota_clicker:dotaClickerStart()
 	local badPath = getPaths("wave_path_", pathCount, false)
 	local bad_start = badPath[1]:GetAbsOrigin()
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
-	badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
+	-- badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
 	-- wa:spawnWave(badBot)
 	
 	Timers:CreateTimer(LVLUP_INTERVAL, function()
 		GiveExpPlayers(LVL_GIVE*levelExp)
+		playerLevel = playerLevel + LVL_GIVE
+		if math.floor(playerLevel) == 5 then
+			LVL_GIVE = 0.75
+		elseif math.floor(playerLevel) == 15 then
+			LVL_GIVE = 0.5
+		end
 		return LVLUP_INTERVAL
 	end)
 	
@@ -562,7 +569,7 @@ function dota_clicker:dotaClickerStart()
 		end)
 
 		-- бот думает, как развиваться
-		badBotAI:Tick(badBot, MAX_UNITS)
+		-- badBotAI:Tick(badBot, MAX_UNITS)
 		wa:spawnWave(badBot)
 
 		return WAVE_INTERVAL

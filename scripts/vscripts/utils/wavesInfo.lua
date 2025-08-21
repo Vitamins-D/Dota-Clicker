@@ -336,7 +336,7 @@ wi.subClasses = { -- усиляются их способности
 		{type = "melee_upgrade", levels = {
 			{{type = "spell", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 500},
 			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, cost = 500},
-			{{type = "", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 500},
+			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 500},
 		}}, cost = 500
 	}, -- berserker
 	["illusionist"] = {
@@ -350,7 +350,7 @@ wi.subClasses = { -- усиляются их способности
 		{type = "gunner_upgrade", levels = {
 			{{type = "spell", value = "dc_troll_warlord_fervor"}, cost = 500},
 			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, cost = 500},
-			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, {type = "", value = 0}, cost = 500},
+			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, cost = 500},
 		}}, cost = 500
 	}, -- shooter
 	["sniper"] = {
