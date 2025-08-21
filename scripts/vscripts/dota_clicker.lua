@@ -387,6 +387,13 @@ function miningDo(oreType, playerId)
 	local baseGold = oresValues[oreType] or 0
 	local finalGold = math.floor(baseGold * goldMultiplier)
 	
+	local proMiner = hero:FindAbilityByName("dotac_meepo_pro_miner")
+	print(proMiner, proMiner:GetLevel())
+	if proMiner and proMiner:GetLevel() > 0 then
+		local bonusGold = proMiner:GetSpecialValueFor("bonus_gold")
+		finalGold = finalGold + bonusGold
+	end
+	
 	-- Выдаем золото
 	GiveGold(finalGold, playerId)
 end
@@ -556,6 +563,13 @@ function dota_clicker:OnNpcSpawned(data)
     if ability and ability:GetLevel() < 1 then
         ability:SetLevel(1)
     end
+	
+	if npc:getUnitName() == "npc_dota_hero_meepo" then
+		local proMiner = npc:FindAbilityByName("dotac_meepo_pro_miner")
+		if not proMiner then
+			npc:AddAbility("dotac_meepo_pro_miner")
+		end
+	end
 end
 
 function dota_clicker:throughPlayers(callback)

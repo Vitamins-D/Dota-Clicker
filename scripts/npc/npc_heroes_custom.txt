@@ -17,6 +17,10 @@
 	"npc_dota_hero_hoodwink"
 	{
 		"Ability9"		"neutral_damage_bonus"
-		"Ability9Level" "1"
+	}
+	
+	"npc_dota_hero_meepo"
+	{
+		"Ability8"		"dotac_meepo_pro_miner"
 	}
 }
