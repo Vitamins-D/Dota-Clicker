@@ -1146,7 +1146,7 @@
 		{
 			"damage"
 			{
-				"value"	"20 30 40"
+				"value"	"20 30 40 60 80 100"
 				"special_bonus_unique_sniper_headshot_damage"	"+30"
 			}
 			"proc_chance"					"25"
@@ -1270,7 +1270,7 @@
 				}
 				"damage_modifier_tooltip"		
 				{	
-					"value"			"50 60"
+					"value"			"50 60 70 80 90 100"
 					"special_bonus_unique_medusa_2"	"+8"
 				}		
 				"arrow_count"
@@ -1390,10 +1390,10 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"duration"			"3.0 4.0"
+				"duration"			"3.0 4.0 5.0 6.0 7.0"
 				"heal_additive"		
 				{
-					"value"		"40 45"
+					"value"		"40 45 50 55 60"
 				"special_bonus_unique_winter_wyvern_5" "+25"
 				}
 				"heal_percentage"	"1.25 2"
@@ -1644,7 +1644,7 @@
 				"value"			"400"
 				"affected_by_aoe_increase"		"1"
 			}
-			"damage_percent"			"100"
+			"damage_percent"			"100 120 140 160"
 
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
@@ -1682,7 +1682,7 @@
 		{
 			"AbilityCooldown"
 			{
-				"value"			"40 35 30 25"
+				"value"			"40 35 30 25 20 15 15"
 				"special_bonus_unique_techies_5"	"-15"
 			}
 			"radius"				
@@ -1692,7 +1692,7 @@
 			}
 			"damage"
 			{
-				"value"			"700 800"
+				"value"			"500 600 700 8000 900 1000"
 				"special_bonus_unique_techies" "+200"
 			}
 			"stun_duration"				"2.5"
@@ -1713,6 +1713,45 @@
 			"duration"				"0.75"
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
+	//=================================================================================================================
+	// Frogmen: Water Bubbles
+	//=================================================================================================================
+	"dc_frogmen_water_bubble_small"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"frogmen_water_bubble_small"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"	
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"550"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"16"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+			"AbilityManaCost"				"90"
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"duration"			"10"
+			"damage_absorb"
+			{
+				"value"			"100 120 140"
+				"DamageTypeTooltip"		"DAMAGE_TYPE_MAGICAL"
+			}
+
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 	}
 	//=================================================================================================================
 	// Techies: Sticky Bomb
@@ -1982,7 +2021,7 @@
 		{
 			"bonus_base_damage"
 			{
-				"value" "20 25 30 35"
+				"value" "20 25 30 35 40 45 50"
 				"special_bonus_unique_vengeful_spirit_2" "+16"
 
 				// "damage" in attribute name but it's a percentage-based effect
@@ -2008,6 +2047,1011 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// Riki: Permanent Invis
+	//=================================================================================================================
+	"dc_riki_permanent_invisibility"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"riki_permanent_invisibility"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"IsBreakable"					"1"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"fade_delay"					"4 3 2"
+			"movement_speed"				"20 40 60"
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
+	//=================================================================================================================
+	// Troll Warlord: Fervor
+	//=================================================================================================================
+	"dc_troll_warlord_fervor"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"troll_warlord_fervor"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+ 		"AbilityCastAnimation"			"ACT_INVALID"
+		"HasShardUpgrade"				"1"
+		"IsBreakable"					"1"
+		// Casting
+		"AbilityValues"
+		{
+			"attack_speed"			
+			{
+				"value"		"5 9 15"
+				"special_bonus_unique_troll_warlord_5"		"+5"
+			}
+			"max_stacks"			
+			{
+				"value"		"5 10 20"
+			}
+			"stack_limit_during_battle_trance"
+			{
+				"value"												"0"
+				"special_bonus_facet_troll_warlord_bad_influence"	"+12"		// BEHAVIOR ONLY, DOES NOT UPDATE TOOLTIP: Update stack_limit_tooltip for tooltip change
+			}
+			"extra_attack_chance_per_stack"
+			{
+				"special_bonus_shard"	"3"
+			}
+			"base_chance"
+			{
+				"special_bonus_shard"	"16"
+			}
+			"armor_per_stack"
+			{
+				"special_bonus_facet_troll_warlord_insensitive"			"+1.0"				
+			}
+			"range_buffer"
+			{
+				"special_bonus_shard"			"=175"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Ability: Phantom Coup de Grace
+	//=================================================================================================================
+	"dc_phantom_assassin_coup_de_grace"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"phantom_assassin_coup_de_grace"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilitySound"					"Hero_PhantomAssassin.CoupDeGrace"
+		"IsBreakable"					"1"
+
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityDraftExtraAbilities"
+		{
+			"phantom_assassin_fan_of_knives" "shard"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"crit_chance"				
+			{
+				"value"			"7 9 11"
+				"special_bonus_unique_phantom_assassin_2"	"+10"
+				"special_bonus_facet_phantom_assassin_methodical"		"=0"
+			}
+			"dagger_crit_chance"
+			{
+				"value"			"34"
+				"special_bonus_unique_phantom_assassin_2"	"+10"
+				"special_bonus_facet_phantom_assassin_methodical"		"=0"
+			}
+
+			"crit_bonus"				
+			{
+				"value"		"700 800 900"
+				"special_bonus_facet_phantom_assassin_methodical"		"+100"
+			}
+			"attacks_to_proc"
+			{
+				"special_bonus_facet_phantom_assassin_methodical"
+				{
+					"value"										"6"
+					"special_bonus_unique_phantom_assassin_2"	"-1"
+				}
+			}
+			"attacks_to_proc_creeps"
+			{
+				"special_bonus_facet_phantom_assassin_methodical"
+				{
+					"value"										"4"
+					"special_bonus_unique_phantom_assassin_2"	"-1"
+				}
+			}
+			"duration"				"6 8 10"
+			"two_tooltip"
+			{
+				"special_bonus_facet_phantom_assassin_methodical"		"+2"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Beastmaster: Call of the Wild Hawk
+	//=================================================================================================================
+	"dc_beastmaster_call_of_the_wild_hawk"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"beastmaster_call_of_the_wild_hawk"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilitySound"					"Hero_Beastmaster.Call.Hawk"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"						// Dive
+		"LinkedAbility"					"beastmaster_call_of_the_wild_boar"
+
+		"AbilityDraftExtraAbilities"
+		{
+			"beastmaster_call_of_the_wild_boar" ""
+		}
+
+        "HasShardUpgrade"               "1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.3"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"10"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"						"15"
+				"special_bonus_shard"		"+5"
+			}
+			"hawk_base_max_health"			"200 325 450"
+			"hawk_base_gold_bounty"			"30 40 50"
+			"hawk_base_vision_range"		"600 650 700"
+			"hawk_base_xp_bounty"			"40 50 60"
+			"hawk_base_magic_resist"		"30 40 50"
+			"AbilityCooldown"
+			{
+				"value"									"50 45 40"
+				"special_bonus_unique_beastmaster_3"	"-5"
+			}
+			"attack_radius"			
+			{
+				"value"		"500"
+				"affected_by_aoe_increase"	"1"
+			}
+			"hawk_count"					
+			{
+				"value"					"1"
+				"special_bonus_shard"	"+1"
+			}
+			"dive_damage"				
+			{
+				"value"		"50 80 110"
+				"special_bonus_unique_beastmaster_2" "+30"
+			}
+			"dive_root_duration"		"0.25 0.5 0.75"
+			"roaming_radius"					"280"
+			"roaming_seconds_per_rotation"			"4"
+			"hawk_base_attack_interval"						"4"
+			"min_move_speed"			"455"
+			"max_move_speed"			"1100"
+
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+	//=================================================================================================================
+	// Windrunner: Shackleshot
+	//=================================================================================================================
+	"dc_windrunner_shackleshot"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"windrunner_shackleshot"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_Windrunner.ShackleshotCast"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.15"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"0 0 0 0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"60"
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityValues"
+		{
+			"AbilityCooldown"
+			{
+				"value"											"20"
+			}
+			"fail_stun_duration"
+			{
+				"value" "0.6"
+			}
+			"stun_duration"
+			{
+				"value" "2.75 2.75 2.75"
+				"special_bonus_unique_windranger_6" "+0.75"
+			}
+			"shackle_distance"
+			{
+				"value" "575"
+			}
+			"arrow_speed"
+			{
+				"value" "1650"
+			}
+			"shackle_count"
+			{
+				"value" 									"1"
+				"special_bonus_facet_windrunner_tangled"	"=0"
+			}
+			"shackle_angle"
+			{
+				"value" "23"
+			}
+
+			"bonus_damage_per_hero"
+			{
+				"special_bonus_facet_windrunner_tangled"	"40"
+			}
+			"bonus_damage_per_other_pct"
+			{
+				"special_bonus_facet_windrunner_tangled"	"50"
+			}
+			"damage_buff_duration"
+			{
+				"special_bonus_facet_windrunner_tangled"	"3 4 5 6"
+			}
+		
+		}
+	}
+	//=================================================================================================================
+	// Batrider: Flamebreak
+	//=================================================================================================================
+	"dc_batrider_flamebreak"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"batrider_flamebreak"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_Batrider.Flamebreak"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1300"
+		"AbilityCastPoint"				"0.2 0.2 0.2"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"60"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"1.0"
+
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+
+			"damage_impact"		
+			{
+				"value"			"30 45 60"
+				"CalculateSpellDamageTooltip" "1"
+			}
+			"damage_per_second"		
+			{
+				"value"			"25 30 35"
+				"CalculateSpellDamageTooltip" "1"
+			}
+			"damage_duration"		
+			{
+				"value"		"4 5 6"
+				"DamageTypeTooltip"		"DAMAGE_TYPE_NONE"
+				"CalculateSpellDamageTooltip" "0"
+			}
+			"explosion_radius"		
+			{
+				"value"		"400"
+					"affected_by_aoe_increase"	"1"
+			}
+			"collision_radius"		
+			{
+				"value"		"100 100 100 "
+					"affected_by_aoe_increase"	"1"
+			}
+			"stun_duration"			"0.5 0.5 0.5"
+			"speed"					"1700"
+			"knockback_distance"	
+			{
+				"value"				"250"
+				"special_bonus_unique_batrider_3"	"+50"
+				"affected_by_aoe_increase"	"1"
+			}
+			"knockback_height"		"100 100 100"
+			"knockback_duration"	"0.35"
+			"napalm_stacks"
+			{
+				"value"				"0"
+				"special_bonus_unique_batrider_2"	"+4"
+			}
+			"AbilityCooldown"		
+			{
+				"value"	 "22 19 16"
+				"special_bonus_unique_batrider_5"	"-6"
+			}
+			"slow"	"8 16 32"		
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+	//=================================================================================================================
+	// Ability: Lina Light Strike Array
+	//=================================================================================================================
+	"dc_lina_light_strike_array"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"lina_light_strike_array"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Ability.LightStrikeArray"
+
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.45 0.45 0.45"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"17 14 11"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 110 120"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"light_strike_array_aoe"	
+				{
+					"value" "200 220 240"
+					"affected_by_aoe_increase"	"1"
+				}
+				"light_strike_array_delay_time"	"0.5"
+				"light_strike_array_stun_duration"	"1.0 1.4 1.8"
+				"light_strike_array_damage"	
+				{
+					"value"							"160 210 260"
+					"special_bonus_unique_lina_3"	"+150"					
+				}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+	//=================================================================================================================
+	// Silencer: Last Word
+	//=================================================================================================================
+	"dc_silencer_last_word"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"silencer_last_word"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_Silencer.LastWord.Target"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"900"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"22 18 14"
+		"AbilityManaCost"				"100 105 110"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.3"	// Applies multiple modifiers
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"damage"			"160 200 240"
+				"int_multiplier"	
+				{
+					"value"					"	1.5 2 2.5" 
+				}
+				"debuff_duration"	
+				{
+					"value"					"4"
+				}
+				"duration"	"4 5 6"
+				"radius"
+				{
+					"value"								"0"
+					"special_bonus_unique_silencer_4"	"+250"
+					"affected_by_aoe_increase"			"1"
+				}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
+	//=================================================================================================================
+	// Ability: Jakiro's Liquid Ice
+	//=================================================================================================================
+	"dc_jakiro_liquid_ice"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"jakiro_liquid_ice"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_DEAD"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Hero_Jakiro.LiquidFire"
+		"FightRecapLevel"				"1"
+		"HasShardUpgrade"				"1"
+		"LinkedAbility"					"jakiro_liquid_fire"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"13 10 7"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportBonus"		"35"
+			
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"movement_slow" 		
+			{
+				"value"		"20 25 30"
+
+			}
+			"damage"
+			{
+				"value"				"20 25 30"
+			}
+			"bonus_instance_damage_from_other_abilities"	
+			{
+				"value"		"16 24 32"	
+			}
+			"pct_health_damage" 		
+			{
+				"value"						"0"
+				"special_bonus_unique_jakiro_3"		"+2.5"
+			}		
+			"duration"				"4.0"
+			"radius"				
+			{
+				"value"		"0"
+				"affected_by_aoe_increase"	"1"
+			}
+			"tick_rate"				"0.5"
+			//"double_head"
+			//{
+			//	"special_bonus_unique_jakiro_3"	"+1"
+			//}
+			"shares_cooldown"					
+			{
+				"value"						"1"
+				"special_bonus_shard"		"=0"
+			}
+		}		
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
+	//=================================================================================================================
+	// Witch Doctor: Voodoo Restoration
+	//=================================================================================================================
+	"dc_witch_doctor_voodoo_restoration"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------\
+		"BaseClass"		"witch_doctor_voodoo_restoration"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
+		"AbilitySound"					"Hero_WitchDoctor.Voodoo_Restoration"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0 0.0 0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"35 40 45"		
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"mana_per_second"			
+				{
+					"value"	"8 12 16"
+				"special_bonus_unique_witch_doctor_4" "x0.75"
+				}
+				"tooltip_mana_per_second"			
+				{
+				"special_bonus_unique_witch_doctor_4" "+25"
+				}
+				"radius"					
+				{
+					"value"			"450 500 550"
+					"special_bonus_facet_witch_doctor_voodoo_festeration"	"+100"
+					"affected_by_aoe_increase"	"1"
+				}
+				"heal"						
+				{
+					"value"			"20 30 40"
+					"DamageTypeTooltip"			"DAMAGE_TYPE_MAGICAL"
+					"special_bonus_facet_witch_doctor_voodoo_festeration"	"+10"
+				}
+				"heal_interval"				"0.73 0.63 0.53 0.43"
+				"does_heal_all_allies"
+				{
+					"value"			"1"
+					"special_bonus_facet_witch_doctor_voodoo_festeration"	"=0"
+				}
+				"does_damage"
+				{
+					"value"			"0"
+					"special_bonus_facet_witch_doctor_voodoo_festeration"	"+1"
+				}
+				"self_only_heal_percentage"		// NOTE: only works if does_heal_all_allies == 0
+				{
+					"value"													"0 0 0 0"
+					"special_bonus_facet_witch_doctor_voodoo_festeration"	"=25 =30 =35 =40"
+				}
+				"bonus_heal_percent"
+				{
+					"special_bonus_unique_witch_doctor_2"		"1"
+				}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+	//=================================================================================================================
+	// Witch Doctor: Death Ward
+	//=================================================================================================================
+	"dc_witch_doctor_death_ward"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"witch_doctor_death_ward"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"AbilitySound"					"Hero_WitchDoctor.Death_WardBuild"
+
+		"HasScepterUpgrade"			"1"
+		"AbilityDraftExtraAbilities"
+		{
+			"witch_doctor_voodoo_switcheroo" "shard"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.35 0.35 0.35"
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityChannelAnimation"		"ACT_DOTA_CHANNEL_ABILITY_4"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"100 90 80"
+		"AbilityChannelTime"			"8.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"200 200 200"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"damage"					
+				{
+					"value"		"60 95 130"
+					"special_bonus_unique_witch_doctor_5"	"+45"
+					"special_bonus_facet_witch_doctor_cleft_death"	"=55 =90 =125"
+					"CalculateSpellDamageTooltip"	"0"
+				}
+				"attack_range_tooltip"		
+				{
+					"value"		"600"
+					"special_bonus_unique_witch_doctor_1"	"+75"
+				}
+				"bonus_attack_range"
+				{
+					"value"					"0"
+					"special_bonus_unique_witch_doctor_1"	"+75"
+				}
+				"bounce_radius"				
+				{
+					"special_bonus_scepter"		"650 650 650"
+					"affected_by_aoe_increase"	"1"
+				}
+				"scepter_lifesteal"			
+				{
+					"special_bonus_scepter"		"10"
+				}
+				"bonus_accuracy"			"50"
+				"initial_target_count"
+				{
+					"value"						"1"
+					"special_bonus_facet_witch_doctor_cleft_death"	"+1"
+				}
+				"secondary_attack_damage_pct"
+				{
+					"special_bonus_facet_witch_doctor_cleft_death"	"=65"
+				}
+		}
+	}
+	//=================================================================================================================
+	// Ability: Earthshaker Totem
+	//=================================================================================================================
+	"dc_earthshaker_enchant_totem"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"earthshaker_enchant_totem"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Hero_EarthShaker.Totem"
+
+		"HasScepterUpgrade"			"1"
+		
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.5"
+		"FightRecapLevel"				"1"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDuration"				"14"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"0 0 0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"45 55 65 75"		
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"totem_damage_percentage"	
+			{
+				"value"		"100 200 300"
+				"CalculateSpellDamageTooltip"	"0"
+				"special_bonus_unique_earthshaker_totem_damage"	"+50"
+			}
+			"distance_scepter"			
+			{
+				"special_bonus_scepter"		"950"
+			}
+			"AbilityCooldown"
+			{
+				"value"			"5.0"
+				"special_bonus_unique_earthshaker"			"-1.5"
+
+			}
+			"scepter_height"			"950"
+			"scepter_height_arcbuffer"	"100"
+			"scepter_acceleration_z"	"4000"
+			"scepter_acceleration_horizontal"	"3000"
+			"scepter_leap_duration"		"0.8"
+			"scepter_cleave_pct"
+			{
+				"special_bonus_scepter"					"40"
+			}
+			"scepter_cleave_starting_width"
+			{
+				"special_bonus_scepter"					"150"
+				"affected_by_aoe_increase"	"1"
+			}
+			"scepter_cleave_ending_width"
+			{
+				"special_bonus_scepter"					"360"
+				"affected_by_aoe_increase"	"1"
+			}
+			"scepter_cleave_distance"
+			{
+				"special_bonus_scepter"					"650"
+				"affected_by_aoe_increase"	"1"
+			}
+			"bonus_attack_range"		"100"
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+	//=================================================================================================================
+	// Shredder: Flamethrower ( shard ability )
+	//=================================================================================================================
+	"dc_shredder_flamethrower"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"shredder_flamethrower"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"MaxLevel"						"1"
+		"FightRecapLevel"				"1"
+		"IsGrantedByShard"				"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"20"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"damage_per_second"		"50 70 90"
+				"duration"		"8"
+				"width"		
+				{
+					"value"			"275"
+					"affected_by_aoe_increase"	"1"
+				}
+				"length"		
+				{
+					"value"			"400"
+					"affected_by_aoe_increase"	"1"
+				}
+				"move_slow_pct"	"30 35 40"
+				"building_dmg_pct"	"30 35 40"
+				"debuff_linger_duration"	"2.0"
+		}
+	}
+	//=================================================================================================================
+	// Batrider: Sticky Napalm
+	//=================================================================================================================
+	"dc_batrider_sticky_napalm"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"batrider_sticky_napalm"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"		
+		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"HasShardUpgrade"			"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"22"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.5"	// Works by boosting damage
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"max_level"
+			{
+				"value"									"4"
+				"special_bonus_facet_batrider_arsonist" "+1"
+			}
+			"max_level_tooltip"
+			{
+				"special_bonus_facet_batrider_arsonist" "=5"
+			}
+			"AbilityCooldown"
+			{
+				"value"			"3.0"
+			}
+			"AbilityCastRange"
+			{
+				"value"				"600"
+			}
+			"stacks_per_cast"						"2"
+			"damage"
+			{
+				"value"								"3 6 9"
+				"special_bonus_unique_batrider_4"	"+10"
+				"CalculateSpellDamageTooltip"		"1"
+			}
+			"radius"
+			{
+				"value"								"375"
+				"special_bonus_unique_batrider_7"	"+50"
+				"affected_by_aoe_increase"	"1"				
+			}
+			"duration"					"6"
+			"movement_speed_pct"		"-.75 -1.5 -2.25"			
+			"turn_rate_pct"				"-10 -30 -50"
+			"max_stacks"				"20"
+			"unlimited_stacks"
+			{
+				"value"					"0"
+				"special_bonus_shard"	"1"
+			}
+			"creep_damage_pct"			"20"
+			"application_damage"		"5 10 15"
+			"building_damage_pct"
+			{
+				"value"						"0"
+				"special_bonus_shard"		"+25"
+			}
+			"napalm_stacks_on_attack"
+			{
+				"value"									"0"
+				"special_bonus_facet_batrider_arsonist"	"=0 =0 =0 =0 =1"
+			}
+			"napalm_stacks_on_attack_tooltip"
+			{
+				"special_bonus_facet_batrider_arsonist"	"1"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
+	//=================================================================================================================
+	// Techies: Land Mines
+	//=================================================================================================================
+	"dc_techies_land_mines"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"techies_land_mines"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+
+		"AbilityDraftExtraAbilities"
+		{
+			"techies_minefield_sign" ""
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"400"
+		"AbilityCastPoint"				"0.0"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0"
+		"AbilityCharges"				"3"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"110 140 170"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"radius"				
+				{
+					"value"	"500"
+					"affected_by_aoe_increase"	"1"	
+
+				}
+				"proximity_threshold"				"1.0"
+				"damage"					
+				{
+					"value"			"400 575 750"
+				}
+				"building_damage_pct"		"30"
+				"activation_delay"			
+				{
+					"value"		"1"
+					"special_bonus_unique_techies_4"	"-0.8"
+				}
+				"cast_range_scepter_bonus"		
+				{
+					"special_bonus_scepter"		"300"
+				}
+				"AbilityChargeRestoreTime"
+				{
+					"value"		"15"
+					"special_bonus_unique_techies_3"	"-3"
+				}
+				"outer_damage"				"50"
+				"min_distance"				"150"
+				"placement_radius"			"350"
+				"mres_reduction"			"15 20 25"
+				"burn_duration"				"5"
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
+
+
+//==================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+//===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+// КАСТОМНЫЕ АБИЛИТИ
+//=====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+//===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 	//=================================================================================================================
 	// Ability: burning_strikes
 	//=================================================================================================================
@@ -2035,83 +3079,131 @@
 		}
 	}
 	//=================================================================================================================
-	// melee_spawn_unit
-	//=================================================================================================================
-	"melee_spawn_unit"
-	{  
-		"BaseClass"            "ability_lua"
-		"ScriptFile"          "abilities/creeps/melee_spawn_unit"
-		"AbilityTextureName"      "melee_spawn_unit"
-		"MaxLevel"						"2"
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"FightRecapLevel"        "1"
+  // melee_spawn_unit
+  //=================================================================================================================
+  "melee_spawn_unit"
+  {  
+    "BaseClass"            "ability_lua"
+    "ScriptFile"          "abilities/creeps/melee_spawn_unit"
+    "AbilityTextureName"      "melee_spawn_unit"
+    "MaxLevel"            "3"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "FightRecapLevel"        "1"
 
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"        "0.0"
-		"AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
-		
-		// Time    
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"        "50"
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    
+    // Time    
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"        "20"
 
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"        "100"
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"        "100"
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-			"unit_id"      "1"  
-			"duration"      "30"
-			"count" 		"3"
-			"hp_perc"	"123"
-			"damage_perc" "500"
-			"def_perc" "123"
-		}
-	}
-	//=================================================================================================================
-	// pathfinder_spawn_unit
-	//=================================================================================================================
-	"pathfinder_spawn_unit"
-	{  
-		"BaseClass"            "ability_lua"
-		"ScriptFile"          "abilities/creeps/pathfinder_spawn_unit"
-		"AbilityTextureName"      "pathfinder_spawn_unit"
-		"MaxLevel"						"2"
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"FightRecapLevel"        "1"
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "duration"      "10"
+      "count"     "3"
+      "hp_perc"  "20 35 50"
+      "damage_perc" "20 35 50"
+      "def_perc" "50"
+    }
+  }
+  //=================================================================================================================
+  // pathfinder_spawn_unit
+  //=================================================================================================================
+  "pathfinder_spawn_unit"
+  {  
+    "BaseClass"            "ability_lua"
+    "ScriptFile"          "abilities/creeps/pathfinder_spawn_unit"
+    "AbilityTextureName"      "pathfinder_spawn_unit"
+    "MaxLevel"            "3"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "FightRecapLevel"        "1"
 
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"        "0.0"
-		"AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
-		
-		// Time    
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"        "50"
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    
+    // Time    
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"        "50"
 
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"        "100"
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"        "100"
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-			"unit_id"      "1"  
-			"duration"      "30"
-			"count" 		"3"
-			"hp"	"123"
-			"damage" "500"
-			"def" "123"
-		}
-	}
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "duration"      "30"
+      "count"     "1 2"
+      "hp"  "1500 1750 2500"
+      "damage" "100 150 250"
+      "def" "3 4 7"
+    }
+  }
+  
+  //=================================================================================================================
+  // Magical Crit
+  //=================================================================================================================
+  "dotac_magical_crit"
+  {  
+    "BaseClass"            "ability_lua"
+    "ScriptFile"          "abilities/creeps/dotac_magical_crit"
+    "AbilityTextureName"      "dotac_magical_crit"
+    "MaxLevel"            "3"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "FightRecapLevel"        "1"
+	
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "chance"      "15"  
+      "crit"      "150 200 250"
+    }
+  }
+  
+  //=================================================================================================================
+  // Vampiric Aura
+  //=================================================================================================================
+  "dotac_vampiric_aura"
+  {  
+    "BaseClass"            "ability_lua"
+    "ScriptFile"          "abilities/creeps/dotac_vampiric_aura"
+    "AbilityTextureName"      "dotac_vampiric_aura"
+    "MaxLevel"            "3"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"          "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "FightRecapLevel"        "1"
+    "AbilityCastRange"      "1000"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "radius"      "1000"  
+      "vampiric_perc"      "10 20 30"
+    }
+  }
 }
