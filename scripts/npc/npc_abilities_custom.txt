@@ -1527,6 +1527,32 @@
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 	}
 	//=================================================================================================================
+	// Black Dragon: Splash Attack
+	//=================================================================================================================
+	"black_dragon_splash_attack_small"
+	{
+		"BaseClass"		"black_dragon_splash_attack"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"IsBreakable"					"1"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"range"
+			{
+				"value"			"400"
+				"affected_by_aoe_increase"		"1"
+			}
+			"damage_percent"			"120"
+
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+	//=================================================================================================================
 	// Techies: Suicide Squad, Attack!
 	//=================================================================================================================
 	"dc_techies_suicide"
@@ -2101,14 +2127,14 @@
 				"value"						"15"
 				"special_bonus_shard"		"+5"
 			}
-			"hawk_base_max_health"			"200 325 450"
-			"hawk_base_gold_bounty"			"30 40 50"
-			"hawk_base_vision_range"		"600 650 700"
-			"hawk_base_xp_bounty"			"40 50 60"
-			"hawk_base_magic_resist"		"30 40 50"
+			"hawk_base_max_health"			"200"
+			"hawk_base_gold_bounty"			"0"
+			"hawk_base_vision_range"		"900"
+			"hawk_base_xp_bounty"			"0"
+			"hawk_base_magic_resist"		"30"
 			"AbilityCooldown"
 			{
-				"value"									"50 45 40"
+				"value"									"50"
 				"special_bonus_unique_beastmaster_3"	"-5"
 			}
 			"attack_radius"			
@@ -2123,10 +2149,10 @@
 			}
 			"dive_damage"				
 			{
-				"value"		"50 80 110"
+				"value"		"75"
 				"special_bonus_unique_beastmaster_2" "+30"
 			}
-			"dive_root_duration"		"0.25 0.5 0.75"
+			"dive_root_duration"		"0.25"
 			"roaming_radius"					"280"
 			"roaming_seconds_per_rotation"			"4"
 			"hawk_base_attack_interval"						"4"
@@ -3055,7 +3081,7 @@
     "AbilityValues"
     {
       "chance"      "15"  
-      "crit"      "150 200 250"
+      "crit"      "200"
     }
   }
   

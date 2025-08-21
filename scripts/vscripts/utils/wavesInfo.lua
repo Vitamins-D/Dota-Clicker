@@ -320,115 +320,115 @@ wi.classes = {
 wi.subClasses = { -- усиляются их способности
 	["Veins_fire"] = {
 		{type = "Veins_fire_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "spell_up", value = "burning_strikes"}, cost = 700},
+			{{type = "hp", value = 100}, {type = "magr", value = 5}, cost = 400},
+			{{type = "spell_up", value = "burning_strikes"}, cost = 900},
 		}}, cost = 500
 	}, -- tank
 	["stone_block"] = {
 		{type = "stone_block_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "spell_up", value = "dc_mars_bulwark"}, cost = 700},
+			{{type = "hp", value = 150}, {type = "hpreg", value = 1}, cost = 500},
+			{{type = "spell_up", value = "dc_mars_bulwark"}, cost = 900},
 		}}, cost = 500
 	}, -- tank
 	["melee"] = {
 		{type = "melee_upgrade", levels = {
-			{{type = "spell", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 500},
-			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, cost = 500},
-			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 500},
-		}}, cost = 500
+			{{type = "spell", value = "dc_weaver_geminate_attack"}, cost = 500},
+			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 1000},
+			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 1250},
+		}}, cost = 700
 	}, -- berserker
 	["illusionist"] = {
 		{type = "illusionist_upgrade", levels = {
 			{{type = "spell", value = "dc_riki_permanent_invisibility"}, cost = 500},
-			{{type = "spell", value = "melee_spawn_unit"}, cost = 500},
-			{{type = "spell_up", value = "melee_spawn_unit"}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "melee_spawn_unit"}, cost = 700},
+			{{type = "spell_up", value = "melee_spawn_unit"}, cost = 900},
+		}}, cost = 700
 	}, -- berserker
 	["gunner"] = {
 		{type = "gunner_upgrade", levels = {
 			{{type = "spell", value = "dc_troll_warlord_fervor"}, cost = 500},
-			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, cost = 500},
-			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, cost = 700},
+			{{type = "spell_up", value = "dc_troll_warlord_fervor"}, cost = 900},
+		}}, cost = 700
 	}, -- shooter
 	["sniper"] = {
 		{type = "sniper_upgrade", levels = {
-			{{type = "spell", value = "dc_phantom_assassin_coup_de_grace"}, {type = "spell_up", value = "dc_sniper_headshot"}, cost = 500},
-			{{type = "spell_up", value = "dc_phantom_assassin_coup_de_grace"}, cost = 500},
-			{{type = "spell_up", value = "dc_phantom_assassin_coup_de_grace"}, {type = "spell_up", value = "dc_sniper_headshot"}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "dc_phantom_assassin_coup_de_grace"}, cost = 1000},
+			{{type = "spell_up", value = "dc_sniper_headshot"}, cost = 600},
+			{{type = "spell_up", value = "dc_phantom_assassin_coup_de_grace"}, cost = 1500},
+		}}, cost = 1000
 	}, -- shooter
 	["pathfinder"] = {
 		{type = "pathfinder_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "pathfinder_spawn_unit"}, cost = 700},
+			{{type = "spell", value = "dc_beastmaster_call_of_the_wild_hawk"}, cost = 400},
+			{{type = "spell_up", value = "pathfinder_spawn_unit"}, cost = 900},
+		}}, cost = 600
 	}, -- ranger
 	["marksman"] = {
 		{type = "marksman_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell", value = "dc_windrunner_shackleshot"}, cost = 500},
+			{{type = "spell_up", value = "dc_medusa_split_shot"}, cost = 700},
+			{{type = "spell_up", value = "dc_medusa_split_shot"}, cost = 900},
+		}}, cost = 900
 	}, -- ranger
 	["fire_mage"] = {
 		{type = "fire_mage_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "dc_batrider_flamebreak"}, cost = 700},
+			{{type = "spell", value = ""}, cost = 900},
+			{{type = "spell_up", value = "dc_lina_light_strike_array"}, cost = 800},
+		}}, cost = 1000
 	}, -- elementalist
 	["air_mage"] = {
 		{type = "air_mage_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell", value = "dc_silencer_last_word"}, cost = 700},
+			{{type = "spell_up", value = "dc_winter_wyvern_cold_embrace"}, cost = 700},
+			{{type = "spell_up", value = "dc_winter_wyvern_cold_embrace"}, {type = "spell_up", value = "dc_jakiro_liquid_ice"}, cost = 1100},
+		}}, cost = 700
 	}, -- elementalist
 	["def_shaman"] = {
 		{type = "def_shaman_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
+			{{type = "spell_up", value = "dc_witch_doctor_voodoo_restoration"}, {type = "armor", value = 4}, cost = 1000},
+			{{type = "spell", value = "dc_witch_doctor_death_ward"}, cost = 700},
+			{{type = "hpreg", value = 5}, {type = "spell_up", value = "dc_witch_doctor_voodoo_restoration"}, cost = 1000},
 		}}, cost = 500
 	}, -- shaman
 	["fight_shaman"] = {
 		{type = "fight_shaman_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "dc_vengefulspirit_command_aura"}, cost = 700},
+			{{type = "spell_up", value = "dc_witch_doctor_death_ward"}, cost = 500},
+			{{type = "spell_up", value = "dc_witch_doctor_death_ward"}, cost = 500},
+		}}, cost = 650
 	}, -- shaman
 	["trebuchet"] = {
 		{type = "trebuchet_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell", value = "dc_earthshaker_enchant_totem"}, cost = 700},
+			{{type = "spell_up", value = "black_dragon_splash_attack"}, cost = 700},
+			{{type = "spell_up", value = "dc_earthshaker_enchant_totem"}, cost = 900},
+		}}, cost = 1200
 	}, -- siege_tower
 	["ballista"] = {
 		{type = "ballista_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = ""}, cost = 700},
+			{{type = "spell_up", value = ""}, cost = 900},
+			{{type = "spell_up", value = ""}, cost = 1200},
+		}}, cost = 900
 	}, -- siege_tower
 	["rapid_fire"] = {
 		{type = "rapid_fire_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "dc_shredder_flamethrower"}, cost = 500},
+			{{type = "spell", value = "dc_batrider_sticky_napalm"}, cost = 500},
+			{{type = "spell_up", value = "dc_batrider_sticky_napalm"}, cost = 500},
+		}}, cost = 600
 	}, -- bomber
 	["miner"] = {
 		{type = "miner_upgrade", levels = {
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-			{{type = "", value = 0}, {type = "", value = 0}, cost = 500},
-		}}, cost = 500
+			{{type = "spell_up", value = "dc_techies_land_mines"}, cost = 700},
+			{{type = "spell_up", value = "dc_techies_sticky_bomb"}, cost = 800},
+			{{type = "spell_up", value = "dc_techies_land_mines"}, cost = 900},
+		}}, cost = 800
 	}, -- bomber
 }
 

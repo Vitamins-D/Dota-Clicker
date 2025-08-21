@@ -1617,10 +1617,10 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"120"		// Damage range min.
-		"AttackDamageMax"			"125"		// Damage range max.	
-		"AttackRate"				"2"		// Speed of attack.
-		"BaseAttackSpeed"			"600"
+		"AttackDamageMin"			"100"		// Damage range min.
+		"AttackDamageMax"			"105"		// Damage range max.	
+		"AttackRate"				"1.75"		// Speed of attack.
+		"BaseAttackSpeed"			"300"
 		"AttackAnimationPoint"		"0.30"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
@@ -1851,13 +1851,13 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"100"		// Damage range min.
-		"AttackDamageMax"			"105"		// Damage range max.	
-		"AttackRate"				"2"		// Speed of attack.
-		"BaseAttackSpeed"			"120"
+		"AttackDamageMin"			"35"		// Damage range min.
+		"AttackDamageMax"			"45"		// Damage range max.	
+		"AttackRate"				"1"		// Speed of attack.
+		"BaseAttackSpeed"			"300"
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
-		"AttackRange"				"650"		// Range within a target can be attacked.
+		"AttackRange"				"450"		// Range within a target can be attacked.
 		"ProjectileModel"			"particles/base_attacks/ranged_badguy.vpcf"			// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"			// Speed of projectile.		   
 
