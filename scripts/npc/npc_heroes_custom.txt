@@ -6,11 +6,13 @@
 	"npc_dota_hero_ogre_magi"
 	{
 		"Ability5"		""
+		//"Ability2"		"dotac_magical_crit"
 	}
 	
 	"npc_dota_hero_pudge"
 	{
-		"Ability1"		"pathfinder_spawn_unit"
+		"Ability1"		"pudge_meat_hook_lua"
+		//"Ability2"		"dotac_vampiric_aura"
 		"Ability5"		"pudge_innate_custom"
 	}
 	

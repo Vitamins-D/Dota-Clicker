@@ -115,14 +115,14 @@ function wa:spawnWave(player)
 			end
 			
 			local names = {name, class, subclass}
-			for i = 1, 3 do
+			for i = 1, #names do
 				local pUpgrade = unitUpg[i]
 				local type = pUpgrade.type
 				local levels = pUpgrade.levels
+				local unitType = names[i]
 				for j = 1, #levels do
 					local lvl = levels[j]
 					
-					local unitType = names[i]
 					if lvl > 0 and unitType then
 						local upgrades = info.upgrades[type][unitType][j].levels
 						
@@ -156,6 +156,14 @@ function wa:spawnWave(player)
 						end
 					end
 					
+				end
+				
+				local skills = wi.skills[unitType]
+				if skills then
+					for k = 1, #skills do
+						local skill = skills[k]
+						unit:AddAbility(skill)
+					end
 				end
 			end
 			Timers:CreateTimer(0.5, function()

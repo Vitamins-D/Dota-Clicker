@@ -1,28 +1,34 @@
 pathfinder_spawn_unit = class({})
 
-local spawn_units = {"npc_dota_clicker_boar_sub"}
-
 function pathfinder_spawn_unit:OnSpellStart()
     local caster = self:GetCaster()
-    local unit_id = self:GetSpecialValueFor("unit_id")
     local duration = self:GetSpecialValueFor("duration")
     local count = self:GetSpecialValueFor("count")
-    
+    local unit_name = "npc_dota_clicker_boar_sub"
 
-    -- Проверка, что unit_id корректен
-    if unit_id < 1 or unit_id > #spawn_units then
-        print("[pathfinder_spawn_unit] Invalid unit_id: " .. unit_id)
-        return
-    end
-
-    -- Получение имени юнита из массива
-    local unit_name = spawn_units[unit_id]
+    local hp = self:GetSpecialValueFor("hp")
+    local armor = self:GetSpecialValueFor("def")
+    local dmg = self:GetSpecialValueFor("damage")
 
     for i = 1, count do 
-        local spawn_position = caster:GetAbsOrigin() + RandomVector(200) -- Случайная позиция рядом с кастером
-        -- Призыв юнита
+        local spawn_position = caster:GetAbsOrigin() + RandomVector(200)
         local summoned_unit = CreateUnitByName(unit_name, spawn_position, true, caster, caster, caster:GetTeamNumber())
-        -- Установка удаления через duration
+		summoned_unit.path = caster.path
+		
+        -- Удаление после времени
         summoned_unit:AddNewModifier(caster, self, "modifier_kill", { duration = duration })
+
+        -- === СТАТЫ ===
+        -- HP
+        summoned_unit:SetBaseMaxHealth(hp)
+        summoned_unit:SetMaxHealth(hp)
+        summoned_unit:SetHealth(hp)
+
+        -- Урон
+        summoned_unit:SetBaseDamageMin(dmg-5)
+        summoned_unit:SetBaseDamageMax(dmg+5)
+
+        -- Броня
+        summoned_unit:SetPhysicalArmorBaseValue(armor)
     end
 end
