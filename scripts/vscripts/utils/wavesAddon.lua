@@ -34,7 +34,7 @@ function wa:sortUnits(array)
 end
 
 function wa:InitAddon(player, spawnPos, path, team)
-	player.units = {"mage", "swordsman", "archer", "catapult", "archer", "mage", "catapult", "swordsman"}
+	player.units = {}
 	
 	player.upgrades = {
 		["swordsman"] = {

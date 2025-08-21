@@ -25,4 +25,9 @@
 	{
 		"Ability8"		"dotac_meepo_pro_miner"
 	}
+	
+	"npc_dota_hero_shredder"
+	{
+		"Ability18"		"shredder_rigid_saws"
+	}
 }

@@ -6,6 +6,7 @@ local neutralSpawner = require("utils/neutralSpawner")
 local wi = require("utils/wavesInfo")
 local wa = require("utils/wavesAddon")
 local utils = require("utils/utils")
+local badBotAI = require("utils/badBotAI")
 
 -- константы/настройки
 local LVLUP_INTERVAL = 60
@@ -13,6 +14,8 @@ local GOLD_INTERVAL = 120
 local WAVE_INTERVAL = 60
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
+local GOLD_GIVE = 500
+local LVL_GIVE = 100
 
 local badBot = {}
 
@@ -22,9 +25,10 @@ local uiArr
 
 local playerCount
 
+local levelExp = 100
 HeroExpTable = {0}
 for i=2,30 do 
-	HeroExpTable[i] = 100*(i-1)
+	HeroExpTable[i] = levelExp*(i-1)
 end
 
 function dota_clicker:InitGameMode()
@@ -295,7 +299,22 @@ function dota_clicker:DamageFilter(filterTable)
 end
 
 function dota_clicker:OnTreeCut(event)
-	if math.random(1, 100) <= 60 then
+	local killer = event.killerID
+	
+	local drop_chance = 60
+	
+	if killer then
+		local player = PlayerResource:GetPlayer(killer)
+		if player then 
+			local hero = player:GetAssignedHero()
+			local ability = hero:FindAbilityByName("shredder_rigid_saws")
+			if ability and ability:GetLevel() > 0 then
+				drop_chance = ability:GetSpecialValueFor("new_chance")
+			end
+		end
+	end
+	
+	if math.random(1, 100) <= drop_chance then
 		local tree_position = Vector(event.tree_x, event.tree_y, GetGroundHeight(Vector(event.tree_x, event.tree_y, 0), nil))
 		
 		local item = CreateItem("item_dotac_wood", nil, nil)
@@ -388,7 +407,6 @@ function miningDo(oreType, playerId)
 	local finalGold = math.floor(baseGold * goldMultiplier)
 	
 	local proMiner = hero:FindAbilityByName("dotac_meepo_pro_miner")
-	print(proMiner, proMiner:GetLevel())
 	if proMiner and proMiner:GetLevel() > 0 then
 		local bonusGold = proMiner:GetSpecialValueFor("bonus_gold")
 		finalGold = finalGold + bonusGold
@@ -525,15 +543,16 @@ function dota_clicker:dotaClickerStart()
 	local badPath = getPaths("wave_path_", pathCount, false)
 	local bad_start = badPath[1]:GetAbsOrigin()
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
+	badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
 	-- wa:spawnWave(badBot)
 	
 	Timers:CreateTimer(LVLUP_INTERVAL, function()
-		GiveExpPlayers(100)
+		GiveExpPlayers(LVL_GIVE*levelExp)
 		return LVLUP_INTERVAL
 	end)
 	
 	Timers:CreateTimer(GOLD_INTERVAL, function()
-		GiveGoldPlayers(500)
+		GiveGoldPlayers(GOLD_GIVE)
 		return GOLD_INTERVAL
 	end)
 	
@@ -541,9 +560,14 @@ function dota_clicker:dotaClickerStart()
 		self:throughPlayers(function(player, hero)
 			wa:spawnWave(player)
 		end)
+
+		-- бот думает, как развиваться
+		badBotAI:Tick(badBot, MAX_UNITS)
 		wa:spawnWave(badBot)
+
 		return WAVE_INTERVAL
 	end)
+
 end
 
 function dota_clicker:OnThink()
@@ -559,10 +583,18 @@ function dota_clicker:OnNpcSpawned(data)
     if not npc or not npc:IsRealHero() then return end
 
     -- Проверяем, есть ли способность
-    local ability = npc:FindAbilityByName("neutral_damage_bonus")
-    if ability and ability:GetLevel() < 1 then
-        ability:SetLevel(1)
-    end
+	do
+		local ability = npc:FindAbilityByName("neutral_damage_bonus")
+		if ability and ability:GetLevel() < 1 then
+			ability:SetLevel(1)
+		end
+	end
+	do
+		local ability = npc:FindAbilityByName("shredder_rigid_saws")
+		if ability and ability:GetLevel() < 1 then
+			ability:SetLevel(1)
+		end
+	end
 end
 
 function dota_clicker:throughPlayers(callback)
