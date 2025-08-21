@@ -579,7 +579,7 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"burning_strikes"			// Ability 1
+		"Ability1"					""			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -671,8 +671,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"0"		// Damage range min.
-		"AttackDamageMax"			"0"		// Damage range max.	
+		"AttackDamageMin"			"70"		// Damage range min.
+		"AttackDamageMax"			"80"		// Damage range max.	
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"250"
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
@@ -749,8 +749,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"0"		// Damage range min.
-		"AttackDamageMax"			"0"		// Damage range max.	
+		"AttackDamageMin"			"35"		// Damage range min.
+		"AttackDamageMax"			"40"		// Damage range max.	
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"150"
 		"AttackAnimationPoint"		"0.40"		// Normalized time in animation cycle to attack.
@@ -827,8 +827,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"1"		// Damage range min.
-		"AttackDamageMax"			"1"		// Damage range max.	
+		"AttackDamageMin"			"40"		// Damage range min.
+		"AttackDamageMax"			"45"		// Damage range max.	
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"100"
 		"AttackAnimationPoint"		"0.35"		// Normalized time in animation cycle to attack.
