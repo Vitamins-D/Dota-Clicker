@@ -84,6 +84,8 @@ wi.specials = {
 
 wi.skills = {
   -- ["unit"] = {"spell", "spell"}, -- example
+  ["mage"] = {"dota_clicker_vengefulspirit_magic_missile"},
+  ["catapult"] = {"dota_clicker_creep_siege"},
 }
 
 wi.units = {
@@ -141,7 +143,7 @@ wi.base = {
 			{{type = "magr", value = 5}, {type = "armor", value = 1}, cost = 700},
 			{{type = "magr", value = 12}, cost = 900},
 			{{type = "magr", value = 6}, {type = "armor", value = 1}, cost = 1200},
-			{{type = "magr", value = 6}, {type = "armor", value = 1}, cost = 1200},
+			{{type = "spell", value = "dota_clicker_tidehunter_kraken_shell"}, {type = "armor", value = 1}, cost = 1200},
 		}}, cost = 300
 	},
 	["archer"] =
@@ -155,7 +157,7 @@ wi.base = {
 		}},
 		{type = "strength", levels = {
 			{{type = "atk", value = 7}, {type = "atk_dis", value = 30}, cost = 450},
-			{{type = "atk", value = 7}, cost = 300},
+			{{type = "spell", value = "dota_clicker_sniper_take_aim"}, cost = 300},
 			{{type = "atk", value = 9}, {type = "atk_dis", value = 40}, cost = 750},
 			{{type = "atk", value = 14}, {type = "atk_dis", value = 7}, cost = 300},
 			{{type = "atk", value = 22}, {type = "atk_dis", value = 70}, cost = 1200},

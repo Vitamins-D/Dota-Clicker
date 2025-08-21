@@ -21,9 +21,20 @@ function u:countOf(tbl, value)
     return count
 end
 
+function u:removeAbility(unit, abil)
+	table.insert(unit.skills, self:indexOf(unit.skills, abil))
+    unit:RemoveAbility(abil)
+end
+
+function u:addAbility(unit, abil)
+	local newAbil = unit:AddAbility(abil)
+	newAbil:SetLevel(1)
+	table.insert(unit.skills, newAbil)
+end
+
 function u:replaceAbility(unit, abil1, abil2)
-    unit:RemoveAbility(abil1)
-	unit:AddAbility(abil2)
+	self:removeAbility(unit, abil1)
+	self:addAbility(unit, abil2)
 end
 
 function u:upgradeAbility(unit, abil)

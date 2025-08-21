@@ -1,4 +1,5 @@
 require('ai/ai_core')
+require('ai/ai_skills')
 local nextPath = true
 
 function Spawn(entityKeyValues)
@@ -31,6 +32,15 @@ function AIThink()
     if not thisEntity:IsAlive() then
         return nil -- Прекратить обработку, если крип мертв
     end
+	
+	local skills = thisEntity.skills
+	if skills then
+		for i = 1, #skills do
+			local skill = skills[i]
+			local name = skill:GetAbilityName()
+			skillsCore.pattern[name]({ability = skill, thisEntity = thisEntity})
+		end
+	end
 	
 	goPath()
 	

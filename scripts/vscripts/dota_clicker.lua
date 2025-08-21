@@ -9,13 +9,16 @@ local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
 
 -- константы/настройки
-local WAVE_INTERVAL = 60
+local WAVE_INTERVAL = 15
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
+local AI_ON = true
+
+local newLevelGive = LVL_GIVE
 local playerLevel = 1
 
 local badBot = {}
@@ -25,6 +28,13 @@ local pathCount = 11
 local uiArr
 
 local playerCount
+local difficulty
+local difficulties = {
+	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 30, GOLD_INTERVAL = 60, MAX_UNITS = 30, GOLD_GIVE = 750, LVL_GIVE = 1.5},
+	{WAVE_INTERVAL = 60, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 120, MAX_UNITS = 20, GOLD_GIVE = 500, LVL_GIVE = 1},
+	{WAVE_INTERVAL = 40, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 180, MAX_UNITS = 20, GOLD_GIVE = 450, LVL_GIVE = 0.9},
+	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 180, MAX_UNITS = 15, GOLD_GIVE = 60, LVL_GIVE = 0.75},
+}
 
 local levelExp = 100
 HeroExpTable = {0}
@@ -94,6 +104,27 @@ function dota_clicker:RegisterCustomEventListeners()
 	
 	CustomGameEventManager:RegisterListener("sell_unit", function(_, event)
 		self:HandleSellUnit(event)
+	end)
+	
+	CustomGameEventManager:RegisterListener("difficulty_changed", function(_, event)
+		self:HandleDifficulty(event)
+	end)
+end
+
+function dota_clicker:HandleDifficulty(event)
+	difficulty = event.difficulty
+	
+	local prms = difficulties[difficulty]
+	
+	WAVE_INTERVAL = prms.WAVE_INTERVAL
+	LVLUP_INTERVAL = prms.LVLUP_INTERVAL
+	GOLD_INTERVAL = prms.GOLD_INTERVAL
+	MAX_UNITS = prms.MAX_UNITS
+	GOLD_GIVE = prms.GOLD_GIVE
+	LVL_GIVE = prms.LVL_GIVE
+	
+	self:throughPlayers(function(player, hero)
+		CustomGameEventManager:Send_ServerToPlayer(player, "difficulty_confirmed", {success = true})
 	end)
 end
 
@@ -541,19 +572,23 @@ function dota_clicker:dotaClickerStart()
 		-- wa:spawnWave(player)
 	end)
 	
+	
 	local badPath = getPaths("wave_path_", pathCount, false)
 	local bad_start = badPath[1]:GetAbsOrigin()
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
-	-- badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
+	if AI_ON then
+		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
+	end
 	-- wa:spawnWave(badBot)
 	
+	newLevelGive = LVL_GIVE
 	Timers:CreateTimer(LVLUP_INTERVAL, function()
-		GiveExpPlayers(LVL_GIVE*levelExp)
-		playerLevel = playerLevel + LVL_GIVE
+		GiveExpPlayers(newLevelGive*levelExp)
+		playerLevel = playerLevel + newLevelGive
 		if math.floor(playerLevel) == 5 then
-			LVL_GIVE = 0.75
+			newLevelGive = LVL_GIVE*0.75
 		elseif math.floor(playerLevel) == 15 then
-			LVL_GIVE = 0.5
+			newLevelGive = LVL_GIVE*0.5
 		end
 		return LVLUP_INTERVAL
 	end)
@@ -569,7 +604,9 @@ function dota_clicker:dotaClickerStart()
 		end)
 
 		-- бот думает, как развиваться
-		-- badBotAI:Tick(badBot, MAX_UNITS)
+		if AI_ON then
+			badBotAI:Tick(badBot, MAX_UNITS)
+		end
 		wa:spawnWave(badBot)
 
 		return WAVE_INTERVAL

@@ -95,6 +95,7 @@ function wa:spawnWave(player)
 			local unit = CreateUnitByName(path, spawnPos, true, nil, nil, team)
 			unit.path = player.path
 			
+			unit.skills = {}
 			unit.bonus = {}
 			
 			local special = info.specials[pathName]
@@ -120,6 +121,15 @@ function wa:spawnWave(player)
 				local type = pUpgrade.type
 				local levels = pUpgrade.levels
 				local unitType = names[i]
+				
+				local skills = wi.skills[unitType]
+				if skills then
+					for k = 1, #skills do
+						local skill = skills[k]
+						utils:addAbility(unit, skill)
+					end
+				end
+				
 				for j = 1, #levels do
 					local lvl = levels[j]
 					
@@ -133,7 +143,8 @@ function wa:spawnWave(player)
 								local upgrade = upgradeLevel[n]
 								if upgrade.type == "spell" then
 									-- print("SPELL:", upgrade.value)
-									unit:AddAbility(upgrade.value)
+									utils:addAbility(unit, upgrade.value)
+									-- unit:AddAbility(upgrade.value)
 								elseif upgrade.type == "spell_up" then
 									utils:upgradeAbility(unit, upgrade.value)
 								elseif upgrade.type == "replace" then
@@ -156,14 +167,6 @@ function wa:spawnWave(player)
 						end
 					end
 					
-				end
-				
-				local skills = wi.skills[unitType]
-				if skills then
-					for k = 1, #skills do
-						local skill = skills[k]
-						unit:AddAbility(skill)
-					end
 				end
 			end
 			Timers:CreateTimer(0.5, function()
