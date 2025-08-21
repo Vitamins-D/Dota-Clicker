@@ -1323,6 +1323,16 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "6810"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "6805"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "6809"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "6811"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 //========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 //======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -1561,7 +1571,19 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-		"vscripts"					"ai/ai_wave.lua"	
+		"vscripts"					"ai/ai_wave.lua"
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "6441"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "6447"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "6444"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "6449"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "6450"        } //"Wings of the Ephemeral Haunt"
+				"Wearable6"        {    "ItemDef"        "6442"        } //"Wings of the Ephemeral Haunt"
+			}
+		}	
 	}
 	//=================================================================================
 	// Wave: Evol shaman
@@ -1640,6 +1662,18 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "5548"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "5500"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "5501"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "5504"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "5503"        } //"Wings of the Ephemeral Haunt"
+				"Wearable6"        {    "ItemDef"        "5507"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: Evol shooter
@@ -1718,6 +1752,17 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "4729"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "4725"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "4728"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "4727"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "4726"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: Evol ranger
@@ -1874,6 +1919,17 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "7122"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "7123"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "5090"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "7126"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "7125"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: Evol catapult
@@ -2035,6 +2091,17 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "18479"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "18477"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "18478"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "18475"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "18476"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: subclass gunner
@@ -2113,6 +2180,17 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "14971"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "14968"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "14970"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "14969"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "14972"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: subclass water_mage
@@ -2268,7 +2346,20 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-		"vscripts"					"ai/ai_wave.lua"	
+		"vscripts"					"ai/ai_wave.lua"
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "13529"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "13528"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "13530"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "13526"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "13548"        } //"Wings of the Ephemeral Haunt"
+				"Wearable6"        {    "ItemDef"        "13527"        } //"Wings of the Ephemeral Haunt"
+				"Wearable7"        {    "ItemDef"        "13666"        } //"Wings of the Ephemeral Haunt"
+			}
+		}	
 	}
 	//=================================================================================
 	// Wave: Sub rapid_fire
@@ -2347,6 +2438,17 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		"vscripts"					"ai/ai_wave.lua"	
+		"Creature"
+		 {
+			"AttachWearables"
+			{
+				"Wearable1"        {    "ItemDef"        "7156"        } //"Dress of the Ephemeral Haunt"
+				"Wearable2"        {    "ItemDef"        "7158"        } //"Horns of the Ephemeral Haunt"
+				"Wearable3"     {    "ItemDef"        "7157"        } //"Sleeves of the Ephemeral Haunt"
+				"Wearable4"        {    "ItemDef"        "7160"        } //"Wings of the Ephemeral Haunt"
+				"Wearable5"        {    "ItemDef"        "7163"        } //"Wings of the Ephemeral Haunt"
+			}
+		}
 	}
 //=========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 //==============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
