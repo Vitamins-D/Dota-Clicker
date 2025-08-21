@@ -556,7 +556,7 @@ end
 
 function dota_clicker:OnNpcSpawned(data)
 	local npc = EntIndexToHScript(data.entindex)
-    if not npc or not npc:IsRealHero() then return end
+    if not npc or not npc:IsRealHero() or not npc.getUnitName then return end
 
     -- Проверяем, есть ли способность
     local ability = npc:FindAbilityByName("neutral_damage_bonus")
