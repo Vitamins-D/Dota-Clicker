@@ -44,7 +44,8 @@ for i=2,30 do
 end
 
 function dota_clicker:InitGameMode()
-	playerCount = DOTA_MAX_TEAM_PLAYERS 
+	playerCount = DOTA_MAX_TEAM_PLAYERS
+	uiArr = wi:convertToUnifiedStructure()
 	
 	GameRules:SetStartingGold(1000)
 	GameRules:SetUseUniversalShopMode(true)
@@ -103,6 +104,11 @@ function dota_clicker:RegisterCustomEventListeners()
 	
 	CustomGameEventManager:RegisterListener("buy_unit", function(_, event)
 		self:HandleBuyUnit(event)
+	end)
+
+	CustomGameEventManager:RegisterListener("get_data_units", function(_, event)
+		local player = event.player_id
+		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
 	end)
 	
 	CustomGameEventManager:RegisterListener("sell_unit", function(_, event)
