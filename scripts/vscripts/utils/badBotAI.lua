@@ -549,6 +549,7 @@ function badBotAI:Init(bot, params)
     -- выберем стратегию «случайно» из пула
     local pool = CFG.STRATEGY_POOL
     bot.strategy = pool[rnd(1, #pool)]
+	bot._wave = 0
 
     debug(bot, ("Инициализация. Сложность: %s, Игроков: %d, Стратегия: %s"):format(bot.difficulty, bot.players, bot.strategy))
 end
@@ -563,11 +564,14 @@ end
 function badBotAI:Tick(bot, MAX_UNITS)
     -- запоминаем лимит, чтобы проверки покупки знали верхнюю границу
     bot._MAX_UNITS = MAX_UNITS
+	bot._wave = bot._wave + 1
 
     -- выдаём доход
-    local income = badBotAI.IncomeForWave(bot)
-    bot.gold = bot.gold + income
-    debug(bot, ("Доход за волну: +%d золота. Сейчас золота: %d"):format(income, bot.gold))
+	if bot._wave > 1 then
+		local income = badBotAI.IncomeForWave(bot)
+		bot.gold = bot.gold + income
+		debug(bot, ("Доход за волну: +%d золота. Сейчас золота: %d"):format(income, bot.gold))
+	end
 
     -- высокоуровневая логика:
     -- 1) если мало юнитов, добираем стак
