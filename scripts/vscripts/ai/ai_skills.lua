@@ -390,6 +390,8 @@ skillsCore.pattern = {
 	["dc_shredder_flamethrower"] = aroundDanger,
 	["dc_batrider_sticky_napalm"] = posCast,
 	["dc_techies_land_mines"] = posCast,
+	["dc_windrunner_powershot"] = posCast,
+	["dota_clicker_sniper_take_aim"] = aroundDanger,
 	
 }
 
