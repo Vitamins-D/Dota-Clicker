@@ -22,7 +22,7 @@ local newLevelGive = LVL_GIVE
 local playerLevel = 1
 
 local badBot = {}
-
+ 
 local pathCount = 11
 
 local uiArr
@@ -43,6 +43,8 @@ for i=2,30 do
 end
 
 function dota_clicker:InitGameMode()
+	playerCount = DOTA_MAX_TEAM_PLAYERS 
+	
 	GameRules:SetStartingGold(1000)
 	GameRules:SetUseUniversalShopMode(true)
 	GameRules:SetHeroSelectionTime(99999)
@@ -106,14 +108,13 @@ function dota_clicker:RegisterCustomEventListeners()
 		self:HandleSellUnit(event)
 	end)
 	
-	CustomGameEventManager:RegisterListener("difficulty_changed", function(_, event)
+	CustomGameEventManager:RegisterListener("player_selected_difficulty", function(_, event)
 		self:HandleDifficulty(event)
 	end)
 end
 
 function dota_clicker:HandleDifficulty(event)
 	difficulty = event.difficulty
-	print("CHANGE DIF", event)
 	
 	local prms = difficulties[difficulty]
 	
@@ -126,7 +127,7 @@ function dota_clicker:HandleDifficulty(event)
 	
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "difficulty_confirmed", {success = true})
-	end)
+	end, true)
 end
 
 function dota_clicker:HandleBaseUpgrade(player, player_id, unit, upgrade)
@@ -536,6 +537,8 @@ function dota_clicker:dotaClickerStart()
 	local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
 	local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil, nil, DOTA_TEAM_GOODGUYS)
 	
+	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
+	
 	-- Timers:CreateTimer(1, function()
 		-- local damage_table = {
 			-- victim = vision_unit,          
@@ -547,8 +550,6 @@ function dota_clicker:dotaClickerStart()
 		-- ApplyDamage(damage_table)
 		-- return
 	-- end)
-	
-	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
 	
 	dota_clicker:SpawnMines()
 	
@@ -643,12 +644,14 @@ function dota_clicker:OnNpcSpawned(data)
 	end
 end
 
-function dota_clicker:throughPlayers(callback)
+function dota_clicker:throughPlayers(callback, notHero)
 	for index = 0, playerCount - 1 do
-		if PlayerResource:HasSelectedHero(index) then
+		if notHero or PlayerResource:HasSelectedHero(index)then
 			local player = PlayerResource:GetPlayer(index)
-			local hero = PlayerResource:GetSelectedHeroEntity(index)
-			callback(player, hero)
+			if player then
+				local hero = PlayerResource:GetSelectedHeroEntity(index)
+				callback(player, hero)
+			end
 		end
 	end
 end

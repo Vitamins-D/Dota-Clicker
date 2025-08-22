@@ -480,6 +480,11 @@ local autoDesc = {
     spell_up = "Улучшает способность %s",
 }
 
+local abilitiesNames = {
+	dc_techies_land_mines = "Land Mines",
+	dc_frogmen_water_bubble_small = "Water Bubble",
+}
+
 function wi:getUpgradeCost(unit, name, level)
 	local upgrades = wi:getUpgrades(unit, name)
 	if upgrades then 
@@ -514,7 +519,7 @@ function wi:getUpgradeDescription(unit, name, level)
 					if pattern then
 						if upgrade.type == "spell" or upgrade.type == "spell_up" then
 							-- Берём локализованное имя способности
-							desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_" .. upgrade.value)
+							desc = desc .. string.format(pattern, abilitiesNames[upgrade.value])
 						else
 							desc = desc .. string.format(pattern, upgrade.value)
 						end
@@ -851,5 +856,7 @@ function wi:printUnifiedStructure()
 	
 	print("\n=== END STRUCTURE ===")
 end
+
+print("ZXCZXCZXC", "#neutral_damage_bonus")
 
 return wi
