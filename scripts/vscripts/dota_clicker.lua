@@ -29,7 +29,7 @@ local pathCount = 11
 local uiArr
 
 local playerCount
-local difficulty
+local difficulty = 2
 local difficulties = {
 	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 30, GOLD_INTERVAL = 60, MAX_UNITS = 30, GOLD_GIVE = 750, LVL_GIVE = 1.5, AI_DIF = 1},
 	{WAVE_INTERVAL = 60, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 120, MAX_UNITS = 20, GOLD_GIVE = 500, LVL_GIVE = 1, AI_DIF = 1},
@@ -116,16 +116,6 @@ end
 
 function dota_clicker:HandleDifficulty(event)
 	difficulty = event.difficulty
-	
-	local prms = difficulties[difficulty]
-	
-	WAVE_INTERVAL = prms.WAVE_INTERVAL
-	LVLUP_INTERVAL = prms.LVLUP_INTERVAL
-	GOLD_INTERVAL = prms.GOLD_INTERVAL
-	MAX_UNITS = prms.MAX_UNITS
-	GOLD_GIVE = prms.GOLD_GIVE
-	LVL_GIVE = prms.LVL_GIVE
-	AI_DIF = prms.AI_DIF
 	
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "difficulty_confirmed", {success = true})
@@ -534,6 +524,17 @@ end
 
 function dota_clicker:dotaClickerStart()
 	print("DOTA CLICKER START")
+	
+	local prms = difficulties[difficulty]
+	
+	WAVE_INTERVAL = prms.WAVE_INTERVAL
+	LVLUP_INTERVAL = prms.LVLUP_INTERVAL
+	GOLD_INTERVAL = prms.GOLD_INTERVAL
+	MAX_UNITS = prms.MAX_UNITS
+	GOLD_GIVE = prms.GOLD_GIVE
+	LVL_GIVE = prms.LVL_GIVE
+	AI_DIF = prms.AI_DIF
+	
 	neutralSpawner:InitNeutralCamps()
 	
 	local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()

@@ -166,6 +166,29 @@ function summonWard(prms)
 	end
 end
 
+function summonWard2(prms)
+	local thisEntity = prms.thisEntity
+	local hAbility = prms.ability
+	if hAbility and hAbility:IsFullyCastable() then
+		local enemies = AICore:getAllEnemies(hAbility:GetCastRange(), thisEntity)
+		if #enemies > 0 then
+			local enemy = enemies[math.random(1, #enemies)]
+			
+			local direction = (enemy:GetOrigin() - thisEntity:GetOrigin()):Normalized()
+            local castPos = enemy:GetOrigin() - direction * 100
+			
+			ExecuteOrderFromTable({
+				UnitIndex = thisEntity:entindex(),
+				OrderType = DOTA_UNIT_ORDER_CAST_POSITION,
+				AbilityIndex = hAbility:entindex(),
+				Position = castPos, -- Используйте позицию врага как направление
+				Queue = false,
+			})
+			return hAbility:GetCastPoint()+0.1 + hAbility:GetSpecialValueFor("AbilityChannelTime")
+		end
+	end
+end
+
 function chakraMagic(prms)
 	local thisEntity = prms.thisEntity
 	local hAbility = prms.ability
@@ -385,7 +408,7 @@ skillsCore.pattern = {
 	["dc_lina_light_strike_array"] = posCast,
 	["dc_jakiro_liquid_ice"] = autoCast,
 	["dc_witch_doctor_voodoo_restoration"] = voodooRestor,
-	["dc_witch_doctor_death_ward"] = summonWard,
+	["dc_witch_doctor_death_ward"] = summonWard2,
 	["dc_earthshaker_enchant_totem"] = castByReady,
 	["dc_shredder_flamethrower"] = aroundDanger,
 	["dc_batrider_sticky_napalm"] = posCast,
