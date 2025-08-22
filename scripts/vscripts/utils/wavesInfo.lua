@@ -81,12 +81,12 @@ wi.requirement = {
 wi.specials = {
 	-- ["unit"] = {{"replace", "from", "to"}, {"upgrade", "name"}, {"set", "name", 2}}, -- example
 	["tank"] = {{"upgrade", "dota_clicker_tidehunter_kraken_shell"}},
+	["bomber"] = {{"remove", "creep_siege"}},
 	["siege_tower"] = {{"upgrade", "creep_siege"}},
 	["sniper"] = {{"upgrade", "dc_sniper_headshot"}},
 	["marksman"] = {{"upgrade", "dc_medusa_split_shot"}},
 	["fire_mage"] = {{"replace", "dc_winter_wyvern_cold_embrace", "dc_lina_light_strike_array"}},
-	["air_mage"] = {{"upgrade", "dc_winter_wyvern_cold_embrace"}},
-	["air_mage"] = {{"replace", "dc_jakiro_liquid_fire", "dc_jakiro_liquid_ice"}},
+	["air_mage"] = {{"upgrade", "dc_winter_wyvern_cold_embrace"}, {"replace", "dc_jakiro_liquid_fire", "dc_jakiro_liquid_ice"}},
 	["trebuchet"] = {{"upgrade", "black_dragon_splash_attack"}},
 	["ballista"] = {{"replace", "black_dragon_splash_attack", "black_dragon_splash_attack_small"}},
 	["miner"] = {"replace", "dc_lina_dragon_slave", "dc_techies_suicide_big"}
@@ -97,7 +97,7 @@ wi.skills = {
   ["ballista"] = {"dc_windrunner_powershot"},
   ["mage"] = {"dotac_luna_lucent_beam"},
   ["catapult"] = {"creep_siege"},
-  ["air_mage"] = {"dc_zuus_arc_lightning"},
+  ["elementalist"] = {"dc_zuus_arc_lightning"},
   ["shaman"] = {"dc_shadow_shaman_mass_serpent_ward"},
   ["bomber"] = {"dc_techies_suicide"},
   ["Veins_fire"] = {"burning_strikes"},
@@ -214,7 +214,7 @@ wi.base = {
 	["catapult"] =
 	{
 		{type = "siege", levels = {
-			{{type = "spell", value = "dota_clicker_creep_siege"}, cost = 600},
+			{{type = "spell_up", value = "dota_clicker_creep_siege"}, cost = 600},
 			{{type = "atk", value = 60}, cost = 700},
 			{{type = "atks", value = -40}, {type = "", value = 0}, cost = 800},
 			{{type = "spell_up", value = "dota_clicker_creep_siege"}, {type = "atk", value = 40}, cost = 1200},

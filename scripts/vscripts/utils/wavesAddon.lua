@@ -166,6 +166,8 @@ function wa:spawnWave(player)
 						end
 					elseif arr[1] == "upgrade" then
 						utils:upgradeAbility(unit, arr[2])
+					elseif arr[1] == "remove" then
+						utils:removeAbility(unit, arr[2])
 					end
 				end
 			end
