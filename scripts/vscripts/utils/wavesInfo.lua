@@ -94,12 +94,12 @@ wi.specials = {
 
 wi.skills = {
   -- ["unit"] = {"spell", "spell"}, -- example
-  ["ballista"] = {"dc_windrunner_powershot"}
-  ["mage"] = {"dotac_chaos_knight_chaos_bolt"},
-  ["catapult"] = {"dota_clicker_creep_siege"},
+  ["ballista"] = {"dc_windrunner_powershot"},
+  ["mage"] = {"dotac_luna_lucent_beam"},
+  ["catapult"] = {"creep_siege"},
   ["air_mage"] = {"dc_zuus_arc_lightning"},
   ["shaman"] = {"dc_shadow_shaman_mass_serpent_ward"},
-  ["bomber"] = {"dc_techies_suicide"}
+  ["bomber"] = {"dc_techies_suicide"},
   ["Veins_fire"] = {"burning_strikes"},
   ["stone_block"] = {"dc_mars_bulwark"},
   ["fight_shaman"] = {"dc_witch_doctor_death_ward"},

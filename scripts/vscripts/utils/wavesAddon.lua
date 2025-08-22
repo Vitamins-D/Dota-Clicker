@@ -98,23 +98,6 @@ function wa:spawnWave(player)
 			unit.skills = {}
 			unit.bonus = {}
 			
-			local special = info.specials[pathName]
-			if special then
-				for j = 1, #special do
-					local arr = special[j]
-					if arr[1] == "replace" then
-						utils:replaceAbility(unit, arr[2], arr[3])
-					elseif arr[1] == "set" then
-						local ability = unit:FindAbilityByName(arr[2])
-						if ability then
-							ability:SetLevel(arr[3])
-						end
-					elseif arr[1] == "upgrade" then
-						utils:upgradeAbility(unit, arr[2])
-					end
-				end
-			end
-			
 			local names = {name, class, subclass}
 			for i = 1, #names do
 				local pUpgrade = unitUpg[i]
@@ -169,6 +152,24 @@ function wa:spawnWave(player)
 					
 				end
 			end
+			
+			local special = info.specials[pathName]
+			if special then
+				for j = 1, #special do
+					local arr = special[j]
+					if arr[1] == "replace" then
+						utils:replaceAbility(unit, arr[2], arr[3])
+					elseif arr[1] == "set" then
+						local ability = unit:FindAbilityByName(arr[2])
+						if ability then
+							ability:SetLevel(arr[3])
+						end
+					elseif arr[1] == "upgrade" then
+						utils:upgradeAbility(unit, arr[2])
+					end
+				end
+			end
+			
 			Timers:CreateTimer(0.5, function()
 				unit:AddNewModifier(unit, nil, "modifier_buff_stats", {})
 			end)

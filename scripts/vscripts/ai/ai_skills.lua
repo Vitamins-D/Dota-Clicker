@@ -13,7 +13,7 @@ function aroundDanger(prms)
 				OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET,
 				AbilityIndex = hAbility:entindex(),
 			})
-			return hAbility:GetCastPoint()
+			return hAbility:GetCastPoint()+0.1
 		end
 	end
 end
@@ -22,14 +22,14 @@ function takeAim(prms)
 	local thisEntity = prms.thisEntity
 	local hAbility = prms.ability
 	if hAbility and hAbility:IsFullyCastable() then
-		local enemies = AICore:getAllEnemies(hAbility:GetSpecialValueFor("active_attack_range_bonus") + thisEntity:GetAttackRange(), thisEntity)
+		local enemies = AICore:getAllEnemies(hAbility:GetSpecialValueFor("active_attack_range_bonus") + thisEntity:GetAttackRangeBuffer(), thisEntity)
 		if #enemies > 0 then
 			ExecuteOrderFromTable({
 				UnitIndex = thisEntity:entindex(),
 				OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET,
 				AbilityIndex = hAbility:entindex(),
 			})
-			return hAbility:GetCastPoint()
+			return hAbility:GetCastPoint()+0.1
 		end
 	end
 end
@@ -49,12 +49,12 @@ function targetCast(prms)
 				Queue = false,
 			}
 			ExecuteOrderFromTable(order)
-			return hAbility:GetCastPoint()
+			return hAbility:GetCastPoint()+0.1
 		end
 	end
 end
 
-function buffYourSelf()
+function buffYourSelf(prms)
 	local thisEntity = prms.thisEntity
 	local hAbility = prms.ability
 	if hAbility and hAbility:IsFullyCastable() then
@@ -67,7 +67,7 @@ function buffYourSelf()
 				AbilityIndex = hAbility:entindex(),
 				Queue = false,
 			})
-			return hAbility:GetCastPoint()
+			return hAbility:GetCastPoint()+0.1
 		end
 	end
 end
@@ -75,7 +75,7 @@ end
 skillsCore.pattern = {
 	["dota_clicker_tidehunter_kraken_shell"] = aroundDanger,
 	["dota_clicker_sniper_take_aim"] = takeAim,
-	["dota_clicker_vengefulspirit_magic_missile"] = targetCast,
+	["dotac_luna_lucent_beam"] = targetCast,
 	["dc_frogmen_water_bubble_small"] = buffYourSelf,
 }
 

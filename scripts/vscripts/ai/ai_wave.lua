@@ -38,7 +38,7 @@ function AIThink()
 		for i = 1, #skills do
 			local skill = skills[i]
 			local name = skill:GetAbilityName()
-			skillsCore.pattern[name]({ability = skill, thisEntity = thisEntity})
+			if skillsCore.pattern[name] then skillsCore.pattern[name]({ability = skill, thisEntity = thisEntity}) end
 		end
 	end
 	

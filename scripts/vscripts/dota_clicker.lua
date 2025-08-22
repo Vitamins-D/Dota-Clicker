@@ -9,7 +9,7 @@ local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
 
 -- константы/настройки
-local WAVE_INTERVAL = 15
+local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
 local MAX_UNITS = 20
@@ -113,6 +113,7 @@ end
 
 function dota_clicker:HandleDifficulty(event)
 	difficulty = event.difficulty
+	print("CHANGE DIF", event)
 	
 	local prms = difficulties[difficulty]
 	
@@ -577,6 +578,7 @@ function dota_clicker:dotaClickerStart()
 	local bad_start = badPath[1]:GetAbsOrigin()
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
 	if AI_ON then
+		badBot.gold = PlayerResource:GetPlayerCount()*1000
 		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
 	end
 	-- wa:spawnWave(badBot)
