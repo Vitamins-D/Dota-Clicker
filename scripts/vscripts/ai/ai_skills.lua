@@ -184,7 +184,7 @@ function summonWard2(prms)
 				Position = castPos, -- Используйте позицию врага как направление
 				Queue = false,
 			})
-			return hAbility:GetCastPoint()+0.1 + hAbility:GetSpecialValueFor("AbilityChannelTime")
+			return hAbility:GetCastPoint()+0.1 + hAbility:GetChannelTime()
 		end
 	end
 end
