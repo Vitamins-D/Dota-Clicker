@@ -186,7 +186,7 @@ function chakraMagic(prms)
 			for i = 1, #allies do
 				local unit = allies[i]
 				local manaPct = (unit:GetMana() / unit:GetMaxMana()) * 100
-				if manaPct < targetManaPct and not (unit.type ~= "mage" and target.type == "mage" and targetManaPct < 75) then
+				if manaPct < targetManaPct and not (unit.type ~= "mage" and target and target.type == "mage" and targetManaPct < 75) then
 					target = unit
 					targetManaPct = manaPct
 				end
