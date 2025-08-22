@@ -225,7 +225,7 @@
 		{
 			"new_chance"
 			{
-				"value"      "10"
+				"value"      "20"
 			}
 		}
 	}
