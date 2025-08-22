@@ -27,6 +27,7 @@ local badBot = {}
 local pathCount = 11
 
 local uiArr
+local maxUnitPerPlayer
 
 local playerCount
 local difficulty = 2
@@ -46,6 +47,7 @@ end
 function dota_clicker:InitGameMode()
 	playerCount = DOTA_MAX_TEAM_PLAYERS
 	uiArr = wi:convertToUnifiedStructure()
+	maxUnitPerPlayer = math.ceil(MAX_UNITS/playerCount)
 	
 	GameRules:SetStartingGold(1000)
 	GameRules:SetUseUniversalShopMode(true)
@@ -55,7 +57,7 @@ function dota_clicker:InitGameMode()
 	GameRules:SetShowcaseTime(0.0)
 	GameRules:SetTreeRegrowTime(120)
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(25)
-	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(false)
+	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
 	
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(HeroExpTable)
@@ -107,8 +109,17 @@ function dota_clicker:RegisterCustomEventListeners()
 	end)
 
 	CustomGameEventManager:RegisterListener("get_data_units", function(_, event)
-		local player = event.player_id
+		local player_id = event.player_id
+		local player = PlayerResource:GetPlayer(player_id)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
+	end)
+
+	CustomGameEventManager:RegisterListener("get_data_currMaxUnits", function(_, event)
+		local player_id = event.player_id
+		local player = PlayerResource:GetPlayer(player_id)
+		self:throughPlayers(function(player, hero)
+			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataLimit", {limit = maxUnitPerPlayer})
+		end)
 	end)
 	
 	CustomGameEventManager:RegisterListener("sell_unit", function(_, event)
@@ -571,7 +582,7 @@ function dota_clicker:dotaClickerStart()
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnits", {dataU = uiArr})
 	end)
 	
-	local maxUnitPerPlayer = math.ceil(MAX_UNITS/playerCount)
+	maxUnitPerPlayer = math.ceil(MAX_UNITS/playerCount)
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataLimit", {limit = maxUnitPerPlayer})
 	end)
