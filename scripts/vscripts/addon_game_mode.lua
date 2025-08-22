@@ -47,6 +47,82 @@ function Precache( context )
     -- Models for Subclass Units
     PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ancient_frog/n_creep_ancient_frog_mage.vmdl", context);
     PrecacheResource("model", "models/heroes/techies/techies.vmdl", context);
+	
+	PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf", context)
+	
+	-- Ogre Magi
+    PrecacheResource("particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_ignite.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_fireblast.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf", context)
+
+    -- Pudge
+    PrecacheResource("particle", "particles/units/heroes/hero_pudge/pudge_meathook.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_pudge/pudge_meathook_impact.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_pudge/pudge_dismember.vpcf", context)
+
+    -- Shredder
+    PrecacheResource("particle", "particles/units/heroes/hero_shredder/shredder_reactive_armor.vpcf", context)
+
+    -- Phantom Assassin
+    PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur_active.vpcf", context)
+
+    -- Dazzle
+    PrecacheResource("particle", "particles/units/heroes/hero_dazzle/dazzle_poison_touch.vpcf", context)
+
+    -- Tidehunter
+    PrecacheResource("particle", "particles/units/heroes/hero_tidehunter/tidehunter_kraken_shell.vpcf", context)
+
+    -- Sniper
+    PrecacheResource("particle", "particles/units/heroes/hero_sniper/sniper_headshot.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_sniper/sniper_take_aim_active.vpcf", context)
+
+    -- Juggernaut
+    PrecacheResource("particle", "particles/units/heroes/hero_juggernaut/juggernaut_blade_dance.vpcf", context)
+
+    -- Enchantress
+    PrecacheResource("particle", "particles/units/heroes/hero_enchantress/enchantress_natures_attendants.vpcf", context)
+
+    -- Medusa
+    PrecacheResource("particle", "particles/units/heroes/hero_medusa/medusa_split_shot.vpcf", context)
+
+    -- Jakiro
+    PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_liquid_fire.vpcf", context)
+
+    -- Winter Wyvern
+    PrecacheResource("particle", "particles/units/heroes/hero_winter_wyvern/wyvern_cold_embrace.vpcf", context)
+
+    -- Zeus
+    PrecacheResource("particle", "particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_zuus/zuus_arc_lightning_head.vpcf", context)
+
+    -- Shadow Shaman
+    PrecacheResource("particle", "particles/units/heroes/hero_shadowshaman/shadowshaman_ward_base_attack.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_shadowshaman/shadowshaman_ward_cast.vpcf", context)
+
+    -- Keeper of the Light
+    PrecacheResource("particle", "particles/units/heroes/hero_keeper_of_the_light/keeper_chakra_magic.vpcf", context)
+
+    -- Black Dragon
+    PrecacheResource("particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_splash_attack.vpcf", context)
+
+    -- Techies
+    PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_suicide.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_suicide_explode.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_sticky_bomb_projectile.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_sticky_bomb_explosion.vpcf", context)
+
+    -- Lina
+    PrecacheResource("particle", "particles/units/heroes/hero_lina/lina_spell_dragon_slave.vpcf", context)
+
+    -- Mars
+    PrecacheResource("particle", "particles/units/heroes/hero_mars/mars_shield_of_mars.vpcf", context)
+
+    -- Weaver
+    PrecacheResource("particle", "particles/units/heroes/hero_weaver/weaver_geminate_attack.vpcf", context)
+
+    -- Vengeful Spirit
+    PrecacheResource("particle", "particles/units/heroes/hero_vengeful/vengeful_command_aura.vpcf", context)
 end
 
 -- Create the game mode when we activate

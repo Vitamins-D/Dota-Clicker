@@ -94,6 +94,9 @@ function wa:spawnWave(player)
 			
 			local unit = CreateUnitByName(path, spawnPos, true, nil, nil, team)
 			unit.path = player.path
+			unit.type = name
+			unit.class = class
+			unit.subclass = subclass
 			
 			unit.skills = {}
 			unit.bonus = {}

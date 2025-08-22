@@ -7,7 +7,7 @@ function AICore:getEnemies(radius, tEntity, minDist)
         nil,
         radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_CREEP, -- Все юниты кроме построек
+        DOTA_UNIT_TARGET_BASIC, -- Все юниты кроме построек
         DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
         FIND_CLOSEST,
         false
@@ -31,7 +31,7 @@ function AICore:getAllEnemies(radius, tEntity, minDist)
         nil,
         radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_CREEP, -- Все юниты кроме построек
+        DOTA_UNIT_TARGET_BASIC , -- Все юниты кроме построек
         DOTA_UNIT_TARGET_FLAG_NONE,
         FIND_CLOSEST,
         false
@@ -55,7 +55,7 @@ function AICore:getAllies(radius, tEntity)
         nil,
         radius,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_CREEP, -- Добавлены герои и крипы
+		DOTA_UNIT_TARGET_BASIC, -- Добавлены герои и крипы
         DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
         FIND_CLOSEST,
         false

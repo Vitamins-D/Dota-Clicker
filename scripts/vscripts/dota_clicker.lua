@@ -16,6 +16,7 @@ local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
+local AI_DIF = 1
 local AI_ON = true
 
 local newLevelGive = LVL_GIVE
@@ -30,10 +31,10 @@ local uiArr
 local playerCount
 local difficulty
 local difficulties = {
-	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 30, GOLD_INTERVAL = 60, MAX_UNITS = 30, GOLD_GIVE = 750, LVL_GIVE = 1.5},
-	{WAVE_INTERVAL = 60, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 120, MAX_UNITS = 20, GOLD_GIVE = 500, LVL_GIVE = 1},
-	{WAVE_INTERVAL = 40, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 180, MAX_UNITS = 20, GOLD_GIVE = 450, LVL_GIVE = 0.9},
-	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 180, MAX_UNITS = 15, GOLD_GIVE = 60, LVL_GIVE = 0.75},
+	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 30, GOLD_INTERVAL = 60, MAX_UNITS = 30, GOLD_GIVE = 750, LVL_GIVE = 1.5, AI_DIF = 1},
+	{WAVE_INTERVAL = 60, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 120, MAX_UNITS = 20, GOLD_GIVE = 500, LVL_GIVE = 1, AI_DIF = 1},
+	{WAVE_INTERVAL = 40, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 180, MAX_UNITS = 20, GOLD_GIVE = 450, LVL_GIVE = 0.9, AI_DIF = 2},
+	{WAVE_INTERVAL = 30, LVLUP_INTERVAL = 60, GOLD_INTERVAL = 180, MAX_UNITS = 15, GOLD_GIVE = 60, LVL_GIVE = 0.75, AI_DIF = 3},
 }
 
 local levelExp = 100
@@ -124,6 +125,7 @@ function dota_clicker:HandleDifficulty(event)
 	MAX_UNITS = prms.MAX_UNITS
 	GOLD_GIVE = prms.GOLD_GIVE
 	LVL_GIVE = prms.LVL_GIVE
+	AI_DIF = prms.AI_DIF
 	
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "difficulty_confirmed", {success = true})
@@ -580,7 +582,7 @@ function dota_clicker:dotaClickerStart()
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
 	if AI_ON then
 		badBot.gold = PlayerResource:GetPlayerCount()*1000
-		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount() })
+		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount(), difficulty = AI_DIF })
 	end
 	-- wa:spawnWave(badBot)
 	

@@ -42,6 +42,33 @@ function AIThink()
 		end
 	end
 	
+	if thisEntity.subclass == "air_mage" then
+		local lAbility = thisEntity:FindAbilityByName("dc_silencer_last_word")
+		if lAbility and lAbility:IsFullyCastable() then
+			local enemies = AICore:getAllEnemies(lAbility:GetCastRange(), thisEntity)
+
+			for _, enemy in pairs(enemies) do
+				for i=0, 11 do  -- проверяем 6 слотов способностей
+					local ab = enemy:GetAbilityByIndex(i)
+					if ab and ab:IsInAbilityPhase() then
+						ExecuteOrderFromTable({
+							UnitIndex = thisEntity:entindex(),
+							OrderType = DOTA_UNIT_ORDER_CAST_TARGET,
+							AbilityIndex = lAbility:entindex(),
+							TargetIndex = enemy:entindex(),
+							Queue = false
+						})
+						return lAbility:GetCastPoint() + 0.1
+					end
+				end
+			end
+			
+			goPath()
+
+			return 0.1
+		end
+	end
+	
 	goPath()
 	
     return 0.5 -- Продолжите обработку на следующем тике
