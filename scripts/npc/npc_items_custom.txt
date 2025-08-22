@@ -374,7 +374,7 @@
 	"item_recipe_dotac_pickaxe_stone"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "100"
+	   "ItemCost"               "300"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_pickaxe_stone"
@@ -387,7 +387,7 @@
 	"item_recipe_dotac_pickaxe_iron"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "200"
+	   "ItemCost"               "600"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_pickaxe_iron"
@@ -400,7 +400,7 @@
 	"item_recipe_dotac_pickaxe_diamond"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "400"
+	   "ItemCost"               "1000"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_pickaxe_diamond"
@@ -415,7 +415,7 @@
 	   "BaseClass"              "item_recipe_iron_talon"
 	   "ItemCost"               "800"
 	   "ItemShopTags"           "damage"
-	   "ItemRecipe"             "1"
+	   "ItemRecipe"             "1500"
 	   "ItemResult"             "item_dotac_pickaxe_netherite"
 	   "ItemRequirements"
 	   {
@@ -606,7 +606,7 @@
 	"item_recipe_dotac_axe_stone"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "100"
+	   "ItemCost"               "300"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_axe_stone"
@@ -619,7 +619,7 @@
 	"item_recipe_dotac_axe_iron"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "200"
+	   "ItemCost"               "600"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_axe_iron"
@@ -632,7 +632,7 @@
 	"item_recipe_dotac_axe_diamond"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "400"
+	   "ItemCost"               "1000"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_axe_diamond"
@@ -645,7 +645,7 @@
 	"item_recipe_dotac_axe_netherite"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "800"
+	   "ItemCost"               "1500"
 	   "ItemShopTags"           "damage"
 	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_axe_netherite"
