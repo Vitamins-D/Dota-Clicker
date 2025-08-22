@@ -558,7 +558,6 @@ function dota_clicker:dotaClickerStart()
 	
 	self:throughPlayers(function(player, hero)
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
-		print("Отправился перевод")
 	end)
 	
 	uiArr = wi:convertToUnifiedStructure()
