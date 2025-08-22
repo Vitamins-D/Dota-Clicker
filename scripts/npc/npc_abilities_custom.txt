@@ -2392,7 +2392,7 @@
 		
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.3"
+		"AbilityCastPoint"				"0.0"
 		"AbilityCastRange"				"900"
 
 		// Time		
@@ -2416,7 +2416,7 @@
 				}
 				"debuff_duration"	
 				{
-					"value"					"4"
+					"value"					"0.1"
 				}
 				"duration"	"4 5 6"
 				"radius"

@@ -88,6 +88,7 @@ function Precache( context )
 
     -- Jakiro
     PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_liquid_fire.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_liquid_ice_projectile.vpcf", context)
 
     -- Winter Wyvern
     PrecacheResource("particle", "particles/units/heroes/hero_winter_wyvern/wyvern_cold_embrace.vpcf", context)

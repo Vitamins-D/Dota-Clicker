@@ -384,6 +384,18 @@ function voodooRestor(prms)
 	end
 end
 
+function geminateAttack(prms)
+	local thisEntity = prms.thisEntity
+	local hAbility = prms.ability
+	if hAbility and hAbility:IsFullyCastable() then
+		if not hAbility.active then
+			hAbility:ToggleAbility()
+			hAbility.active = true
+			return hAbility:GetCastPoint()+0.1
+		end
+	end
+end
+
 
 skillsCore.pattern = {
 	["dota_clicker_tidehunter_kraken_shell"] = aroundDanger,
@@ -401,7 +413,7 @@ skillsCore.pattern = {
 	["dc_techies_suicide_big"] = suicide,
 	["dc_techies_sticky_bomb"] = posCast,
 	["dc_lina_dragon_slave"] = posCast,
-	["dc_weaver_geminate_attack"] = autoCast,
+	["dc_weaver_geminate_attack"] = geminateAttack,
 	["dc_beastmaster_call_of_the_wild_hawk"] = castByReady,
 	["dc_windrunner_shackleshot"] = castShackleshot,
 	["dc_batrider_flamebreak"] = posCast,
@@ -415,6 +427,8 @@ skillsCore.pattern = {
 	["dc_techies_land_mines"] = posCast,
 	["dc_windrunner_powershot"] = posCast,
 	["dota_clicker_sniper_take_aim"] = aroundDanger,
+	["melee_spawn_unit"] = aroundDanger,
+	["pathfinder_spawn_unit"] = aroundDanger,
 	
 }
 

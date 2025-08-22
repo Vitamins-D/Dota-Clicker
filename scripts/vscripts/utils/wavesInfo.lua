@@ -51,14 +51,14 @@ wi.unitDescription = {
 }
 
 wi.requirement = {
-	["tank"] = {upgs = {{"def", 1}, {"hp", 2}}},
-	["berserker"] = {upgs = {{"damage", 5}}},
-	["shooter"] = {upgs = {{"agility", 1}, {"strength", 2}}},
-	["ranger"] = {upgs = {{"agility", 1}, {"def", 2}}},
-	["elementalist"] = {upgs = {{"mana", 1}, {"spell_power", 2}}},
-	["shaman"] = {upgs = {{"mana", 1}, {"def", 2}}},
-	["siege_tower"] = {upgs = {{"siege", 1}, {"def", 2}}},
-	["bomber"] = {upgs = {{"damage", 1}}},
+	["tank"] = {upgs = {{"def", 2}, {"hp", 3}}},
+	["berserker"] = {upgs = {{"damage", 4}, {"def", 1}}},
+	["shooter"] = {upgs = {{"agility", 2}, {"strength", 2}}},
+	["ranger"] = {upgs = {{"agility", 3}, {"def", 1}}},
+	["elementalist"] = {upgs = {{"mana", 2}, {"spell_power", 3}}},
+	["shaman"] = {upgs = {{"mana", 3}, {"def", 2}}},
+	["siege_tower"] = {upgs = {{"siege", 3}, {"def", 2}}},
+	["bomber"] = {upgs = {{"damage", 4}}},
 	
 	["Veins_fire"] = {class = "tank", upgs = {{"mag_armor", 3}}},
 	["stone_block"] = {class = "tank", upgs = {{"phys_armor", 3}}},
@@ -103,6 +103,7 @@ wi.skills = {
   ["Veins_fire"] = {"burning_strikes"},
   ["stone_block"] = {"dc_mars_bulwark"},
   ["fight_shaman"] = {"dc_witch_doctor_death_ward"},
+  -- ["air_mage"] = {"dc_silencer_last_word"},
 }
 
 wi.units = {
@@ -197,11 +198,11 @@ wi.base = {
 			{{type = "mana", value = 150}, {type = "manareg", value = 2.7}, cost = 900},
 		}},
 		{type = "spell_power", levels = {
-			{{type = "spell_amp", value = 5}, {type = "spell_up", value = "dotac_chaos_knight_chaos_bolt"}, cost = 450},
+			{{type = "spell_amp", value = 5}, {type = "spell_up", value = "dotac_luna_lucent_beam"}, cost = 450},
 			{{type = "spell_amp", value = 7}, cost = 400},
-			{{type = "spell_amp", value = 7}, {type = "spell_up", value = "dotac_chaos_knight_chaos_bolt"}, cost = 600},
+			{{type = "spell_amp", value = 7}, {type = "spell_up", value = "dotac_luna_lucent_beam"}, cost = 600},
 			{{type = "spell_amp", value = 9},cost = 500},
-			{{type = "spell_amp", value = 15}, {type = "spell_up", value = "dotac_chaos_knight_chaos_bolt"},cost = 1200},
+			{{type = "spell_amp", value = 15}, {type = "spell_up", value = "dotac_luna_lucent_beam"},cost = 1200},
 		}},
 		{type = "def", levels = {
 			{{type = "spell", value = "dc_frogmen_water_bubble_small"}, cost = 300},
@@ -214,11 +215,11 @@ wi.base = {
 	["catapult"] =
 	{
 		{type = "siege", levels = {
-			{{type = "spell_up", value = "dota_clicker_creep_siege"}, cost = 600},
+			{{type = "spell_up", value = "creep_siege"}, cost = 600},
 			{{type = "atk", value = 60}, cost = 700},
 			{{type = "atks", value = -40}, {type = "", value = 0}, cost = 800},
-			{{type = "spell_up", value = "dota_clicker_creep_siege"}, {type = "atk", value = 40}, cost = 1200},
-			{{type = "spell_up", value = "dota_clicker_creep_siege"}, {type = "atk", value = 40}, cost = 1200},
+			{{type = "spell_up", value = "creep_siege"}, {type = "atk", value = 40}, cost = 1200},
+			{{type = "spell_up", value = "creep_siege"}, {type = "atk", value = 40}, cost = 1200},
 		}},
 		{type = "damage", levels = {
 			{{type = "atk", value = 15}, cost = 300},
@@ -487,7 +488,7 @@ local abilitiesNames = {
 	dc_earthshaker_enchant_totem = "Enchant Totem",
 	dc_enchantress_natures_attendants = "Natures Attendants",
 	dc_frogmen_water_bubble_small = "Water Bubble Small",
-	dc_jakiro_liquid_fire = "JLiquid Fire",
+	dc_jakiro_liquid_fire = "Liquid Fire",
 	dc_jakiro_liquid_ice = "Liquid Ice",
 	dc_keeper_of_the_light_chakra_magic = "Chakra Magic",
 	dc_lina_dragon_slave = "Dragon Slave",
@@ -517,6 +518,9 @@ local abilitiesNames = {
 	dota_clicker_phantom_assassin_immaterial = "Immaterial",
 	dota_clicker_sniper_take_aim = "Take Aim",
 	dota_clicker_tidehunter_kraken_shell = "Kraken Shell",
+	dotac_luna_lucent_beam = "Lucent Beam",
+	burning_strikes = "Burning Strikes",
+	black_dragon_splash_attack = "Splash",
 }
 
 function wi:getUpgradeCost(unit, name, level)
@@ -718,6 +722,56 @@ wi.nameMapping = {
 	["miner_upgrade"] = "Минер"
 }
 
+local roleNames = {
+	dps = "[<font color='#E63946'>DPS</font>]",
+	tank = "[<font color='#6C757D'>Tank</font>]",
+	healer = "[<font color='#2ECC71'>Healer</font>]",
+	buffer = "[<font color='#4DB6E5'>Buffer</font>]",
+	debuffer = "[<font color='#9B59B6'>Debuffer</font>]",
+	caster = "[<font color='#1F77D0'>Caster</font>]",
+	siege = "[<font color='#E67E22'>Siege</font>]",
+	summoner = "[<font color='#F1C40F'>Summoner</font>]",
+}
+
+local unitRoles = {
+	["tank"] = {"tank"},
+	["berserker"] = {"dps"},
+	["shooter"] = {"dps"},
+	["ranger"] = {"dps"},
+	["elementalist"] = {"dps", "caster", "healer"},
+	["shaman"] = {"summoner", "buffer"},
+	["siege_tower"] = {"siege"},
+	["bomber"] = {"dps", "caster"},
+	
+	["Veins_fire"] = {"tank", "debuffer"},
+	["stone_block"] = {"tank"},
+	["melee"] = {"dps"},
+	["illusionist"] = {"dps", "summoner"},
+	["gunner"] = {"dps"},
+	["sniper"] = {"dps"},
+	["pathfinder"] = {"dps", "summoner"},
+	["marksman"] = {"dps", "debuffer"},
+	["fire_mage"] = {"dps"},
+	["air_mage"] = {"healer", "debuffer"},
+	["def_shaman"] = {"buffer", "healer"},
+	["fight_shaman"] = {"summoner", "buffer"},
+	["trebuchet"] = {"siege"},
+	["ballista"] = {"dps", "siege"},
+	["rapid_fire"] = {"dps", "debuffer", "caster"},
+	["miner"] = {"dps", "caster"},
+}
+
+function wi:getRoleText(unit)
+	local roles = unitRoles[unit]
+	local text = ""
+	for i = 1, #roles do
+		local role = roles[i]
+		text = text..roleNames[role].." "
+	end
+	text = text.."<br>"
+	return text
+end
+
 -- Функция преобразования всех данных в один большой массив
 function wi:convertToUnifiedStructure()
   local result = {}
@@ -756,7 +810,7 @@ function wi:convertToUnifiedStructure()
         local evolution = {
           id = className,
           name = wi.nameMapping[className] or className,
-          description = wi.unitDescription[className] .. costText(wi.classes[className].cost) .. "<br>" or "",
+          description = wi:getRoleText(className) .. wi.unitDescription[className] .. costText(wi.classes[className].cost) .. "<br>" or "",
           requirement = {},
           skills = newArray()
         }
@@ -794,7 +848,7 @@ function wi:convertToUnifiedStructure()
         local subclass = {
           id = subClassName,
           name = wi.nameMapping[subClassName] or subClassName,
-          description = wi.unitDescription[subClassName] .. costText(wi.subClasses[subClassName].cost) .. "<br>" or "",
+          description = wi:getRoleText(subClassName) .. wi.unitDescription[subClassName] .. costText(wi.subClasses[subClassName].cost) .. "<br>" or "",
           requirement = {},
           skills = newArray()
         }
