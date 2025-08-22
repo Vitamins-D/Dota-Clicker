@@ -29,6 +29,8 @@ local pathCount = 11
 local uiArr
 local maxUnitPerPlayer
 
+local PlayerData = {}
+
 local playerCount
 local difficulty = 2
 local difficulties = {
@@ -58,9 +60,8 @@ function dota_clicker:InitGameMode()
 	GameRules:SetTreeRegrowTime(120)
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(25)
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
-	GameRules:SetGoldPerTick(0)    
-    -- GameRules:GetGameModeEntity():SetGoldTickTime(0.0)
-
+	GameRules:SetGoldPerTick(0) 
+	-- GameRules:SetGoldTickTime(5)
 	
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(HeroExpTable)
@@ -75,6 +76,15 @@ function dota_clicker:InitGameMode()
 	ListenToGameEvent('entity_hurt', Dynamic_Wrap(self, 'dotaClickerHurt'), self)
 	ListenToGameEvent("player_chat", Dynamic_Wrap(self, 'OnPlayerChat'), self)
 	ListenToGameEvent('tree_cut', Dynamic_Wrap(self, 'OnTreeCut'), self)
+	
+	-- Игрок отключился (его объект Player удаляется)
+	ListenToGameEvent("player_disconnect", Dynamic_Wrap(self, "OnPlayerDisconnect"), self)
+
+	-- Игрок переподключился
+	ListenToGameEvent("player_reconnected", Dynamic_Wrap(self, "OnPlayerReconnect"), self)
+
+	-- Игрок подключился первый раз
+	ListenToGameEvent("player_connect_full", Dynamic_Wrap(self, "OnPlayerConnectFull"), self)
 	
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(dota_clicker, "OrderFilter"), self)
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(dota_clicker, "DamageFilter"), self)
@@ -712,3 +722,56 @@ function getPaths(name, count, revers)
 	end
 	return path
 end
+
+function dota_clicker:OnPlayerConnectFull(keys)
+    local player_id = keys.PlayerID
+    if player_id == nil or player_id == -1 then return end
+
+	local pdata = PlayerData[player_id+1]
+	if not pdata then
+        PlayerData[player_id+1] = {
+            units = {},
+            upgrades = {},
+			path = {},
+			spawnPos = 0,
+			team = DOTA_TEAM_GOODGUYS,
+            disconnected = false
+        }
+	else
+		pdata.disconnected = false
+
+        local player = PlayerResource:GetPlayer(player_id)
+        if player then
+			for k,v in pairs(pdata) do
+				player[k] = v
+			end
+        end
+    end
+	
+	GameRules:SendCustomMessageToTeam("Player "..player_id.." подключился", 0, 255, 0)
+end
+
+function dota_clicker:OnPlayerDisconnect(keys)
+    local player_id = keys.PlayerID
+    if player_id == nil or player_id == -1 then return end
+	
+	local player = PlayerResource:GetPlayer(player_id)
+	local pdata = PlayerData[player_id+1]
+    if pdata then
+        pdata.disconnected = true
+		for k,v in pairs(pdata) do
+			pdata[k] = player[k]
+		end
+    end
+	
+	GameRules:SendCustomMessageToTeam("Player "..player_id.." отключился", 0, 255, 0)
+end
+
+function dota_clicker:OnPlayerReconnect(keys)
+    local player_id = keys.PlayerID
+    if player_id == nil or player_id == -1 then return end
+	
+
+	GameRules:SendCustomMessageToTeam("Player "..player_id.." переподключился", 0, 255, 0)
+end
+

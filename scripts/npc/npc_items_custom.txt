@@ -413,9 +413,9 @@
 	"item_recipe_dotac_pickaxe_netherite"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "800"
+	   "ItemCost"               "1500"
 	   "ItemShopTags"           "damage"
-	   "ItemRecipe"             "1500"
+	   "ItemRecipe"             "1"
 	   "ItemResult"             "item_dotac_pickaxe_netherite"
 	   "ItemRequirements"
 	   {
@@ -454,7 +454,7 @@
 		"AbilityValues"
 		{
 			"bonus_damage"				"10"
-			"bleed_chance"				"100"
+			"bleed_chance"				"15"
 			"bleed_damage"				"5"
 			"bleed_duration"			"3"
 			"tree_cut_time"				"6.0"
