@@ -99,6 +99,8 @@ function Precache( context )
     -- Shadow Shaman
     PrecacheResource("particle", "particles/units/heroes/hero_shadowshaman/shadowshaman_ward_base_attack.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_shadowshaman/shadowshaman_ward_cast.vpcf", context)
+	PrecacheResource("model", "models/heroes/shadowshaman/shadowshaman_totem.vmdl", context);
+	PrecacheResource("particle", "particles/units/heroes/hero_shadowshaman/shadow_shaman_ward_base_attack.vpcf", context);
 
     -- Keeper of the Light
     PrecacheResource("particle", "particles/units/heroes/hero_keeper_of_the_light/keeper_chakra_magic.vpcf", context)
@@ -111,6 +113,8 @@ function Precache( context )
     PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_suicide_explode.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_sticky_bomb_projectile.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_sticky_bomb_explosion.vpcf", context)
+	PrecacheResource("model", "models/heroes/techies/fx_techies_remote_cart.vmdl", context)
+	PrecacheResource("model", "models/heroes/techies/fx_techiesfx_mine.vmdl", context)
 
     -- Lina
     PrecacheResource("particle", "particles/units/heroes/hero_lina/lina_spell_dragon_slave.vpcf", context)
@@ -121,8 +125,21 @@ function Precache( context )
     -- Weaver
     PrecacheResource("particle", "particles/units/heroes/hero_weaver/weaver_geminate_attack.vpcf", context)
 
+	-- Windranger
+	PrecacheResource("particle", "particles/units/heroes/hero_windrunner/windrunner_shackleshot.vpcf", context)
+
     -- Vengeful Spirit
     PrecacheResource("particle", "particles/units/heroes/hero_vengeful/vengeful_command_aura.vpcf", context)
+
+	--doctor
+	PrecacheResource("particle", "particles/units/heroes/hero_witchdoctor/witchdoctor_ward_attack.vpcf", context)
+	PrecacheResource("model", "models/heroes/witchdoctor/witchdoctor_ward.vmdl", context)
+
+	-- Beastmaster
+	PrecacheResource("model", "models/heroes/beastmaster/beastmaster_bird.vmdl", context)
+
+	PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer.vmdl", context)
+	PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer.vmdl", context)
 end
 
 -- Create the game mode when we activate
