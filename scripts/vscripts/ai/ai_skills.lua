@@ -166,7 +166,7 @@ function summonWard(prms)
 	end
 end
 
-function chakraMagic()
+function chakraMagic(prms)
 	local thisEntity = prms.thisEntity
 	local hAbility = prms.ability
 	if hAbility and hAbility:IsFullyCastable() then
@@ -375,6 +375,7 @@ skillsCore.pattern = {
 	["dc_shadow_shaman_mass_serpent_ward"] = summonWard,
 	["dc_keeper_of_the_light_chakra_magic"] = chakraMagic,
 	["dc_techies_suicide"] = suicide,
+	["dc_techies_suicide_big"] = suicide,
 	["dc_techies_sticky_bomb"] = posCast,
 	["dc_lina_dragon_slave"] = posCast,
 	["dc_weaver_geminate_attack"] = autoCast,
