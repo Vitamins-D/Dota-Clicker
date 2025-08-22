@@ -103,18 +103,6 @@ wi.skills = {
   ["Veins_fire"] = {"burning_strikes"},
   ["stone_block"] = {"dc_mars_bulwark"},
   ["fight_shaman"] = {"dc_witch_doctor_death_ward"},
-  ["swordsman"] = {
-	"dc_batrider_sticky_napalm",
-	"dc_techies_land_mines",
-	"dc_windrunner_powershot",
-	"dotac_luna_lucent_beam",
-	"burning_strikes",
-	"melee_spawn_unit",
-	"pathfinder_spawn_unit",
-	"dotac_magical_crit",
-	"dotac_vampiric_aura"
-	},
-
 }
 
 wi.units = {
