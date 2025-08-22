@@ -331,13 +331,32 @@ function voodooRestor(prms)
 	local thisEntity = prms.thisEntity
 	local hAbility = prms.ability
 	if hAbility and hAbility:IsFullyCastable() then
-		local enemies = AICore:getAllies(800, thisEntity)
-		local active = false
-		if (active and not hAbility.active) or (not active and hAbility.active) then
-			hAbility:ToggleAbility()
-			if hAbility.active then hAbility.active = false
-			else hAbility.active = true end
-			return hAbility:GetCastPoint()+0.1
+		local manaPct = (thisEntity:GetMana() / thisEntity:GetMaxMana()) * 100
+		
+		if manaPct > 10 then
+			local allies = AICore:getAllies(hAbility:GetSpecialValueFor("radius"), thisEntity)
+			local active = false
+			
+			for i = 1, #allies do
+				local unit = allies[i]
+				local hpPct = (unit:GetHealth() / unit:GetMaxHealth()) * 100
+				if hpPct < 90 then
+					active = true
+					break
+				end
+			end
+			
+			local hpPct = (thisEntity:GetHealth() / thisEntity:GetMaxHealth()) * 100
+			if hpPct < 90 then
+				active = true
+			end
+			
+			if (active and not hAbility.active) or (not active and hAbility.active) then
+				hAbility:ToggleAbility()
+				if hAbility.active then hAbility.active = false
+				else hAbility.active = true end
+				return hAbility:GetCastPoint()+0.1
+			end
 		end
 	end
 end
@@ -364,7 +383,12 @@ skillsCore.pattern = {
 	["dc_batrider_flamebreak"] = posCast,
 	["dc_lina_light_strike_array"] = posCast,
 	["dc_jakiro_liquid_ice"] = autoCast,
-	["dc_witch_doctor_voodoo_restoration"] = autoCast,
+	["dc_witch_doctor_voodoo_restoration"] = voodooRestor,
+	["dc_witch_doctor_death_ward"] = summonWard,
+	["dc_earthshaker_enchant_totem"] = castByReady,
+	["dc_shredder_flamethrower"] = aroundDanger,
+	["dc_batrider_sticky_napalm"] = posCast,
+	["dc_techies_land_mines"] = posCast,
 	
 }
 
