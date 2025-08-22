@@ -17,7 +17,7 @@ local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
 local AI_DIF = 1
-local AI_ON = false
+local AI_ON = true
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -542,17 +542,17 @@ function dota_clicker:dotaClickerStart()
 	
 	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
 	
-	-- Timers:CreateTimer(1, function()
-		-- local damage_table = {
-			-- victim = vision_unit,          
-			-- attacker = vision_unit,        
-			-- damage = vision_unit:GetMaxHealth()*1.5,        
-			-- damage_type = DAMAGE_TYPE_PURE, 
-			-- ability = nil,      
-		-- }
-		-- ApplyDamage(damage_table)
-		-- return
-	-- end)
+	Timers:CreateTimer(1, function()
+		local damage_table = {
+			victim = vision_unit,          
+			attacker = vision_unit,        
+			damage = vision_unit:GetMaxHealth()*1.5,        
+			damage_type = DAMAGE_TYPE_PURE, 
+			ability = nil,      
+		}
+		ApplyDamage(damage_table)
+		return
+	end)
 	
 	dota_clicker:SpawnMines()
 	
@@ -570,17 +570,17 @@ function dota_clicker:dotaClickerStart()
 		CustomGameEventManager:Send_ServerToPlayer(player, "SetDataLimit", {limit = maxUnitPerPlayer})
 	end)
 	
-	local badPath = getPaths("wave_path_", pathCount, false)
-	local bad_start = badPath[1]:GetAbsOrigin()
-	self:throughPlayers(function(player, hero)
-		wa:InitAddon(player, bad_start, badPath, DOTA_TEAM_BADGUYS)
-	end)
-	
-	-- local path = getPaths("wave_path_", pathCount, true)
-	-- local wave_start = path[1]:GetAbsOrigin()
+	-- local badPath = getPaths("wave_path_", pathCount, false)
+	-- local bad_start = badPath[1]:GetAbsOrigin()
 	-- self:throughPlayers(function(player, hero)
-		-- wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS)
+		-- wa:InitAddon(player, bad_start, badPath, DOTA_TEAM_BADGUYS)
 	-- end)
+	
+	local path = getPaths("wave_path_", pathCount, true)
+	local wave_start = path[1]:GetAbsOrigin()
+	self:throughPlayers(function(player, hero)
+		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS)
+	end)
 	
 	
 	local badPath = getPaths("wave_path_", pathCount, false)
