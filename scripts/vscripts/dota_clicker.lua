@@ -58,6 +58,9 @@ function dota_clicker:InitGameMode()
 	GameRules:SetTreeRegrowTime(120)
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(25)
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
+	GameRules:SetGoldPerTick(0)    
+    -- GameRules:GetGameModeEntity():SetGoldTickTime(0.0)
+
 	
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(HeroExpTable)
