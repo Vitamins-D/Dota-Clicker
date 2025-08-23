@@ -22,21 +22,23 @@ function u:countOf(tbl, value)
 end
 
 function u:removeAbility(unit, abil)
-	table.remove(unit.skills, self:indexOf(unit.skills, abil))
+	local ability = unit:FindAbilityByName(abil)
+	table.remove(unit.skills, self:indexOf(unit.skills, ability))
     unit:RemoveAbility(abil)
 end
 
-function u:addAbility(unit, abil)
+function u:addAbility(unit, abil, level)
 	local newAbil = unit:AddAbility(abil)
-	newAbil:SetLevel(1)
+	newAbil:SetLevel(level or 1)
 	table.insert(unit.skills, newAbil)
 end
 
 function u:replaceAbility(unit, abil1, abil2)
 	local ability = unit:FindAbilityByName(abil1)
+	local lvl = ability:GetLevel()
 	if ability then
-		self:removeAbility(unit, ability)
-		self:addAbility(unit, abil2)
+		self:removeAbility(unit, abil1)
+		self:addAbility(unit, abil2, lvl)
 	end
 end
 

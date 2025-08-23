@@ -105,6 +105,7 @@ wi.skills = {
   ["fight_shaman"] = {"dc_witch_doctor_death_ward"},
   ["illusionist"] = {"melee_spawn_unit"},
   ["pathfinder"] = {"pathfinder_spawn_unit"},
+  ["fire_mage"] = {"dc_batrider_flamebreak"},
   -- ["air_mage"] = {"dc_silencer_last_word"},
 }
 
