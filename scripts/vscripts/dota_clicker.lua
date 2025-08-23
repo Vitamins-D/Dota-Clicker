@@ -755,6 +755,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
     if player_id == nil or player_id == -1 then return end
 
 	local pdata = PlayerData[player_id+1]
+	print(pdata, "pdata")
 	if not pdata then
         PlayerData[player_id+1] = {
             units = {},
@@ -802,15 +803,18 @@ function dota_clicker:OnPlayerConnectFull(keys)
 				local class = player.upgrades[unit][4]
 				local upgrades = player.upgrades[unit][2].levels
 				local arr = {}
-				for i = 1, #wi.classes[class] do
-					local upgrade = wi.classes[class][i]
-					arr[upgrade.type] = upgrades[i]
+				if wi.classes[class] then
+					for i = 1, #wi.classes[class] do
+						local upgrade = wi.classes[class][i]
+						arr[upgrade.type] = upgrades[i]
+					end
+					
+				
+					local classSkills = {}
+					
+					classSkills[class] = arr
+					evolutionSkills[unit] = classSkills[class]
 				end
-				
-				local classSkills = {}
-				
-				classSkills[class] = arr
-				evolutionSkills[unit] = classSkills[class]
 			end
 			
 			local chosenSubclasses = {}
@@ -818,15 +822,18 @@ function dota_clicker:OnPlayerConnectFull(keys)
 				local subclass = player.upgrades[unit][5]
 				local upgrades = player.upgrades[unit][3].levels
 				local arr = {}
-				for i = 1, #wi.subclasses[subclass] do
-					local upgrade = wi.subclasses[subclass][i]
-					arr[upgrade.type] = upgrades[i]
+				
+				if wi.subClasses[subclass] then
+					for i = 1, #wi.subClasses[subclass] do
+						local upgrade = wi.subClasses[subclass][i]
+						arr[upgrade.type] = upgrades[i]
+					end
+					
+					local subclassSkills = {}
+					
+					subclassSkills[class] = arr
+					chosenSubclasses[unit] = subclassSkills[class]
 				end
-				
-				local subclassSkills = {}
-				
-				subclassSkills[class] = arr
-				chosenSubclasses[unit] = subclassSkills[class]
 			end
 			
 			CustomGameEventManager:Send_ServerToPlayer(player, "Get_user_info", {
