@@ -39,22 +39,22 @@ function wa:InitAddon(player, spawnPos, path, team)
 	player.upgrades = {
 		["swordsman"] = {
 			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
 		["archer"] = {
 			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
 		["mage"] = {
 			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
 		["catapult"] = {
 			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
 			{type = "sub", levels = {0}}, 
 			nil, nil},
 	}
@@ -138,23 +138,23 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team)
 			end
 			
 		end
-	end
-	
-	local special = info.specials[pathName]
-	if special then
-		for j = 1, #special do
-			local arr = special[j]
-			if arr[1] == "replace" then
-				utils:replaceAbility(unit, arr[2], arr[3])
-			elseif arr[1] == "set" then
-				local ability = unit:FindAbilityByName(arr[2])
-				if ability then
-					ability:SetLevel(arr[3])
+		
+		local special = info.specials[unitType]
+		if special then
+			for j = 1, #special do
+				local arr = special[j]
+				if arr[1] == "replace" then
+					utils:replaceAbility(unit, arr[2], arr[3])
+				elseif arr[1] == "set" then
+					local ability = unit:FindAbilityByName(arr[2])
+					if ability then
+						ability:SetLevel(arr[3])
+					end
+				elseif arr[1] == "upgrade" then
+					utils:upgradeAbility(unit, arr[2])
+				elseif arr[1] == "remove" then
+					utils:removeAbility(unit, arr[2])
 				end
-			elseif arr[1] == "upgrade" then
-				utils:upgradeAbility(unit, arr[2])
-			elseif arr[1] == "remove" then
-				utils:removeAbility(unit, arr[2])
 			end
 		end
 	end

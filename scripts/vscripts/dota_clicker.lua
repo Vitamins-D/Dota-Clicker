@@ -30,6 +30,31 @@ local uiArr
 local maxUnitPerPlayer
 
 local PlayerData = {}
+PlayerData[1] = {
+	upgrades = {
+		["swordsman"] = {
+			{type = "base", levels = {3, 5, 5}}, 
+			{type = "class", levels = {3, 1}}, 
+			{type = "sub", levels = {2}}, 
+			"tank", "Veins_fire"},
+		["archer"] = {
+			{type = "base", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
+		["mage"] = {
+			{type = "base", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
+		["catapult"] = {
+			{type = "base", levels = {0, 0, 0}}, 
+			{type = "class", levels = {0, 0}}, 
+			{type = "sub", levels = {0}}, 
+			nil, nil},
+	},
+	units = {"swordsman", "mage", "mage", "swordsman", "swordsman", "swordsman"}
+}
 
 local playerCount
 local difficulty = 2
