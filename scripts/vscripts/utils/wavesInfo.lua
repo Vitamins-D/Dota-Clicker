@@ -526,6 +526,7 @@ local abilitiesNames = {
 	black_dragon_splash_attack = "Splash",
 	pathfinder_spawn_unit = "Call Of The Wild Boar",
 	melee_spawn_unit = "Mirror Image",
+	creep_siege = "Siege",
 }
 
 function wi:getUpgradeCost(unit, name, level)

@@ -78,7 +78,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"500"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -101,7 +101,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"600"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -124,7 +124,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"700"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -147,7 +147,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"800"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -171,7 +171,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"75"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -194,7 +194,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"300"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -217,7 +217,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"600"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -240,7 +240,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"800"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -263,7 +263,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"1600"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"
@@ -286,7 +286,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"3200"
 		"ItemStackable"					"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
 		"ItemSellable"					"1"
 		"ItemPurchasable"				"0"

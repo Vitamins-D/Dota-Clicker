@@ -462,7 +462,7 @@
 			}
 			"damage"				
 			{
-				"value"	"25"
+				"value"	"15"
 				"special_bonus_unique_spirit_breaker_3" "+20"
 			}
 			"duration"				"0.3"
