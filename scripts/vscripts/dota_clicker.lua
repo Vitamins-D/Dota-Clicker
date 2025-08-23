@@ -809,14 +809,14 @@ function dota_clicker:OnPlayerConnectFull(keys)
 					end
 					
 				
-					local classSkills = {}
+					local skills = {}
 					
-					classSkills[class] = arr
-					evolutionSkills[unit] = classSkills
+					skills[class] = arr
+					evolutionSkills[unit] = skills
 				end
 			end
 			
-			local chosenSubclasses = {}
+			local subclassSkills = {}
 			for unit,v in pairs(player.upgrades) do
 				local subclass = player.upgrades[unit][5]
 				local upgrades = player.upgrades[unit][3].levels
@@ -828,10 +828,10 @@ function dota_clicker:OnPlayerConnectFull(keys)
 						arr[upgrade.type] = upgrades[i]
 					end
 					
-					local subclassSkills = {}
+					local skills = {}
 					
-					subclassSkills[class] = arr
-					chosenSubclasses[unit] = subclassSkills
+					skills[class] = arr
+					subclassSkills[unit] = skills
 				end
 			end
 			
