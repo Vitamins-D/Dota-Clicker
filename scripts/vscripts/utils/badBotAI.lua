@@ -557,7 +557,7 @@ end
 function badBotAI.IncomeForWave(bot)
     local mult = CFG.DIFFICULTY_MULT[bot.difficulty] or 1.0
     -- более чем в 1 игрок усиливаем доход линейно, как ты просил
-    local gold = math.floor(CFG.BASE_GOLD_PER_WAVE * mult * bot.players)
+    local gold = math.floor(CFG.BASE_GOLD_PER_WAVE * mult * bot.players * (1 + (bot._wave-1)*0.1))
     return gold
 end
 

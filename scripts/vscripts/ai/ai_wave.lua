@@ -22,6 +22,9 @@ function goPath()
             if distance < 100 then
                 -- Дошёл до точки → следующая
                 thisEntity.currentPathIndex = thisEntity.currentPathIndex + 1
+				if thisEntity.currentPathIndex > #thisEntity.path and thisEntity.isCaravan then
+					thisEntity:RemoveSelf()
+				end
             end
             ExecuteOrderFromTable({
                 UnitIndex = thisEntity:entindex(),

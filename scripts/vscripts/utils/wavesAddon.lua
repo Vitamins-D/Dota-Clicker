@@ -33,7 +33,7 @@ function wa:sortUnits(array)
     return array
 end
 
-function wa:InitAddon(player, spawnPos, path, team)
+function wa:InitAddon(player, spawnPos, path, team, caravanSpawn, caravanPath)
 	player.units = {}
 	
 	player.upgrades = {
@@ -62,9 +62,11 @@ function wa:InitAddon(player, spawnPos, path, team)
 	player.path = path
 	player.spawnPos = spawnPos
 	player.team = team
+	player.caravanSpawn = caravanSpawn
+	player.caravanPath = caravanPath
 end
 
-function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team)
+function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
 	local name = spawn_unit
 			
 	local unitUpg = pUpgrades[name]
@@ -74,10 +76,10 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team)
 	local pathName = name
 	if subclass then pathName = subclass
 	elseif class then pathName = class end
-	local path = info:getUnitByName(pathName)
+	local unitPath = info:getUnitByName(pathName)
 	
-	local unit = CreateUnitByName(path, spawnPos, true, nil, nil, team)
-	unit.path = player.path
+	local unit = CreateUnitByName(unitPath, spawnPos, true, nil, nil, team)
+	unit.path = path
 	unit.type = name
 	unit.class = class
 	unit.subclass = subclass
@@ -162,6 +164,8 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team)
 	Timers:CreateTimer(0.5, function()
 		unit:AddNewModifier(unit, nil, "modifier_buff_stats", {})
 	end)
+	
+	return unit
 end
 
 function wa:spawnWave(player)
@@ -181,22 +185,53 @@ function wa:spawnWave(player)
 	
 	for i = 1, #units do
 		Timers:CreateTimer(0.5*i, function()
-			wa:spawnUnit(units[i], player, spawnPos, pUpgrades, team)
+			wa:spawnUnit(units[i], player, spawnPos, pUpgrades, team, player.path)
 		end)
 	end
 end
 
-function wa:spawnCaravan(player)
-	local spawnPos = player.spawnPos
+function wa:spawnCaravan(player, level)
+	local spawnPos = player.caravanSpawn
 	local units = player.units
 	local pUpgrades = player.upgrades
 	local team = player.team
+	local path = player.caravanPath
 	
 	units = wa:sortUnits(units)
 	
-	for i = 1, #units do
-		Timers:CreateTimer(0.5*i, function()
-			wa:spawnUnit(units[i], spawnPos, pUpgrades, team)
+	local half = math.floor(#units/2)
+	
+	local function lSpawn(i)
+		local unit = wa:spawnUnit(units[i], player, spawnPos, pUpgrades, team, path)
+		unit.isCaravan = true
+		unit:SetBaseMoveSpeed(400)
+	end
+	
+	local interval = 0.5
+	for i = 1, half do
+		Timers:CreateTimer(interval*i, function()
+			lSpawn(i)
+		end)
+	end
+	for i = 1, 3 do
+		Timers:CreateTimer(interval*i + half*interval, function()
+			local caravan = CreateUnitByName("npc_dota_clicker_treasure_carrier"..math.random(1, 2), spawnPos, true, nil, nil, team)
+			caravan.path = path
+			caravan.type = "caravan"
+			caravan.isCaravan = true
+			caravan.bonus = {
+				hp = 300*(level-1)
+			}
+			caravan:SetBaseMoveSpeed(400)
+			
+			Timers:CreateTimer(0.5, function()
+				caravan:AddNewModifier(unit, nil, "modifier_buff_stats", {})
+			end)
+		end)
+	end
+	for i = half+1, #units do
+		Timers:CreateTimer(interval*i + interval*3, function()
+			lSpawn(i)
 		end)
 	end
 end

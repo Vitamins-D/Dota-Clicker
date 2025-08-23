@@ -12,19 +12,24 @@ local badBotAI = require("utils/badBotAI")
 local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
+local CARAVAN_INTERVAL = 180
+-- local CARAVAN_INTERVAL = WAVE_INTERVAL+5
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
 local AI_DIF = 1
 local AI_ON = true
+local ALL_VISION = false
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
+local caravanLevel = 1
 
 local badBot = {}
  
 local pathCount = 11
+local caravanPathCount = 4
 
 local uiArr
 local maxUnitPerPlayer
@@ -411,11 +416,17 @@ end
 function dota_clicker:StartSimpleGroundItemCleanup()
 	local cleanupItems = {
 		"item_dotac_wood",
+		
 		"item_dotac_boar_skin",
 		"item_dotac_wolf_skin",
 		"item_dotac_murloc_skin",
 		"item_dotac_bear_skin",
-		"item_dotac_cheeter_meat"
+		"item_dotac_cheeter_meat",
+		
+		"item_dotac_gemstone1",
+		"item_dotac_gemstone2",
+		"item_dotac_gemstone3",
+		"item_dotac_gemstone4",
 	}
 
 	Timers:CreateTimer(30, function()
@@ -556,6 +567,15 @@ function dota_clicker:dotaClickerKilled(data)
 				end
 			end
 		end
+	elseif unitName == "npc_dota_clicker_treasure_carrier1" or unitName == "npc_dota_clicker_treasure_carrier2" then
+		local itemName = "item_dotac_gemstone"..math.random(1, 4)
+		local item = CreateItem(itemName, nil, nil)
+		if item then
+			local dropped_item = CreateItemOnPositionSync(dropPos, item)
+			if dropped_item then
+				dropped_item.creation_time = GameRules:GetGameTime()
+			end
+		end
 	end
 end
 
@@ -581,6 +601,7 @@ end
 
 function dota_clicker:dotaClickerStart()
 	print("DOTA CLICKER START")
+	GameRules:SendCustomMessageToTeam("#ads_telegram", 0, 255, 0)
 	
 	local prms = difficulties[difficulty]
 	
@@ -599,17 +620,19 @@ function dota_clicker:dotaClickerStart()
 	
 	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
 	
-	Timers:CreateTimer(1, function()
-		local damage_table = {
-			victim = vision_unit,          
-			attacker = vision_unit,        
-			damage = vision_unit:GetMaxHealth()*1.5,        
-			damage_type = DAMAGE_TYPE_PURE, 
-			ability = nil,      
-		}
-		ApplyDamage(damage_table)
-		return
-	end)
+	if not ALL_VISION then
+		Timers:CreateTimer(1, function()
+			local damage_table = {
+				victim = vision_unit,          
+				attacker = vision_unit,        
+				damage = vision_unit:GetMaxHealth()*1.5,        
+				damage_type = DAMAGE_TYPE_PURE, 
+				ability = nil,      
+			}
+			ApplyDamage(damage_table)
+			return
+		end)
+	end
 	
 	dota_clicker:SpawnMines()
 	
@@ -636,13 +659,17 @@ function dota_clicker:dotaClickerStart()
 	local path = getPaths("wave_path_", pathCount, true)
 	local wave_start = path[1]:GetAbsOrigin()
 	self:throughPlayers(function(player, hero)
-		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS)
+		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil)
 	end)
 	
 	
 	local badPath = getPaths("wave_path_", pathCount, false)
 	local bad_start = badPath[1]:GetAbsOrigin()
-	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS)
+	
+	local caravanPath = getPaths("caravan_", caravanPathCount, false)
+	local caravan_start = caravanPath[1]:GetAbsOrigin()
+	
+	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS, caravan_start, caravanPath)
 	if AI_ON then
 		badBot.gold = PlayerResource:GetPlayerCount()*1000
 		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount(), difficulty = AI_DIF })
@@ -679,7 +706,12 @@ function dota_clicker:dotaClickerStart()
 
 		return WAVE_INTERVAL
 	end)
-
+	
+	Timers:CreateTimer(CARAVAN_INTERVAL, function()
+		wa:spawnCaravan(badBot, caravanLevel)
+		caravanLevel = caravanLevel + 1
+		return CARAVAN_INTERVAL
+	end)
 end
 
 function dota_clicker:OnThink()
@@ -850,6 +882,8 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			end
 			
 			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataCurrUnits", {units = units})
+			
+			CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
         end
     end
 	

@@ -28,7 +28,7 @@ ns.dropTable = {
 	["npc_dota_clicker_bear"] = {
 		{item = "item_dotac_bear_skin", chance = 75},
 		{item = "item_dotac_cheeter_meat", chance = 5}
-	}
+	},
 }
 
 local camps = {}
