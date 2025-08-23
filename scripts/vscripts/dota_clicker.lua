@@ -505,6 +505,8 @@ function dota_clicker:OnPlayerChat(event)
 	
 	if text == "-rich" or text == "-кшср" then
 		GiveGoldPlayers(999999)
+	elseif text == "-lvl" or text == "-дмд" then
+		GiveExpPlayers(levelExp*30)
 	end
 end
 
@@ -745,6 +747,78 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			for k,v in pairs(pdata) do
 				player[k] = v
 			end
+			
+			local playerUpgrades = {}
+			for unit,v in pairs(player.upgrades) do
+				local upgrades = player.upgrades[unit][1].levels
+				local arr = {}
+				for i = 1, #wi.base[unit] do
+					local upgrade = wi.base[unit][i]
+					arr[upgrade.type] = upgrades[i]
+				end
+				
+				playerUpgrades[unit] = arr
+			end
+			
+			local chosenEvolutions = {}
+			for unit,v in pairs(player.upgrades) do
+				local class = player.upgrades[unit][4]
+				chosenEvolutions[unit] = class
+			end
+			
+			local chosenSubclasses = {}
+			for unit,v in pairs(player.upgrades) do
+				local subclass = player.upgrades[unit][5]
+				chosenSubclasses[unit] = subclass
+			end
+			
+			local evolutionSkills = {}
+			for unit,v in pairs(player.upgrades) do
+				local class = player.upgrades[unit][4]
+				local upgrades = player.upgrades[unit][2].levels
+				local arr = {}
+				for i = 1, #wi.classes[class] do
+					local upgrade = wi.classes[class][i]
+					arr[upgrade.type] = upgrades[i]
+				end
+				
+				local classSkills = {}
+				
+				classSkills[class] = arr
+				evolutionSkills[unit] = classSkills[class]
+			end
+			
+			local chosenSubclasses = {}
+			for unit,v in pairs(player.upgrades) do
+				local subclass = player.upgrades[unit][5]
+				local upgrades = player.upgrades[unit][3].levels
+				local arr = {}
+				for i = 1, #wi.subclasses[subclass] do
+					local upgrade = wi.subclasses[subclass][i]
+					arr[upgrade.type] = upgrades[i]
+				end
+				
+				local subclassSkills = {}
+				
+				subclassSkills[class] = arr
+				chosenSubclasses[unit] = subclassSkills[class]
+			end
+			
+			CustomGameEventManager:Send_ServerToPlayer(player, "Get_user_info", {
+				playerUpgrades = playerUpgrades,
+				chosenEvolutions = chosenEvolutions,
+				chosenSubclasses = chosenSubclasses,
+				evolutionSkills = evolutionSkills,
+				subclassSkills = subclassSkills,
+			})
+			
+			local units = {}
+			for i = 1, #wi.unitTypes do
+				local name = wi.unitTypes[i]
+				units[name] = utils:countOf(player.units, name)
+			end
+			
+			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataCurrUnits", {units = units})
         end
     end
 	

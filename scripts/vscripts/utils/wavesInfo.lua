@@ -103,6 +103,8 @@ wi.skills = {
   ["Veins_fire"] = {"burning_strikes"},
   ["stone_block"] = {"dc_mars_bulwark"},
   ["fight_shaman"] = {"dc_witch_doctor_death_ward"},
+  ["illusionist"] = {"melee_spawn_unit"},
+  ["pathfinder"] = {"pathfinder_spawn_unit"},
   -- ["air_mage"] = {"dc_silencer_last_word"},
 }
 
@@ -521,6 +523,8 @@ local abilitiesNames = {
 	dotac_luna_lucent_beam = "Lucent Beam",
 	burning_strikes = "Burning Strikes",
 	black_dragon_splash_attack = "Splash",
+	pathfinder_spawn_unit = "Call Of The Wild Boar",
+	melee_spawn_unit = "Mirror Image",
 }
 
 function wi:getUpgradeCost(unit, name, level)
