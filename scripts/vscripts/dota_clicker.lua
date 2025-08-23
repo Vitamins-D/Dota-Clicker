@@ -165,6 +165,14 @@ function dota_clicker:RegisterCustomEventListeners()
 		end)
 	end)
 	
+	CustomGameEventManager:RegisterListener("upd_trans_map", function(_, event)
+		local player_id = event.player_id
+		local player = PlayerResource:GetPlayer(player_id)
+		self:throughPlayers(function(player, hero)
+			CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
+		end)
+	end)
+	
 	CustomGameEventManager:RegisterListener("sell_unit", function(_, event)
 		self:HandleSellUnit(event)
 	end)
@@ -454,9 +462,9 @@ end
 
 function miningDo(oreType, playerId)
 	local oresValues = {
-		["iron"] = 1,
-		["silver"] = 3,
-		["gold"] = 5,
+		["iron"] = 2,
+		["silver"] = 4,
+		["gold"] = 6,
 	}
 	
 	local player = PlayerResource:GetPlayer(playerId)
@@ -671,7 +679,7 @@ function dota_clicker:dotaClickerStart()
 	
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS, caravan_start, caravanPath)
 	if AI_ON then
-		badBot.gold = PlayerResource:GetPlayerCount()*1000
+		-- badBot.gold = PlayerResource:GetPlayerCount()*1000
 		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount(), difficulty = AI_DIF })
 	end
 	-- wa:spawnWave(badBot)

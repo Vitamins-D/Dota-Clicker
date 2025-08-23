@@ -48,8 +48,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"50"
-		"ItemStockMax"					"8"
-		"ItemStockInitial"				"8"
+		"ItemStockMax"					"15"
+		"ItemStockInitial"				"15"
 	}
 	
 	//=================================================================================================================
@@ -76,7 +76,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"300"
+		"ItemCost"						"500"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -99,7 +99,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"400"
+		"ItemCost"						"600"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -122,7 +122,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"500"
+		"ItemCost"						"700"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -145,7 +145,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"600"
+		"ItemCost"						"800"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -169,7 +169,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"50"
+		"ItemCost"						"75"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -192,7 +192,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"250"
+		"ItemCost"						"300"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -215,7 +215,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"500"
+		"ItemCost"						"600"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -238,7 +238,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"750"
+		"ItemCost"						"800"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -261,7 +261,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"1000"
+		"ItemCost"						"1600"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"
@@ -284,7 +284,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"3000"
+		"ItemCost"						"3200"
 		"ItemStackable"					"0"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDroppable"					"1"

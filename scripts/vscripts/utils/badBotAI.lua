@@ -38,6 +38,8 @@ local CFG = {
 
     -- Сколько максимум разных «билдов» рассматривать при старте (разнообразие)
     STRATEGY_POOL = { "mages_focus", "archers_focus", "balanced", "siege_focus" },
+	
+	PLAYERS_MULT = 0.85,
 }
 
 --------------------------------------------------------------------------------
@@ -538,7 +540,7 @@ function badBotAI:Init(bot, params)
         ["mage"]      = { {type="base", levels={0,0,0}}, {type="class", levels={0,0,0}}, {type="sub", levels={0}}, nil, nil },
         ["catapult"]  = { {type="base", levels={0,0,0}}, {type="class", levels={0,0,0}}, {type="sub", levels={0}}, nil, nil },
     }
-    bot.gold       = bot.gold or 0
+    bot.gold       = bot.gold or 1000 * (1 + (bot.players-1)*CFG.PLAYERS_MULT)
     bot.players    = clamp(tonumber(params.players or 1) or 1, 1, 10)
 
     -- поддерживаем русские и английские варианты сложности
@@ -557,7 +559,7 @@ end
 function badBotAI.IncomeForWave(bot)
     local mult = CFG.DIFFICULTY_MULT[bot.difficulty] or 1.0
     -- более чем в 1 игрок усиливаем доход линейно, как ты просил
-    local gold = math.floor(CFG.BASE_GOLD_PER_WAVE * mult * bot.players * (1 + (bot._wave-1)*0.1))
+    local gold = math.floor(CFG.BASE_GOLD_PER_WAVE * mult * (1 + (bot.players-1)*CFG.PLAYERS_MULT) * (1 + (bot._wave-1)*0.1))
     return gold
 end
 

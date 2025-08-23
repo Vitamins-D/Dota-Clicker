@@ -11,29 +11,23 @@ local campsUnits = {
 ns.campsUnits = campsUnits
 ns.dropTable = {
 	["npc_dota_clicker_boar"] = {
-		{item = "item_dotac_boar_skin", chance = 75},
-		{item = "item_madstone", chance = 50},
+		{item = "item_dotac_boar_skin", chance = 85},
 	},
 	["npc_dota_clicker_wolf"] = {
-		{item = "item_dotac_wolf_skin", chance = 75},
-		{item = "item_madstone", chance = 50},
+		{item = "item_dotac_wolf_skin", chance = 85},
 	},
 	["npc_dota_clicker_wolf_alpha"] = {
-		{item = "item_dotac_wolf_skin", chance = 75},
-		{item = "item_madstone", chance = 50},
+		{item = "item_dotac_wolf_skin", chance = 85},
 	},
 	["npc_dota_clicker_murloc"] = {
-		{item = "item_dotac_murloc_skin", chance = 75},
-		{item = "item_madstone", chance = 50},
+		{item = "item_dotac_murloc_skin", chance = 85},
 	},
 	["npc_dota_clicker_murloc2"] = {
-		{item = "item_dotac_murloc_skin", chance = 75},
-		{item = "item_madstone", chance = 50},
+		{item = "item_dotac_murloc_skin", chance = 85},
 	},
 	["npc_dota_clicker_bear"] = {
-		{item = "item_dotac_bear_skin", chance = 75},
+		{item = "item_dotac_bear_skin", chance = 85},
 		{item = "item_dotac_cheeter_meat", chance = 5},
-		{item = "item_madstone", chance = 100},
 	},
 }
 
