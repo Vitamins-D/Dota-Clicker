@@ -30,31 +30,31 @@ local uiArr
 local maxUnitPerPlayer
 
 local PlayerData = {}
-PlayerData[1] = {
-	upgrades = {
-		["swordsman"] = {
-			{type = "base", levels = {3, 5, 5}}, 
-			{type = "class", levels = {3, 1}}, 
-			{type = "sub", levels = {2}}, 
-			"tank", "Veins_fire"},
-		["archer"] = {
-			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0}}, 
-			{type = "sub", levels = {0}}, 
-			nil, nil},
-		["mage"] = {
-			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0}}, 
-			{type = "sub", levels = {0}}, 
-			nil, nil},
-		["catapult"] = {
-			{type = "base", levels = {0, 0, 0}}, 
-			{type = "class", levels = {0, 0}}, 
-			{type = "sub", levels = {0}}, 
-			nil, nil},
-	},
-	units = {"swordsman", "mage", "mage", "swordsman", "swordsman", "swordsman"}
-}
+-- PlayerData[1] = {
+	-- upgrades = {
+		-- ["swordsman"] = {
+			-- {type = "base", levels = {3, 5, 5}}, 
+			-- {type = "class", levels = {3, 1}}, 
+			-- {type = "sub", levels = {2}}, 
+			-- "tank", "Veins_fire"},
+		-- ["archer"] = {
+			-- {type = "base", levels = {0, 0, 0}}, 
+			-- {type = "class", levels = {0, 0}}, 
+			-- {type = "sub", levels = {0}}, 
+			-- nil, nil},
+		-- ["mage"] = {
+			-- {type = "base", levels = {0, 0, 0}}, 
+			-- {type = "class", levels = {0, 0}}, 
+			-- {type = "sub", levels = {0}}, 
+			-- nil, nil},
+		-- ["catapult"] = {
+			-- {type = "base", levels = {0, 0, 0}}, 
+			-- {type = "class", levels = {0, 0}}, 
+			-- {type = "sub", levels = {0}}, 
+			-- nil, nil},
+	-- },
+	-- units = {"swordsman", "mage", "mage", "swordsman", "swordsman", "swordsman"}
+-- }
 
 local playerCount
 local difficulty = 2
@@ -755,7 +755,6 @@ function dota_clicker:OnPlayerConnectFull(keys)
     if player_id == nil or player_id == -1 then return end
 
 	local pdata = PlayerData[player_id+1]
-	print(pdata, "pdata")
 	if not pdata then
         PlayerData[player_id+1] = {
             units = {},
