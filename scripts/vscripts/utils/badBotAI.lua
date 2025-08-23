@@ -540,8 +540,8 @@ function badBotAI:Init(bot, params)
         ["mage"]      = { {type="base", levels={0,0,0}}, {type="class", levels={0,0,0}}, {type="sub", levels={0}}, nil, nil },
         ["catapult"]  = { {type="base", levels={0,0,0}}, {type="class", levels={0,0,0}}, {type="sub", levels={0}}, nil, nil },
     }
-    bot.gold       = bot.gold or 1000 * (1 + (bot.players-1)*CFG.PLAYERS_MULT)
     bot.players    = clamp(tonumber(params.players or 1) or 1, 1, 10)
+	bot.gold       = bot.gold or 1000 * (1 + (bot.players-1)*CFG.PLAYERS_MULT)
 
     -- поддерживаем русские и английские варианты сложности
     local diff = (params.difficulty or 1)
