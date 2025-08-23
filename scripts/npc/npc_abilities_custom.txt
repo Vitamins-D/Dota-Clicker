@@ -1087,7 +1087,7 @@
 				}		
 				"arrow_count"
 				{
-					"value"						"2"
+					"value"						"2 2 2 3"
 					"special_bonus_scepter"		"+1"
 				}	
 				"process_procs"
@@ -1095,7 +1095,7 @@
 					"value"						"0"
 					"special_bonus_scepter"		"+1"
 				}
-				"split_shot_bonus_range"		"150"
+				"split_shot_bonus_range"		"0"
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}
@@ -1145,7 +1145,7 @@
 			}
 			"damage"
 			{
-				"value"				"100"
+				"value"				"75 100 125"
 
 			}
 			"pct_health_damage" 		
@@ -1272,12 +1272,12 @@
 		{
 			"AbilityCooldown"
 			{
-				"value"							"3.0 2.5 2.5 2.5 2.5"
+				"value"							"2.5"
 				"special_bonus_unique_zeus_6"	"-0.4"
 			}
 			"arc_damage"
 			{
-				"value"			"90 120 150 180"
+				"value"			"150"
 				"special_bonus_unique_zeus_2"	"+60"
 			}
 			"radius"				
@@ -1285,7 +1285,7 @@
 				"value"			"450"
 				"affected_by_aoe_increase"	"1"
 			}
-			"jump_count"			"5 7 9 15"
+			"jump_count"			"7"
 			"jump_delay"			"0.25 0.25 0.25 0.25"
 		
 		}
@@ -1649,7 +1649,7 @@
 			"duration"			"10"
 			"damage_absorb"
 			{
-				"value"			"100 120 140"
+				"value"			"100 120 140 160 200"
 				"DamageTypeTooltip"		"DAMAGE_TYPE_MAGICAL"
 			}
 
@@ -2280,17 +2280,17 @@
 
 			"damage_impact"		
 			{
-				"value"			"30 45 60"
+				"value"			"100 200"
 				"CalculateSpellDamageTooltip" "1"
 			}
 			"damage_per_second"		
 			{
-				"value"			"25 30 35"
+				"value"			"30 45"
 				"CalculateSpellDamageTooltip" "1"
 			}
 			"damage_duration"		
 			{
-				"value"		"4 5 6"
+				"value"		"5 6"
 				"DamageTypeTooltip"		"DAMAGE_TYPE_NONE"
 				"CalculateSpellDamageTooltip" "0"
 			}
@@ -2301,10 +2301,10 @@
 			}
 			"collision_radius"		
 			{
-				"value"		"100 100 100 "
+				"value"		"100 100 "
 					"affected_by_aoe_increase"	"1"
 			}
-			"stun_duration"			"0.5 0.5 0.5"
+			"stun_duration"			"0.5 0.5"
 			"speed"					"1700"
 			"knockback_distance"	
 			{
@@ -2312,7 +2312,7 @@
 				"special_bonus_unique_batrider_3"	"+50"
 				"affected_by_aoe_increase"	"1"
 			}
-			"knockback_height"		"100 100 100"
+			"knockback_height"		"100 100"
 			"knockback_duration"	"0.35"
 			"napalm_stacks"
 			{
@@ -2321,10 +2321,10 @@
 			}
 			"AbilityCooldown"		
 			{
-				"value"	 "22 19 16"
+				"value"	 "22 19"
 				"special_bonus_unique_batrider_5"	"-6"
 			}
-			"slow"	"8 16 32"		
+			"slow"	"16 32"		
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 	}
@@ -3069,7 +3069,7 @@
 		{
 		"AbilityCooldown"
 		{
-			"value"          "9.0 8.0"
+			"value"          "9.0 8.0 7.0 7.0"
 			"special_bonus_unique_luna_2" "-2"
 		}
 		"AbilityManaCost"
@@ -3079,7 +3079,7 @@
 		}
 		"beam_damage"
 		{
-			"value"          "85 225"
+			"value"          "85 225 270 315"
 			"special_bonus_unique_luna_1"  "+110"
 		}
 		"stun_duration"

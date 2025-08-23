@@ -12,6 +12,8 @@ function Precache( context )
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_ranged_v2.vmdl", context);
 	PrecacheResource("model", "models/heroes/lone_druid/spirit_bear.vmdl", context);
 	PrecacheResource("model", "models/creeps/lane_creeps/creep_good_siege/creep_good_siege_deathsim.vmdl", context);
+    PrecacheResource("model", "models/courier/defense3_sheep/defense3_sheep.vmdl", context);
+	PrecacheResource("model", "models/courier/donkey_crummy_wizard_2014/donkey_crummy_wizard_2014.vmdl", context);
 	
 	-- Звуки для кирок
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts", context)
@@ -141,6 +143,65 @@ function Precache( context )
 
 	PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer.vmdl", context)
 	PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer.vmdl", context)
+
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_hook/artisan_of_havoc_hook.vmdl", context)
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_helmet/artisan_of_havoc_helmet.vmdl", context)
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_armor/artisan_of_havoc_armor.vmdl", context)
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_rocket/artisan_of_havoc_rocket.vmdl", context)
+
+    PrecacheResource("model", "models/items/sniper/spring2021_ambush_sniper_sniper_rifle/spring2021_ambush_sniper_sniper_rifle.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/spring2021_ambush_sniper_nest_cap/spring2021_ambush_sniper_nest_cap.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/spring2021_ambush_sniper_shoulders/spring2021_ambush_sniper_shoulders.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/spring2021_ambush_sniper_arms/spring2021_ambush_sniper_arms.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/spring2021_ambush_sniper_cape/spring2021_ambush_sniper_cape.vmdl", context)
+
+    PrecacheResource("model", "models/items/sniper/scifi_sniper_test_gun/scifi_sniper_test_gun.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/scifi_sniper_test_head/scifi_sniper_test_head.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/scifi_sniper_test_shoulder/scifi_sniper_test_shoulder.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/scifi_sniper_test_arms/scifi_sniper_test_arms.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/scifi_sniper_test_back/scifi_sniper_test_back.vmdl", context)
+
+    PrecacheResource("model", "models/items/techies/techies_ti9_immortal_bazooka/techies_ti9_immortal_bazooka.vmdl", context)
+    PrecacheResource("model", "models/items/techies/techies_ti9_immortal_spleen/techies_ti9_immortal_spleen.vmdl", context)
+    PrecacheResource("model", "models/items/techies/techies_ti9_immortal_spoon/techies_ti9_immortal_spoon.vmdl", context)
+    PrecacheResource("model", "models/items/techies/techies_ti9_immortal_squee/techies_ti9_immortal_squee.vmdl", context)
+    PrecacheResource("model", "models/items/techies/techies_ti9_immortal_cart/techies_ti9_immortal_cart.vmdl", context)
+
+    PrecacheResource("model", "models/items/sniper/heavymetal_weapon/heavymetal_weapon.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_head/heavymetal_head.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_shoulder/heavymetal_shoulder.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_arms/heavymetal_arms.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_back/heavymetal_back.vmdl", context)
+
+    PrecacheResource("model", "models/items/sniper/heavymetal_weapon/heavymetal_weapon.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_head/heavymetal_head.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_shoulder/heavymetal_shoulder.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_arms/heavymetal_arms.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/heavymetal_back/heavymetal_back.vmdl", context)
+
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_hook/artisan_of_havoc_hook.vmdl", context)
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_helmet/artisan_of_havoc_helmet.vmdl", context)
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_armor/artisan_of_havoc_armor.vmdl", context)
+    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_rocket/artisan_of_havoc_rocket.vmdl", context)
+
+    PrecacheResource("model", "models/items/shadowshaman/eki_bukaw_bracers/eki_bukaw_bracers.vmdl", context)
+    PrecacheResource("model", "models/items/shadowshaman/records_of_the_eki_bukaw/records_of_the_eki_bukaw.vmdl", context)
+    PrecacheResource("model", "models/items/shadowshaman/eki_bukaw_wand/eki_bukaw_wand.vmdl", context)
+    PrecacheResource("model", "models/items/shadowshaman/eki_bukaw_wand__offhand/eki_bukaw_wand__offhand.vmdl", context)
+    PrecacheResource("model", "models/items/shadowshaman/serpent_ward/fiery_ward_of_eki_bukaw/fiery_ward_of_eki_bukaw.vmdl", context)
+    PrecacheResource("model", "models/items/shadowshaman/visage_of_eki_bukaw/visage_of_eki_bukaw.vmdl", context)
+
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_head2/sniper_tallyho_head2.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tally_ho_back2/sniper_tally_ho_back2.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_arms2/sniper_tallyho_arms2.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_shoulders3/sniper_tallyho_shoulders3.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_weapons1/sniper_tallyho_weapons1.vmdl", context)
+
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_head2/sniper_tallyho_head2.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tally_ho_back2/sniper_tally_ho_back2.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_arms2/sniper_tallyho_arms2.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_shoulders3/sniper_tallyho_shoulders3.vmdl", context)
+    PrecacheResource("model", "models/items/sniper/sniper_tallyho_weapons1/sniper_tallyho_weapons1.vmdl", context)
 end
 
 -- Create the game mode when we activate
