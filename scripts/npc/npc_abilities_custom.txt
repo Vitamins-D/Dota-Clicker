@@ -3250,4 +3250,50 @@
       "vampiric_perc"      "10 20 30"
     }
   }
+  //=================================================================================================================
+	// Medusa: Split Shot
+	//=================================================================================================================
+	"dc_medusa_split_shot_tower"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"		"medusa_split_shot"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"		
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"HasScepterUpgrade"				"1"
+		"IsBreakable"					"1"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.4 0.4"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"damage_modifier"		
+				{
+					"value"		"-0 -0"
+					"special_bonus_unique_medusa_2"	"+8"
+				}
+				"damage_modifier_tooltip"		
+				{	
+					"value"			"60 100"
+					"special_bonus_unique_medusa_2"	"+8"
+				}		
+				"arrow_count"
+				{
+					"value"						"2 2"
+					"special_bonus_scepter"		"+1"
+				}	
+				"process_procs"
+				{
+					"value"						"0"
+					"special_bonus_scepter"		"+1"
+				}
+				"split_shot_bonus_range"		"0"
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
 }
