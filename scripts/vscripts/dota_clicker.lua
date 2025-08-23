@@ -830,7 +830,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
 					
 					local skills = {}
 					
-					skills[class] = arr
+					skills[subclass] = arr
 					subclassSkills[unit] = skills
 				end
 			end
