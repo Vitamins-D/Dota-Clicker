@@ -399,7 +399,7 @@ wi.subClasses = { -- усиляются их способности
 	["fire_mage"] = {
 		{type = "fire_mage_upgrade", levels = {
 			{{type = "spell_up", value = "dc_batrider_flamebreak"}, cost = 700},
-			{{type = "spell", value = ""}, cost = 900},
+			{{type = "spell", value = "dotac_magical_crit"}, cost = 900},
 			{{type = "spell_up", value = "dc_lina_light_strike_array"}, cost = 800},
 		}}, cost = 1000
 	}, -- elementalist
