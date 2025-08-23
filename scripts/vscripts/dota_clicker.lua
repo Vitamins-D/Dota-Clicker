@@ -812,7 +812,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
 					local classSkills = {}
 					
 					classSkills[class] = arr
-					evolutionSkills[unit] = classSkills[class]
+					evolutionSkills[unit] = classSkills
 				end
 			end
 			
@@ -831,7 +831,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
 					local subclassSkills = {}
 					
 					subclassSkills[class] = arr
-					chosenSubclasses[unit] = subclassSkills[class]
+					chosenSubclasses[unit] = subclassSkills
 				end
 			end
 			
