@@ -1525,12 +1525,12 @@
 			}
 			"radius"				
 			{
-				"value"		"600"
+				"value"		"500"
 				"affected_by_aoe_increase"	"1"	
 			}
 			"damage"
 			{
-				"value"			"500 600 700"
+				"value"			"200 300 400"
 				"special_bonus_unique_techies" "+200"
 			}
 			"stun_duration"				"0.5"
@@ -1590,12 +1590,12 @@
 			}
 			"radius"				
 			{
-				"value"		"1200"
+				"value"		"600"
 				"affected_by_aoe_increase"	"1"	
 			}
 			"damage"
 			{
-				"value"			"800 900 1000"
+				"value"			"600 700 900"
 				"special_bonus_unique_techies" "+200"
 			}
 			"stun_duration"				"1.5"
