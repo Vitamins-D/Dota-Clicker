@@ -169,7 +169,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"75"
+		"ItemCost"						"80"
 		"ItemStackable"					"0"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDroppable"					"1"
@@ -532,7 +532,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
 		"AbilityCastRange"				"300"
-		"AbilityCastPoint"				"6.0"
+		"AbilityCastPoint"				"3.5"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -551,7 +551,7 @@
 			"bleed_chance"				"15"
 			"bleed_damage"				"5"
 			"bleed_duration"			"3"
-			"tree_cut_time"				"6.0"
+			"tree_cut_time"				"3.5"
 		}
 	}
 
@@ -569,7 +569,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
 		"AbilityCastRange"				"300"
-		"AbilityCastPoint"				"5.0"
+		"AbilityCastPoint"				"3"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -588,7 +588,7 @@
 			"bleed_chance"				"15"
 			"bleed_damage"				"8"
 			"bleed_duration"			"2.5"
-			"tree_cut_time"				"5.8"
+			"tree_cut_time"				"3"
 		}
 	}
 
@@ -606,7 +606,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
 		"AbilityCastRange"				"300"
-		"AbilityCastPoint"				"4.0"
+		"AbilityCastPoint"				"2.5"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -623,7 +623,7 @@
 			"bleed_chance"				"15"
 			"bleed_damage"				"12"
 			"bleed_duration"			"3"
-			"tree_cut_time"				"4.0"
+			"tree_cut_time"				"2.5"
 		}
 	}
 
@@ -641,7 +641,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
 		"AbilityCastRange"				"300"
-		"AbilityCastPoint"				"3.0"
+		"AbilityCastPoint"				"2"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -658,7 +658,7 @@
 			"bleed_chance"				"20"
 			"bleed_damage"				"18"
 			"bleed_duration"			"4.0"
-			"tree_cut_time"				"3.0"
+			"tree_cut_time"				"2"
 		}
 	}
 
@@ -676,7 +676,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_NEUTRAL"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
 		"AbilityCastRange"				"300"
-		"AbilityCastPoint"				"2.0"
+		"AbilityCastPoint"				"1.0"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -693,7 +693,7 @@
 			"bleed_chance"				"20"
 			"bleed_damage"				"25"
 			"bleed_duration"			"4.0"
-			"tree_cut_time"				"2.0"
+			"tree_cut_time"				"1.0"
 		}
 	}
 
