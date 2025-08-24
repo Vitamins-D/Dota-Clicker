@@ -462,9 +462,9 @@ end
 
 function miningDo(oreType, playerId)
 	local oresValues = {
-		["iron"] = 2,
-		["silver"] = 4,
-		["gold"] = 6,
+		["iron"] = 3,
+		["silver"] = 5,
+		["gold"] = 7,
 	}
 	
 	local player = PlayerResource:GetPlayer(playerId)
