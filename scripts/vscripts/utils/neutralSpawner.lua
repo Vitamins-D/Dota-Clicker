@@ -43,7 +43,7 @@ function ns:InitNeutralCamps()
             local campType = tonumber(string.match(name, 'neutral_camp_(%d+)$') or 1)
             local camp = {
                 trigger = trigger,
-                campType = campType,
+                campType = 1,
                 units = {},
                 respawnTime = 30,
                 isRespawning = false
@@ -76,16 +76,15 @@ function ns:SpawnCamp(camp)
         unit.campRef = camp -- привязка к кемпу
 		
         -- Выдаём предметы из dropTable
-        local drops = self.dropTable[unitName]
-        if drops then
-            for _, dropInfo in pairs(drops) do
-                -- Если шанс срабатывает — даём предмет сразу в инвентарь
-				if dropInfo.item ~= "item_dotac_cheeter_meat" then
-					local item = CreateItem(dropInfo.item, unit, unit)
-					unit:AddItem(item)
-				end
-            end
-        end
+        -- local drops = self.dropTable[unitName]
+        -- if drops then
+            -- for _, dropInfo in pairs(drops) do
+				-- if dropInfo.item ~= "item_dotac_cheeter_meat" then
+					-- local item = CreateItem(dropInfo.item, unit, unit)
+					-- unit:AddItem(item)
+				-- end
+            -- end
+        -- end
 
         table.insert(camp.units, unit)
     end

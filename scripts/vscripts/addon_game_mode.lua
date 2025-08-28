@@ -14,6 +14,7 @@ function Precache( context )
 	PrecacheResource("model", "models/creeps/lane_creeps/creep_good_siege/creep_good_siege_deathsim.vmdl", context);
     PrecacheResource("model", "models/courier/defense3_sheep/defense3_sheep.vmdl", context);
 	PrecacheResource("model", "models/courier/donkey_crummy_wizard_2014/donkey_crummy_wizard_2014.vmdl", context);
+	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_c/n_creep_kobold_c.vmdl", context);
 	
 	-- Звуки для кирок
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts", context)
@@ -173,17 +174,6 @@ function Precache( context )
     PrecacheResource("model", "models/items/sniper/heavymetal_arms/heavymetal_arms.vmdl", context)
     PrecacheResource("model", "models/items/sniper/heavymetal_back/heavymetal_back.vmdl", context)
 
-    PrecacheResource("model", "models/items/sniper/heavymetal_weapon/heavymetal_weapon.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/heavymetal_head/heavymetal_head.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/heavymetal_shoulder/heavymetal_shoulder.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/heavymetal_arms/heavymetal_arms.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/heavymetal_back/heavymetal_back.vmdl", context)
-
-    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_hook/artisan_of_havoc_hook.vmdl", context)
-    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_helmet/artisan_of_havoc_helmet.vmdl", context)
-    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_armor/artisan_of_havoc_armor.vmdl", context)
-    PrecacheResource("model", "models/items/rattletrap/artisan_of_havoc_rocket/artisan_of_havoc_rocket.vmdl", context)
-
     PrecacheResource("model", "models/items/shadowshaman/eki_bukaw_bracers/eki_bukaw_bracers.vmdl", context)
     PrecacheResource("model", "models/items/shadowshaman/records_of_the_eki_bukaw/records_of_the_eki_bukaw.vmdl", context)
     PrecacheResource("model", "models/items/shadowshaman/eki_bukaw_wand/eki_bukaw_wand.vmdl", context)
@@ -196,12 +186,19 @@ function Precache( context )
     PrecacheResource("model", "models/items/sniper/sniper_tallyho_arms2/sniper_tallyho_arms2.vmdl", context)
     PrecacheResource("model", "models/items/sniper/sniper_tallyho_shoulders3/sniper_tallyho_shoulders3.vmdl", context)
     PrecacheResource("model", "models/items/sniper/sniper_tallyho_weapons1/sniper_tallyho_weapons1.vmdl", context)
-
-    PrecacheResource("model", "models/items/sniper/sniper_tallyho_head2/sniper_tallyho_head2.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/sniper_tally_ho_back2/sniper_tally_ho_back2.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/sniper_tallyho_arms2/sniper_tallyho_arms2.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/sniper_tallyho_shoulders3/sniper_tallyho_shoulders3.vmdl", context)
-    PrecacheResource("model", "models/items/sniper/sniper_tallyho_weapons1/sniper_tallyho_weapons1.vmdl", context)
+	
+	PrecacheResource("model", "models/items/invoker/sempiternal_revelations_hat/sempiternal_revelations_hat.vmdl", context)
+	PrecacheResource("model", "models/items/invoker/sempiternal_revelations_shoulder/sempiternal_revelations_shoulder.vmdl", context)
+	PrecacheResource("model", "models/items/invoker/sempiternal_revelations_cape/sempiternal_revelations_cape.vmdl", context)
+	PrecacheResource("model", "models/items/invoker/sempiternal_revelations_arms/sempiternal_revelations_arms.vmdl", context)
+	PrecacheResource("model", "models/items/invoker/forge_spirit/sempiternal_revelations_forged_spirits/sempiternal_revelations_forged_spirits.vmdl", context)
+	PrecacheResource("model", "models/items/invoker/sempiternal_revelations_belt/sempiternal_revelations_belt.vmdl", context)
+	
+	PrecacheResource("model", "models/items/rattletrap/warmachine_shovel_dc/warmachine_shovel_dc.vmdl", context)
+	PrecacheResource("model", "models/items/rattletrap/dc_clock_head01_warmachine/dc_clock_head01_warmachine.vmdl", context)
+	PrecacheResource("model", "models/items/rattletrap/warmachine_armor_dc/warmachine_armor_dc.vmdl", context)
+	PrecacheResource("model", "models/items/rattletrap/warmachine_rocket_dc/warmachine_rocket_dc.vmdl", context)
+	PrecacheResource("model", "models/items/rattletrap/warmachine_cog_dc/warmachine_cog_dc.vmdl", context)
 end
 
 -- Create the game mode when we activate

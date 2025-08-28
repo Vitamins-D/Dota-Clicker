@@ -14,6 +14,7 @@ function melee_spawn_unit:OnSpellStart()
         local spawn_position = caster:GetAbsOrigin() + RandomVector(200)
         local summoned_unit = CreateUnitByName(unit_name, spawn_position, true, caster, caster, caster:GetTeamNumber())
 		summoned_unit.path = caster.path
+		summoned_unit.currentPathIndex = caster.currentPathIndex
 		
         -- Удаление после времени
         summoned_unit:AddNewModifier(caster, self, "modifier_kill", { duration = duration })

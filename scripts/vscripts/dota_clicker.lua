@@ -5,6 +5,8 @@ end
 local neutralSpawner = require("utils/neutralSpawner")
 local wi = require("utils/wavesInfo")
 local wa = require("utils/wavesAddon")
+local ma = require("utils/minerAddon")
+local mi = require("utils/mineInfo")
 local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
 
@@ -20,7 +22,7 @@ local GOLD_GIVE = 500
 local LVL_GIVE = 1
 local AI_DIF = 1
 local AI_ON = true
-local ALL_VISION = false
+local ALL_VISION = true
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -105,7 +107,7 @@ function dota_clicker:InitGameMode()
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(self, 'OnNpcSpawned'), self)
 	ListenToGameEvent('entity_hurt', Dynamic_Wrap(self, 'dotaClickerHurt'), self)
 	ListenToGameEvent("player_chat", Dynamic_Wrap(self, 'OnPlayerChat'), self)
-	ListenToGameEvent('tree_cut', Dynamic_Wrap(self, 'OnTreeCut'), self)
+	-- ListenToGameEvent('tree_cut', Dynamic_Wrap(self, 'OnTreeCut'), self)
 	
 	-- Игрок отключился (его объект Player удаляется)
 	ListenToGameEvent("player_disconnect", Dynamic_Wrap(self, "OnPlayerDisconnect"), self)
@@ -392,34 +394,34 @@ function dota_clicker:DamageFilter(filterTable)
 	return true
 end
 
-function dota_clicker:OnTreeCut(event)
-	local killer = event.killerID
+-- function dota_clicker:OnTreeCut(event)
+	-- local killer = event.killerID
 	
-	local drop_chance = 60
+	-- local drop_chance = 60
 	
-	if killer then
-		local player = PlayerResource:GetPlayer(killer)
-		if player then 
-			local hero = player:GetAssignedHero()
-			local ability = hero:FindAbilityByName("shredder_rigid_saws")
-			if ability and ability:GetLevel() > 0 then
-				drop_chance = ability:GetSpecialValueFor("new_chance")
-			end
-		end
-	end
+	-- if killer then
+		-- local player = PlayerResource:GetPlayer(killer)
+		-- if player then 
+			-- local hero = player:GetAssignedHero()
+			-- local ability = hero:FindAbilityByName("shredder_rigid_saws")
+			-- if ability and ability:GetLevel() > 0 then
+				-- drop_chance = ability:GetSpecialValueFor("new_chance")
+			-- end
+		-- end
+	-- end
 	
-	if math.random(1, 100) <= drop_chance then
-		local tree_position = Vector(event.tree_x, event.tree_y, GetGroundHeight(Vector(event.tree_x, event.tree_y, 0), nil))
+	-- if math.random(1, 100) <= drop_chance then
+		-- local tree_position = Vector(event.tree_x, event.tree_y, GetGroundHeight(Vector(event.tree_x, event.tree_y, 0), nil))
 		
-		local item = CreateItem("item_dotac_wood", nil, nil)
-		if item then
-			local dropped_item = CreateItemOnPositionSync(tree_position, item)
-			if dropped_item then
-				dropped_item.creation_time = GameRules:GetGameTime()
-			end
-		end
-	end
-end
+		-- local item = CreateItem("item_dotac_wood", nil, nil)
+		-- if item then
+			-- local dropped_item = CreateItemOnPositionSync(tree_position, item)
+			-- if dropped_item then
+				-- dropped_item.creation_time = GameRules:GetGameTime()
+			-- end
+		-- end
+	-- end
+-- end
 
 function dota_clicker:StartSimpleGroundItemCleanup()
 	local cleanupItems = {
@@ -461,11 +463,7 @@ function dota_clicker:StartSimpleGroundItemCleanup()
 end
 
 function miningDo(oreType, playerId)
-	local oresValues = {
-		["iron"] = 3,
-		["silver"] = 5,
-		["gold"] = 7,
-	}
+	local oresValues = mi.ores
 	
 	local player = PlayerResource:GetPlayer(playerId)
 	if not player then return end
@@ -503,7 +501,7 @@ function miningDo(oreType, playerId)
 	end
 	
 	-- Рассчитываем финальное количество золота
-	local baseGold = oresValues[oreType] or 0
+	local baseGold = oresValues[oreType].value or 0
 	local finalGold = math.floor(baseGold * goldMultiplier)
 	
 	local proMiner = hero:FindAbilityByName("dotac_meepo_pro_miner")
@@ -513,17 +511,17 @@ function miningDo(oreType, playerId)
 	end
 	
 	-- Выдаем золото
-	GiveGold(finalGold, playerId)
+	utils:GiveGold(finalGold, playerId)
 end
 
-function GiveGold(gold, playerId)
-	if PlayerResource:HasSelectedHero(playerId) then
-		local player = PlayerResource:GetPlayer(playerId)
-		local hero = PlayerResource:GetSelectedHeroEntity(playerId)
-		hero:ModifyGold(gold, false, 0)
-		SendOverheadEventMessage(player, OVERHEAD_ALERT_GOLD, hero, gold, nil)
-	end
-end
+-- function GiveGold(gold, playerId)
+	-- if PlayerResource:HasSelectedHero(playerId) then
+		-- local player = PlayerResource:GetPlayer(playerId)
+		-- local hero = PlayerResource:GetSelectedHeroEntity(playerId)
+		-- hero:ModifyGold(gold, false, 0)
+		-- SendOverheadEventMessage(player, OVERHEAD_ALERT_GOLD, hero, gold, nil)
+	-- end
+-- end
 
 function dota_clicker:dotaClickerStateChange(data)
 	local newState = GameRules:State_Get()
@@ -558,33 +556,33 @@ function dota_clicker:dotaClickerKilled(data)
 	local killed_unit = EntIndexToHScript(data.entindex_killed)
 	if not killed_unit or not killed_unit.GetUnitName then return end
 
-	local unitName = killed_unit:GetUnitName()
-	local dropPos = killed_unit:GetAbsOrigin()
+	-- local unitName = killed_unit:GetUnitName()
+	-- local dropPos = killed_unit:GetAbsOrigin()
 
-	local dropTable = neutralSpawner.dropTable
+	-- local dropTable = neutralSpawner.dropTable
 
-	if dropTable[unitName] then
-		for _, drop in pairs(dropTable[unitName]) do
-			if RandomInt(1, 100) <= drop.chance then
-				local item = CreateItem(drop.item, nil, nil)
-				if item then
-					local dropped_item = CreateItemOnPositionSync(dropPos, item)
-					if dropped_item then
-						dropped_item.creation_time = GameRules:GetGameTime()
-					end
-				end
-			end
-		end
-	elseif unitName == "npc_dota_clicker_treasure_carrier1" or unitName == "npc_dota_clicker_treasure_carrier2" then
-		local itemName = "item_dotac_gemstone"..math.random(1, 4)
-		local item = CreateItem(itemName, nil, nil)
-		if item then
-			local dropped_item = CreateItemOnPositionSync(dropPos, item)
-			if dropped_item then
-				dropped_item.creation_time = GameRules:GetGameTime()
-			end
-		end
-	end
+	-- if dropTable[unitName] then
+		-- for _, drop in pairs(dropTable[unitName]) do
+			-- if RandomInt(1, 100) <= drop.chance then
+				-- local item = CreateItem(drop.item, nil, nil)
+				-- if item then
+					-- local dropped_item = CreateItemOnPositionSync(dropPos, item)
+					-- if dropped_item then
+						-- dropped_item.creation_time = GameRules:GetGameTime()
+					-- end
+				-- end
+			-- end
+		-- end
+	-- elseif unitName == "npc_dota_clicker_treasure_carrier1" or unitName == "npc_dota_clicker_treasure_carrier2" then
+		-- local itemName = "item_dotac_gemstone"..math.random(1, 4)
+		-- local item = CreateItem(itemName, nil, nil)
+		-- if item then
+			-- local dropped_item = CreateItemOnPositionSync(dropPos, item)
+			-- if dropped_item then
+				-- dropped_item.creation_time = GameRules:GetGameTime()
+			-- end
+		-- end
+	-- end
 end
 
 function dota_clicker:SpawnMines()
@@ -664,10 +662,15 @@ function dota_clicker:dotaClickerStart()
 		-- wa:InitAddon(player, bad_start, badPath, DOTA_TEAM_BADGUYS)
 	-- end)
 	
+	local minerSpawn = Entities:FindByName(nil, "miner_spawn"):GetAbsOrigin()
+	local homePos = Entities:FindByName(nil, "dota_goodguys_fort"):GetAbsOrigin()
+	local minePos = Entities:FindByName(nil, "mine_spawn"):GetAbsOrigin()
+	
 	local path = getPaths("wave_path_", pathCount, true)
 	local wave_start = path[1]:GetAbsOrigin()
-	self:throughPlayers(function(player, hero)
+	self:throughPlayers(function(player, hero, playerID)
 		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil)
+		ma:InitAddon(player, minerSpawn, minePos, homePos)
 	end)
 	
 	
@@ -755,7 +758,7 @@ function dota_clicker:throughPlayers(callback, notHero)
 			local player = PlayerResource:GetPlayer(index)
 			if player then
 				local hero = PlayerResource:GetSelectedHeroEntity(index)
-				callback(player, hero)
+				callback(player, hero, index)
 			end
 		end
 	end
@@ -802,6 +805,8 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			path = {},
 			spawnPos = 0,
 			team = DOTA_TEAM_GOODGUYS,
+			minerLevel = 0,
+			miner = nil,
             disconnected = false
         }
 	else

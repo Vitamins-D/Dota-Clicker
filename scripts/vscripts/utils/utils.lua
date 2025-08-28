@@ -49,4 +49,25 @@ function u:upgradeAbility(unit, abil)
 	end
 end
 
+function u:GiveGold(gold, playerId)
+	if PlayerResource:HasSelectedHero(playerId) then
+		local player = PlayerResource:GetPlayer(playerId)
+		local hero = PlayerResource:GetSelectedHeroEntity(playerId)
+		hero:ModifyGold(gold, false, 0)
+		SendOverheadEventMessage(player, OVERHEAD_ALERT_GOLD, hero, gold, nil)
+	end
+end
+
+function u:RemoveItemByName(unit, item_name)
+    for slot = 0, 5 do
+        local item = unit:GetItemInSlot(slot)
+        if item and item:GetName() == item_name then
+            unit:RemoveItem(item)
+			UTIL_Remove(item)
+            return true -- нашли и удалили
+        end
+    end
+    return false -- предмета нет
+end
+
 return u
