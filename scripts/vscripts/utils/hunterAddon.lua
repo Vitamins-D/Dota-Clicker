@@ -73,8 +73,8 @@ function ha:spawn(player, camp)
 		local playerKey = "player_" .. playerID
 		
 		local data = CustomNetTables:GetTableValue("user_stats", playerKey)
-		data.camp_count = unit.camp_count
-		data.camp_reward = unit.camp_reward
+		data.camp_count = camp.camp_count
+		data.camp_reward = camp.camp_reward
 		CustomNetTables:SetTableValue("user_stats", playerKey, data)
 	end
 	unit:update()

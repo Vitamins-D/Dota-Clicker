@@ -53,7 +53,6 @@ function ma:spawn(player, spawnPos, minePos, homePos)
 	unit.playerID = playerID
 	
 	local playerName = PlayerResource:GetPlayerName(playerID)
-	print("ZXCZXC", playerName)
 	unit:SetUnitName(playerName)
 	
 	unit:AddNewModifier(unit, nil, "modifier_mine_protection", {})
