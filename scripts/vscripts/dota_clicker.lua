@@ -684,7 +684,8 @@ function dota_clicker:dotaClickerStart()
 	local wave_start = path[1]:GetAbsOrigin()
 	self:throughPlayers(function(player, hero, playerID)
 		local playerKey = "player_" .. playerID
-		CustomNetTables:SetTableValue("user_stats", playerKey, {})
+		local data = {upgrade_point = 0}
+		CustomNetTables:SetTableValue("user_stats", playerKey, data)
 		
 		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil)
 		ma:InitAddon(player, minerSpawn, minePos, homePos)

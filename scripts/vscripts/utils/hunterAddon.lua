@@ -32,7 +32,7 @@ end
 function ha:spawn(player, camp)
 	local playerID = player:GetPlayerID()
 	local team = PlayerResource:GetTeam(playerID)
-	local unit = CreateUnitByName("npc_dota_clicker_hunter", camp:GetAbsOrigin(), true, nil, nil, team)
+	local unit = CreateUnitByName("npc_dota_clicker_hunter", camp.trigger:GetAbsOrigin(), true, nil, nil, team)
 	
 	unit.isHunter = true
 	unit.camp = camp
@@ -86,4 +86,4 @@ function ha:spawn(player, camp)
 	player.hunter = unit
 end
 
-return hi
+return ha

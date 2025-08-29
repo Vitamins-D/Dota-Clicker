@@ -72,7 +72,6 @@ function ns:InitNeutralCamps()
 				CustomNetTables:SetTableValue("user_stats", playerKey, data)
 				
 				local data = CustomNetTables:GetTableValue("user_stats", playerKey)
-				print("NEW POINTS:", data.upgrade_point)
 			end
 		end
 		
