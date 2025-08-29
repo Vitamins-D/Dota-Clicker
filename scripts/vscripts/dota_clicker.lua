@@ -7,6 +7,7 @@ local wi = require("utils/wavesInfo")
 local wa = require("utils/wavesAddon")
 local ma = require("utils/minerAddon")
 local mi = require("utils/mineInfo")
+local hunterAddon = require("utils/hunterAddon")
 local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
 
@@ -89,6 +90,8 @@ function dota_clicker:InitGameMode()
 	GameRules:SetPreGameTime(0)
 	GameRules:SetStrategyTime(10.0)
 	GameRules:SetShowcaseTime(0.0)
+	GameRules:SetCustomGameSetupTimeout(999)
+	GameRules:EnableCustomGameSetupAutoLaunch(false)
 	GameRules:SetTreeRegrowTime(120)
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(25)
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
@@ -555,7 +558,16 @@ end
 function dota_clicker:dotaClickerKilled(data)
 	local killed_unit = EntIndexToHScript(data.entindex_killed)
 	if not killed_unit or not killed_unit.GetUnitName then return end
-
+	
+	if killed_unit.isHunter then
+		local player = PlayerResource:GetPlayer(killed_unit.playerID)
+		local camp = killed_unit.camp
+		Timers:CreateTimer(killed_unit.respawnHunter, function()
+			
+			ha:spawn(player, camp)
+		end)
+	end
+	
 	-- local unitName = killed_unit:GetUnitName()
 	-- local dropPos = killed_unit:GetAbsOrigin()
 
@@ -666,11 +678,18 @@ function dota_clicker:dotaClickerStart()
 	local homePos = Entities:FindByName(nil, "dota_goodguys_fort"):GetAbsOrigin()
 	local minePos = Entities:FindByName(nil, "mine_spawn"):GetAbsOrigin()
 	
+	local neutralCamps = neutralSpawner.camps
+	utils:ShuffleArray(neutralCamps)
 	local path = getPaths("wave_path_", pathCount, true)
 	local wave_start = path[1]:GetAbsOrigin()
 	self:throughPlayers(function(player, hero, playerID)
+		local playerKey = "player_" .. playerID
+		CustomNetTables:SetTableValue("user_stats", playerKey, {})
+		
 		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil)
 		ma:InitAddon(player, minerSpawn, minePos, homePos)
+		
+		hunterAddon:InitAddon(player, neutralCamps[playerID+1])
 	end)
 	
 	
@@ -807,6 +826,9 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			team = DOTA_TEAM_GOODGUYS,
 			minerLevel = 0,
 			miner = nil,
+			hunterLevel = 0,
+			hunterCamp = nil,
+			hunter = nil,
             disconnected = false
         }
 	else

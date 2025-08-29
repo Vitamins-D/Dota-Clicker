@@ -3,7 +3,7 @@ if ns == nil then
 end
 
 local campsUnits = {
-	{"npc_dota_clicker_boar", "npc_dota_clicker_boar"}, -- 1
+	{"npc_dota_clicker_boar"}, -- 1
 	{"npc_dota_clicker_wolf", "npc_dota_clicker_wolf_alpha", "npc_dota_clicker_wolf"}, -- 2
 	{"npc_dota_clicker_murloc", "npc_dota_clicker_murloc2"}, -- 3
 	{"npc_dota_clicker_bear"}, -- 4
@@ -46,6 +46,8 @@ function ns:InitNeutralCamps()
                 campType = 1,
                 units = {},
                 respawnTime = 30,
+                camp_count = 2,
+                camp_reward = 1,
                 isRespawning = false
             }
             table.insert(camps, camp)
@@ -57,6 +59,23 @@ function ns:InitNeutralCamps()
     -- Слушаем смерти крипов только один раз
     ListenToGameEvent("entity_killed", function(keys)
         local killed = EntIndexToHScript(keys.entindex_killed)
+		local attacker = EntIndexToHScript(keys.entindex_attacker or -1)
+		
+		if attacker then
+			local playerID = attacker.playerID
+			if playerID then
+				local playerKey = "player_" .. playerID
+				local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+				
+				data.upgrade_point = data.upgrade_point + killed.campRef.camp_reward
+				
+				CustomNetTables:SetTableValue("user_stats", playerKey, data)
+				
+				local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+				print("NEW POINTS:", data.upgrade_point)
+			end
+		end
+		
         if killed and killed.campRef then
             self:OnCampUnitDeath(killed)
         end
@@ -71,22 +90,13 @@ function ns:SpawnCamp(camp)
     end
 
     for _, unitName in pairs(unitNames) do
-        local spawnPos = camp.trigger:GetAbsOrigin() + RandomVector(math.random(0, 200))
-        local unit = CreateUnitByName(unitName, spawnPos, true, nil, nil, DOTA_TEAM_NEUTRALS)
-        unit.campRef = camp -- привязка к кемпу
-		
-        -- Выдаём предметы из dropTable
-        -- local drops = self.dropTable[unitName]
-        -- if drops then
-            -- for _, dropInfo in pairs(drops) do
-				-- if dropInfo.item ~= "item_dotac_cheeter_meat" then
-					-- local item = CreateItem(dropInfo.item, unit, unit)
-					-- unit:AddItem(item)
-				-- end
-            -- end
-        -- end
+		for i = 1, camp.camp_count do
+			local spawnPos = camp.trigger:GetAbsOrigin() + RandomVector(math.random(0, 200))
+			local unit = CreateUnitByName(unitName, spawnPos, true, nil, nil, DOTA_TEAM_NEUTRALS)
+			unit.campRef = camp -- привязка к кемпу
 
-        table.insert(camp.units, unit)
+			table.insert(camp.units, unit)
+		end
     end
 
     camp.isRespawning = false

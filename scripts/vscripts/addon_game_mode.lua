@@ -15,6 +15,7 @@ function Precache( context )
     PrecacheResource("model", "models/courier/defense3_sheep/defense3_sheep.vmdl", context);
 	PrecacheResource("model", "models/courier/donkey_crummy_wizard_2014/donkey_crummy_wizard_2014.vmdl", context);
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_c/n_creep_kobold_c.vmdl", context);
+	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl", context);
 	
 	-- Звуки для кирок
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts", context)

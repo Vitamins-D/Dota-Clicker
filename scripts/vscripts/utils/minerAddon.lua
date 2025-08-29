@@ -7,22 +7,22 @@ local utils = require("utils/utils")
 
 ma.defaultStats = {
 	ore_count = 2, -- размер рюкзака
-	mine_speed = 1, -- скорость добычи 1 руды (в секундах)
+	mine_speed = 5, -- скорость добычи 1 руды (в секундах)
 	speed = 300, -- скорость передвижения
-	gold_mult = 1,
+	gold_mult = 3,
 }
 
 ma.upgrades = {
-	{type = "speed", value = 50, cost = 100},
-	{type = "mine_speed", value = -2, cost = 100},
-	{type = "ore_count", value = 1, cost = 100},
-	{type = "ore_count", value = 1, cost = 100},
-	{type = "speed", value = 50, cost = 100}
+	{values = {{type = "speed", value = 50}}, cost = 100},
+	{values = {{type = "mine_speed", value = -2}}, cost = 100},
+	{values = {{type = "ore_count", value = 1}}, cost = 100},
+	{values = {{type = "gold_mult", value = 1}}, cost = 100},
+	{values = {{type = "speed", value = 50}}, cost = 100}
 }
 
 
 function ma:InitAddon(player, spawnPos, minePos, homePos)
-	player.minerLevel = 0
+	player.minerLevel = 5
 	
 	ma:spawn(player, spawnPos, minePos, homePos)
 end
@@ -53,14 +53,40 @@ function ma:spawn(player, spawnPos, minePos, homePos)
 	unit.playerID = playerID
 	
 	local playerName = PlayerResource:GetPlayerName(playerID)
+	print("ZXCZXC", playerName)
 	unit:SetUnitName(playerName)
 	
 	unit:AddNewModifier(unit, nil, "modifier_mine_protection", {})
 	
-	unit.ore_count = ma.defaultStats.ore_count
-	unit.mine_speed = ma.defaultStats.mine_speed
-	unit.gold_mult = ma.defaultStats.gold_mult
-	unit:SetBaseMoveSpeed(ma.defaultStats.speed)
+	function unit:update()
+		unit.ore_count = ma.defaultStats.ore_count
+		unit.mine_speed = ma.defaultStats.mine_speed
+		unit.gold_mult = ma.defaultStats.gold_mult
+		unit:SetBaseMoveSpeed(ma.defaultStats.speed)
+		
+		for i = 1, player.minerLevel do
+			local upgrades = ma.upgrades[i]
+			if upgrades then
+				for j = 1, #upgrades.values do
+					local upgrade = upgrades.values[j]
+					if upgrade.type == "speed" then
+						unit:SetBaseMoveSpeed(unit:GetBaseMoveSpeed() + upgrade.value)
+					else
+						unit[upgrade.type] = unit[upgrade.type] + upgrade.value
+					end
+				end
+			end
+		end
+		
+		local playerKey = "player_" .. playerID
+		
+		local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+		data.backpack = unit.ore_count
+		data.mine_speed = unit.mine_speed
+		data.gold_mult = unit.gold_mult
+		CustomNetTables:SetTableValue("user_stats", playerKey, data)
+	end
+	unit:update()
 	
 	unit.phase = "goMine"
 	

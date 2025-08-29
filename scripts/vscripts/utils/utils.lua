@@ -70,4 +70,13 @@ function u:RemoveItemByName(unit, item_name)
     return false -- предмета нет
 end
 
+function u:ShuffleArray(t)
+    local n = #t
+    for i = n, 2, -1 do
+        local j = RandomInt(1, i) -- случайный индекс от 1 до i
+        t[i], t[j] = t[j], t[i]   -- меняем местами
+    end
+    return t
+end
+
 return u

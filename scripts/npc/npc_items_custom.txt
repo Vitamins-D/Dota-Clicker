@@ -451,20 +451,6 @@
 		}
 	}
 
-	// Рецепты
-	"item_recipe_dotac_pickaxe_wood"
-	{
-	   "BaseClass"              "item_recipe_iron_talon"
-	   "ItemCost"               "50"
-	   "ItemShopTags"           "damage"
-	   "ItemRecipe"             "1"
-	   "ItemResult"             "item_dotac_pickaxe_wood"
-	   "ItemRequirements"
-	   {
-		   "01"                 "item_dotac_wood"
-	   }
-	}
-
 	"item_recipe_dotac_pickaxe_stone"
 	{
 	   "BaseClass"              "item_recipe_iron_talon"
