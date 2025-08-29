@@ -212,7 +212,7 @@ function dota_clicker:HandleBaseUpgrade(player, player_id, unit, upgrade)
 		newLevel = newLevel + 1
 		player.upgrades[unit][arrId].levels[upgId] = newLevel
 		desc = wi:getUpgradeDescription(currentName, upgrade, newLevel+1)
-		GiveGold(-cost, player_id)
+		utils:GiveGold(-cost, player_id)
 	end
 	
 	CustomGameEventManager:Send_ServerToPlayer(player, "upgrade_success", {
@@ -235,7 +235,7 @@ function dota_clicker:HandleSpecialUpgrade(player, player_id, unit, upgrade, typ
 	
 	local gold = PlayerResource:GetGold(player_id)
 	if gold >= cost then
-		GiveGold(-cost, player_id)
+		utils:GiveGold(-cost, player_id)
 		if type == "evolution" then
 			playerUnit[4] = upgrade
 		else
@@ -263,7 +263,7 @@ function dota_clicker:HandleBuyUnit(event)
 	local cost = wi.base[unit].cost
 	
 	if gold >= cost then
-		GiveGold(-cost, player_id)
+		utils:GiveGold(-cost, player_id)
 		success = true
 		count = count + 1
 		table.insert(player.units, unit)
@@ -288,7 +288,7 @@ function dota_clicker:HandleSellUnit(event)
 	table.remove(player.units, utils:indexOf(player.units, unit))
 	
 	local cost = wi.base[unit].cost
-	GiveGold(cost, player_id)
+	utils:GiveGold(cost, player_id)
 	
 	CustomGameEventManager:Send_ServerToPlayer(player, "sell_unit_response", {
 		unit = unit, 
