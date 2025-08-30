@@ -22,7 +22,7 @@ ma.upgrades = {
 
 
 function ma:InitAddon(player, spawnPos, minePos, homePos)
-	player.minerLevel = 5
+	player.minerLevel = 0
 	
 	ma:spawn(player, spawnPos, minePos, homePos)
 end

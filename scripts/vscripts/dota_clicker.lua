@@ -15,8 +15,8 @@ local badBotAI = require("utils/badBotAI")
 local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
-local CARAVAN_INTERVAL = 180
--- local CARAVAN_INTERVAL = WAVE_INTERVAL+5
+-- local CARAVAN_INTERVAL = 180
+local CARAVAN_INTERVAL = 30+5
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
@@ -216,6 +216,11 @@ function dota_clicker:HandleBaseUpgrade(player, player_id, unit, upgrade)
 		player.upgrades[unit][arrId].levels[upgId] = newLevel
 		desc = wi:getUpgradeDescription(currentName, upgrade, newLevel+1)
 		utils:GiveGold(-cost, player_id)
+	elseif gold < cost then
+		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
+			message = "Not enough upgrade points!",
+			duration = 2.0
+		})
 	end
 	
 	CustomGameEventManager:Send_ServerToPlayer(player, "upgrade_success", {
@@ -248,6 +253,11 @@ function dota_clicker:HandleSpecialUpgrade(player, player_id, unit, upgrade, typ
 			unit = unit, 
 			upgrade = upgrade
 		})
+	else
+		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
+			message = "Not enough upgrade points!",
+			duration = 2.0
+		})
 	end
 end
 
@@ -270,6 +280,11 @@ function dota_clicker:HandleBuyUnit(event)
 		success = true
 		count = count + 1
 		table.insert(player.units, unit)
+	else
+		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
+			message = "Not enough gold!",
+			duration = 2.0
+		})
 	end
 	
 	CustomGameEventManager:Send_ServerToPlayer(player, "buy_unit_response", {
@@ -566,6 +581,20 @@ function dota_clicker:dotaClickerKilled(data)
 			
 			ha:spawn(player, camp)
 		end)
+	elseif killed_unit.isCaravan then
+		local caravan = killed_unit.caravan
+		if caravan then
+			local caravanArr = caravan.units
+			local rogueArr = caravan.rogues
+			table.remove(caravanArr, utils:indexOf(caravanArr, killed_unit))
+			if #caravanArr == 0 then
+				GiveGoldPlayers(math.ceil(caravan.reward/playerCount))
+				for i = 1, #rogueArr do
+					local rogue = rogueArr[i]
+					rogue:RemoveSelf()
+				end
+			end
+		end
 	end
 	
 	-- local unitName = killed_unit:GetUnitName()
@@ -682,12 +711,14 @@ function dota_clicker:dotaClickerStart()
 	utils:ShuffleArray(neutralCamps)
 	local path = getPaths("wave_path_", pathCount, true)
 	local wave_start = path[1]:GetAbsOrigin()
+	local atkCarPath = getPaths("caravan_attack_", 2, false)
+	print("atkCarPath", atkCarPath, #atkCarPath)
 	self:throughPlayers(function(player, hero, playerID)
 		local playerKey = "player_" .. playerID
 		local data = {upgrade_point = 0}
 		CustomNetTables:SetTableValue("user_stats", playerKey, data)
 		
-		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil)
+		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil, atkCarPath)
 		ma:InitAddon(player, minerSpawn, minePos, homePos)
 		
 		hunterAddon:InitAddon(player, neutralCamps[playerID+1])
@@ -739,7 +770,12 @@ function dota_clicker:dotaClickerStart()
 	end)
 	
 	Timers:CreateTimer(CARAVAN_INTERVAL, function()
-		wa:spawnCaravan(badBot, caravanLevel)
+		local players = {}
+		self:throughPlayers(function(player, hero, playerID)
+			table.insert(players, playerID)
+		end)
+		
+		wa:spawnCaravan(badBot, caravanLevel, players)
 		caravanLevel = caravanLevel + 1
 		return CARAVAN_INTERVAL
 	end)
@@ -830,6 +866,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			hunterLevel = 0,
 			hunterCamp = nil,
 			hunter = nil,
+			atkCarPath = nil,
             disconnected = false
         }
 	else
@@ -923,7 +960,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
         end
     end
 	
-	GameRules:SendCustomMessageToTeam("Player "..player_id.." подключился", 0, 255, 0)
+	-- GameRules:SendCustomMessageToTeam("Player "..player_id.." подключился", 0, 255, 0)
 end
 
 function dota_clicker:OnPlayerDisconnect(keys)
@@ -939,7 +976,7 @@ function dota_clicker:OnPlayerDisconnect(keys)
 		end
     end
 	
-	GameRules:SendCustomMessageToTeam("Player "..player_id.." отключился", 0, 255, 0)
+	-- GameRules:SendCustomMessageToTeam("Player "..player_id.." отключился", 0, 255, 0)
 end
 
 function dota_clicker:OnPlayerReconnect(keys)
@@ -947,6 +984,6 @@ function dota_clicker:OnPlayerReconnect(keys)
     if player_id == nil or player_id == -1 then return end
 	
 
-	GameRules:SendCustomMessageToTeam("Player "..player_id.." переподключился", 0, 255, 0)
+	-- GameRules:SendCustomMessageToTeam("Player "..player_id.." переподключился", 0, 255, 0)
 end
 

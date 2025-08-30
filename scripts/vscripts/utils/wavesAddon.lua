@@ -33,7 +33,8 @@ function wa:sortUnits(array)
     return array
 end
 
-function wa:InitAddon(player, spawnPos, path, team, caravanSpawn, caravanPath)
+function wa:InitAddon(player, spawnPos, path, team, caravanSpawn, caravanPath, atkCarPath)
+	-- player.units = {}
 	player.units = {}
 	
 	player.upgrades = {
@@ -64,6 +65,13 @@ function wa:InitAddon(player, spawnPos, path, team, caravanSpawn, caravanPath)
 	player.team = team
 	player.caravanSpawn = caravanSpawn
 	player.caravanPath = caravanPath
+	
+	if player and player.GetPlayerID and atkCarPath then
+		player.atkCarPath = atkCarPath
+		local playerID = player:GetPlayerID()
+		local playerKey = "player_" .. playerID
+		CustomNetTables:SetTableValue("caravan_units", playerKey, {"mage"})
+	end
 end
 
 function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
@@ -190,21 +198,34 @@ function wa:spawnWave(player)
 	end
 end
 
-function wa:spawnCaravan(player, level)
+function wa:spawnCaravan(player, level, enemies)
 	local spawnPos = player.caravanSpawn
 	local units = player.units
 	local pUpgrades = player.upgrades
 	local team = player.team
 	local path = player.caravanPath
 	
+	local caravanUnits = {}
+	local rogues = {}
 	units = wa:sortUnits(units)
+	
+	local caravanInfo = {}
+	caravanInfo.units = caravanUnits
+	caravanInfo.rogues = rogues
+	caravanInfo.reward = math.random(200, 800)
 	
 	local half = math.floor(#units/2)
 	
 	local function lSpawn(i)
 		local unit = wa:spawnUnit(units[i], player, spawnPos, pUpgrades, team, path)
+		
+		local cost = info.base[units[i]].cost
+		caravanInfo.reward = caravanInfo.reward + cost
+		
 		unit.isCaravan = true
 		unit:SetBaseMoveSpeed(400)
+		unit.caravan = caravanInfo
+		table.insert(caravanUnits, unit)
 	end
 	
 	local interval = 0.5
@@ -224,6 +245,9 @@ function wa:spawnCaravan(player, level)
 			}
 			caravan:SetBaseMoveSpeed(400)
 			
+			caravan.caravan = caravanInfo
+			table.insert(caravanUnits, caravan)
+			
 			Timers:CreateTimer(0.5, function()
 				caravan:AddNewModifier(unit, nil, "modifier_buff_stats", {})
 			end)
@@ -233,6 +257,40 @@ function wa:spawnCaravan(player, level)
 		Timers:CreateTimer(interval*i + interval*3, function()
 			lSpawn(i)
 		end)
+	end
+	
+	for i = 1, #enemies do
+		local enemyId = enemies[i]
+		if enemyId then
+			wa:spawnRogues(enemyId, rogues)
+		end
+	end
+end
+
+function wa:spawnRogues(playerID, rogues)
+	local player = PlayerResource:GetPlayer(playerID)
+	if player then
+		local path = player.atkCarPath
+		local spawnPos = path[1]:GetAbsOrigin()
+		local pUpgrades = player.upgrades
+		local team = player.team
+		
+		local playerKey = "player_" .. playerID
+		local data = CustomNetTables:GetTableValue("caravan_units", playerKey)
+		local units = {}
+		for _,v in pairs(data) do
+			table.insert(units, v)
+		end
+		
+		units = wa:sortUnits(units)
+		for i = 1, #units do
+			Timers:CreateTimer(0.5*i, function()
+				local unit = wa:spawnUnit(units[i], player, spawnPos, pUpgrades, team, path)
+				table.insert(rogues, unit)
+			end)
+		end
+		
+		CustomNetTables:SetTableValue("caravan_units", playerKey, {})
 	end
 end
 

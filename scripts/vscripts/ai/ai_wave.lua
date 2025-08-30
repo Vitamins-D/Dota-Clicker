@@ -15,7 +15,7 @@ function Spawn(entityKeyValues)
 end
 
 function goPath()
-	if nextPath and not thisEntity:IsChanneling() and not thisEntity:IsAttacking() and thisEntity.currentPathIndex <= #thisEntity.path then
+	if thisEntity and nextPath and not thisEntity:IsChanneling() and not thisEntity:IsAttacking() and thisEntity.currentPathIndex <= #thisEntity.path then
         local targetPoint = thisEntity.path[thisEntity.currentPathIndex]
         if targetPoint then
             local distance = (thisEntity:GetAbsOrigin() - targetPoint:GetAbsOrigin()):Length2D()
@@ -26,12 +26,15 @@ function goPath()
 					thisEntity:RemoveSelf()
 				end
             end
-            ExecuteOrderFromTable({
-                UnitIndex = thisEntity:entindex(),
-                OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
-                Position = thisEntity.path[thisEntity.currentPathIndex]:GetAbsOrigin(),
-                Queue = false,
-            })
+			targetPoint = thisEntity.path[thisEntity.currentPathIndex]
+			if targetPoint then
+				ExecuteOrderFromTable({
+					UnitIndex = thisEntity:entindex(),
+					OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+					Position = thisEntity.path[thisEntity.currentPathIndex]:GetAbsOrigin(),
+					Queue = false,
+				})
+			end
         end
     end
 end
