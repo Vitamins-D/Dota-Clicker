@@ -13,11 +13,18 @@ ma.defaultStats = {
 }
 
 ma.upgrades = {
-	{values = {{type = "speed", value = 50}}, cost = 100},
-	{values = {{type = "mine_speed", value = -2}}, cost = 100},
-	{values = {{type = "ore_count", value = 1}}, cost = 100},
-	{values = {{type = "gold_mult", value = 1}}, cost = 100},
-	{values = {{type = "speed", value = 50}}, cost = 100}
+	{values = {{type = "speed", value = 50}}, cost = 500},
+	{values = {{type = "mine_speed", value = -0.5}}, cost = 500},
+	{values = {{type = "ore_count", value = 1}}, cost = 500},
+	{values = {{type = "gold_mult", value = 1}}, cost = 1000},
+	{values = {{type = "speed", value = 50}}, cost = 500},
+	{values = {{type = "mine_speed", value = -0.5}}, cost = 500},
+	{values = {{type = "mine_speed", value = -1}}, cost = 600},
+	{values = {{type = "ore_count", value = 2}}, cost = 850},
+	{values = {{type = "mine_speed", value = -1}}, cost = 600},
+	{values = {{type = "ore_count", value = 1}}, cost = 500},
+	{values = {{type = "speed", value = 50}}, cost = 500},
+	{values = {{type = "gold_mult", value = 1.5}}, cost = 2000},
 }
 
 
