@@ -3,27 +3,82 @@ if ha == nil then
 end
 
 -- local hi = require("utils/hunterInfo")
+local wi = require("utils/wavesInfo")
 
 ha.defaultStats = {
-	respawnTime = 15,
-	camp_count = 2,
-	camp_reward = 1,
+	respawnTime = 5,
+	camp_count = 1,
+	camp_reward = 0.5,
 	respawnHunter = 10,
 }
 
 ha.upgrades = {
-	{values = {{type = "atks", value = 50}}, cost = 100},
-	{values = {{type = "respawnTime", value = -15}}, cost = 100},
-	{values = {{type = "camp_count", value = 2}}, cost = 100},
-	{values = {{type = "camp_reward", value = 1}}, cost = 100},
-	{values = {{type = "atk", value = 20}}, cost = 100},
-	{values = {{type = "hp", value = 300}}, cost = 100},
-	{values = {{type = "armor", value = 5}}, cost = 100},
-	{values = {{type = "hpreg", value = 4}}, cost = 100}
+	{values = {{type = "atk", value = 20}}, cost = 300},
+	{values = {{type = "atks", value = 50}}, cost = 450},
+	{values = {{type = "hp", value = 200}, {type = "hpreg", value = 1}}, cost = 600},
+	{values = {{type = "armor", value = 2}}, cost = 500},
+	{values = {{type = "camp_count", value = 1}, {type = "atks", value = 75}}, cost = 750},
+	{values = {{type = "camp_reward", value = 0.25}}, cost = 800},
+	{values = {{type = "atk", value = 50}, {type = "atks", value = 75}}, cost = 1100},
+	{values = {{type = "camp_reward", value = 0.25}}, cost = 700},
+	{values = {{type = "respawnTime", value = -1.5}, {type = "atks", value = 75}}, cost = 1200},
+	{values = {{type = "hp", value = 400}, {type = "hpreg", value = 1.5}, {type = "armor", value = 2}}, cost = 1500},
+	{values = {{type = "respawnTime", value = -1.5}, {type = "camp_reward", value = 0.25}, {type = "respawnHunter", value = -5}}, cost = 2000},
+	{values = {{type = "atk", value = 40}}, cost = 1000},
 }
+
+local autoDesc = {
+	camp_count = "Увеличивает количество мобов в лесу на %d ед.",
+	respawnTime = "Уменьшает время возрождения лесных крипов на %.1f сек.",
+	camp_reward = "Увеличивает награду за лесных крипов на %.2f ОУ",
+	respawnHunter = "Уменьшает время возрождения охотника на %.1f сек.",
+}
+
+for k,v in pairs(wi.autoDesc) do
+	autoDesc[k] = v
+end
+
+local function costText(cost)
+	return "<br><br>Стоимость: <font color='#EFBF04'>" .. cost .. "</font>"
+end
+
+function ha:getUpgradeDescription(level)
+	
+	local desc = ""
+	local maxLevel = #ha.upgrades
+	local upgrades = ha.upgrades[level]
+	if upgrades then
+		for i = 1, #upgrades.values do
+			local upgrade = upgrades.values[i]
+			if i > 1 then desc = desc .. "<br><br>" end
+			if upgrade.desc then
+				desc = desc .. upgrade.desc
+			else
+				local pattern = autoDesc[upgrade.type]
+				if pattern then
+					desc = desc .. string.format(pattern, upgrade.value)
+				end
+			end
+		end
+	end
+	
+	if level <= maxLevel then
+		local cost = upgrades.cost
+		desc = desc .. costText(cost)
+	end
+    return desc
+end
+
+-- print("-------------------------------------------------------------")
+-- print("HUNTER UPGRADE DESC")
+-- print("-------------------------------------------------------------")
+-- for i = 1, #ha.upgrades  do
+	-- print(ha:getUpgradeDescription(i))
+-- end
 
 function ha:InitAddon(player, camp)
 	player.hunterLevel = 0
+	-- player.hunterLevel = #ha.upgrades
 	player.hunterCamp = camp
 	
 	ha:spawn(player, camp)
@@ -37,6 +92,7 @@ function ha:spawn(player, camp)
 	unit.isHunter = true
 	unit.camp = camp
 	unit.playerID = playerID
+	unit.bonus = {}
 	
 	local playerName = PlayerResource:GetPlayerName(playerID)
 	unit:SetUnitName(playerName)
@@ -52,6 +108,7 @@ function ha:spawn(player, camp)
 			if upgrades then
 				for j = 1, #upgrades.values do
 					local upgrade = upgrades.values[j]
+					print("upgrade", upgrade, upgrade.type, upgrade.value)
 					if upgrade.type == "armor" then
 						unit:SetPhysicalArmorBaseValue(unit:GetPhysicalArmorBaseValue() + upgrade.value)
 					elseif upgrade.type == "magr" then

@@ -15,15 +15,15 @@ local badBotAI = require("utils/badBotAI")
 local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
--- local CARAVAN_INTERVAL = 180
-local CARAVAN_INTERVAL = 30+5
+local CARAVAN_INTERVAL = 180
+-- local CARAVAN_INTERVAL = 30+5
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
 local AI_DIF = 1
 local AI_ON = true
-local ALL_VISION = true
+local ALL_VISION = false
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -206,17 +206,20 @@ function dota_clicker:HandleBaseUpgrade(player, player_id, unit, upgrade)
 	
 	local _, _, currentName = wi:getUpgByName(unit, upgrade)
 	local newLevel = player.upgrades[unit][arrId].levels[upgId]
-	local gold = PlayerResource:GetGold(player_id)
+	
+	local points = utils:GetPoints(player_id)
+	
 	local maxLevel = wi:getMaxLevel(upgType, currentName, upgrade)
 	local desc = wi:getUpgradeDescription(currentName, upgrade, newLevel+1)
 	local cost = wi:getUpgradeCost(currentName, upgrade, newLevel+1)
 	
-	if gold >= cost and newLevel < maxLevel then
+	if points >= cost and newLevel < maxLevel then
 		newLevel = newLevel + 1
 		player.upgrades[unit][arrId].levels[upgId] = newLevel
 		desc = wi:getUpgradeDescription(currentName, upgrade, newLevel+1)
-		utils:GiveGold(-cost, player_id)
-	elseif gold < cost then
+		-- utils:GiveGold(-cost, player_id)
+		utils:UpdatePoints(player_id, -cost)
+	elseif points < cost then
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
 			message = "Not enough upgrade points!",
 			duration = 2.0
@@ -241,9 +244,11 @@ function dota_clicker:HandleSpecialUpgrade(player, player_id, unit, upgrade, typ
 	local infoUnit = wi.upgrades[converter[type]][upgrade]
 	local cost = infoUnit.cost
 	
-	local gold = PlayerResource:GetGold(player_id)
-	if gold >= cost then
-		utils:GiveGold(-cost, player_id)
+	-- local gold = PlayerResource:GetGold(player_id)
+	local points = utils:GetPoints(player_id)
+	if points >= cost then
+		-- utils:GiveGold(-cost, player_id)
+		utils:UpdatePoints(player_id, -cost)
 		if type == "evolution" then
 			playerUnit[4] = upgrade
 		else
@@ -573,6 +578,27 @@ end
 function dota_clicker:dotaClickerKilled(data)
 	local killed_unit = EntIndexToHScript(data.entindex_killed)
 	if not killed_unit or not killed_unit.GetUnitName then return end
+	
+	if killed_unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS or killed_unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+		local enemyTeam = (killed_unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS) and DOTA_TEAM_BADGUYS or DOTA_TEAM_GOODGUYS
+		local enemies = FindUnitsInRadius(
+			enemyTeam,                               -- команда ищущего
+			killed_unit:GetAbsOrigin(),              -- точка поиска
+			nil,                                     -- кеш не нужен
+			1000,                                    -- радиус
+			DOTA_UNIT_TARGET_TEAM_FRIENDLY,          -- ищем союзников enemyTeam = значит враги для killed_unit
+			DOTA_UNIT_TARGET_HERO,                   -- только герои
+			DOTA_UNIT_TARGET_FLAG_NONE,              -- без флагов
+			FIND_ANY_ORDER,                          -- порядок не важен
+			false
+		)
+
+		for _,hero in pairs(enemies) do
+			if hero and hero:IsRealHero() then
+				hero:AddExperience(5, DOTA_ModifyXP_Unspecified, false, true)
+			end
+		end
+	end
 	
 	if killed_unit.isHunter then
 		local player = PlayerResource:GetPlayer(killed_unit.playerID)

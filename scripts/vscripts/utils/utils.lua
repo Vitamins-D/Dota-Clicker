@@ -21,6 +21,15 @@ function u:countOf(tbl, value)
     return count
 end
 
+function u:ShuffleArray(t)
+    local n = #t
+    for i = n, 2, -1 do
+        local j = RandomInt(1, i) -- случайный индекс от 1 до i
+        t[i], t[j] = t[j], t[i]   -- меняем местами
+    end
+    return t
+end
+
 function u:removeAbility(unit, abil)
 	local ability = unit:FindAbilityByName(abil)
 	table.remove(unit.skills, self:indexOf(unit.skills, ability))
@@ -70,13 +79,16 @@ function u:RemoveItemByName(unit, item_name)
     return false -- предмета нет
 end
 
-function u:ShuffleArray(t)
-    local n = #t
-    for i = n, 2, -1 do
-        local j = RandomInt(1, i) -- случайный индекс от 1 до i
-        t[i], t[j] = t[j], t[i]   -- меняем местами
-    end
-    return t
+function u:GetPoints(playerID)
+	local playerKey = "player_" .. playerID
+	return CustomNetTables:GetTableValue("user_stats", playerKey).upgrade_point
+end
+
+function u:UpdatePoints(playerID, value)
+	local playerKey = "player_" .. playerID
+	local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+	data.upgrade_point = data.upgrade_point + value
+	CustomNetTables:SetTableValue("user_stats", playerKey, data)
 end
 
 return u

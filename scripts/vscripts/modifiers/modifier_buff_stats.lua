@@ -1,7 +1,7 @@
 modifier_buff_stats = class({})
 
 function modifier_buff_stats:IsHidden()
-    return false -- Сделаем видимым для отладки
+    return true -- Сделаем видимым для отладки
 end
 
 function modifier_buff_stats:IsPurgable()

@@ -46,8 +46,8 @@ function ns:InitNeutralCamps()
                 campType = 1,
                 units = {},
                 respawnTime = 30,
-                camp_count = 2,
-                camp_reward = 1,
+                camp_count = 1,
+                camp_reward = 0.5,
                 isRespawning = false
             }
             table.insert(camps, camp)

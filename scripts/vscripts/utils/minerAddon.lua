@@ -27,9 +27,54 @@ ma.upgrades = {
 	{values = {{type = "gold_mult", value = 1.5}}, cost = 2000},
 }
 
+local autoDesc = {
+	ore_count = "Увеличивает размер рюкзака шахтера на %d ед.",
+	mine_speed = "Уменьшает время добычи 1 руды на %.2f сек.",
+	speed = "Увеличивает скорость передвижения на %d ед.",
+	gold_mult = "Увеличивает множитель продажи руды шахтера на %.2f ед.",
+}
+
+local function costText(cost)
+	return "<br><br>Стоимость: <font color='#EFBF04'>" .. cost .. "</font>"
+end
+
+function ma:getUpgradeDescription(level)
+	
+	local desc = ""
+	local maxLevel = #ma.upgrades
+	local upgrades = ma.upgrades[level]
+	if upgrades then
+		for i = 1, #upgrades.values do
+			local upgrade = upgrades.values[i]
+			if i > 1 then desc = desc .. "<br><br>" end
+			if upgrade.desc then
+				desc = desc .. upgrade.desc
+			else
+				local pattern = autoDesc[upgrade.type]
+				if pattern then
+					desc = desc .. string.format(pattern, upgrade.value)
+				end
+			end
+		end
+	end
+	
+	if level <= maxLevel then
+		local cost = upgrades.cost
+		desc = desc .. costText(cost)
+	end
+    return desc
+end
+
+-- print("-------------------------------------------------------------")
+-- print("MINER UPGRADES DESC")
+-- print("-------------------------------------------------------------")
+-- for i = 1, #ma.upgrades  do
+	-- print(ma:getUpgradeDescription(i))
+-- end
 
 function ma:InitAddon(player, spawnPos, minePos, homePos)
 	player.minerLevel = 0
+	-- player.minerLevel = #ma.upgrades
 	
 	ma:spawn(player, spawnPos, minePos, homePos)
 end
