@@ -238,14 +238,14 @@ function dota_clicker:HandleMine(event)
 end
 
 function dota_clicker:HandleWorkerUpgrade(event)
-	id_worker = event.id_worker
+	id_worker = event.id
 	player_id = event.player_id
 	local player = PlayerResource:GetPlayer(player_id)
 	
 	local lAddon
 	local level
 	local maxLevel
-	if id_worker == "miner" then
+	if id_worker == "mainer" then
 		lAddon = ma
 		level = player.minerLevel
 		maxLevel = #ma.upgrades
@@ -264,7 +264,7 @@ function dota_clicker:HandleWorkerUpgrade(event)
 	if gold >= cost then
 		utils:GiveGold(-cost, player_id)
 		success = true
-		if id_worker == "miner" then
+		if id_worker == "mainer" then
 			player.minerLevel = player.minerLevel + 1
 		else
 			player.hunterLevel = player.hunterLevel + 1
@@ -1163,7 +1163,7 @@ function getWorkers(playerID)
 		
 		
 		workers.mainer = {
-			id = "miner",
+			id = "mainer",
 			name = "Шахтёр",
 			level = player.minerLevel,
 			maxLevel = #ma.upgrades,
