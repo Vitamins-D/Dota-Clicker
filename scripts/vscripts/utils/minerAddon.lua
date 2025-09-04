@@ -45,7 +45,7 @@ end
 
 function ma:getUpgradeDescription(level)
 	
-	local desc = ""
+	local desc = "<font color='#FFD700'>Шахтер</font><br><br>"
 	local maxLevel = #ma.upgrades
 	local upgrades = ma.upgrades[level]
 	if upgrades then

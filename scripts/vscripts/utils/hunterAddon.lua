@@ -49,7 +49,7 @@ end
 
 function ha:getUpgradeDescription(level)
 	
-	local desc = ""
+	local desc = "<font color='#228B22'>Охотник</font><br><br>"
 	local maxLevel = #ha.upgrades
 	local upgrades = ha.upgrades[level]
 	if upgrades then
