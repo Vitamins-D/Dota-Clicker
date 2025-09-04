@@ -253,7 +253,7 @@ function dota_clicker:HandleWorkerUpgrade(event)
 	end
 	
 	local gold = PlayerResource:GetGold(player_id)
-	local cost = lAddon:getCost(level)
+	local cost = lAddon:getCost(level+1)
 	
 	local success = false
 	if gold >= cost then
