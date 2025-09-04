@@ -15,15 +15,15 @@ local badBotAI = require("utils/badBotAI")
 local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
-local CARAVAN_INTERVAL = 180
--- local CARAVAN_INTERVAL = 30+5
+-- local CARAVAN_INTERVAL = 180
+local CARAVAN_INTERVAL = 30+5
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 200
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
 local AI_DIF = 1
 local AI_ON = true
-local ALL_VISION = false
+local ALL_VISION = true
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -221,8 +221,7 @@ function dota_clicker:HandleMine(event)
 	
 	if mine and hero then
 		local hero_pos = hero:GetAbsOrigin()
-		local mine_pos = mine:GetAbsOrigin()
-		local distance = (hero_pos - mine_pos):Length2D()
+		local distance = (hero_pos - mine):Length2D()
 		
 		if distance <= MINE_INTERACTION_DISTANCE then
 		
