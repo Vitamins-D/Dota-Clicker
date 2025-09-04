@@ -245,7 +245,7 @@ function dota_clicker:HandleWorkerUpgrade(event)
 	local lAddon
 	local level
 	local maxLevel
-	if id_worker == "mainer" then
+	if id_worker == "miner" then
 		lAddon = ma
 		level = player.minerLevel
 		maxLevel = #ma.upgrades
@@ -264,12 +264,11 @@ function dota_clicker:HandleWorkerUpgrade(event)
 	if gold >= cost then
 		utils:GiveGold(-cost, player_id)
 		success = true
-		if id_worker == "mainer" then
+		if id_worker == "miner" then
 			player.minerLevel = player.minerLevel + 1
 		else
 			player.hunterLevel = player.hunterLevel + 1
 		end
-		level = level + 1
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
 			message = "Not enough gold!",
@@ -277,7 +276,6 @@ function dota_clicker:HandleWorkerUpgrade(event)
 		})
 	end
 	
-	if level == maxLevel then return end
 	CustomGameEventManager:Send_ServerToPlayer(player, "successful_res", {
 		status = success
 	})
@@ -1164,8 +1162,8 @@ function getWorkers(playerID)
 
 		
 		
-		workers.miners = {
-			id = "mainer",
+		workers.mainer = {
+			id = "miner",
 			name = "Шахтёр",
 			level = player.minerLevel,
 			maxLevel = #ma.upgrades,
