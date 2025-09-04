@@ -121,7 +121,7 @@ function dota_clicker:InitGameMode()
 	-- Игрок подключился первый раз
 	ListenToGameEvent("player_connect_full", Dynamic_Wrap(self, "OnPlayerConnectFull"), self)
 	
-	GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(dota_clicker, "OrderFilter"), self)
+	-- GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(dota_clicker, "OrderFilter"), self)
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(dota_clicker, "DamageFilter"), self)
 	
 	self:StartSimpleGroundItemCleanup()
@@ -153,6 +153,7 @@ function dota_clicker:RegisterCustomEventListeners()
 	end)
 	
 	CustomGameEventManager:RegisterListener("buy_unit", function(_, event)
+		event.type = "wave"
 		self:HandleBuyUnit(event)
 	end)
 
@@ -179,12 +180,110 @@ function dota_clicker:RegisterCustomEventListeners()
 	end)
 	
 	CustomGameEventManager:RegisterListener("sell_unit", function(_, event)
+		event.type = "wave"
 		self:HandleSellUnit(event)
 	end)
 	
 	CustomGameEventManager:RegisterListener("player_selected_difficulty", function(_, event)
 		self:HandleDifficulty(event)
 	end)
+	
+	CustomGameEventManager:RegisterListener("upgrade_worker", function(_, event)
+		self:HandleWorkerUpgrade(event)
+	end)
+	
+	CustomGameEventManager:RegisterListener("get_data_units", function(_, event)
+		self:HandleDataWorkers(event)
+	end)
+	
+	CustomGameEventManager:RegisterListener("ReqToggleMineModal", function(_, event)
+		self:HandleMine(event)
+	end)
+	
+	CustomGameEventManager:RegisterListener("buy_unit_caravan", function(_, event)
+		event.type = "caravan"
+		self:HandleBuyUnit(event)
+	end)
+	
+	CustomGameEventManager:RegisterListener("sell_unit_caravan", function(_, event)
+		event.type = "caravan"
+		self:HandleSellUnit(event)
+	end)
+end
+
+function dota_clicker:HandleMine(event)
+	player_id = event.player_id
+	local player = PlayerResource:GetPlayer(player_id)
+	
+	local mine = player.miner.mine
+	
+	local hero = PlayerResource:GetSelectedHeroEntity(player_id)
+	
+	if mine and hero then
+		local hero_pos = hero:GetAbsOrigin()
+		local mine_pos = mine:GetAbsOrigin()
+		local distance = (hero_pos - mine_pos):Length2D()
+		
+		if distance <= MINE_INTERACTION_DISTANCE then
+		
+			CustomGameEventManager:Send_ServerToPlayer(player, "toggle_mine_modal", {
+				mine_id = hero:GetEntityIndex()
+			})
+		else
+			CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
+				message = "Too far away!",
+				duration = 2.0
+			})
+		end
+	end
+end
+
+function dota_clicker:HandleWorkerUpgrade(event)
+	id_worker = event.id_worker
+	player_id = event.player_id
+	local player = PlayerResource:GetPlayer(player_id)
+	
+	local lAddon
+	local level
+	if id_worker == "mainer" then
+		lAddon = ma
+		level = player.minerLevel
+	else
+		lAddon = ha
+		level = player.hunterLevel
+	end
+	
+	local gold = PlayerResource:GetGold(player_id)
+	local cost = lAddon:getCost(level)
+	
+	local success = false
+	if gold >= cost then
+		utils:GiveGold(-cost, player_id)
+		success = true
+		if id_worker == "mainer" then
+			player.minerLevel = player.minerLevel + 1
+		else
+			player.hunterLevel = player.hunterLevel + 1
+		end
+	else
+		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
+			message = "Not enough gold!",
+			duration = 2.0
+		})
+	end
+	
+	CustomGameEventManager:Send_ServerToPlayer(player, "successful_res", {
+		status = success
+	})
+	
+	CustomGameEventManager:Send_ServerToPlayer(player, "difficulty_confirmed", {success = true})
+end
+
+function dota_clicker:HandleDataWorkers(event)
+	player_id = event.player_id
+	local player = PlayerResource:GetPlayer(player_id)
+	
+	CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnitsWorkers", getWorkers(player_id))
 end
 
 function dota_clicker:HandleDifficulty(event)
@@ -270,21 +369,44 @@ function dota_clicker:HandleBuyUnit(event)
 	local unit = event.unit
 	local player_id = event.player_id
 	local player = PlayerResource:GetPlayer(player_id)
+	local gold = PlayerResource:GetGold(player_id)
+	local type = event.type
+	
 	
 	local baseName = wi:getUnitName(unit)
-	local playerUnit = utils:countOf(player.units, unit)
 	
+	local playerKey = "player_" .. player_id
+	
+	local caravans
 	local success = false
-	local count = playerUnit
+	local count
+	if type == "caravan" then
+		local data = CustomNetTables:GetTableValue("caravan_units", playerKey)
+		caravans = utils:getArrFromCNT(data)
+		local playerUnit = utils:countOf(caravans, unit)
+		count = playerUnit
+	else
+		local playerUnit = utils:countOf(player.units, unit)
+		count = playerUnit
+	end
 	
-	local gold = PlayerResource:GetGold(player_id)
 	local cost = wi.base[unit].cost
 	
+	local bonus = ""
+	
 	if gold >= cost then
-		utils:GiveGold(-cost, player_id)
 		success = true
+		utils:GiveGold(-cost, player_id)
 		count = count + 1
-		table.insert(player.units, unit)
+		if type == "caravan" then
+			bonus = "_caravan"
+			
+			table.insert(caravans, unit)
+			
+			CustomNetTables:SetTableValue("caravan_units", playerKey, caravans)
+		else
+			table.insert(player.units, unit)
+		end
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
 			message = "Not enough gold!",
@@ -292,7 +414,7 @@ function dota_clicker:HandleBuyUnit(event)
 		})
 	end
 	
-	CustomGameEventManager:Send_ServerToPlayer(player, "buy_unit_response", {
+	CustomGameEventManager:Send_ServerToPlayer(player, "buy_unit_response"..bonus, {
 		unit = unit, 
 		success = success, 
 		new_count = count
@@ -303,17 +425,31 @@ function dota_clicker:HandleSellUnit(event)
 	local unit = event.unit
 	local player_id = event.player_id
 	local player = PlayerResource:GetPlayer(player_id)
+	local type = event.type
+	
+	local bonus = ""
 	
 	local baseName = wi:getUnitName(unit)
-	local playerUnit = utils:countOf(player.units, unit)
+	local playerUnit
+	if type == "caravan" then
+		local playerKey = "player_" .. player_id
+		local data = CustomNetTables:GetTableValue("caravan_units", playerKey)
+		local units = utils:getArrFromCNT(data)
+		playerUnit = utils:countOf(units, unit)
+		table.remove(units, utils:indexOf(units, unit))
+		
+		CustomNetTables:SetTableValue("caravan_units", playerKey, units)
+	else
+		playerUnit = utils:countOf(player.units, unit)
+		table.remove(player.units, utils:indexOf(player.units, unit))
+	end
 	
 	local count = playerUnit - 1
-	table.remove(player.units, utils:indexOf(player.units, unit))
 	
 	local cost = wi.base[unit].cost
 	utils:GiveGold(cost, player_id)
 	
-	CustomGameEventManager:Send_ServerToPlayer(player, "sell_unit_response", {
+	CustomGameEventManager:Send_ServerToPlayer(player, "sell_unit_response"..bonus, {
 		unit = unit, 
 		success = true, 
 		new_count = count
@@ -983,6 +1119,8 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataCurrUnits", {units = units})
 			
 			CustomGameEventManager:Send_ServerToPlayer(player, "SetTransMap", {transMap = wi.nameMapping})
+			
+			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnitsWorkers", getWorkers(player_id))
         end
     end
 	
@@ -1013,3 +1151,31 @@ function dota_clicker:OnPlayerReconnect(keys)
 	-- GameRules:SendCustomMessageToTeam("Player "..player_id.." переподключился", 0, 255, 0)
 end
 
+function getWorkers(playerID)
+	local player = PlayerResource:GetPlayer(playerID)
+	local workers = {}
+	if player then
+
+		
+		
+		workers.miners = {
+			id = "mainer",
+			name = "Шахтёр",
+			level = player.minerLevel,
+			maxLevel = #ma.upgrades,
+			description = ma:getUpgradeDescription(player.minerLevel+1),
+			cost = ma:getCost(player.minerLevel+1)
+		}
+		
+		workers.woodcutter = {
+			id = "woodcutter",
+			name = "Дровосек",
+			level = player.hunterLevel,
+			maxLevel = #ha.upgrades,
+			description = ha:getUpgradeDescription(player.hunterLevel+1),
+			cost = ha:getCost(player.hunterLevel+1)
+		}
+	end
+	
+	return workers
+end

@@ -42,6 +42,11 @@ local function costText(cost)
 	return "<br><br>Стоимость: <font color='#EFBF04'>" .. cost .. "</font>"
 end
 
+function ha:getCost(level)
+	local upgrades = ha.upgrades[level]
+	return upgrades.cost
+end
+
 function ha:getUpgradeDescription(level)
 	
 	local desc = ""
@@ -63,7 +68,7 @@ function ha:getUpgradeDescription(level)
 	end
 	
 	if level <= maxLevel then
-		local cost = upgrades.cost
+		local cost = ha:getCost(level)
 		desc = desc .. costText(cost)
 	end
     return desc

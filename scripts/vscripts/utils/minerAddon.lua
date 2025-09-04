@@ -38,6 +38,11 @@ local function costText(cost)
 	return "<br><br>Стоимость: <font color='#EFBF04'>" .. cost .. "</font>"
 end
 
+function ma:getCost(level)
+	local upgrades = ma.upgrades[level]
+	return upgrades.cost
+end
+
 function ma:getUpgradeDescription(level)
 	
 	local desc = ""
@@ -59,7 +64,7 @@ function ma:getUpgradeDescription(level)
 	end
 	
 	if level <= maxLevel then
-		local cost = upgrades.cost
+		local cost = ma:getCost(level)
 		desc = desc .. costText(cost)
 	end
     return desc

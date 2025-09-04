@@ -70,7 +70,7 @@ function wa:InitAddon(player, spawnPos, path, team, caravanSpawn, caravanPath, a
 		player.atkCarPath = atkCarPath
 		local playerID = player:GetPlayerID()
 		local playerKey = "player_" .. playerID
-		CustomNetTables:SetTableValue("caravan_units", playerKey, {"mage"})
+		CustomNetTables:SetTableValue("caravan_units", playerKey, {})
 	end
 end
 
@@ -277,10 +277,7 @@ function wa:spawnRogues(playerID, rogues)
 		
 		local playerKey = "player_" .. playerID
 		local data = CustomNetTables:GetTableValue("caravan_units", playerKey)
-		local units = {}
-		for _,v in pairs(data) do
-			table.insert(units, v)
-		end
+		local units = utils:getArrFromCNT(data)
 		
 		units = wa:sortUnits(units)
 		for i = 1, #units do

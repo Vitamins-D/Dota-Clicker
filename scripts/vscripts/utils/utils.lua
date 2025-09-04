@@ -91,4 +91,12 @@ function u:UpdatePoints(playerID, value)
 	CustomNetTables:SetTableValue("user_stats", playerKey, data)
 end
 
+function u:getArrFromCNT(data)
+	local arr = {}
+	for _,v in pairs(data) do
+		table.insert(arr, v)
+	end
+	return arr
+end
+
 return u
