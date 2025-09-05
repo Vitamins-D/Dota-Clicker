@@ -6,10 +6,10 @@ end
 local wi = require("utils/wavesInfo")
 
 ha.defaultStats = {
-	respawnTime = 5,
+	respawnTime = 2,
 	camp_count = 1,
 	camp_reward = 0.5,
-	respawnHunter = 10,
+	respawnHunter = 4,
 }
 
 ha.upgrades = {
@@ -21,9 +21,9 @@ ha.upgrades = {
 	{values = {{type = "camp_reward", value = 0.25}}, cost = 800},
 	{values = {{type = "atk", value = 50}, {type = "atks", value = 75}}, cost = 1100},
 	{values = {{type = "camp_reward", value = 0.25}}, cost = 700},
-	{values = {{type = "respawnTime", value = -1.5}, {type = "atks", value = 75}}, cost = 1200},
+	{values = {{type = "respawnTime", value = -0.5}, {type = "atks", value = 75}}, cost = 1200},
 	{values = {{type = "hp", value = 400}, {type = "hpreg", value = 1.5}, {type = "armor", value = 2}}, cost = 1500},
-	{values = {{type = "respawnTime", value = -1.5}, {type = "camp_reward", value = 0.25}, {type = "respawnHunter", value = -5}}, cost = 2000},
+	{values = {{type = "respawnTime", value = -1}, {type = "camp_reward", value = 0.25}, {type = "respawnHunter", value = -2}}, cost = 2000},
 	{values = {{type = "atk", value = 40}}, cost = 1000},
 }
 

@@ -16,11 +16,11 @@ local CFG = {
     BASE_GOLD_PER_WAVE = 700,       -- TUNE: базовый доход золота за волну (1 игрок)
     GOLD_WAVE_GROWTH   = 0.12,      -- TUNE: рост золота по волне: (1 + (wave-1)*GOLD_WAVE_GROWTH)
     BASE_UP_PER_WAVE   = 3,         -- TUNE: базовый доход Upgrade Points за волну (1 игрок)
-    UP_LINEAR_ADD      = 0.50,      -- TUNE: линейное ускорение UP: + UP_LINEAR_ADD * wave
+    UP_LINEAR_ADD      = 0.4,      -- TUNE: линейное ускорение UP: + UP_LINEAR_ADD * wave
 
     -- «Мягкий» коэффициент за игрока (не линейное умножение на N)
     PLAYERS_MULT_GOLD  = 0.75,      -- на каждого доп. игрока прирост золота: 1 + (p-1)*0.75
-    PLAYERS_MULT_UP    = 0.60,      -- на каждого доп. игрока прирост UP:    1 + (p-1)*0.60
+    PLAYERS_MULT_UP    = 0.2,      -- на каждого доп. игрока прирост UP:    1 + (p-1)*0.60
 
     -- Сложность → множитель
     DIFFICULTY_MULT = {1.00, 1.25, 1.50},

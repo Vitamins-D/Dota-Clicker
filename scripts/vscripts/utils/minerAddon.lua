@@ -7,21 +7,21 @@ local utils = require("utils/utils")
 
 ma.defaultStats = {
 	ore_count = 2, -- размер рюкзака
-	mine_speed = 5, -- скорость добычи 1 руды (в секундах)
-	speed = 300, -- скорость передвижения
+	mine_speed = 3, -- скорость добычи 1 руды (в секундах)
+	speed = 400, -- скорость передвижения
 	gold_mult = 3,
 }
 
 ma.upgrades = {
 	{values = {{type = "speed", value = 50}}, cost = 500},
-	{values = {{type = "mine_speed", value = -0.5}}, cost = 500},
+	{values = {{type = "mine_speed", value = -0.25}}, cost = 500},
 	{values = {{type = "ore_count", value = 1}}, cost = 500},
 	{values = {{type = "gold_mult", value = 1}}, cost = 1000},
 	{values = {{type = "speed", value = 50}}, cost = 500},
-	{values = {{type = "mine_speed", value = -0.5}}, cost = 500},
-	{values = {{type = "mine_speed", value = -1}}, cost = 600},
+	{values = {{type = "mine_speed", value = -0.25}}, cost = 500},
+	{values = {{type = "mine_speed", value = -0.5}}, cost = 600},
 	{values = {{type = "ore_count", value = 2}}, cost = 850},
-	{values = {{type = "mine_speed", value = -1}}, cost = 600},
+	{values = {{type = "mine_speed", value = -0.5}}, cost = 600},
 	{values = {{type = "ore_count", value = 1}}, cost = 500},
 	{values = {{type = "speed", value = 50}}, cost = 500},
 	{values = {{type = "gold_mult", value = 1.5}}, cost = 2000},

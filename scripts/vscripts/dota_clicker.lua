@@ -18,7 +18,7 @@ local GOLD_INTERVAL = 120
 local CARAVAN_INTERVAL = 180
 -- local CARAVAN_INTERVAL = 30+5
 local MAX_UNITS = 20
-local MINE_INTERACTION_DISTANCE = 200
+local MINE_INTERACTION_DISTANCE = 400
 local GOLD_GIVE = 500
 local LVL_GIVE = 1
 local AI_DIF = 1
@@ -266,8 +266,14 @@ function dota_clicker:HandleWorkerUpgrade(event)
 		success = true
 		if id_worker == "mainer" then
 			player.minerLevel = player.minerLevel + 1
+			if player.miner then
+				player.miner:update()
+			end
 		else
 			player.hunterLevel = player.hunterLevel + 1
+			if player.hunter then
+				player.hunter:update()
+			end
 		end
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
@@ -736,6 +742,8 @@ function dota_clicker:dotaClickerKilled(data)
 		for _,hero in pairs(enemies) do
 			if hero and hero:IsRealHero() then
 				hero:AddExperience(5, DOTA_ModifyXP_Unspecified, false, true)
+				local playerID = hero:GetPlayerOwnerID()
+				utils:GiveGold(10, playerId)
 			end
 		end
 	end
