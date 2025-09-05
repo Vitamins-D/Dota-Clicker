@@ -1154,7 +1154,7 @@
 				"special_bonus_unique_jakiro_3"		"+2.5"
 			}
 			"tick_rate"				"0.3"
-			"building_dmg_pct"		"30"
+			"building_dmg_pct"		"15"
 			//"double_head"
 			//{
 			//	"special_bonus_unique_jakiro_3"	"+1"
@@ -3196,7 +3196,7 @@
       "duration"      "30"
       "count"     "1 2"
       "hp"  "1500 1750 2500"
-      "damage" "100 150 250"
+      "damage" "50 75 125"
       "def" "3 4 7"
     }
   }
