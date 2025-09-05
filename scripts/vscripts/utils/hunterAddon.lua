@@ -105,9 +105,9 @@ function ha:spawn(player, camp)
 	unit.playerID = playerID
 	unit.bonus = {}
 	
-	local name = PlayerResource:GetPlayerName(playerID)
-	print("Игрок "..playerID.." = "..name)
-	unit:SetUnitName(playerName)
+	-- local name = PlayerResource:GetPlayerName(playerID)
+	-- print("Игрок "..playerID.." = "..name)
+	-- unit:SetUnitName(name)
 	
 	function unit:update()
 		camp.respawnTime = ha.defaultStats.respawnTime

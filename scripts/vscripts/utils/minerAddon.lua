@@ -115,8 +115,8 @@ function ma:spawn(player, spawnPos, minePos, homePos)
 	unit.home = homePos
 	unit.playerID = playerID
 	
-	local playerName = PlayerResource:GetPlayerName(playerID)
-	unit:SetUnitName(playerName)
+	-- local playerName = PlayerResource:GetPlayerName(playerID)
+	-- unit:SetUnitName(tostring(playerID))
 	
 	unit:AddNewModifier(unit, nil, "modifier_mine_protection", {})
 	
