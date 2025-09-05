@@ -44,7 +44,9 @@ end
 
 function ha:getCost(level)
 	local upgrades = ha.upgrades[level]
-	return upgrades.cost
+	if upgrades then
+		return upgrades.cost
+	else return nil end
 end
 
 function ha:getUpgradeDescription(level)
@@ -103,7 +105,8 @@ function ha:spawn(player, camp)
 	unit.playerID = playerID
 	unit.bonus = {}
 	
-	local playerName = PlayerResource:GetPlayerName(playerID)
+	local name = PlayerResource:GetPlayerName(playerID)
+	print("Игрок "..playerID.." = "..name)
 	unit:SetUnitName(playerName)
 	
 	function unit:update()

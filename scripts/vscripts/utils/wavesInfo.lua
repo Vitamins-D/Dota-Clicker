@@ -177,11 +177,11 @@ wi.base = {
 			{{type = "atks", value = 18}, {type = "vision", value = 350}, cost = 5},
 		}},
 		{type = "strength", levels = {
-			{{type = "atk", value = 7}, {type = "atk_dis", value = 30}, cost = 1},
+			{{type = "atk", value = 7}, {type = "atk_dis", value = 25}, cost = 1},
 			{{type = "spell", value = "dota_clicker_sniper_take_aim"}, cost = 2},
-			{{type = "atk", value = 9}, {type = "atk_dis", value = 40}, cost = 3},
-			{{type = "atk", value = 14}, {type = "atk_dis", value = 7}, cost = 4},
-			{{type = "atk", value = 22}, {type = "atk_dis", value = 70}, cost = 5},
+			{{type = "atk", value = 9}, {type = "atk_dis", value = 25}, cost = 3},
+			{{type = "atk", value = 14}, {type = "atk_dis", value = 25}, cost = 4},
+			{{type = "atk", value = 22}, {type = "atk_dis", value = 50}, cost = 5},
 		}},
 		{type = "def", levels = {
 			{{type = "hp", value = 100}, {type = "armor", value = 1}, cost = 1},
@@ -317,8 +317,8 @@ wi.classes = {
 	["siege_tower"] = { -- catapult
 		{type = "splash", levels = {
 			{{type = "spell", value = "black_dragon_splash_attack"}, cost = 2},
-			{{type = "atk_dis", value = 60}, cost = 4},
-			{{type = "spell_up", value = "black_dragon_splash_attack"}, {type = "atk_dis", value = 40}, cost = 6},
+			{{type = "atk_dis", value = 40}, cost = 4},
+			{{type = "spell_up", value = "black_dragon_splash_attack"}, {type = "atk_dis", value = 35}, cost = 6},
 		}},
 		{type = "speed_siege", levels = {
 			{{type = "atks", value = 20}, cost = 2},

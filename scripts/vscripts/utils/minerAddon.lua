@@ -40,7 +40,9 @@ end
 
 function ma:getCost(level)
 	local upgrades = ma.upgrades[level]
-	return upgrades.cost
+	if upgrades then
+		return upgrades.cost
+	else return nil end
 end
 
 function ma:getUpgradeDescription(level)

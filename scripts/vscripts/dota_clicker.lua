@@ -192,7 +192,7 @@ function dota_clicker:RegisterCustomEventListeners()
 		self:HandleWorkerUpgrade(event)
 	end)
 	
-	CustomGameEventManager:RegisterListener("get_data_units", function(_, event)
+	CustomGameEventManager:RegisterListener("get_data_units_workers", function(_, event)
 		self:HandleDataWorkers(event)
 	end)
 	
@@ -1160,24 +1160,25 @@ function getWorkers(playerID)
 	local workers = {}
 	if player then
 
-		
+		local minerLevel = player.minerLevel or 0
+		local hunterLevel = player.hunterLevel or 0
 		
 		workers.mainer = {
 			id = "mainer",
 			name = "Шахтёр",
-			level = player.minerLevel,
+			level = minerLevel,
 			maxLevel = #ma.upgrades,
-			description = ma:getUpgradeDescription(player.minerLevel+1),
-			cost = ma:getCost(player.minerLevel+1)
+			description = ma:getUpgradeDescription(minerLevel+1),
+			cost = ma:getCost(minerLevel+1)
 		}
 		
 		workers.woodcutter = {
 			id = "woodcutter",
 			name = "Дровосек",
-			level = player.hunterLevel,
+			level = hunterLevel,
 			maxLevel = #ha.upgrades,
-			description = ha:getUpgradeDescription(player.hunterLevel+1),
-			cost = ha:getCost(player.hunterLevel+1)
+			description = ha:getUpgradeDescription(hunterLevel+1),
+			cost = ha:getCost(hunterLevel+1)
 		}
 	end
 	
