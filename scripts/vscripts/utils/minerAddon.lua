@@ -48,24 +48,28 @@ function ma:getUpgradeDescription(level)
 	local desc = "<font color='#FFD700'>Шахтер</font><br><br>"
 	local maxLevel = #ma.upgrades
 	local upgrades = ma.upgrades[level]
-	if upgrades then
-		for i = 1, #upgrades.values do
-			local upgrade = upgrades.values[i]
-			if i > 1 then desc = desc .. "<br><br>" end
-			if upgrade.desc then
-				desc = desc .. upgrade.desc
-			else
-				local pattern = autoDesc[upgrade.type]
-				if pattern then
-					desc = desc .. string.format(pattern, upgrade.value)
+	if level > maxLevel then
+		desc = desc .. "<font color='#80FF80'>Достигнут максимальный уровень</font>";
+	else
+		if upgrades then
+			for i = 1, #upgrades.values do
+				local upgrade = upgrades.values[i]
+				if i > 1 then desc = desc .. "<br><br>" end
+				if upgrade.desc then
+					desc = desc .. upgrade.desc
+				else
+					local pattern = autoDesc[upgrade.type]
+					if pattern then
+						desc = desc .. string.format(pattern, upgrade.value)
+					end
 				end
 			end
 		end
-	end
-	
-	if level <= maxLevel then
-		local cost = ma:getCost(level)
-		desc = desc .. costText(cost)
+		
+		if level <= maxLevel then
+			local cost = ma:getCost(level)
+			desc = desc .. costText(cost)
+		end
 	end
     return desc
 end
