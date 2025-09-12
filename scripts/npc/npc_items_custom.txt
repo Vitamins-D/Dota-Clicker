@@ -754,4 +754,17 @@
 			"cleave_radius"			"250"
 		}
 	}
+
+	"item_nothing"
+    {
+        "ID"                     "3000"              // уникальный ID, главное чтобы не пересекался с другими
+        "BaseClass"              "item_datadriven"
+        "Model"                  "models/props_gameplay/rune_doubledamage01.vmdl" // можно любой
+        "AbilityTextureName"     "nothing"           // файл иконки (nothing.png)
+        "ItemCost"               "0"
+        "ItemShopTags"           ""
+        "ItemQuality"            "common"
+        "ItemDeclarations"       "DECLARE_PURCHASES_TO_SPECTATORS"
+        "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    }
 }
