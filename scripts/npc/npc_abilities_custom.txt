@@ -1797,7 +1797,7 @@
 		{
 			"physical_damage_reduction"
 			{
-				"value"		"30 40 50"
+				"value"		"10 15 20"
 				"special_bonus_unique_mars_bulwark_damage_reduction"		"+10"
 			}
 			"forward_angle"					"140"
