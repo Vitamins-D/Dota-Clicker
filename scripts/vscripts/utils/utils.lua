@@ -68,7 +68,7 @@ function u:GiveGold(gold, playerId)
 end
 
 function u:RemoveItemByName(unit, item_name)
-    for slot = 0, 5 do
+    for slot = 0, 8 do
         local item = unit:GetItemInSlot(slot)
         if item and item:GetName() == item_name then
             unit:RemoveItem(item)

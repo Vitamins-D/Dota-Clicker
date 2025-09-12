@@ -24,6 +24,9 @@ local LVL_GIVE = 1
 local AI_DIF = 1
 local AI_ON = true
 local ALL_VISION = false
+local WAVE_CREEP_REWARD = 50
+local TOWER_REWARD = 200
+local WAVE_CREEP_EXP = 5
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -110,7 +113,7 @@ function dota_clicker:InitGameMode()
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(self, 'OnNpcSpawned'), self)
 	ListenToGameEvent('entity_hurt', Dynamic_Wrap(self, 'dotaClickerHurt'), self)
 	ListenToGameEvent("player_chat", Dynamic_Wrap(self, 'OnPlayerChat'), self)
-	-- ListenToGameEvent('tree_cut', Dynamic_Wrap(self, 'OnTreeCut'), self)
+	ListenToGameEvent('tree_cut', Dynamic_Wrap(self, 'OnTreeCut'), self)
 	
 	-- Игрок отключился (его объект Player удаляется)
 	ListenToGameEvent("player_disconnect", Dynamic_Wrap(self, "OnPlayerDisconnect"), self)
@@ -563,34 +566,34 @@ function dota_clicker:DamageFilter(filterTable)
 	return true
 end
 
--- function dota_clicker:OnTreeCut(event)
-	-- local killer = event.killerID
+function dota_clicker:OnTreeCut(event)
+	local killer = event.killerID
 	
-	-- local drop_chance = 60
+	local drop_chance = 60
 	
-	-- if killer then
-		-- local player = PlayerResource:GetPlayer(killer)
-		-- if player then 
-			-- local hero = player:GetAssignedHero()
-			-- local ability = hero:FindAbilityByName("shredder_rigid_saws")
-			-- if ability and ability:GetLevel() > 0 then
-				-- drop_chance = ability:GetSpecialValueFor("new_chance")
-			-- end
-		-- end
-	-- end
+	if killer then
+		local player = PlayerResource:GetPlayer(killer)
+		if player then 
+			local hero = player:GetAssignedHero()
+			local ability = hero:FindAbilityByName("shredder_rigid_saws")
+			if ability and ability:GetLevel() > 0 then
+				drop_chance = ability:GetSpecialValueFor("new_chance")
+			end
+		end
+	end
 	
-	-- if math.random(1, 100) <= drop_chance then
-		-- local tree_position = Vector(event.tree_x, event.tree_y, GetGroundHeight(Vector(event.tree_x, event.tree_y, 0), nil))
+	if math.random(1, 100) <= drop_chance then
+		local tree_position = Vector(event.tree_x, event.tree_y, GetGroundHeight(Vector(event.tree_x, event.tree_y, 0), nil))
 		
-		-- local item = CreateItem("item_dotac_wood", nil, nil)
-		-- if item then
-			-- local dropped_item = CreateItemOnPositionSync(tree_position, item)
-			-- if dropped_item then
-				-- dropped_item.creation_time = GameRules:GetGameTime()
-			-- end
-		-- end
-	-- end
--- end
+		local item = CreateItem("item_dotac_wood", nil, nil)
+		if item then
+			local dropped_item = CreateItemOnPositionSync(tree_position, item)
+			if dropped_item then
+				dropped_item.creation_time = GameRules:GetGameTime()
+			end
+		end
+	end
+end
 
 function dota_clicker:StartSimpleGroundItemCleanup()
 	local cleanupItems = {
@@ -739,14 +742,18 @@ function dota_clicker:dotaClickerKilled(data)
 			false
 		)
 
-		for _,hero in pairs(enemies) do
+		-- Определяем награду за золото
+		local goldReward = killed_unit:IsTower() and TOWER_REWARD or WAVE_CREEP_REWARD
+
+		for _, hero in pairs(enemies) do
 			if hero and hero:IsRealHero() then
-				hero:AddExperience(5, DOTA_ModifyXP_Unspecified, false, true)
+				hero:AddExperience(WAVE_CREEP_EXP, DOTA_ModifyXP_Unspecified, false, true)
 				local playerID = hero:GetPlayerOwnerID()
-				utils:GiveGold(10, playerId)
+				utils:GiveGold(goldReward, playerID)
 			end
 		end
 	end
+
 	
 	if killed_unit.isHunter then
 		local player = PlayerResource:GetPlayer(killed_unit.playerID)
@@ -1027,6 +1034,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
     local player_id = keys.PlayerID
     if player_id == nil or player_id == -1 then return end
 
+	local player = PlayerResource:GetPlayer(player_id)
 	local pdata = PlayerData[player_id+1]
 	if not pdata then
         PlayerData[player_id+1] = {
@@ -1045,8 +1053,7 @@ function dota_clicker:OnPlayerConnectFull(keys)
         }
 	else
 		pdata.disconnected = false
-
-        local player = PlayerResource:GetPlayer(player_id)
+		
         if player then
 			for k,v in pairs(pdata) do
 				player[k] = v
@@ -1136,6 +1143,9 @@ function dota_clicker:OnPlayerConnectFull(keys)
         end
     end
 	
+	if player then
+		player.playerID = player_id
+	end
 	-- GameRules:SendCustomMessageToTeam("Player "..player_id.." подключился", 0, 255, 0)
 end
 

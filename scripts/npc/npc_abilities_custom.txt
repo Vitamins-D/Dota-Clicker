@@ -22,6 +22,44 @@
 		}
 	}
 	
+	"hunter_damage_bonus"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "abilities/neutral_damage_bonus"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"    "hunter"
+		
+		"MaxLevel"              "1"
+		
+		"AbilityValues"
+		{
+			"damage_bonus"
+			{
+				"value"      "1000"
+			}
+		}
+	}
+	
+	"beasts_damage_bonus"
+	{
+		"AbilityTextureName"    "alpha_wolf_command_aura"
+		"BaseClass"		"creep_piercing"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"creep_damage_bonus"		"900"
+				"hero_damage_penalty"		"100"
+				"heavy_damage_penalty"		"0"
+		}
+	}
+	
 	
 	//=================================================================================================================
 	//=================================================================================================================

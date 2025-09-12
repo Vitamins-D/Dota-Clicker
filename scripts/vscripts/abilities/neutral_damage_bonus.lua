@@ -1,4 +1,5 @@
 neutral_damage_bonus = class({})
+hunter_damage_bonus = neutral_damage_bonus
 
 function neutral_damage_bonus:GetIntrinsicModifierName()
     return "modifier_neutral_damage_bonus_passive"

@@ -12,20 +12,66 @@ ha.defaultStats = {
 	respawnHunter = 4,
 }
 
+-- ha.upgrades = {
+	-- {values = {{type = "atk", value = 20}}, cost = 300},
+	-- {values = {{type = "atks", value = 50}}, cost = 450},
+	-- {values = {{type = "hp", value = 200}, {type = "hpreg", value = 1}}, cost = 600},
+	-- {values = {{type = "armor", value = 2}}, cost = 500},
+	-- {values = {{type = "camp_count", value = 1}, {type = "atks", value = 75}}, cost = 750},
+	-- {values = {{type = "camp_reward", value = 0.25}}, cost = 800},
+	-- {values = {{type = "atk", value = 50}, {type = "atks", value = 75}}, cost = 1100},
+	-- {values = {{type = "camp_reward", value = 0.25}}, cost = 700},
+	-- {values = {{type = "respawnTime", value = -0.5}, {type = "atks", value = 75}}, cost = 1200},
+	-- {values = {{type = "hp", value = 400}, {type = "hpreg", value = 1.5}, {type = "armor", value = 2}}, cost = 1500},
+	-- {values = {{type = "respawnTime", value = -1}, {type = "camp_reward", value = 0.25}, {type = "respawnHunter", value = -2}}, cost = 2000},
+	-- {values = {{type = "atk", value = 40}}, cost = 1000},
+-- }
+
 ha.upgrades = {
-	{values = {{type = "atk", value = 20}}, cost = 300},
-	{values = {{type = "atks", value = 50}}, cost = 450},
-	{values = {{type = "hp", value = 200}, {type = "hpreg", value = 1}}, cost = 600},
-	{values = {{type = "armor", value = 2}}, cost = 500},
-	{values = {{type = "camp_count", value = 1}, {type = "atks", value = 75}}, cost = 750},
-	{values = {{type = "camp_reward", value = 0.25}}, cost = 800},
-	{values = {{type = "atk", value = 50}, {type = "atks", value = 75}}, cost = 1100},
-	{values = {{type = "camp_reward", value = 0.25}}, cost = 700},
-	{values = {{type = "respawnTime", value = -0.5}, {type = "atks", value = 75}}, cost = 1200},
-	{values = {{type = "hp", value = 400}, {type = "hpreg", value = 1.5}, {type = "armor", value = 2}}, cost = 1500},
-	{values = {{type = "respawnTime", value = -1}, {type = "camp_reward", value = 0.25}, {type = "respawnHunter", value = -2}}, cost = 2000},
-	{values = {{type = "atk", value = 40}}, cost = 1000},
+    { values = { { type = "camp_reward", value = 0.25 } }, cost = 300 },
+    { values = { { type = "atk", value = 21 } }, cost = 310 },
+    { values = { { type = "hpreg", value = 3 } }, cost = 320 },
+    { values = { { type = "camp_reward", value = 0.25 } }, cost = 330 },
+    { values = { { type = "armor", value = 2 } }, cost = 340 },
+
+    { values = { { type = "hp", value = 500 } }, cost = 350 },
+    { values = { { type = "atk", value = 21 } }, cost = 360 },
+    { values = { { type = "camp_reward", value = 0.25 } }, cost = 370 },
+    { values = { { type = "atks", value = 46 } }, cost = 380 },
+    { values = { { type = "hpreg", value = 3 } }, cost = 390 },
+
+    { values = { { type = "respawnTime", value = -0.5 } }, cost = 400 },
+    { values = { { type = "atk", value = 21 } }, cost = 410 },
+    { values = { { type = "camp_reward", value = 0.25 } }, cost = 420 },
+    { values = { { type = "hp", value = 500 } }, cost = 430 },
+    { values = { { type = "armor", value = 2 } }, cost = 440 },
+
+    { values = { { type = "atk", value = 21 } }, cost = 450 },
+    { values = { { type = "hpreg", value = 3 } }, cost = 460 },
+    { values = { { type = "camp_reward", value = 0.25 } }, cost = 470 },
+    { values = { { type = "atks", value = 45 } }, cost = 480 },
+    { values = { { type = "hp", value = 500 } }, cost = 490 },
+
+    { values = { { type = "respawnHunter", value = -1.5 } }, cost = 500 },
+    { values = { { type = "atk", value = 21 } }, cost = 510 },
+    { values = { { type = "camp_count", value = 1 } }, cost = 520 },
+    { values = { { type = "hpreg", value = 3 } }, cost = 530 },
+    { values = { { type = "hp", value = 500 } }, cost = 540 },
+
+    { values = { { type = "atk", value = 21 } }, cost = 550 },
+    { values = { { type = "atks", value = 46 } }, cost = 560 },
+    { values = { { type = "camp_reward", value = 0.25 } }, cost = 580 },
+    { values = { { type = "armor", value = 2 } }, cost = 590 },
+
+    { values = { { type = "respawnTime", value = -0.5 } }, cost = 600 },
+    { values = { { type = "respawnHunter", value = -1.5 } }, cost = 610 },
+    { values = { { type = "atk", value = 21 } }, cost = 620 },
+    { values = { { type = "atks", value = 46 } }, cost = 630 },
+    { values = { { type = "hp", value = 500 } }, cost = 640 },
+    { values = { { type = "hpreg", value = 2 } }, cost = 650 },
 }
+
+
 
 local autoDesc = {
 	camp_count = "Увеличивает количество мобов в лесу на %d ед.",
@@ -88,8 +134,8 @@ end
 -- end
 
 function ha:InitAddon(player, camp)
-	player.hunterLevel = 0
-	-- player.hunterLevel = #ha.upgrades
+	-- player.hunterLevel = 0
+	player.hunterLevel = #ha.upgrades
 	player.hunterCamp = camp
 	
 	ha:spawn(player, camp)
@@ -120,7 +166,7 @@ function ha:spawn(player, camp)
 			if upgrades then
 				for j = 1, #upgrades.values do
 					local upgrade = upgrades.values[j]
-					print("upgrade", upgrade, upgrade.type, upgrade.value)
+					-- print("upgrade", upgrade, upgrade.type, upgrade.value)
 					if upgrade.type == "armor" then
 						unit:SetPhysicalArmorBaseValue(unit:GetPhysicalArmorBaseValue() + upgrade.value)
 					elseif upgrade.type == "magr" then

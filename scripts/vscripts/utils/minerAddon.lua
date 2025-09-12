@@ -9,22 +9,58 @@ ma.defaultStats = {
 	ore_count = 2, -- размер рюкзака
 	mine_speed = 3, -- скорость добычи 1 руды (в секундах)
 	speed = 400, -- скорость передвижения
-	gold_mult = 3,
+	gold_mult = 5,
 }
 
+-- ma.upgrades = {
+	-- {values = {{type = "speed", value = 50}}, cost = 500},
+	-- {values = {{type = "mine_speed", value = -0.25}}, cost = 500},
+	-- {values = {{type = "ore_count", value = 1}}, cost = 500},
+	-- {values = {{type = "gold_mult", value = 1}}, cost = 1000},
+	-- {values = {{type = "speed", value = 50}}, cost = 500},
+	-- {values = {{type = "mine_speed", value = -0.25}}, cost = 500},
+	-- {values = {{type = "mine_speed", value = -0.5}}, cost = 600},
+	-- {values = {{type = "ore_count", value = 2}}, cost = 850},
+	-- {values = {{type = "mine_speed", value = -0.5}}, cost = 600},
+	-- {values = {{type = "ore_count", value = 1}}, cost = 500},
+	-- {values = {{type = "speed", value = 50}}, cost = 500},
+	-- {values = {{type = "gold_mult", value = 1.5}}, cost = 2000},
+-- }
+
 ma.upgrades = {
-	{values = {{type = "speed", value = 50}}, cost = 500},
-	{values = {{type = "mine_speed", value = -0.25}}, cost = 500},
-	{values = {{type = "ore_count", value = 1}}, cost = 500},
-	{values = {{type = "gold_mult", value = 1}}, cost = 1000},
-	{values = {{type = "speed", value = 50}}, cost = 500},
-	{values = {{type = "mine_speed", value = -0.25}}, cost = 500},
-	{values = {{type = "mine_speed", value = -0.5}}, cost = 600},
-	{values = {{type = "ore_count", value = 2}}, cost = 850},
-	{values = {{type = "mine_speed", value = -0.5}}, cost = 600},
-	{values = {{type = "ore_count", value = 1}}, cost = 500},
-	{values = {{type = "speed", value = 50}}, cost = 500},
-	{values = {{type = "gold_mult", value = 1.5}}, cost = 2000},
+  { values = { { type = "speed", value = 20 } }, cost = 300 },
+  { values = { { type = "mine_speed", value = -0.3 } }, cost = 305 },
+
+  { values = { { type = "speed", value = 20 } }, cost = 310 },
+  { values = { { type = "gold_mult", value = 0.5 } }, cost = 315 },
+  { values = { { type = "mine_speed", value = -0.3 } }, cost = 320 },
+  { values = { { type = "ore_count", value = 1 } }, cost = 325 },
+  { values = { { type = "speed", value = 20 } }, cost = 330 },
+  { values = { { type = "mine_speed", value = -0.3 } }, cost = 335 },
+  { values = { { type = "gold_mult", value = 0.5 } }, cost = 340 },
+  { values = { { type = "ore_count", value = 1 } }, cost = 345 },
+
+  { values = { { type = "speed", value = 20 } }, cost = 350 },
+  { values = { { type = "mine_speed", value = -0.3 } }, cost = 355 },
+  { values = { { type = "gold_mult", value = 0.5 } }, cost = 360 },
+  { values = { { type = "ore_count", value = 1 } }, cost = 365 },
+  { values = { { type = "mine_speed", value = -0.3 } }, cost = 370 },
+  { values = { { type = "speed", value = 20 } }, cost = 375 },
+  { values = { { type = "ore_count", value = 1 } }, cost = 380 },
+  { values = { { type = "mine_speed", value = -0.25 } }, cost = 385 },
+  { values = { { type = "gold_mult", value = 0.5 } }, cost = 390 },
+  { values = { { type = "speed", value = 15 } }, cost = 395 },
+
+  { values = { { type = "mine_speed", value = -0.25 } }, cost = 400 },
+  { values = { { type = "ore_count", value = 1 } }, cost = 405 },
+  { values = { { type = "mine_speed", value = -0.25 } }, cost = 410 },
+  { values = { { type = "speed", value = 15 } }, cost = 415 },
+  { values = { { type = "gold_mult", value = 0.5 } }, cost = 420 },
+  { values = { { type = "mine_speed", value = -0.25 } }, cost = 425 },
+  { values = { { type = "gold_mult", value = 0.5 } }, cost = 430 },
+  { values = { { type = "mine_speed", value = -0.25 } }, cost = 435 },
+  { values = { { type = "ore_count", value = 2 } }, cost = 440 },
+  { values = { { type = "gold_mult", value = 1 } }, cost = 445 },
 }
 
 local autoDesc = {
@@ -134,7 +170,7 @@ function ma:spawn(player, spawnPos, minePos, homePos)
 					if upgrade.type == "speed" then
 						unit:SetBaseMoveSpeed(unit:GetBaseMoveSpeed() + upgrade.value)
 					else
-						unit[upgrade.type] = unit[upgrade.type] + upgrade.value
+						unit[upgrade.type] = math.floor((unit[upgrade.type] + upgrade.value) * 100 + 0.5) / 100
 					end
 				end
 			end
@@ -185,7 +221,7 @@ function ma:spawn(player, spawnPos, minePos, homePos)
 				ore = mi.ores[ore]
 				utils:RemoveItemByName(unit, ore.item)
 				utils:GiveGold(ore.value*unit.gold_mult, unit.playerID)
-				return 0.5
+				return 0.25
 			else
 				unit.phase = "goMine"
 				return nil
