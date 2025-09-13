@@ -57,28 +57,9 @@ function ns:InitNeutralCamps()
     end
 
     -- Слушаем смерти крипов только один раз
-    ListenToGameEvent("entity_killed", function(keys)
-        local killed = EntIndexToHScript(keys.entindex_killed)
-		local attacker = EntIndexToHScript(keys.entindex_attacker or -1)
-		
-		if attacker then
-			local playerID = attacker.playerID
-			if playerID then
-				local playerKey = "player_" .. playerID
-				local data = CustomNetTables:GetTableValue("user_stats", playerKey)
-				
-				data.upgrade_point = data.upgrade_point + killed.campRef.camp_reward
-				
-				CustomNetTables:SetTableValue("user_stats", playerKey, data)
-				
-				local data = CustomNetTables:GetTableValue("user_stats", playerKey)
-			end
-		end
-		
-        if killed and killed.campRef then
-            self:OnCampUnitDeath(killed)
-        end
-    end, nil)
+    -- ListenToGameEvent("entity_killed", function(keys)
+        
+    -- end, nil)
 end
 
 function ns:SpawnCamp(camp)

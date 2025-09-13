@@ -134,8 +134,8 @@ end
 -- end
 
 function ha:InitAddon(player, camp)
-	-- player.hunterLevel = 0
-	player.hunterLevel = #ha.upgrades
+	player.hunterLevel = 0
+	-- player.hunterLevel = #ha.upgrades
 	player.hunterCamp = camp
 	
 	ha:spawn(player, camp)
@@ -159,6 +159,7 @@ function ha:spawn(player, camp)
 		camp.respawnTime = ha.defaultStats.respawnTime
 		camp.camp_count = ha.defaultStats.camp_count
 		camp.camp_reward = ha.defaultStats.camp_reward
+		camp.playerID = playerID
 		unit.respawnHunter = ha.defaultStats.respawnHunter
 		
 		for i = 1, player.hunterLevel do

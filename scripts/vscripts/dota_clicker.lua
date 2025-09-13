@@ -10,13 +10,14 @@ local mi = require("utils/mineInfo")
 local hunterAddon = require("utils/hunterAddon")
 local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
+local G = require("utils/globalPrms")
 
 -- константы/настройки
 local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
-local CARAVAN_INTERVAL = 180
--- local CARAVAN_INTERVAL = 30+5
+-- local CARAVAN_INTERVAL = 180
+local CARAVAN_INTERVAL = 30+5
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 400
 local GOLD_GIVE = 500
@@ -552,18 +553,32 @@ function dota_clicker:OrderFilter(filterTable)
 end
 
 function dota_clicker:DamageFilter(filterTable)
-	local victim_index = filterTable["entindex_victim_const"]
-	
-	if victim_index then
-		local victim = EntIndexToHScript(victim_index)
-		if victim and IsValidEntity(victim) then
-			if victim:GetUnitName() == "npc_dotac_mine" or victim.is_mine then
-				return false
-			end
-		end
-	end
-	
-	return true
+    local victim_index = filterTable["entindex_victim_const"]
+    local attacker_index = filterTable["entindex_attacker_const"]
+
+    if victim_index and attacker_index then
+        local victim = EntIndexToHScript(victim_index)
+        local attacker = EntIndexToHScript(attacker_index)
+
+        if victim and IsValidEntity(victim) and attacker and IsValidEntity(attacker) then
+            -- запрет урона по минам
+            if victim:GetUnitName() == "npc_dotac_mine" or victim.is_mine then
+                return false
+            end
+
+            -- если атакует герой и жертва нейтрал
+            if attacker:IsRealHero() and victim:GetTeamNumber() == DOTA_TEAM_NEUTRALS then
+                if victim.playerID ~= nil then
+                    local attackerPlayerID = attacker:GetPlayerOwnerID()
+                    if attackerPlayerID ~= victim.playerID then
+                        return false
+                    end
+                end
+            end
+        end
+    end
+
+    return true
 end
 
 function dota_clicker:OnTreeCut(event)
@@ -726,6 +741,7 @@ end
 
 function dota_clicker:dotaClickerKilled(data)
 	local killed_unit = EntIndexToHScript(data.entindex_killed)
+	local attacker = EntIndexToHScript(data.entindex_attacker or -1)
 	if not killed_unit or not killed_unit.GetUnitName then return end
 	
 	if killed_unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS or killed_unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
@@ -776,6 +792,31 @@ function dota_clicker:dotaClickerKilled(data)
 				end
 			end
 		end
+	end
+	
+		
+	if attacker then
+		local playerID = nil
+
+		if attacker:IsRealHero() then
+			playerID = attacker:GetPlayerOwnerID()
+		else
+			playerID = attacker.playerID
+		end
+
+		if playerID ~= nil and playerID >= 0 then
+			local playerKey = "player_" .. playerID
+			local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+
+			if data then
+				data.upgrade_point = data.upgrade_point + killed_unit.campRef.camp_reward
+				CustomNetTables:SetTableValue("user_stats", playerKey, data)
+			end
+		end
+	end
+	
+	if killed_unit and killed_unit.campRef then
+		ns:OnCampUnitDeath(killed_unit)
 	end
 	
 	-- local unitName = killed_unit:GetUnitName()
@@ -1142,10 +1183,6 @@ function dota_clicker:OnPlayerConnectFull(keys)
 			CustomGameEventManager:Send_ServerToPlayer(player, "SetDataUnitsWorkers", getWorkers(player_id))
         end
     end
-	
-	if player then
-		player.playerID = player_id
-	end
 	-- GameRules:SendCustomMessageToTeam("Player "..player_id.." подключился", 0, 255, 0)
 end
 

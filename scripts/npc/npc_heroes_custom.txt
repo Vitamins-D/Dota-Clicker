@@ -5,7 +5,7 @@
 {
 	"npc_dota_hero_ogre_magi"
 	{
-		"Ability5"		""
+		"Ability5"		"dotac_ogre_magi_dep"
 		//"Ability2"		"dotac_magical_crit"
 	}
 	
