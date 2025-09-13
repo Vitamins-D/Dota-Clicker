@@ -213,10 +213,23 @@ function dota_clicker:RegisterCustomEventListeners()
 		event.type = "caravan"
 		self:HandleSellUnit(event)
 	end)
+	
+	CustomGameEventManager:RegisterListener("SentItemServer", function(_, event)
+		self:OgreMageItems(event)
+	end)
+end
+
+function dota_clicker:OgreMageItems(event)
+	local player_id = event.player_id
+	local itemName = event.item
+	local hero = PlayerResource:GetSelectedHeroEntity(player_id)
+	
+	local item = CreateItem(itemName, hero, hero)
+	hero:AddItem(item)
 end
 
 function dota_clicker:HandleMine(event)
-	player_id = event.player_id
+	local player_id = event.player_id
 	local player = PlayerResource:GetPlayer(player_id)
 	
 	local mine = player.miner.mine
