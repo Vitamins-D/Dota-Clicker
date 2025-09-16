@@ -153,11 +153,11 @@ wi.base = {
 			{{type = "hp", value = 125}, {type = "hpreg", value = 2.7}, cost = 5},
 		}},
 		{type = "damage", levels = {
-			{{type = "atk", value = 3}, {type = "atks", value = 3}, cost = 1},
-			{{type = "atk", value = 5}, {type = "atks", value = 7}, cost = 2},
-			{{type = "atk", value = 12}, {type = "atks", value = 5}, cost = 3},
+			{{type = "atk", value = 7}, {type = "atks", value = 3}, cost = 1},
+			{{type = "atk", value = 9}, {type = "atks", value = 7}, cost = 2},
+			{{type = "atk", value = 14}, {type = "atks", value = 5}, cost = 3},
 			{{type = "atk", value = 20}, {type = "atks", value = 3}, cost = 4},
-			{{type = "atk", value = 14}, {type = "atks", value = 15}, cost = 5},
+			{{type = "atk", value = 19}, {type = "atks", value = 15}, cost = 5},
 		}},
 		{type = "def", levels = {
 			{{type = "magr", value = 1}, {type = "armor", value = 1}, cost = 1},
@@ -218,7 +218,7 @@ wi.base = {
 	["catapult"] =
 	{
 		{type = "siege", levels = {
-			{{type = "spell_up", value = "creep_siege"}, cost = 1},
+			{{type = "spell_up"}, cost = 1},
 			{{type = "atk", value = 60}, cost = 2},
 			{{type = "atks", value = -40}, {type = "", value = 0}, cost = 3},
 			{{type = "spell_up", value = "creep_siege"}, {type = "atk", value = 40}, cost = 4},
@@ -244,9 +244,9 @@ wi.base = {
 wi.classes = {
 	["tank"] = { -- swordsman
 		{type = "mag_armor", levels = {
-			{{type = "magr", value = 5}, cost = 2},
-			{{type = "magr", value = 5}, cost = 4},
-			{{type = "magr", value = 15}, cost = 6},
+			{{type = "magr", value = 9}, cost = 2},
+			{{type = "magr", value = 9}, cost = 4},
+			{{type = "magr", value = 19}, cost = 6},
 		}},
 		{type = "phys_armor", levels = {
 			{{type = "armor", value = 1}, {type = "hp", value = 400}, cost = 2},
@@ -258,10 +258,10 @@ wi.classes = {
 		{type = "crit", levels = {
 			{{type = "spell", value = "dota_clicker_juggernaut_blade_dance"}, cost = 2},
 			{{type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, {type = "atk", value = 60}, cost = 4},
-			{{type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, {type = "atk", value = 100}, cost = 6},
+			{{type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, {type = "atk", value = 100}, {type = "armor", value = 1}, cost = 7},
 		}},
 		{type = "evade", levels = {
-			{{type = "spell", value = "dota_clicker_phantom_assassin_immaterial"}, cost = 2},
+			{{type = "spell", value = "dota_clicker_phantom_assassin_immaterial"}, {type = "hp", value = 300}, cost = 3},
 			{{type = "spell_up", value = "dota_clicker_phantom_assassin_immaterial"}, {type = "atks", value = 20}, cost = 4},
 			{{type = "spell_up", value = "dota_clicker_phantom_assassin_immaterial"}, {type = "atks", value = 20}, cost = 6},
 		}}, cost = 10
@@ -273,9 +273,9 @@ wi.classes = {
 			{{type = "hp", value = 250}, {type = "atks", value = 60}, cost = 6},
 		}},
 		{type = "light", levels = { -- -atks
-			{{type = "atk", value = 100}, {type = "atks", value = -30}, {type = "spell", value = "dc_sniper_headshot"}, cost = 2},
-			{{type = "atk", value = 120}, {type = "atks", value = -30}, {type = "spell_up", value = "dc_sniper_headshot"}, cost = 4},
-			{{type = "atk", value = 140}, {type = "atks", value = -40}, {type = "spell_up", value = "dc_sniper_headshot"}, cost = 6},
+			{{type = "atk", value = 50}, {type = "atks", value = -30}, {type = "spell", value = "dc_sniper_headshot"}, cost = 2},
+			{{type = "atk", value = 70}, {type = "atks", value = -30}, {type = "spell_up", value = "dc_sniper_headshot"}, cost = 4},
+			{{type = "atk", value = 75}, {type = "atks", value = -40}, {type = "spell_up", value = "dc_sniper_headshot"}, cost = 6},
 		}}, cost = 10
 	},
 	["ranger"] = { -- archer
@@ -357,15 +357,15 @@ wi.subClasses = { -- усиляются их способности
 	}, -- tank
 	["melee"] = {
 		{type = "melee_upgrade", levels = {
-			{{type = "spell", value = "dc_weaver_geminate_attack"}, cost = 3},
-			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 6},
+			{{type = "spell", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 3},
+			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, {type = "hp", value = 300}, cost = 6},
 			{{type = "spell_up", value = "dc_weaver_geminate_attack"}, {type = "spell_up", value = "dota_clicker_juggernaut_blade_dance"}, cost = 9},
 		}}, cost = 20
 	}, -- berserker
 	["illusionist"] = {
 		{type = "illusionist_upgrade", levels = {
 			{{type = "spell", value = "dc_riki_permanent_invisibility"}, cost = 3},
-			{{type = "spell_up", value = "melee_spawn_unit"}, cost = 6},
+			{{type = "spell_up", value = "melee_spawn_unit"}, {type = "hp", value = 300}, cost = 6},
 			{{type = "spell_up", value = "melee_spawn_unit"}, cost = 9},
 		}}, cost = 20
 	}, -- berserker
@@ -428,7 +428,7 @@ wi.subClasses = { -- усиляются их способности
 	["trebuchet"] = {
 		{type = "trebuchet_upgrade", levels = {
 			{{type = "spell", value = "dc_earthshaker_enchant_totem"}, cost = 3},
-			{{type = "spell_up", value = "black_dragon_splash_attack"}, cost = 6},
+			{{type = "spell_up", value = "black_dragon_splash_attack", value = "creep_siege	"}, cost = 6},
 			{{type = "spell_up", value = "dc_earthshaker_enchant_totem"}, cost = 9},
 		}}, cost = 20
 	}, -- siege_tower

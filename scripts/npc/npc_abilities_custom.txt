@@ -886,7 +886,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_building_damage"		"40 50 60 70 90 150"
+				"bonus_building_damage"		" 50 60 70 90 150"
 				"incoming_hero_damage_penalty"		"-50"
 				"incoming_basic_damage_penalty"		"-30"
 				"incoming_controlled_unit_penalty"	"-40"
@@ -960,10 +960,10 @@
 		{
 			"damage"
 			{
-				"value"	"20 30 40 60 80 100"
+				"value"	"20 30 40 60 80 90"
 				"special_bonus_unique_sniper_headshot_damage"	"+30"
 			}
-			"proc_chance"					"25"
+			"proc_chance"					"17"
 			"knockback_distance"
 			{
 				"value"					"20 30 40"
@@ -2063,7 +2063,7 @@
 
 			"crit_bonus"				
 			{
-				"value"		"700 800 900"
+				"value"		"400 500 600"
 				"special_bonus_facet_phantom_assassin_methodical"		"+100"
 			}
 			"attacks_to_proc"
