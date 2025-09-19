@@ -165,7 +165,7 @@ wi.base = {
 			{{type = "magr", value = 12}, cost = 3},
 			{{type = "magr", value = 6}, {type = "armor", value = 1}, cost = 4},
 			{{type = "spell", value = "dota_clicker_tidehunter_kraken_shell"}, {type = "armor", value = 1}, cost = 5},
-		}}, cost = 600
+		}}, cost = 400
 	},
 	["archer"] =
 	{
@@ -189,7 +189,7 @@ wi.base = {
 			{{type = "hp", value = 100}, cost = 3},
 			{{type = "hp", value = 25}, {type = "armor", value = 1}, cost = 4},
 			{{type = "hp", value = 100}, {type = "armor", value = 1}, cost = 5},
-		}}, cost = 700
+		}}, cost = 500
 	},
 	["mage"] =
 	{
@@ -213,7 +213,7 @@ wi.base = {
 			{{type = "spell_up", value = "dc_frogmen_water_bubble_small"}, cost = 3},
 			{{type = "spell_up", value = "dc_frogmen_water_bubble_small"}, cost = 4},
 			{{type = "spell_up", value = "dc_frogmen_water_bubble_small"}, {type = "armor", value = 1}, cost = 5},
-		}}, cost = 800
+		}}, cost = 600
 	},
 	["catapult"] =
 	{
@@ -237,7 +237,7 @@ wi.base = {
 			{{type = "hp", value = 100}, cost = 3},
 			{{type = "hp", value = 125}, {type = "hpreg", value = 1.4}, cost = 4},
 			{{type = "hp", value = 125}, {type = "def", value = 1}, cost = 5},
-		}}, cost = 1000
+		}}, cost = 800
 	},
 }
 
@@ -564,7 +564,8 @@ function wi:getUpgradeDescription(unit, name, level)
 					if pattern then
 						if upgrade.type == "spell" or upgrade.type == "spell_up" then
 							-- Берём локализованное имя способности
-							desc = desc .. string.format(pattern, abilitiesNames[upgrade.value])
+							-- desc = desc .. string.format(pattern, abilitiesNames[upgrade.value])
+							desc = desc .. string.format(pattern, "#"..upgrade.value)
 						else
 							desc = desc .. string.format(pattern, upgrade.value)
 						end
