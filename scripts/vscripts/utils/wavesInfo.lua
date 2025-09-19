@@ -561,7 +561,7 @@ function wi:getUpgradeDescription(unit, name, level)
 					desc = desc .. upgrade.desc
 				else
 					local pattern = autoDesc[upgrade.type]
-					if pattern then
+					if pattern and upgrade.value then
 						if upgrade.type == "spell" or upgrade.type == "spell_up" then
 							-- Берём локализованное имя способности
 							-- desc = desc .. string.format(pattern, abilitiesNames[upgrade.value])
