@@ -565,7 +565,7 @@ function wi:getUpgradeDescription(unit, name, level)
 						if upgrade.type == "spell" or upgrade.type == "spell_up" then
 							-- Берём локализованное имя способности
 							-- desc = desc .. string.format(pattern, abilitiesNames[upgrade.value])
-							desc = desc .. string.format(pattern, "#"..upgrade.value)
+							desc = desc .. string.format(pattern, "#DOTA_Tooltip_ability_"..upgrade.value)
 						else
 							desc = desc .. string.format(pattern, upgrade.value)
 						end
