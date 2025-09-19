@@ -16,8 +16,8 @@ local G = require("utils/globalPrms")
 local WAVE_INTERVAL = 60
 local LVLUP_INTERVAL = WAVE_INTERVAL
 local GOLD_INTERVAL = 120
-local CARAVAN_INTERVAL = 180
--- local CARAVAN_INTERVAL = 30+5
+-- local CARAVAN_INTERVAL = 180
+local CARAVAN_INTERVAL = 30+5
 local MAX_UNITS = 20
 local MINE_INTERACTION_DISTANCE = 400
 local GOLD_GIVE = 500
@@ -25,9 +25,15 @@ local LVL_GIVE = 1
 local AI_DIF = 1
 local AI_ON = true
 local ALL_VISION = false
-local WAVE_CREEP_REWARD = 50
+local WAVE_CREEP_REWARD = 30
 local TOWER_REWARD = 200
-local WAVE_CREEP_EXP = 5
+local WAVE_CREEP_EXP = 2
+local WAVE_REWARD_R = 1500
+
+local FOREST_REWARD = 70
+local FOREST_R = 800
+
+local START_GOLD = 1200
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -85,10 +91,11 @@ end
 
 function dota_clicker:InitGameMode()
 	playerCount = DOTA_MAX_TEAM_PLAYERS
+	G.playerCount = playerCount
 	uiArr = wi:convertToUnifiedStructure()
 	maxUnitPerPlayer = math.ceil(MAX_UNITS/playerCount)
 	
-	GameRules:SetStartingGold(1000)
+	GameRules:SetStartingGold(START_GOLD)
 	GameRules:SetUseUniversalShopMode(true)
 	GameRules:SetHeroSelectionTime(99999)
 	GameRules:SetPreGameTime(0)
@@ -241,10 +248,34 @@ function dota_clicker:HandleMine(event)
 		local distance = (hero_pos - mine):Length2D()
 		
 		if distance <= MINE_INTERACTION_DISTANCE then
-		
-			CustomGameEventManager:Send_ServerToPlayer(player, "toggle_mine_modal", {
-				mine_id = hero:GetEntityIndex()
-			})
+			
+			local has_pickaxe = false
+			local pickaxes = {
+				"item_dotac_pickaxe_wood",
+				"item_dotac_pickaxe_stone", 
+				"item_dotac_pickaxe_iron",
+				"item_dotac_pickaxe_diamond",
+				"item_dotac_pickaxe_netherite"
+			}
+			
+			for _, pickaxe_name in pairs(pickaxes) do
+				if hero:HasItemInInventory(pickaxe_name) then
+					has_pickaxe = true
+					break
+				end
+			end
+			
+			if has_pickaxe then
+			
+				CustomGameEventManager:Send_ServerToPlayer(player, "toggle_mine_modal", {
+					mine_id = hero:GetEntityIndex()
+				})
+			else
+				CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
+					message = "Требуется кирка!",
+					duration = 2.0
+				})
+			end
 		else
 			CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
 				message = "Too far away!",
@@ -749,6 +780,8 @@ function dota_clicker:OnPlayerChat(event)
 		GiveGoldPlayers(999999)
 	elseif text == "-lvl" or text == "-дмд" then
 		GiveExpPlayers(levelExp*30)
+	elseif text == "-points" or text == "-зщштеы" then
+		utils:GivePoint(9999, player_id)
 	end
 end
 
@@ -763,7 +796,7 @@ function dota_clicker:dotaClickerKilled(data)
 			enemyTeam,                               -- команда ищущего
 			killed_unit:GetAbsOrigin(),              -- точка поиска
 			nil,                                     -- кеш не нужен
-			1000,                                    -- радиус
+			WAVE_REWARD_R,                                    -- радиус
 			DOTA_UNIT_TARGET_TEAM_FRIENDLY,          -- ищем союзников enemyTeam = значит враги для killed_unit
 			DOTA_UNIT_TARGET_HERO,                   -- только герои
 			DOTA_UNIT_TARGET_FLAG_NONE,              -- без флагов
@@ -773,6 +806,32 @@ function dota_clicker:dotaClickerKilled(data)
 
 		-- Определяем награду за золото
 		local goldReward = killed_unit:IsTower() and TOWER_REWARD or WAVE_CREEP_REWARD
+
+		for _, hero in pairs(enemies) do
+			if hero and hero:IsRealHero() then
+				hero:AddExperience(WAVE_CREEP_EXP, DOTA_ModifyXP_Unspecified, false, true)
+				local playerID = hero:GetPlayerOwnerID()
+				utils:GiveGold(goldReward, playerID)
+			end
+		end
+	end
+	
+	if killed_unit:GetTeamNumber() == DOTA_TEAM_NEUTRALS then
+		local enemyTeam = DOTA_TEAM_GOODGUYS
+		local enemies = FindUnitsInRadius(
+			enemyTeam,                               -- команда ищущего
+			killed_unit:GetAbsOrigin(),              -- точка поиска
+			nil,                                     -- кеш не нужен
+			FOREST_R,                                    -- радиус
+			DOTA_UNIT_TARGET_TEAM_FRIENDLY,          -- ищем союзников enemyTeam = значит враги для killed_unit
+			DOTA_UNIT_TARGET_HERO,                   -- только герои
+			DOTA_UNIT_TARGET_FLAG_NONE,              -- без флагов
+			FIND_ANY_ORDER,                          -- порядок не важен
+			false
+		)
+
+		-- Определяем награду за золото
+		local goldReward = FOREST_REWARD
 
 		for _, hero in pairs(enemies) do
 			if hero and hero:IsRealHero() then
@@ -818,13 +877,7 @@ function dota_clicker:dotaClickerKilled(data)
 		end
 
 		if playerID ~= nil and playerID >= 0 then
-			local playerKey = "player_" .. playerID
-			local data = CustomNetTables:GetTableValue("user_stats", playerKey)
-
-			if data then
-				data.upgrade_point = data.upgrade_point + killed_unit.campRef.camp_reward
-				CustomNetTables:SetTableValue("user_stats", playerKey, data)
-			end
+			utils:GivePoint(killed_unit.campRef.camp_reward, playerID)
 		end
 	end
 	
@@ -901,6 +954,7 @@ function dota_clicker:dotaClickerStart()
 	local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil, nil, DOTA_TEAM_GOODGUYS)
 	
 	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
+	G.playerCount = playerCount
 	
 	if not ALL_VISION then
 		Timers:CreateTimer(1, function()
@@ -1044,15 +1098,7 @@ function dota_clicker:OnNpcSpawned(data)
 end
 
 function dota_clicker:throughPlayers(callback, notHero)
-	for index = 0, playerCount - 1 do
-		if notHero or PlayerResource:HasSelectedHero(index)then
-			local player = PlayerResource:GetPlayer(index)
-			if player then
-				local hero = PlayerResource:GetSelectedHeroEntity(index)
-				callback(player, hero, index)
-			end
-		end
-	end
+	utils:throughPlayers(callback, notHero)
 end
 
 function GiveExpPlayers(expVal)

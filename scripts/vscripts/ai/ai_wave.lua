@@ -11,6 +11,7 @@ function Spawn(entityKeyValues)
 	end
 	
     thisEntity.currentPathIndex = 1
+	thisEntity:SetIdleAcquire(true)
 	thisEntity:SetContextThink("AIThink", AIThink, 0.5)
 end
 
@@ -19,21 +20,27 @@ function goPath()
         local targetPoint = thisEntity.path[thisEntity.currentPathIndex]
         if targetPoint then
             local distance = (thisEntity:GetAbsOrigin() - targetPoint:GetAbsOrigin()):Length2D()
-            if distance < 100 then
+            if distance < 500 then
                 -- Дошёл до точки → следующая
                 thisEntity.currentPathIndex = thisEntity.currentPathIndex + 1
-				if thisEntity.currentPathIndex > #thisEntity.path and thisEntity.isCaravan then
-					thisEntity:RemoveSelf()
+				if thisEntity.currentPathIndex > #thisEntity.path then
+					if thisEntity.isCaravan then
+						thisEntity:RemoveSelf()
+					else
+						thisEntity.currentPathIndex = #thisEntity.path
+					end
 				end
             end
-			targetPoint = thisEntity.path[thisEntity.currentPathIndex]
-			if targetPoint then
-				ExecuteOrderFromTable({
-					UnitIndex = thisEntity:entindex(),
-					OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
-					Position = thisEntity.path[thisEntity.currentPathIndex]:GetAbsOrigin(),
-					Queue = false,
-				})
+			if thisEntity.currentPathIndex <= #thisEntity.path then
+				targetPoint = thisEntity.path[thisEntity.currentPathIndex]
+				if targetPoint then
+					ExecuteOrderFromTable({
+						UnitIndex = thisEntity:entindex(),
+						OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+						Position = thisEntity.path[thisEntity.currentPathIndex]:GetAbsOrigin(),
+						Queue = false,
+					})
+				end
 			end
         end
     end

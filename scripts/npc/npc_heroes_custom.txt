@@ -21,6 +21,11 @@
 		"Ability9"		"neutral_damage_bonus"
 	}
 	
+	"npc_dota_hero_beastmaster"
+	{
+		"Ability8"		"neutral_damage_bonus"
+	}
+	
 	"npc_dota_hero_meepo"
 	{
 		"Ability8"		"dotac_meepo_pro_miner"

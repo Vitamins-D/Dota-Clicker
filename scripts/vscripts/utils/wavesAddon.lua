@@ -205,6 +205,14 @@ function wa:spawnCaravan(player, level, enemies)
 	local team = player.team
 	local path = player.caravanPath
 	
+	EmitSoundOnLocationForAllies(spawnPos, "General.Ping", nil)
+	utils:throughPlayers(function(player, hero, index)
+		CustomGameEventManager:Send_ServerToPlayer(player, "ping_on_map", {
+			x = spawnPos.x,
+			y = spawnPos.y
+		})
+	end)
+	
 	local caravanUnits = {}
 	local rogues = {}
 	units = wa:sortUnits(units)
@@ -283,6 +291,7 @@ function wa:spawnRogues(playerID, rogues)
 		for i = 1, #units do
 			Timers:CreateTimer(0.5*i, function()
 				local unit = wa:spawnUnit(units[i], player, spawnPos, pUpgrades, team, path)
+				unit.isRogue = true
 				table.insert(rogues, unit)
 			end)
 		end

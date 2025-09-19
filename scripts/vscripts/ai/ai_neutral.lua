@@ -3,6 +3,7 @@ local spawnPoint
 local back = true
 
 function Spawn(entityKeyValues)
+	spawnPoint = thisEntity:GetAbsOrigin()
 	thisEntity:SetContextThink("AIThink", AIThink, 1)
 end
 
@@ -10,15 +11,13 @@ function spawnBack()
 	if not spawnPoint then
 		spawnPoint = thisEntity:GetAbsOrigin()
 	end
-	local dist = VectorDistance(spawnPoint, thisEntity:GetAbsOrigin())
-	if not thisEntity:GetAggroTarget() or dist > 1500 then
-		local order = {
-			UnitIndex = thisEntity:entindex(),
-			OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
-			Position = spawnPoint
-		}
-		ExecuteOrderFromTable(order)
-	end
+	-- local dist = VectorDistance(spawnPoint, thisEntity:GetAbsOrigin())
+	local order = {
+		UnitIndex = thisEntity:entindex(),
+		OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+		Position = spawnPoint
+	}
+	ExecuteOrderFromTable(order)
 end
 
 function AIThink()

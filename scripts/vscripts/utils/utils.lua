@@ -2,6 +2,8 @@ if u == nil then
 	u = class({})
 end
 
+local G = require("utils/globalPrms")
+
 function u:indexOf(t, value)
 	for i = 1, #t do
 		if t[i] == value then
@@ -67,6 +69,16 @@ function u:GiveGold(gold, playerId)
 	end
 end
 
+function u:GivePoint(point, playerId)
+	local playerKey = "player_" .. playerId
+	local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+
+	if data then
+		data.upgrade_point = data.upgrade_point + point
+		CustomNetTables:SetTableValue("user_stats", playerKey, data)
+	end
+end
+
 function u:RemoveItemByName(unit, item_name)
     for slot = 0, 8 do
         local item = unit:GetItemInSlot(slot)
@@ -97,6 +109,18 @@ function u:getArrFromCNT(data)
 		table.insert(arr, v)
 	end
 	return arr
+end
+
+function u:throughPlayers(callback, notHero)
+	for index = 0, G.playerCount - 1 do
+		if notHero or PlayerResource:HasSelectedHero(index)then
+			local player = PlayerResource:GetPlayer(index)
+			if player then
+				local hero = PlayerResource:GetSelectedHeroEntity(index)
+				callback(player, hero, index)
+			end
+		end
+	end
 end
 
 return u
