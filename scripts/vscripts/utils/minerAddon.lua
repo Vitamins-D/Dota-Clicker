@@ -71,7 +71,7 @@ local autoDesc = {
 }
 
 local function costText(cost)
-	return "<br><br>Стоимость: <font color='#EFBF04'>" .. cost .. "</font>"
+	return "<br><br>#cost_text <font color='#EFBF04'>" .. cost .. "</font>"
 end
 
 function ma:getCost(level)
@@ -83,11 +83,11 @@ end
 
 function ma:getUpgradeDescription(level)
 	
-	local desc = "<font color='#FFD700'>Шахтер</font><br><br>"
+	local desc = "<font color='#FFD700'>#miner_work</font><br><br>"
 	local maxLevel = #ma.upgrades
 	local upgrades = ma.upgrades[level]
 	if level > maxLevel then
-		desc = desc .. "<font color='#80FF80'>Достигнут максимальный уровень</font>";
+		desc = desc .. "<font color='#80FF80'>#Max_lvl</font>";
 	else
 		if upgrades then
 			for i = 1, #upgrades.values do

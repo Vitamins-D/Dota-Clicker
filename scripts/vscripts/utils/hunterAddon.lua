@@ -85,7 +85,7 @@ for k,v in pairs(wi.autoDesc) do
 end
 
 local function costText(cost)
-	return "<br><br>Стоимость: <font color='#EFBF04'>" .. cost .. "</font>"
+	return "<br><br>#cost_text <font color='#EFBF04'>" .. cost .. "</font>"
 end
 
 function ha:getCost(level)
@@ -97,10 +97,10 @@ end
 
 function ha:getUpgradeDescription(level)
 	
-	local desc = "<font color='#228B22'>Охотник</font><br><br>"
+	local desc = "<font color='#228B22'>#hunter</font><br><br>"
 	local maxLevel = #ha.upgrades
 	if level > maxLevel then
-		desc = desc .. "<font color='#80FF80'>Достигнут максимальный уровень</font>";
+		desc = desc .. "<font color='#80FF80'>#Max_lvl</font>";
 	else
 		local upgrades = ha.upgrades[level]
 		if upgrades then

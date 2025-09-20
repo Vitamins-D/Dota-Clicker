@@ -218,8 +218,8 @@ wi.base = {
 	["catapult"] =
 	{
 		{type = "siege", levels = {
-			{{type = "spell_up"}, cost = 1},
-			{{type = "atk", value = 60}, cost = 2},
+			{{type = "atk", value = 20}, cost = 1},
+			{{type = "atk", value = 40}, cost = 2},
 			{{type = "atks", value = -40}, {type = "", value = 0}, cost = 3},
 			{{type = "spell_up", value = "creep_siege"}, {type = "atk", value = 40}, cost = 4},
 			{{type = "spell_up", value = "creep_siege"}, {type = "atk", value = 40}, cost = 5},
@@ -232,11 +232,11 @@ wi.base = {
 			{{type = "atk", value = 40}, {type = "spell_amp", value = 12}, cost = 5},
 		}},
 		{type = "def", levels = {
-			{{type = "hp", value = 75}, {type = "def", value = 1}, cost = 1},
+			{{type = "hp", value = 75}, {type = "armor", value = 1}, cost = 1},
 			{{type = "hp", value = 75}, {type = "hpreg", value = 0.4}, cost = 2},
 			{{type = "hp", value = 100}, cost = 3},
 			{{type = "hp", value = 125}, {type = "hpreg", value = 1.4}, cost = 4},
-			{{type = "hp", value = 125}, {type = "def", value = 1}, cost = 5},
+			{{type = "hp", value = 125}, {type = "armor", value = 1}, cost = 5},
 		}}, cost = 800
 	},
 }
@@ -542,7 +542,7 @@ function wi:getUpgradeCost(unit, name, level)
 end
 
 local function costText(cost)
-	return "<br><br>Стоимость: <font color='#4DA6FF'>" .. cost .. " ОУ</font>"
+	return "<br><br>#cost_text <font color='#4DA6FF'>" .. cost .. " #points</font>"
 end
 
 function wi:getUpgradeDescription(unit, name, level)
