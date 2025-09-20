@@ -64,10 +64,10 @@ ma.upgrades = {
 }
 
 local autoDesc = {
-	ore_count = "Увеличивает размер рюкзака шахтера на %d ед.",
-	mine_speed = "Уменьшает время добычи 1 руды на %.2f сек.",
-	speed = "Увеличивает скорость передвижения на %d ед.",
-	gold_mult = "Увеличивает множитель продажи руды шахтера на %.2f ед.",
+	ore_count = "#miner_upg %d #ponints_hunt",
+	mine_speed = "#miner2_upg %.2f #sec",
+	speed = "#miner3_upg %d #ponints_hunt",
+	gold_mult = "#miner4_upg %.2f #ponints_hunt",
 }
 
 local function costText(cost)

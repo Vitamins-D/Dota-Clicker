@@ -469,19 +469,19 @@ wi.unitNames = {
 }
 
 local autoDesc = {
-    atks = "Добавляет %d ед. к скорости атаки",
-    atk = "Добавляет %d ед. к урону",
-    atk_dis = "Добавляет %d ед. к дальности атаки",
-    vision = "Добавляет %d ед. к дальности обзора",
-    hp = "Добавляет %d ед. к здоровью",
-    armor = "Добавляет %d ед. к броне",
-    magr = "Добавляет %d%% к магическому сопротивлению",
-    spell_amp = "Добавляет %d%% к усилению магического урона",
-    hpreg = "Добавляет %.1f ед. к регенерации здоровья",
-    mana = "Добавляет %d ед. к мане",
-    manareg = "Добавляет %.1f ед. к регенерации маны",
-    spell = "Открывает способность %s",
-    spell_up = "Улучшает способность %s",
+    atks = "#add %d #add_atks",
+    atk = "#add %d #add_atk",
+    atk_dis = "#add %d #add_dis_atak",
+    vision = "#add %d #add_vision",
+    hp = "#add %d ед. #add_hp",
+    armor = "#add %d #add_def",
+    magr = "#add %d%% #add_def_mag",
+    spell_amp = "#add %d%% #add_mag_damage",
+    hpreg = "#add %.1f #add_hp_reg",
+    mana = "#add %d #add_mana",
+    manareg = "#add %.1f #add_mana_reg",
+    spell = "#open_abil %s",
+    spell_up = "#upg_abil %s",
 }
 wi.autoDesc = autoDesc
 

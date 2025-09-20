@@ -74,10 +74,10 @@ ha.upgrades = {
 
 
 local autoDesc = {
-	camp_count = "Увеличивает количество мобов в лесу на %d ед.",
-	respawnTime = "Уменьшает время возрождения лесных крипов на %.1f сек.",
-	camp_reward = "Увеличивает награду за лесных крипов на %.2f ОУ",
-	respawnHunter = "Уменьшает время возрождения охотника на %.1f сек.",
+	camp_count = "#hunter_upg %d #ponints_hunt",
+	respawnTime = "#hunter2_upg %.1f #sec",
+	camp_reward = "#hunter3_upg %.2f #points",
+	respawnHunter = "#hunter4_upg %.1f #sec",
 }
 
 for k,v in pairs(wi.autoDesc) do
