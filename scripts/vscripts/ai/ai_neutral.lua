@@ -1,21 +1,21 @@
 require('ai/ai_core')
-local spawnPoint
+-- local spawnPoint
 local back = true
 
 function Spawn(entityKeyValues)
-	spawnPoint = thisEntity:GetAbsOrigin()
+	-- spawnPoint = thisEntity:GetAbsOrigin()
 	thisEntity:SetContextThink("AIThink", AIThink, 1)
 end
 
 function spawnBack()
-	if not spawnPoint then
-		spawnPoint = thisEntity:GetAbsOrigin()
+	if not thisEntity.spawnPoint then
+		thisEntity.spawnPoint = thisEntity:GetAbsOrigin()
 	end
 	-- local dist = VectorDistance(spawnPoint, thisEntity:GetAbsOrigin())
 	local order = {
 		UnitIndex = thisEntity:entindex(),
 		OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
-		Position = spawnPoint
+		Position = thisEntity.spawnPoint
 	}
 	ExecuteOrderFromTable(order)
 end

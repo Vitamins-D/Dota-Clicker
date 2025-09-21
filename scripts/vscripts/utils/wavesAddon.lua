@@ -4,6 +4,7 @@ end
 
 local info = require("utils/wavesInfo")
 local utils = require("utils/utils")
+local ri = require("utils/roshanInfo")
 
 -- info
 -- 1 - swordsman
@@ -70,13 +71,20 @@ function wa:InitAddon(player, spawnPos, path, team, caravanSpawn, caravanPath, a
 		player.atkCarPath = atkCarPath
 		local playerID = player:GetPlayerID()
 		local playerKey = "player_" .. playerID
+		
 		CustomNetTables:SetTableValue("caravan_units", playerKey, {})
 	end
 end
 
 function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
 	local name = spawn_unit
-			
+	
+	local playerID
+	if player and player.GetPlayerID then
+		playerID = player:GetPlayerID()
+	else
+		playerID = "bot"
+	end
 	local unitUpg = pUpgrades[name]
 	local class = unitUpg[4]
 	local subclass = unitUpg[5]
@@ -169,6 +177,18 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
 		end
 	end
 	
+	local roshanId = ri:getRoshanUpgrade(playerID, unit.type)
+	if roshanId and roshanId > 0 then
+		local itemName = ri:getRoshanItem(playerID, unit.type)
+		local item = CreateItem(itemName, unit, unit)
+		local item = CreateItem(itemName, unit, unit)
+		local item = CreateItem(itemName, unit, unit)
+		local item = CreateItem(itemName, unit, unit)
+		local item = CreateItem(itemName, unit, unit)
+		local item = CreateItem(itemName, unit, unit)
+		unit:AddItem(item)
+	end
+	
 	Timers:CreateTimer(0.5, function()
 		unit:AddNewModifier(unit, nil, "modifier_buff_stats", {})
 	end)
@@ -198,6 +218,15 @@ function wa:spawnWave(player)
 	end
 end
 
+function wa:pingCaravan(owner, time)
+	Timers:CreateTimer(time-10, function()
+		local pingPos = owner.caravanSpawn
+		utils:throughPlayers(function(player, hero, index)
+			GameRules:ExecuteTeamPing( player:GetTeamNumber(), pingPos.x, pingPos.y, player, 0 )
+		end, notHero)
+	end)
+end
+
 function wa:spawnCaravan(player, level, enemies)
 	local spawnPos = player.caravanSpawn
 	local units = player.units
@@ -205,13 +234,6 @@ function wa:spawnCaravan(player, level, enemies)
 	local team = player.team
 	local path = player.caravanPath
 	
-	EmitSoundOnLocationForAllies(spawnPos, "General.Ping", nil)
-	utils:throughPlayers(function(player, hero, index)
-		CustomGameEventManager:Send_ServerToPlayer(player, "ping_on_map", {
-			x = spawnPos.x,
-			y = spawnPos.y
-		})
-	end)
 	
 	local caravanUnits = {}
 	local rogues = {}

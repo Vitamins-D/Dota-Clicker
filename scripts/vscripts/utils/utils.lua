@@ -1,10 +1,10 @@
-if u == nil then
-	u = class({})
+if utils == nil then
+	utils = class({})
 end
 
 local G = require("utils/globalPrms")
 
-function u:indexOf(t, value)
+function utils:indexOf(t, value)
 	for i = 1, #t do
 		if t[i] == value then
 			return i
@@ -13,7 +13,7 @@ function u:indexOf(t, value)
 	return nil
 end
 
-function u:countOf(tbl, value)
+function utils:countOf(tbl, value)
     local count = 0
     for i = 1, #tbl do
         if tbl[i] == value then
@@ -23,7 +23,7 @@ function u:countOf(tbl, value)
     return count
 end
 
-function u:ShuffleArray(t)
+function utils:ShuffleArray(t)
     local n = #t
     for i = n, 2, -1 do
         local j = RandomInt(1, i) -- случайный индекс от 1 до i
@@ -32,19 +32,19 @@ function u:ShuffleArray(t)
     return t
 end
 
-function u:removeAbility(unit, abil)
+function utils:removeAbility(unit, abil)
 	local ability = unit:FindAbilityByName(abil)
 	table.remove(unit.skills, self:indexOf(unit.skills, ability))
     unit:RemoveAbility(abil)
 end
 
-function u:addAbility(unit, abil, level)
+function utils:addAbility(unit, abil, level)
 	local newAbil = unit:AddAbility(abil)
 	newAbil:SetLevel(level or 1)
 	table.insert(unit.skills, newAbil)
 end
 
-function u:replaceAbility(unit, abil1, abil2)
+function utils:replaceAbility(unit, abil1, abil2)
 	local ability = unit:FindAbilityByName(abil1)
 	local lvl = ability:GetLevel()
 	if ability then
@@ -53,14 +53,14 @@ function u:replaceAbility(unit, abil1, abil2)
 	end
 end
 
-function u:upgradeAbility(unit, abil)
+function utils:upgradeAbility(unit, abil)
 	local ability = unit:FindAbilityByName(abil)
 	if ability then
 		ability:SetLevel(ability:GetLevel() + 1)
 	end
 end
 
-function u:GiveGold(gold, playerId)
+function utils:GiveGold(gold, playerId)
 	if PlayerResource:HasSelectedHero(playerId) then
 		local player = PlayerResource:GetPlayer(playerId)
 		local hero = PlayerResource:GetSelectedHeroEntity(playerId)
@@ -69,17 +69,7 @@ function u:GiveGold(gold, playerId)
 	end
 end
 
-function u:GivePoint(point, playerId)
-	local playerKey = "player_" .. playerId
-	local data = CustomNetTables:GetTableValue("user_stats", playerKey)
-
-	if data then
-		data.upgrade_point = data.upgrade_point + point
-		CustomNetTables:SetTableValue("user_stats", playerKey, data)
-	end
-end
-
-function u:RemoveItemByName(unit, item_name)
+function utils:RemoveItemByName(unit, item_name)
     for slot = 0, 8 do
         local item = unit:GetItemInSlot(slot)
         if item and item:GetName() == item_name then
@@ -91,19 +81,29 @@ function u:RemoveItemByName(unit, item_name)
     return false -- предмета нет
 end
 
-function u:GetPoints(playerID)
-	local playerKey = "player_" .. playerID
-	return CustomNetTables:GetTableValue("user_stats", playerKey).upgrade_point
+function utils:GetPoints(playerID)
+	return utils:getDataCNT(playerID, "user_stats").upgrade_point
 end
 
-function u:UpdatePoints(playerID, value)
+function utils:UpdatePoints(playerID, value)
 	local playerKey = "player_" .. playerID
-	local data = CustomNetTables:GetTableValue("user_stats", playerKey)
+	local data = utils:getDataCNT(playerID, "user_stats")
 	data.upgrade_point = data.upgrade_point + value
 	CustomNetTables:SetTableValue("user_stats", playerKey, data)
 end
 
-function u:getArrFromCNT(data)
+function utils:GetRPoints(playerID)
+	return utils:getDataCNT(playerID, "user_stats").roshan_point
+end
+
+function utils:UpdateRPoints(playerID, value)
+	local playerKey = "player_" .. playerID
+	local data = utils:getDataCNT(playerID, "user_stats")
+	data.roshan_point = data.roshan_point + value
+	CustomNetTables:SetTableValue("user_stats", playerKey, data)
+end
+
+function utils:getArrFromCNT(data)
 	local arr = {}
 	for _,v in pairs(data) do
 		table.insert(arr, v)
@@ -111,7 +111,7 @@ function u:getArrFromCNT(data)
 	return arr
 end
 
-function u:throughPlayers(callback, notHero)
+function utils:throughPlayers(callback, notHero)
 	for index = 0, G.playerCount - 1 do
 		if notHero or PlayerResource:HasSelectedHero(index)then
 			local player = PlayerResource:GetPlayer(index)
@@ -123,4 +123,33 @@ function u:throughPlayers(callback, notHero)
 	end
 end
 
-return u
+function utils:getDataCNT(playerID, tableName)
+	local playerKey = "player_" .. playerID
+	local data = CustomNetTables:GetTableValue(tableName, playerKey)
+	return data
+end
+
+function utils:setDataCNT(playerID, tableName, data)
+	local playerKey = "player_" .. playerID
+	CustomNetTables:SetTableValue(tableName, playerKey, data)
+end
+
+function utils:setDataKeyCNT(playerID, tableName, key, value)
+	local playerKey = "player_" .. playerID
+	local data = CustomNetTables:GetTableValue(tableName, playerKey)
+	data[key] = value
+	CustomNetTables:SetTableValue(tableName, playerKey, data)
+end
+
+function utils:addDataCNT(playerID, tableName, key, value)
+	local playerKey = "player_" .. playerID
+	local data = CustomNetTables:GetTableValue(tableName, playerKey)
+	if not data[key] then
+		data[key] = value
+	else
+		data[key] = data[key] + value
+	end
+	CustomNetTables:SetTableValue(tableName, playerKey, data)
+end
+
+return utils

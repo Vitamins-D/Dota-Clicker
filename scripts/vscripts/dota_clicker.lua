@@ -7,33 +7,52 @@ local wi = require("utils/wavesInfo")
 local wa = require("utils/wavesAddon")
 local ma = require("utils/minerAddon")
 local mi = require("utils/mineInfo")
+local ra = require("utils/roshanAddon")
 local hunterAddon = require("utils/hunterAddon")
 local utils = require("utils/utils")
 local badBotAI = require("utils/badBotAI")
 local G = require("utils/globalPrms")
 
--- константы/настройки
-local WAVE_INTERVAL = 60
-local LVLUP_INTERVAL = WAVE_INTERVAL
-local GOLD_INTERVAL = 120
--- local CARAVAN_INTERVAL = 180
-local CARAVAN_INTERVAL = 30+5
-local MAX_UNITS = 20
-local MINE_INTERACTION_DISTANCE = 400
-local GOLD_GIVE = 500
-local LVL_GIVE = 1
-local AI_DIF = 1
-local AI_ON = true
+-- КОНСТАНТЫ/НАСТРОЙКИ
+
+-- ОБЩЕЕ
 local ALL_VISION = false
+local AI_ON = true
+
+
+-- ВОЛНА
+local WAVE_INTERVAL = 60
+local CARAVAN_INTERVAL = 180
+-- local CARAVAN_INTERVAL = 30+5
+-- local CARAVAN_INTERVAL = 15
+local AI_DIF = 1
+
+-- ЭКОНОМИКА
+local START_GOLD = 1200
+local GOLD_GIVE = 500
+local GOLD_INTERVAL = 120
+
+local LVLUP_INTERVAL = WAVE_INTERVAL
+local LVL_GIVE = 1
+
 local WAVE_CREEP_REWARD = 30
-local TOWER_REWARD = 200
 local WAVE_CREEP_EXP = 2
 local WAVE_REWARD_R = 1500
+
+local TOWER_REWARD = 200
 
 local FOREST_REWARD = 70
 local FOREST_R = 800
 
-local START_GOLD = 1200
+-- ЮНИТЫ
+local MAX_UNITS = 20
+
+-- ДРУГОЕ
+local MINE_INTERACTION_DISTANCE = 400
+-- local ROSHAN_SPAWN = 10*60
+local ROSHAN_SPAWN = 10
+G.ROSHAN_SPAWN = ROSHAN_SPAWN
+
 
 local newLevelGive = LVL_GIVE
 local playerLevel = 1
@@ -781,7 +800,7 @@ function dota_clicker:OnPlayerChat(event)
 	elseif text == "-lvl" or text == "-дмд" then
 		GiveExpPlayers(levelExp*30)
 	elseif text == "-points" or text == "-зщштеы" then
-		utils:GivePoint(9999, player_id)
+		utils:UpdatePoints(player_id, 9999)
 	end
 end
 
@@ -864,6 +883,8 @@ function dota_clicker:dotaClickerKilled(data)
 				end
 			end
 		end
+	elseif killed_unit.isRoshan then
+		ra:startRoshanTimer()
 	end
 	
 		
@@ -877,7 +898,7 @@ function dota_clicker:dotaClickerKilled(data)
 		end
 
 		if playerID ~= nil and playerID >= 0 then
-			utils:GivePoint(killed_unit.campRef.camp_reward, playerID)
+			utils:UpdatePoints(playerID, killed_unit.campRef.camp_reward)
 		end
 	end
 	
@@ -1001,10 +1022,18 @@ function dota_clicker:dotaClickerStart()
 	local path = getPaths("wave_path_", pathCount, true)
 	local wave_start = path[1]:GetAbsOrigin()
 	local atkCarPath = getPaths("caravan_attack_", 2, false)
-	print("atkCarPath", atkCarPath, #atkCarPath)
 	self:throughPlayers(function(player, hero, playerID)
 		local playerKey = "player_" .. playerID
-		local data = {upgrade_point = 0}
+		local data = {
+			upgrade_point = 0,
+			roshan_point = 0,
+			roshan_upgrades = {
+				["swordsman"] = 1,
+				["archer"] = 0,
+				["mage"] = 0,
+				["catapult"] = 0,
+			},
+		}
 		CustomNetTables:SetTableValue("user_stats", playerKey, data)
 		
 		wa:InitAddon(player, wave_start, path, DOTA_TEAM_GOODGUYS, nil, nil, atkCarPath)
@@ -1020,10 +1049,22 @@ function dota_clicker:dotaClickerStart()
 	local caravanPath = getPaths("caravan_", caravanPathCount, false)
 	local caravan_start = caravanPath[1]:GetAbsOrigin()
 	
+	badBot.id = "bot"
 	wa:InitAddon(badBot, bad_start, badPath, DOTA_TEAM_BADGUYS, caravan_start, caravanPath)
 	if AI_ON then
 		-- badBot.gold = PlayerResource:GetPlayerCount()*1000
 		badBotAI:Init(badBot, { difficulty = 1.0, players = PlayerResource:GetPlayerCount(), difficulty = AI_DIF })
+		
+		local playerKey = "player_" .. badBot.id
+		local data = {
+			roshan_upgrades = {
+				["swordsman"] = 0,
+				["archer"] = 0,
+				["mage"] = 0,
+				["catapult"] = 0,
+			},
+		}
+		CustomNetTables:SetTableValue("user_stats", playerKey, data)
 	end
 	-- wa:spawnWave(badBot)
 	
@@ -1058,6 +1099,8 @@ function dota_clicker:dotaClickerStart()
 		return WAVE_INTERVAL
 	end)
 	
+	wa:pingCaravan(badBot, CARAVAN_INTERVAL)
+	
 	Timers:CreateTimer(CARAVAN_INTERVAL, function()
 		local players = {}
 		self:throughPlayers(function(player, hero, playerID)
@@ -1066,8 +1109,12 @@ function dota_clicker:dotaClickerStart()
 		
 		wa:spawnCaravan(badBot, caravanLevel, players)
 		caravanLevel = caravanLevel + 1
+		
+		wa:pingCaravan(badBot, CARAVAN_INTERVAL)
 		return CARAVAN_INTERVAL
 	end)
+	
+	ra:startRoshanTimer()
 end
 
 function dota_clicker:OnThink()

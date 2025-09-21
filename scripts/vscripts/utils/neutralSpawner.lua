@@ -74,6 +74,7 @@ function ns:SpawnCamp(camp)
 			local spawnPos = camp.trigger:GetAbsOrigin() + RandomVector(math.random(0, 200))
 			local unit = CreateUnitByName(unitName, spawnPos, true, nil, nil, DOTA_TEAM_NEUTRALS)
 			unit.campRef = camp -- привязка к кемпу
+			unit.spawnPoint = spawnPos
 
 			table.insert(camp.units, unit)
 		end
