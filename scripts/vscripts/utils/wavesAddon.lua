@@ -178,13 +178,8 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
 	end
 	
 	local roshanId = ri:getRoshanUpgrade(playerID, unit.type)
-	if roshanId and roshanId > 0 then
+	if roshanId and tonumber(roshanId) ~= 0 then
 		local itemName = ri:getRoshanItem(playerID, unit.type)
-		local item = CreateItem(itemName, unit, unit)
-		local item = CreateItem(itemName, unit, unit)
-		local item = CreateItem(itemName, unit, unit)
-		local item = CreateItem(itemName, unit, unit)
-		local item = CreateItem(itemName, unit, unit)
 		local item = CreateItem(itemName, unit, unit)
 		unit:AddItem(item)
 	end

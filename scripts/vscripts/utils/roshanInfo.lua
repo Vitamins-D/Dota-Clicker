@@ -56,7 +56,7 @@ function ri:setRoshanUpgrade(playerID, unit, upgrade)
 	local data = utils:getDataCNT(playerID, "user_stats")
 	local upgrades = data.roshan_upgrades
 	
-	upgrades[unit] = upgrade
+	upgrades[unit] = tonumber(upgrade)
 	
 	utils:setDataKeyCNT(playerID, "user_stats", "roshan_upgrades", upgrades)
 	
