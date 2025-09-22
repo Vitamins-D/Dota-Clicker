@@ -59,7 +59,7 @@ function ri:setRoshanUpgrade(playerID, unit, upgrade)
 	
 	upgrades[unit] = id
 	
-	utils:setDataKeyCNT(playerID, "user_stats", roshan_upgrades, upgrades)
+	utils:setDataKeyCNT(playerID, "user_stats", "roshan_upgrades", upgrades)
 end
 
 function ri:getRoshanUpgrade(playerID, unit)
