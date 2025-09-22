@@ -786,4 +786,778 @@
         "ItemDeclarations"       "DECLARE_PURCHASES_TO_SPECTATORS"
         "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     }
+	
+	
+	//=================================================================================================================
+	//=================================================================================================================
+	// ROSHAN
+	//=================================================================================================================
+	//=================================================================================================================
+	
+	//=================================================================================================================
+	// ROSHAN Battlefury
+	//=================================================================================================================
+	"item_roshan_bfury"
+	{
+		"BaseClass"						"item_bfury"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CUSTOM"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_CUSTOM"
+
+		"AbilityCastRange"				"350"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"4.0"
+
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage;health_regen;mana_regen;hard_to_tag;farming;dps"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_damage"			"50"
+				"bonus_health_regen"	"3"
+				"bonus_mana_regen"		"4"
+				"cleave_damage_percent"	"50"
+				"cleave_damage_percent_creep"	"50"
+				"quelling_bonus"			"0"
+				"quelling_bonus_ranged"	"0"
+				"cleave_starting_width"			
+				{
+					"value"	"150"
+					"affected_by_aoe_increase"	"1"
+				}
+				"cleave_ending_width"			
+				{
+					"value"	"360"
+					"affected_by_aoe_increase"	"1"
+				}
+				"cleave_distance"			"650"
+				"upgraded_cleave_bonus"			"25"
+				"upgraded_damage_bonus"			"15"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Sphere
+	//=================================================================================================================
+	"item_roshan_sphere"
+	{
+		"BaseClass"						"item_sphere"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"FightRecapLevel"				"1"
+
+		
+		"AbilityCastRange"				"700"
+		"AbilityCooldown"				"12.0"
+
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"regen_health;regen_mana;str;agi;int;hard_to_tag;teamfight;save"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ActiveDescriptionLine"			"2"
+		"SuggestLategame"				"1"
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_all_stats"		"0"
+				"bonus_health_regen"	"5"
+				"bonus_mana_regen"		"5"
+				"block_cooldown"		"12.0"
+				"upgrade_absorb_duration"		"10.0"
+				"damage_absorb"		"500"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Heart
+	//=================================================================================================================
+	"item_roshan_heart"
+	{
+		"BaseClass"						"item_heart"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"str;regen_health;health_pool;tank"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_strength"		"0"
+			"health_regen_pct"		"1.0"
+		}
+	}
+
+	//=================================================================================================================
+	// ROSHAN Blade Mail
+	//=================================================================================================================
+	"item_roshan_blade_mail"
+	{
+		"BaseClass"						"item_blade_mail"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"20.0"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"25"
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage;armor;int;hard_to_tag;tank"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_damage"			"15"
+				"bonus_armor"			"6"
+				"bonus_intellect"		"0"
+				"duration"				"8"
+				"passive_reflection_constant"			"10"
+				"passive_reflection_pct"			"15"
+				"active_reflection_pct"			"50"
+		}
+	}
+	
+	"item_roshan_harpoon"
+	{
+		"BaseClass"						"item_harpoon"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_CUSTOM"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CUSTOM"
+		"FightRecapLevel"				"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"19.0"
+		"AbilityManaCost"				"50"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemPurchasable"				"1"
+		"ItemCost"						"0"
+		"Model"							"models/props_gameplay/neutral_box.vmdl"
+		"SuggestLategame"				"1"
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+
+			"bonus_damage"			"25"
+
+
+
+			"bonus_strength"		"0"
+			"bonus_agility"			"0"
+			"bonus_intellect"		"0"
+			"bonus_mana_regen"		"3.0"
+			
+			"passive_cooldown"		"5"
+			"movement_slow"			"100"
+			"slow_duration"			"1.5"
+
+				
+			"pull_duration"				"0.3"
+			"pull_distance_pct"			"35"
+			"min_distance"				"100"
+			"max_distance"				"1000"
+			"cast_range_enemy"		"700"
+			"push_length"			"600"
+			"projectile_speed"		"2000"
+
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Maelstrom
+	//=================================================================================================================
+	"item_roshan_maelstrom"
+	{
+		"BaseClass"						"item_maelstrom"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage;attack_speed;unique;farming;dps"
+		"ItemQuality"					"artifact"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_damage"			"25"
+				"bonus_attack_speed"	"25"
+				"chain_chance"			"25"
+				"chain_damage"			"150"
+				"chain_strikes"			"5"
+				"chain_radius"			"650"
+				"chain_delay"			"0.25"
+				"chain_cooldown"		"0.2"
+				"illusion_multiplier_pct"	"100"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Greater Crit
+	//=================================================================================================================
+	"item_roshan_greater_crit"
+	{
+		"BaseClass"						"item_greater_crit"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage;crit;dps"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"			"88"
+			"crit_chance"			"30"
+			"crit_multiplier"		"175"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Hurricane Pike
+	//=================================================================================================================
+	"item_roshan_hurricane_pike"
+	{
+		"BaseClass"						"item_hurricane_pike"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH | DOTA_UNIT_TARGET_TEAM_CUSTOM"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CUSTOM"
+		"FightRecapLevel"				"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"650"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"19.0"
+		"AbilitySharedCooldown"			"force"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"150"
+		"ItemCost"						"0"
+		"ItemShopTags"					"int;damage;attack_speed;hard_to_tag;mobility;escape;save"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_intellect"		"0"
+			"bonus_health"	"400"
+			"bonus_agility"			"0"
+			"bonus_strength"		"0"
+			"base_attack_range"		"0"
+			"push_length"			"600"
+			"enemy_length"			"450"
+			"range_duration"		"6"
+			"cast_range_enemy"		"450"
+			"max_attacks"			"5"
+			"bonus_attack_speed"	"100"
+			"push_time"				"0.5"
+			"dizzy_duration"			"0"
+			"dizzy_distance_pct"			"0"
+
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Revenant's Brooch
+	//=================================================================================================================
+	"item_roshan_revenants_brooch"
+	{
+		"BaseClass"						"item_revenants_brooch"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"int;hard_to_tag;crit;dps"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{				
+			"bonus_damage"			"35"				
+			"spell_lifesteal"		"14"	
+			"crit_chance"			"30"
+			"crit_multiplier"		"50"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Monkey King Bar
+	//=================================================================================================================
+	"item_roshan_monkey_king_bar"
+	{
+		"BaseClass"						"item_monkey_king_bar"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage;attack_speed;hard_to_tag;dps"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_damage"			"40"
+				"bonus_attack_speed"	"45"
+				"bonus_chance"			"80"
+				"bonus_chance_damage"			"70"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Gleipnir
+	//=================================================================================================================
+	"item_roshan_gungir"
+	{
+		"BaseClass"						"item_gungir"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"FightRecapLevel"				"1"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySharedCooldown"			"atos"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"18"
+		"AbilityCastRange"				"1100"
+		"AbilityCastPoint"				"0.0"
+
+		"AbilityManaCost"				"150"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage;attack_speed;unique;magic_dmg;disable"
+		"ItemQuality"					"artifact"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_aoe"					"75"			// If changing this, change radius_tooltip
+			"bonus_hp"					"450"
+			"bonus_intellect"			"0"
+			"bonus_mana"				"200"
+			"radius"
+			{
+				"value"						"275"		// NOTE: effective radius is 400 because the bonus_aoe applies to itself. If changing this, change radius_tooltip
+				"affected_by_aoe_increase"	"1"
+			}
+			"radius_tooltip"
+			{
+				"value"						"350"		// NOTE: radius_tooltip = ( radius + bonus_aoe )
+				"affected_by_aoe_increase"	"1"
+			}
+
+			"duration"				"1.0"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Arcane Boots
+	//=================================================================================================================
+	"item_roshan_arcane_boots"
+	{
+		"BaseClass"						"item_arcane_boots"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"55.0"
+
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		"ItemCost"						"0"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool;mana;regen_mana"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemAlertable"					"1"
+		"SuggestEarlygame"				"1"
+		"SpeciallyBannedFromNeutralSlot"		"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_movement"		"45"
+				"mana_regen"			"0.25"
+				"aura_mana_regen"		"1"
+				"aura_radius"			
+				{
+					"value"		"300"
+					"affected_by_aoe_increase"	"1"
+				}
+				"replenish_amount"		"300"
+				"replenish_radius"		
+				{
+					"value"			"300"
+					"affected_by_aoe_increase"	"1"
+				}
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Aether Lens
+	//=================================================================================================================
+	"item_roshan_aether_lens"
+	{
+		"BaseClass"						"item_aether_lens"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"int;regen_mana;hard_to_tag"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_mana"			"300"
+				"bonus_mana_regen"		"2.5"
+				"cast_range_bonus"			"150"
+		}
+	}
+
+	//=================================================================================================================
+	// ROSHAN Octarine Core
+	//=================================================================================================================
+	"item_roshan_octarine_core"
+	{
+		"BaseClass"						"item_octarine_core"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool;mana"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_cooldown"		"25"
+			"bonus_health"			"450"
+			"bonus_mana"			"450"
+			"bonus_health_regen"	"0"
+			"bonus_mana_regen"		"6"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Sheepstick
+	//=================================================================================================================
+	"item_roshan_sheepstick"
+	{
+		"BaseClass"						"item_sheepstick"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"FightRecapLevel"				"2"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"20.0"
+
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"250"
+		"ItemCost"						"0"
+		"ItemShopTags"					"int;regen_mana;agi;hard_to_tag;disable"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_intellect"		"0"
+			"bonus_mana_regen"		"10.5"
+			"sheep_duration"		"1.0"
+			"sheep_movement_speed"	"140"
+			"upgrade_radius"	"200"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Dragon Lance
+	//=================================================================================================================
+	"item_roshan_dragon_lance"
+	{
+		"BaseClass"						"item_dragon_lance"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"artifact"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_agility"			"0"
+				"bonus_strength"		"0"
+				"base_attack_range"		"150"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Aether Lens 2
+	//=================================================================================================================
+	"item_roshan_aether_lens_2"
+	{
+		"BaseClass"						"item_aether_lens"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemShopTags"					"int;regen_mana;hard_to_tag"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_mana"			"300"
+				"bonus_mana_regen"		"2.5"
+				"cast_range_bonus"			"150"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Searing Signet
+	//=================================================================================================================
+	"item_roshan_searing_signet"
+	{
+		"BaseClass"						"item_searing_signet"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES"
+					
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemIsNeutralActiveDrop"		"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
+
+
+		"Model"							"models/props_gameplay/neutral_box.vmdl"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"damage_threshold"			"55"
+			"burn_damage"				
+			{
+				"value"					"100"
+				"apply_curio_bonus"		"1"
+			}
+			"burn_duration"				"6"
+			"burn_tickrate"				".25"
+			"max_range"
+			{
+				"value"						"2000"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// ROSHAN Mask of Madness
+	//=================================================================================================================
+	"item_roshan_mask_of_madness"
+	{
+		"BaseClass"						"item_mask_of_madness"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"FightRecapLevel"				"1"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"16.0"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		"ItemCost"						"0"
+		"ItemShopTags"					"unique;hard_to_tag;farming;dps"
+		"ItemQuality"					"artifact"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_damage"	"20"
+			"lifesteal_percent"		"24"
+			"berserk_bonus_attack_speed"	"200"
+			"berserk_bonus_movement_speed"	"25"
+			"berserk_armor_reduction"	"12"
+			"berserk_duration"		"6.0"
+		}
+	}
+	
+	//=================================================================================================================
+	// ROSHAN Giant's Maul
+	//=================================================================================================================
+	"item_roshan_giant_maul"
+	{
+		"BaseClass"						"item_giant_maul"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+			
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"15"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"
+		"ItemIsNeutralActiveDrop"		"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
+
+		"Model"							"models/props_gameplay/neutral_box.vmdl"
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"crit_multiplier"			
+			{
+				"value"					"150"
+				"apply_curio_bonus"		"1"
+			}
+			"movespeed_slow"			"10"
+			"attack_slow"				"15"
+			"cast_slow"					"20"
+			"debuff_duration"			"3"
+		}
+	}
 }

@@ -148,6 +148,7 @@
 	"roshan_sonic_wave"
 	{
 		"BaseClass"						"queenofpain_sonic_wave"
+		"AbilityTextureName"			"primal_beast_uproar"
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"ABILITY_TYPE_BASIC"

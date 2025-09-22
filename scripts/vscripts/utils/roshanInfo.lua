@@ -6,34 +6,35 @@ local utils = require("utils/utils")
 
 ri.items = {
 	["swordsman"] = {
-		"item_blink",
-		"item_heart",
-		"item_butterfly",
-		"item_shivas_guard",
-		"item_satanic",
+		"item_roshan_bfury",
+		"item_roshan_sphere",
+		"item_roshan_heart",
+		"item_roshan_blade_mail",
+		"item_roshan_harpoon",
 	},
 	["archer"] = {
-		"item_blink",
-		"item_butterfly",
-		"item_assault",
-		"item_manta",
-		"item_satanic",
+		"item_roshan_maelstrom",
+		"item_roshan_greater_crit",
+		"item_roshan_hurricane_pike",
+		"item_roshan_revenants_brooch",
+		"item_roshan_monkey_king_bar",
 	},
 	["mage"] = {
-		"item_heart",
-		"item_ethereal_blade",
-		"item_blink",
-		"item_butterfly",
-		"item_black_king_bar",
+		"item_roshan_gungir",
+		"item_roshan_arcane_boots",
+		"item_roshan_aether_lens",
+		"item_roshan_octarine_core",
+		"item_roshan_sheepstick",
 	},
-	["catapult"] = {
-		"item_black_king_bar",
-		"item_shivas_guard",
-		"item_sphere",
-		"item_butterfly",
-		"item_blink",
-	}
+	["engineer"] = {
+		"item_roshan_dragon_lance",
+		"item_roshan_aether_lens_2",
+		"item_roshan_searing_signet",
+		"item_roshan_mask_of_madness",
+		"item_roshan_giant_maul",
+	},
 }
+
 
 ri.boost = {
 	{ type = "atk", value = 20 },

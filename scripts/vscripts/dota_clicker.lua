@@ -93,6 +93,8 @@ local PlayerData = {}
 	-- units = {"swordsman", "mage", "mage", "swordsman", "swordsman", "swordsman"}
 -- }
 
+local vision_unit
+
 local playerCount
 local difficulty = 2
 local difficulties = {
@@ -273,6 +275,8 @@ function dota_clicker:HandleRoshanUp(event)
 	if isAvailable and rp > 0 then
 	
 		utils:UpdateRPoints(player_id, -1)
+		
+		ri:setRoshanUpgrade(player_id, unit_type, item_id)
 		
 		CustomGameEventManager:Send_ServerToPlayer(player, "success_buy_item", {
 			unit_type = unit_type,
@@ -837,6 +841,33 @@ function dota_clicker:OnPlayerChat(event)
 		GiveExpPlayers(levelExp*30)
 	elseif text == "-points" or text == "-зщштеы" then
 		utils:UpdatePoints(player_id, 9999)
+	elseif text == "-allvision" or text == "-фддмшышщт" then
+		
+		if vision_unit then
+			local damage_table = {
+				victim = vision_unit,          
+				attacker = vision_unit,        
+				damage = vision_unit:GetMaxHealth()*1.5,        
+				damage_type = DAMAGE_TYPE_PURE, 
+				ability = nil,      
+			}
+			ApplyDamage(damage_table)
+		end
+		
+		local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
+		vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil, nil, DOTA_TEAM_GOODGUYS)
+	elseif text == "-offvision" or text == "-щаамшышщт" then
+		
+		if vision_unit then
+			local damage_table = {
+				victim = vision_unit,          
+				attacker = vision_unit,        
+				damage = vision_unit:GetMaxHealth()*1.5,        
+				damage_type = DAMAGE_TYPE_PURE, 
+				ability = nil,      
+			}
+			ApplyDamage(damage_table)
+		end
 	end
 end
 
@@ -1012,7 +1043,7 @@ function dota_clicker:dotaClickerStart()
 	neutralSpawner:InitNeutralCamps()
 	
 	local vision_pos = Entities:FindByName(nil, "vision"):GetAbsOrigin()
-	local vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil, nil, DOTA_TEAM_GOODGUYS)
+	vision_unit = CreateUnitByName("npc_dota_clicker_vision", vision_pos, false, nil, nil, DOTA_TEAM_GOODGUYS)
 	
 	playerCount = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS) + PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_BADGUYS)
 	G.playerCount = playerCount

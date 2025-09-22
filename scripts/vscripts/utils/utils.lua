@@ -73,7 +73,7 @@ function utils:RemoveItemByName(unit, item_name)
     for slot = 0, 8 do
         local item = unit:GetItemInSlot(slot)
         if item and item:GetName() == item_name then
-            unit:RemoveItem(item)
+            -- unit:RemoveItem(item)
 			UTIL_Remove(item)
             return true -- нашли и удалили
         end

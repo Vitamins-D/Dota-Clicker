@@ -608,17 +608,17 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"1"			// Physical protection.
+		"ArmorPhysical"				"10000"			// Physical protection.
 
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"30"		// Damage range min.
-		"AttackDamageMax"			"36"		// Damage range max.
+		"AttackCapabilities"				"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"0"		// Damage range min.
+		"AttackDamageMax"			"0"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"500"		// Range within a target can be attacked.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AttackRange"				"0"		// Range within a target can be attacked.
 		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"1500"		// Speed of projectile.		     
 
@@ -635,13 +635,13 @@
 
 		// Movement
 		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"270"		// Speed.			
+		"MovementCapabilities"				"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"0"		// Speed.			
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"75"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusHealth"				"999999"		// Base health.
+		"StatusHealthRegen"			"999"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -649,6 +649,8 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"4000000"		// Range of vision during day light.
 		"VisionNighttimeRange"		"4000000"		// Range of vision at night time.
+
+		"Invulnerable"						"1"
 
 		// Team
 		//----------------------------------------------------------------
