@@ -45,7 +45,7 @@ function ri:getPanoramaArr()
 	for key,v in pairs(ri.items) do
 		arr[key] = {}
 		for i = 1, #ri.items[key] do
-			arr[key][""..i..""] = ri.items[key]
+			arr[key][""..i..""] = ri.items[key][i]
 		end
 	end
 	return arr
