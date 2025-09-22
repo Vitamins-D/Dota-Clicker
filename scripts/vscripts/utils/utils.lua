@@ -99,8 +99,10 @@ end
 function utils:UpdateRPoints(playerID, value)
 	local playerKey = "player_" .. playerID
 	local data = utils:getDataCNT(playerID, "user_stats")
-	data.roshan_point = data.roshan_point + value
-	CustomNetTables:SetTableValue("user_stats", playerKey, data)
+	if data then
+		data.roshan_point = data.roshan_point + value
+		CustomNetTables:SetTableValue("user_stats", playerKey, data)
+	end
 end
 
 function utils:getArrFromCNT(data)

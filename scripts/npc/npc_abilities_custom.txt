@@ -60,6 +60,328 @@
 		}
 	}
 	
+	//=================================================================================================================
+	//=================================================================================================================
+	// Roshan
+	//=================================================================================================================
+	//=================================================================================================================
+	
+	"roshan_pulverize"
+	{
+		"BaseClass"						"primal_beast_pulverize"
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_CHANNELLED  | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AnimationIgnoresModelScale"      	"1"
+		"AbilityDraftExtraAbilities"
+		{
+			"primal_beast_rock_throw" "shard"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.25"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
+		"AbilityChannelAnimation"	"ACT_DOTA_CHANNEL_ABILITY_5"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"300"
+		"AbilityCooldown"				"30"
+		
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"splash_radius"				
+			{
+				"value"		"600"
+				"affected_by_aoe_increase"	"1"	
+			}
+			"interval"					"0.75"
+			"ministun"					"0.2"
+			"cast_range"				"300"
+			"animation_rate"			"1.5"			// FLAIL MULTIPLIER ON ENEMY UNITS
+			"damage"
+			{
+				"value"						"300"
+			}
+			"bonus_aoe_duration"
+			{
+				"value"							"15"
+				"special_bonus_facet_primal_beast_ferocity"	"+15"
+			}
+			"bonus_aoe_pct_per_hit"
+			{
+				"value"									"25"
+				"special_bonus_facet_primal_beast_ferocity"	"+25"
+			}
+			"max_stacks"
+			{
+				"value"										"10"
+				"special_bonus_facet_primal_beast_ferocity"	"+10"		// 0 disables
+			}
+			"channel_time"
+			{
+				"value"					"2.3"
+				"special_bonus_unique_primal_beast_pulverize_duration"	"+67%"
+			}
+            "pierce_immunity"
+            {
+            	"value"						"1"
+            }
+			"bonus_damage_per_hit"				"60"
+		}
+	}
+	
+	"roshan_sonic_wave"
+	{
+		"BaseClass"						"queenofpain_sonic_wave"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT"				   
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+		"FightRecapLevel"				"2"
+		"AbilitySound"					"Hero_QueenOfPain.SonicWave"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.452 0.452 0.452"
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"starting_aoe"		
+				{
+					"value"		"100"
+				}
+				"distance"		
+				{
+					"value"	"900"
+				}
+				"final_aoe"			
+				{
+					"value"	"450"
+					"affected_by_aoe_increase"		"1"
+				}
+				"speed"				"1750"
+				"damage"			
+				{
+					"value"											"600"
+					"special_bonus_unique_queen_of_pain_7"			"+250"
+				}
+				"tick_rate"	"0.1"
+				"knockback_distance"	
+				{
+					"value"		"650"
+					"affected_by_aoe_increase"	"1"
+				}
+				"knockback_duration" "1.4"
+				"AbilityCooldown"
+				{	
+					"value"											"60"
+					"special_bonus_unique_queen_of_pain_3"			"-45"
+				}
+
+		}
+	}
+	
+	"roshan_fissure"
+	{
+		"BaseClass"						"earthshaker_fissure"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_EarthShaker.Fissure"
+        "HasShardUpgrade"               "1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.69 0.69 0.69 0.69"
+
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"		
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"AbilityCastRange"
+			{
+				"value"				"1600"
+				"special_bonus_unique_earthshaker_3"		"+200"
+			}
+			"fissure_duration"			"4"
+			"fissure_radius"				"225"
+			"stun_duration"				"1.5"
+			"fissure_damage"
+			{
+				"value"				"750"
+				"special_bonus_unique_earthshaker_4"		"+90"
+			}
+			"AbilityCooldown"
+			{
+				"value"			"15"
+				"special_bonus_shard"		"-2"
+			}
+			"free_pathing_linger_duration"
+			{
+				"special_bonus_shard"								"=1.0"
+			}
+			"free_pathing_application_radius"			"150"
+			"fissure_max_distance_moved"				"300"
+
+			"echoes_radius"
+			{
+				"value" "0"
+				"special_bonus_facet_earthshaker_reverberating_ridge" "400"
+				"affected_by_aoe_increase"	"1"
+			}
+
+			"echoes_damage_multiplier"
+			{
+				"value" "0"
+				"special_bonus_facet_earthshaker_reverberating_ridge" "=60"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
+	
+	"roshan_enrage"
+	{
+		"BaseClass"						"ursa_enrage"
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_Ursa.Enrage"
+
+		"HasScepterUpgrade"			"1"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastAnimation"			"ACT_DOTA_OVERRIDE_ABILITY_4"
+		"AbilityCastGestureSlot"		"DEFAULT"
+		"AbilityCastRange"				"0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+						
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0 0 0"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{			
+			"AbilityCooldown"
+			{
+				"value"					"40"
+				"special_bonus_scepter"	"=30 =24 =18"
+			}
+			
+			"damage_reduction"			"50"
+			"status_resistance"
+			{
+				"value"							"50"
+				"special_bonus_unique_ursa_8"			"+25"
+			}
+			"duration"
+			{
+				"value"							"5"
+			}
+			"aoe_radius"
+			{
+				"value"						"0"
+				"affected_by_aoe_increase"	"1"
+			}
+
+			"damage_increase"	
+			{
+				"value"									"0"
+				"special_bonus_facet_ursa_grudge_bearer"	"=5"
+			}
+			"damage_increase_duration"
+			{
+				"value"									"0"
+				"special_bonus_facet_ursa_grudge_bearer"	"=5"
+			}
+		}
+	}
+	
+	"roshan_fury_swipes"
+	{
+		"BaseClass"						"ursa_fury_swipes"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"IsBreakable"					"1"
+				
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_reset_time"				
+				{
+					"value"						"10"
+					"special_bonus_unique_ursa_4" "+12"
+				}
+				"bonus_reset_time_roshan"		"10"
+				"damage_per_stack"				
+				{
+					"value"					"40"
+					"special_bonus_unique_ursa" "+5"
+				}
+				"stun_stack_count"
+				{
+					"value"				"0"
+					"special_bonus_unique_ursa_furyswipes_stun"			"+5"	
+				}
+				"stun_duration"
+				{
+					"value"				"0"
+					"special_bonus_unique_ursa_furyswipes_stun"			"+1.5"	
+				}
+				
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
+	
+	
 	
 	//=================================================================================================================
 	//=================================================================================================================

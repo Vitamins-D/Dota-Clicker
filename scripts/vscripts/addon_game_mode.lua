@@ -7,6 +7,15 @@ end
 
 function Precache( context )
 	PrecacheResource("model", "models/heroes/beastmaster/beastmaster_beast.vmdl", context);
+	
+	-- ROSHAN
+	PrecacheResource("model", "models/heroes/primal_beast/primal_beast_base.vmdl", context);
+	PrecacheResource("model", "models/items/primal_beast/frostivus_pb/frostivus_pb_head.vmdl", context);
+	PrecacheResource("model", "models/items/primal_beast/frostivus_pb/frostivus_pb_arms.vmdl", context);
+	PrecacheResource("model", "models/items/primal_beast/frostivus_pb/frostivus_pb_back.vmdl", context);
+	PrecacheResource("model", "models/items/primal_beast/frostivus_pb/frostivus_pb_legs.vmdl", context);
+	
+	
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_worg_small/n_creep_worg_small.vmdl", context);
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_v2.vmdl", context);
 	PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_ranged_v2.vmdl", context);

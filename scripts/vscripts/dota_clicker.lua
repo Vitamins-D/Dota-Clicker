@@ -243,6 +243,29 @@ function dota_clicker:RegisterCustomEventListeners()
 	CustomGameEventManager:RegisterListener("SentItemServer", function(_, event)
 		self:OgreMageItems(event)
 	end)
+	
+	CustomGameEventManager:RegisterListener("buy_roshan_item", function(_, event)
+		self:HandleRoshanUp(event)
+	end)
+end
+
+function dota_clicker:HandleRoshanUp(event)
+	local player_id = event.player_id
+	local unit_type = event.unit_type
+	local item_id = event.item_id
+	
+	local isAvailable = ri:getRoshanUpgrade(player_id, unit_type) == 0
+	local rp = utils:GetRPoints(player_id)
+	
+	if isAvailable and rp > 0 then
+	
+		utils:UpdateRPoints(player_id, -1)
+		
+		CustomGameEventManager:Send_ServerToPlayer(player, "success_buy_item", {
+			unit_type = unit_type,
+			item_id = item_id
+		})
+	end
 end
 
 function dota_clicker:OgreMageItems(event)
@@ -884,11 +907,15 @@ function dota_clicker:dotaClickerKilled(data)
 			end
 		end
 	elseif killed_unit.isRoshan then
+		local item = CreateItem("item_dotac_aegis", nil, nil)
+		if item then
+			local dropped_item = CreateItemOnPositionSync(killed_unit:GetAbsOrigin(), item)
+		end
 		ra:startRoshanTimer()
 	end
 	
 		
-	if attacker then
+	if attacker and killed_unit.campRef then
 		local playerID = nil
 
 		if attacker:IsRealHero() then
@@ -1040,6 +1067,10 @@ function dota_clicker:dotaClickerStart()
 		ma:InitAddon(player, minerSpawn, minePos, homePos)
 		
 		hunterAddon:InitAddon(player, neutralCamps[playerID+1])
+		
+		CustomGameEventManager:Send_ServerToPlayer(player, "set_roshan_items", {
+			items = ri:getPanoramaArr(),
+		})
 	end)
 	
 	

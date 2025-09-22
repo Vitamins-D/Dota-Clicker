@@ -18,6 +18,25 @@
 	"item_recipe_helm_of_the_overlord" "REMOVE"
 	"item_helm_of_the_overlord" "REMOVE"
 	
+	"item_dotac_aegis"
+    {
+        // Базовые настройки
+        "BaseClass"                 "item_lua"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "Model"                     "models/props_gameplay/aegis.vmdl"
+        "AbilityTextureName"        "aegis"                  // Иконка ванильного аегиса
+
+        // Экономика
+        "ItemCost"                  "5000"
+        "ItemSellable"              "1"
+        "ItemSellCostPercent"       "50"                     // 5000 * 50% = 2500
+        "ItemPurchasable"           "0"                      // Нельзя купить в магазине
+        "ItemShareability"          "ITEM_FULLY_SHAREABLE"   // Можно передавать союзникам
+
+        // Ссылка на lua
+        "ScriptFile"                "items/dotac_aegis"
+    }
+	
 	//=================================================================================================================
 	// Teleport Scroll
 	//=================================================================================================================
