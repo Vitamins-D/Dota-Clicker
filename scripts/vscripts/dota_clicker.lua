@@ -278,6 +278,7 @@ function dota_clicker:HandleRoshanUp(event)
 		
 		ri:setRoshanUpgrade(player_id, unit_type, item_id)
 		
+		local player = PlayerResource:GetPlayer(player_id)
 		CustomGameEventManager:Send_ServerToPlayer(player, "success_buy_item", {
 			unit_type = unit_type,
 			item_id = item_id

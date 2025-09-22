@@ -814,6 +814,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage;health_regen;mana_regen;hard_to_tag;farming;dps"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -867,6 +869,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"regen_health;regen_mana;str;agi;int;hard_to_tag;teamfight;save"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -899,6 +903,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"str;regen_health;health_pool;tank"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -931,6 +937,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"25"
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage;armor;int;hard_to_tag;tank"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -970,7 +978,8 @@
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemPurchasable"				"1"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemCost"						"0"
 		"Model"							"models/props_gameplay/neutral_box.vmdl"
 		"SuggestLategame"				"1"
@@ -1021,6 +1030,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage;attack_speed;unique;farming;dps"
 		"ItemQuality"					"artifact"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1055,6 +1066,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage;crit;dps"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1094,6 +1107,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"150"
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"int;damage;attack_speed;hard_to_tag;mobility;escape;save"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1138,6 +1153,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"int;hard_to_tag;crit;dps"
 		"ItemQuality"					"rare"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1167,6 +1184,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage;attack_speed;hard_to_tag;dps"
 		"ItemQuality"					"epic"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1209,6 +1228,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage;attack_speed;unique;magic_dmg;disable"
 		"ItemQuality"					"artifact"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1256,6 +1277,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"move_speed;boost_mana;mana_pool;mana;regen_mana"
 		"ItemQuality"					"rare"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1298,6 +1321,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"int;regen_mana;hard_to_tag"
 		"ItemQuality"					"rare"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1326,6 +1351,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"move_speed;boost_mana;mana_pool;mana"
 		"ItemQuality"					"rare"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1369,6 +1396,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"250"
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"int;regen_mana;agi;hard_to_tag;disable"
 		"ItemQuality"					"rare"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1400,6 +1429,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"damage"
 		"ItemQuality"					"artifact"
 		"SuggestLategame"				"1"
@@ -1428,6 +1459,8 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"int;regen_mana;hard_to_tag"
 		"ItemQuality"					"rare"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -1503,6 +1536,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		"ItemCost"						"0"
+		"ItemPurchasable"				"0"
+		"ItemSellable"					"0"
 		"ItemShopTags"					"unique;hard_to_tag;farming;dps"
 		"ItemQuality"					"artifact"
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
