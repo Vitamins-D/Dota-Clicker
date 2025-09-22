@@ -26,7 +26,7 @@ ri.items = {
 		"item_roshan_octarine_core",
 		"item_roshan_sheepstick",
 	},
-	["engineer"] = {
+	["catapult"] = {
 		"item_roshan_dragon_lance",
 		"item_roshan_aether_lens_2",
 		"item_roshan_searing_signet",
