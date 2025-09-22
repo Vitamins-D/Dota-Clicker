@@ -53,13 +53,15 @@ function ri:getPanoramaArr()
 end
 
 function ri:setRoshanUpgrade(playerID, unit, upgrade)
-	local id = utils:indexOf(ri.items[unit], upgrade)
 	local data = utils:getDataCNT(playerID, "user_stats")
 	local upgrades = data.roshan_upgrades
 	
-	upgrades[unit] = id
+	upgrades[unit] = upgrade
 	
 	utils:setDataKeyCNT(playerID, "user_stats", "roshan_upgrades", upgrades)
+	
+	local data = utils:getDataCNT(playerID, "user_stats")
+	local upgrades = data.roshan_upgrades
 end
 
 function ri:getRoshanUpgrade(playerID, unit)
