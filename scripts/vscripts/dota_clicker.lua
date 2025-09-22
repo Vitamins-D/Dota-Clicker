@@ -247,6 +247,19 @@ function dota_clicker:RegisterCustomEventListeners()
 	CustomGameEventManager:RegisterListener("buy_roshan_item", function(_, event)
 		self:HandleRoshanUp(event)
 	end)
+	
+	CustomGameEventManager:RegisterListener("get_roshan_items", function(_, event)
+		self:HandleSetRoshanI(event)
+	end)
+end
+
+function dota_clicker:HandleSetRoshanI(event)
+	local player_id = event.player_id
+	local player = PlayerResource:GetPlayer(player_id)
+	
+	CustomGameEventManager:Send_ServerToPlayer(player, "set_roshan_items", {
+		items = ri:getPanoramaArr(),
+	})
 end
 
 function dota_clicker:HandleRoshanUp(event)
