@@ -37,8 +37,15 @@ ri.items = {
 
 
 ri.boost = {
-	{ type = "atk", value = 20 },
-	
+	{ type = "atk", value = 75 },
+	{ type = "atks", value = 75 },
+	{ type = "hp", value = 3500 },
+	{ type = "armor", value = 5 },
+	{ type = "magr", value = 5 },
+	{ type = "spell_amp", value = 25 },
+	{ type = "mana", value = 500 },
+	{ type = "manareg", value = 2 },
+	{ type = "hpreg", value = 4 },
 }
 
 function ri:getPanoramaArr()
