@@ -49,8 +49,8 @@ local MAX_UNITS = 20
 
 -- ДРУГОЕ
 local MINE_INTERACTION_DISTANCE = 400
--- local ROSHAN_SPAWN = 10*60
-local ROSHAN_SPAWN = 10
+local ROSHAN_SPAWN = 10*60
+-- local ROSHAN_SPAWN = 10
 G.ROSHAN_SPAWN = ROSHAN_SPAWN
 
 
@@ -1103,7 +1103,7 @@ function dota_clicker:dotaClickerStart()
 			upgrade_point = 0,
 			roshan_point = 0,
 			roshan_upgrades = {
-				["swordsman"] = 1,
+				["swordsman"] = 0,
 				["archer"] = 0,
 				["mage"] = 0,
 				["catapult"] = 0,
