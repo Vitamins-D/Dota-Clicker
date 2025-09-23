@@ -332,13 +332,13 @@ function dota_clicker:HandleMine(event)
 				})
 			else
 				CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
-					message = "Требуется кирка!",
+					message = "#need_pickaxe",
 					duration = 2.0
 				})
 			end
 		else
 			CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
-				message = "Too far away!",
+				message = "#to_far",
 				duration = 2.0
 			})
 		end
@@ -385,7 +385,7 @@ function dota_clicker:HandleWorkerUpgrade(event)
 		end
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
-			message = "Not enough gold!",
+			message = "#not_enough",
 			duration = 2.0
 		})
 	end
@@ -438,7 +438,7 @@ function dota_clicker:HandleBaseUpgrade(player, player_id, unit, upgrade)
 		utils:UpdatePoints(player_id, -cost)
 	elseif points < cost then
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
-			message = "Not enough upgrade points!",
+			message = "#not_enough_points",
 			duration = 2.0
 		})
 	end
@@ -477,7 +477,7 @@ function dota_clicker:HandleSpecialUpgrade(player, player_id, unit, upgrade, typ
 		})
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
-			message = "Not enough upgrade points!",
+			message = "#not_enough_points",
 			duration = 2.0
 		})
 	end
@@ -527,7 +527,7 @@ function dota_clicker:HandleBuyUnit(event)
 		end
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "show_floating_text", {
-			message = "Not enough gold!",
+			message = "#not_enough",
 			duration = 2.0
 		})
 	end
@@ -641,7 +641,7 @@ function dota_clicker:OrderFilter(filterTable)
 							else
 								-- Показываем сообщение о необходимости кирки
 								CustomGameEventManager:Send_ServerToPlayer(issuer, "show_floating_text", {
-									message = "You need a pickaxe to mine!",
+									message = "#need_pickaxe",
 									duration = 2.0
 								})
 								return false -- Блокируем этот приказ
