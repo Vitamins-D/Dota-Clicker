@@ -565,6 +565,9 @@ function dota_clicker:HandleSellUnit(event)
 	local count = playerUnit - 1
 	
 	local cost = wi.base[unit].cost
+	if type == "wave" then
+		cost = math.ceil(cost * 0.75)
+	end
 	utils:GiveGold(cost, player_id)
 	
 	CustomGameEventManager:Send_ServerToPlayer(player, "sell_unit_response"..bonus, {
