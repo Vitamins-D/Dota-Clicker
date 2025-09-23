@@ -2,7 +2,7 @@
 
 Custom card:
 
-    <img title="" src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-19-05-45-image.png" alt="" data-align="center" width="424">
+    <img title="" src="../images/map.jpg" alt="" data-align="center" width="424">
 
 The Pink dot is Roshan's spawn
 The orange dot is a mine
@@ -20,11 +20,9 @@ The green buildings on the bottom left are your base.
 
     First of all, we focus on the main menu, which is indicated by an orange triangle:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-32-40-image.png" title="" alt="" data-align="center">
+<img title="" src="../images/menu.jpg" alt="" data-align="center">    Then, go to "Buy units" and select one of the four units that exist in our customization.
 
-    Then, go to "Buy units" and select one of the four units that exist in our customization.
-
-<img title="" src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-33-38-image.png" alt="" data-align="center">
+<img title="" src="../images/buy_units.jpg" alt="" data-align="center">
 
     I would like to note that the unit limit for the whole team is 20, that is, if you are playing with a friend, then you will have a limit of 10 instead of 20. If you have 3 players, then 7 units each, and so on.
 
@@ -34,7 +32,7 @@ The green buildings on the bottom left are your base.
 
     We choose one of the ways to upgrade one of the units (you can upgrade all units, but it will not have this effect).
 
-<img title="" src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-19-45-image.png" alt="" data-align="inline" width="754">
+<img title="" src="../images/upgrd.jpg" alt="" data-align="inline" width="754">
 
     Each improvement has its own description (it appears when you hover over the "+"). Each upgrade can be purchased with upgrade points (hereinafter referred to as OP). Each evolution is a separate path, if you choose evolution A, then evolution B for the unit will be closed and the resulting subclasses. To learn more about which evolution is responsible for the subclass, see the description of the subclasses.
 
@@ -46,19 +44,19 @@ The green buildings on the bottom left are your base.
 
     To earn an OU, you need to go into the forest (and bury yourself) to kill creeping boars yourself, or wait for your hunter to do it for you (you don't have to sit in the forest like his loving mother. Leave this syndrome somewhere behind the game). This is what this scum looks like, remember it, then remind me.:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-27-56-image.png" title="" alt="" data-align="center">
+<img src="../images/hunter.jpg" title="" alt="" data-align="center">
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-28-18-image.png" title="" alt="" data-align="center">
+<img src="../images/hunter_near.jpg" title="" alt="" data-align="center">
 
     Before we continue to talk about OU, we need to find this beast in the interface (its index)
 
     Now we open our eyes well and look at this screenshot:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-50-37-image.png" title="" alt="" data-align="center">    We can note that above the menu where we upgrade or buy units is the "player stats".
+<img src="../images/panorama.jpg" title="" alt="" data-align="center">    We can note that above the menu where we upgrade or buy units is the "player stats".
 
 Here it is closer
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-50-17-image.png" title="" alt="" data-align="center">
+<img src="../images/stats.jpg" title="" alt="" data-align="center">
 
 Here we can see the following statistics:
 
@@ -78,7 +76,7 @@ Here we can see the following statistics:
 
     To do this, we need to go to the special tab of the "Workers" menu. This is the kind of picture that will get us there:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-17-57-03-image.png" title="" alt="" data-align="center">
+<img src="../images/workers.jpg" title="" alt="" data-align="center">
 
     To upgrade a worker, we need to spend money on it (there will be a separate chapter about their earnings). The hunter's stats and camp stats mostly swing for improvement, and in rare cases, the reward for a unit killed in your camp increases. To see what the improvement does, you need to focus on the icon of the unit you need.
 
@@ -94,11 +92,11 @@ Here we can see the following statistics:
 
     For more effective earnings, you need to use serious methods. We already have passive earnings coming from the mine, which can be upgraded in the same tab as the hunter is being upgraded. But we can also earn money in it on our own. If you look closely, you will notice that the miner is running to a certain point.:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-18-20-39-image.png" title="" alt="" data-align="center">
+<img src="../images/mine_and_portal.jpg" title="" alt="" data-align="center">
 
     If you get close enough to this structure and have one of the following items, "Pickaxe":
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-18-21-42-image.png" title="" alt="" data-align="center">
+<img src="../images/pickaxe.jpg" title="" alt="" data-align="center">
 
     You can open its interface and start mining by clicking on the ore that appears every 1.5 seconds. Each type of ore yields a different amount of gold. Also, different types of picks have a coefficient that increases income from earnings in the mine (increases the amount of gold given out for "dug-in" ore).
 
@@ -112,7 +110,7 @@ Here we can see the following statistics:
 
     The caravan will go here:
 
-    <img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-18-50-43-image.png" title="" alt="" data-align="center">
+    <img src="../images/loc.jpg" title="" alt="" data-align="center">
 
     To get to this part of the map quickly, you need to go through this portal:
 
@@ -124,21 +122,21 @@ Here we can see the following statistics:
 
     When we were analyzing what OU is, I noticed that there are Roshan points in the statistics. To earn them, you need to kill Roshan. It is located at the top of the mountain. It looks like this:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-19-00-50-image.png" title="" alt="" data-align="center">
+<img src="../images/roshan.jpg" title="" alt="" data-align="center">
 
     After his death, aegis will drop out:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-19-02-40-image.png" title="" alt="" data-align="center">
+<img src="../images/roshan_death.jpg" title="" alt="" data-align="center">
 
     You can use it:
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-19-03-24-image.png" title="" alt="" data-align="center">
+<img src="../images/aegis.jpg" title="" alt="" data-align="center">
 
 Passively, it does not give anything, but after using it, you will receive 1 roshan point, which will allow you to buy one of the special skills for units (the "Improvements" tab - special skills):
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-19-04-33-image.png" title="" alt="" data-align="center">
+<img src="../images/point.jpg" title="" alt="" data-align="center">
 
-<img src="file:///C:/Users/ABOBUS/AppData/Roaming/marktext/images/2025-09-23-19-04-43-image.png" title="" alt="" data-align="center">
+<img src="../images/items.jpg" title="" alt="" data-align="center">
 
     Their descriptions can also be read in the game itself.
 
