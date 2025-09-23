@@ -935,7 +935,7 @@
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"25"
+		"AbilityManaCost"				"0"
 		"ItemCost"						"0"
 		"ItemPurchasable"				"0"
 		"ItemSellable"					"0"
@@ -973,8 +973,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"700"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"19.0"
-		"AbilityManaCost"				"50"
+		"AbilityCooldown"				"13.0"
+		"AbilityManaCost"				"0"
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -1105,7 +1105,7 @@
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"150"
+		"AbilityManaCost"				"0"
 		"ItemCost"						"0"
 		"ItemPurchasable"				"0"
 		"ItemSellable"					"0"
@@ -1409,7 +1409,7 @@
 		{
 			"bonus_intellect"		"0"
 			"bonus_mana_regen"		"10.5"
-			"sheep_duration"		"1.0"
+			"sheep_duration"		"2.0"
 			"sheep_movement_speed"	"140"
 			"upgrade_radius"	"200"
 		}

@@ -1,18 +1,24 @@
 require('ai/ai_core')
 require('ai/ai_skills')
+require('ai/ai_item')
+
 local nextPath = true
 local returnValue = 0.5
+local rndMin = -0.3
+local rndMax = 0.4
 
 function Spawn(entityKeyValues)
 	if not IsServer() then return end
 	
 	if thisEntity.subclass == "air_mage"then
 		returnValue = 0.2
+		rndMin = 0
+		rndMax = 0
 	end
 	
     thisEntity.currentPathIndex = 1
 	thisEntity:SetIdleAcquire(true)
-	thisEntity:SetContextThink("AIThink", AIThink, 0.5)
+	thisEntity:SetContextThink("AIThink", AIThink, returnValue + math.random(rndMin, rndMax))
 end
 
 function goPath()
@@ -95,7 +101,18 @@ function AIThink()
 		end
 	end
 	
+	local items = thisEntity.items
+	if items then
+		for i = 1, #items do
+			local item = items[i]
+			if item then
+				local name = item:GetAbilityName()
+				if itemCore.pattern[name] then itemCore.pattern[name]({item = item, thisEntity = thisEntity}) end
+			end
+		end
+	end
+	
 	goPath()
 	
-    return returnValue-- Продолжите обработку на следующем тике
+    return returnValue + math.random(rndMin, rndMax)-- Продолжите обработку на следующем тике
 end

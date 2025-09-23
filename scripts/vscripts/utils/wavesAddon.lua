@@ -101,6 +101,7 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
 	unit.subclass = subclass
 	
 	unit.skills = {}
+	unit.items = {}
 	unit.bonus = {}
 	
 	local names = {name, class, subclass}
@@ -182,6 +183,7 @@ function wa:spawnUnit(spawn_unit, player, spawnPos, pUpgrades, team, path)
 		local itemName = ri:getRoshanItem(playerID, unit.type)
 		local item = CreateItem(itemName, unit, unit)
 		unit:AddItem(item)
+		table.insert(unit.items, item)
 	end
 	
 	Timers:CreateTimer(0.5, function()
