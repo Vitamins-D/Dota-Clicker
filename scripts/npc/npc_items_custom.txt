@@ -1595,4 +1595,28 @@
 			"debuff_duration"			"3"
 		}
 	}
+	//=================================================================================================================
+	// Aghanim's Shard
+	//=================================================================================================================
+	"item_aghanims_shard"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"1400"
+		"ItemShopTags"					"int;str;agi;mana_pool;health_pool;hard_to_tag"
+		"ItemQuality"					"rare"
+		
+		"ItemPermanent"					"0"
+		"ItemStockTime"					"1"			  
+		"ItemStockInitial"				"0"
+		"ItemStockMax"					"1"
+		"ItemInitialStockTime"			"600.0"
+		"ItemInitialStockTimeTurbo"		"600.0"
+
+		"SuggestLategame"				"1"
+	}
 }
