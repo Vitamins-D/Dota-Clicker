@@ -93,7 +93,7 @@
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"300"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"10"
 		
 
 		// Cost
@@ -115,11 +115,11 @@
 			"animation_rate"			"1.5"			// FLAIL MULTIPLIER ON ENEMY UNITS
 			"damage"
 			{
-				"value"						"300"
+				"value"						"150"
 			}
 			"bonus_aoe_duration"
 			{
-				"value"							"15"
+				"value"							"50"
 				"special_bonus_facet_primal_beast_ferocity"	"+15"
 			}
 			"bonus_aoe_pct_per_hit"
@@ -129,7 +129,7 @@
 			}
 			"max_stacks"
 			{
-				"value"										"10"
+				"value"										"100"
 				"special_bonus_facet_primal_beast_ferocity"	"+10"		// 0 disables
 			}
 			"channel_time"
@@ -160,7 +160,7 @@
 
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"700"
+		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.452 0.452 0.452"
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -172,33 +172,33 @@
 		{
 				"starting_aoe"		
 				{
-					"value"		"100"
+					"value"		"150"
 				}
 				"distance"		
 				{
-					"value"	"900"
+					"value"	"1200"
 				}
 				"final_aoe"			
 				{
-					"value"	"450"
+					"value"	"650"
 					"affected_by_aoe_increase"		"1"
 				}
-				"speed"				"1750"
+				"speed"				"2250"
 				"damage"			
 				{
-					"value"											"600"
+					"value"											"800"
 					"special_bonus_unique_queen_of_pain_7"			"+250"
 				}
 				"tick_rate"	"0.1"
 				"knockback_distance"	
 				{
-					"value"		"650"
+					"value"		"800"
 					"affected_by_aoe_increase"	"1"
 				}
 				"knockback_duration" "1.4"
 				"AbilityCooldown"
 				{	
-					"value"											"60"
+					"value"											"40"
 					"special_bonus_unique_queen_of_pain_3"			"-45"
 				}
 
@@ -243,12 +243,12 @@
 			"stun_duration"				"1.5"
 			"fissure_damage"
 			{
-				"value"				"750"
+				"value"				"950"
 				"special_bonus_unique_earthshaker_4"		"+90"
 			}
 			"AbilityCooldown"
 			{
-				"value"			"15"
+				"value"			"9"
 				"special_bonus_shard"		"-2"
 			}
 			"free_pathing_linger_duration"
@@ -308,7 +308,7 @@
 		{			
 			"AbilityCooldown"
 			{
-				"value"					"40"
+				"value"					"30"
 				"special_bonus_scepter"	"=30 =24 =18"
 			}
 			
@@ -389,6 +389,26 @@
 	// Heroes
 	//=================================================================================================================
 	//=================================================================================================================
+	
+	//=================================================================================================================
+	// Ability: Necrolyte's Heartstopper Aura
+	//=================================================================================================================
+	"necrolyte_heartstopper_aura"
+	{
+
+		"AbilityValues"
+		{
+			"aura_damage"
+			{
+				"value"		"0.5 0.8 1.1 1.4" 
+				"special_bonus_unique_necrophos_2"		"+0.3"
+				"DamageTypeTooltip"	"DAMAGE_TYPE_NONE"
+				"CalculateSpellDamageTooltip"	"0"
+			} 	
+			
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+	}
 	
 	//=================================================================================================================
 	// Ability: Necrolyte's Reaper's Scythe

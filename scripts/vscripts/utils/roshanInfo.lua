@@ -39,7 +39,7 @@ ri.items = {
 ri.boost = {
 	{ type = "atk", value = 75 },
 	{ type = "atks", value = 75 },
-	{ type = "hp", value = 3500 },
+	{ type = "hp", value = 5000 },
 	{ type = "armor", value = 5 },
 	{ type = "magr", value = 5 },
 	{ type = "spell_amp", value = 25 },
